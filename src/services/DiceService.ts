@@ -1,6 +1,5 @@
-import { fetch, addTask } from "domain-task";
 import { Action, Reducer, ActionCreator } from "redux";
-import { AppThunkAction } from "./";
+import { AppThunkAction } from ".";
 import { PoolDice, PoolCombinationContainer, PoolCombinationState, DieType } from "./DiceModels";
 
 // -----------------
@@ -47,7 +46,7 @@ export const actionCreators = {
 				dispatch({ type: "RECEIVE_DICE_STATISTICS", poolCombinationContainer: data });
 			});
 
-		addTask(fetchTask); // Ensure server-side prerendering waits for this to complete
+		// addTask(fetchTask); // Ensure server-side prerendering waits for this to complete
 		dispatch({ type: "REQUEST_DICE_STATISTICS", });
 		//}
 	}

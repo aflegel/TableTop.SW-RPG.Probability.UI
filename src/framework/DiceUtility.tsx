@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import {DieSymbol, DieType, PoolDice} from "../statistics/DiceModels";
+import {DieSymbol, DieType, PoolDice} from "../services/DiceModels";
 
 export default class DiceUtilty {
 	/**

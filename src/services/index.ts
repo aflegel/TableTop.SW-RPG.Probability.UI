@@ -1,4 +1,4 @@
-import * as DiceStatistics from "./DiceStatistics";
+import * as DiceService from "./DiceService";
 import { PoolCombinationState } from "./DiceModels";
 
 // The top-level state object
@@ -10,7 +10,7 @@ export interface ApplicationState {
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
-	diceStatistics: DiceStatistics.reducer,
+	diceStatistics: DiceService.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are
