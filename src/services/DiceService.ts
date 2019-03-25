@@ -10,7 +10,7 @@ interface AddSearchDieAction {
 	poolDie: PoolDice;
 }
 interface RemoveSearchDieAction {
-	type: "REMOVE_SEARCH_DIE"
+	type: "REMOVE_SEARCH_DIE";
 	poolDie: PoolDice;
 }
 
@@ -35,19 +35,18 @@ export const actionCreators = {
 	addSearchDie: (poolDie: PoolDice) => <AddSearchDieAction>{ type: "ADD_SEARCH_DIE", poolDie: poolDie },
 	removeSearchDie: (poolDie: PoolDice) => <RemoveSearchDieAction>{ type: "REMOVE_SEARCH_DIE", poolDie: poolDie },
 	requestDiceStatistics: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-
 		// Only load data if it's something we don't already have (and are not already loading)
 		//if (positivePoolId !== getState().diceStatistics.positivePoolId) {
-		var data = JSON.stringify(getState().diceStatistics.searchDice);
+		const data = JSON.stringify(getState().diceStatistics.searchDice);
 
-		let fetchTask = fetch(`api/Search/GetStatistics?data=${data}`)
+		const fetchTask = fetch(`api/Search/GetStatistics?data=${data}`)
 			.then(response => response.json() as Promise<PoolCombinationContainer>)
 			.then(data => {
 				dispatch({ type: "RECEIVE_DICE_STATISTICS", poolCombinationContainer: data });
 			});
 
 		// addTask(fetchTask); // Ensure server-side prerendering waits for this to complete
-		dispatch({ type: "REQUEST_DICE_STATISTICS", });
+		dispatch({ type: "REQUEST_DICE_STATISTICS" });
 		//}
 	}
 };
@@ -57,75 +56,100 @@ export function FormatDice(dice: PoolDice[]): string {
 }
 
 export function CopyDice(dice: PoolDice[]): PoolDice[] {
-	var replication: PoolDice[] = [];
+	const replication: PoolDice[] = [];
 
-	dice.forEach(item => replication.push({ dieId: item.dieId, quantity: item.quantity }))
+	dice.forEach(item => replication.push({ dieId: item.dieId, quantity: item.quantity }));
 
 	return replication;
 }
 
 export function MergeDice(dice: PoolDice[], addDie: PoolDice) {
-	var existingRecord = dice.find(f => f.dieId == addDie.dieId);
+	const existingRecord = dice.find(f => f.dieId == addDie.dieId);
 
-	if (existingRecord != null)
-		existingRecord.quantity += addDie.quantity;
-	else
-		dice.push(addDie);
+	if (existingRecord != null) existingRecord.quantity += addDie.quantity;
+	else dice.push(addDie);
 }
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: PoolCombinationState = { poolCombinationContainer: {}, searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }], isLoading: false, negativePoolId: 0 };
+const unloadedState: PoolCombinationState = {
+	poolCombinationContainer: {},
+	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
+	isLoading: false,
+	negativePoolId: 0
+};
 
 export const reducer: Reducer<PoolCombinationState> = (state: PoolCombinationState, incomingAction: Action) => {
 	const action = incomingAction as KnownAction;
 	switch (action.type) {
 		case "ADD_SEARCH_DIE":
-			var stateDice = CopyDice(state.searchDice);
+		const addDice = CopyDice(state.searchDice);
 
 			switch (action.poolDie.dieId) {
 				case DieType.Ability:
 				case DieType.Proficiency:
-					if (stateDice.filter(f => (f.dieId == DieType.Ability) || (f.dieId == DieType.Proficiency)).reduce((total, obj) => { return total + obj.quantity }, 0) < 6)
-						MergeDice(stateDice, action.poolDie);
+					if (
+						addDice
+							.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)
+							.reduce((total, obj) => {
+								return total + obj.quantity;
+							}, 0) < 6
+					)
+						MergeDice(addDice, action.poolDie);
 					break;
 				case DieType.Boost:
-					if (stateDice.filter(f => (f.dieId == DieType.Boost)).reduce((total, obj) => { return total + obj.quantity }, 0) < 4)
-						MergeDice(stateDice, action.poolDie);
+					if (
+						addDice
+							.filter(f => f.dieId == DieType.Boost)
+							.reduce((total, obj) => {
+								return total + obj.quantity;
+							}, 0) < 4
+					)
+						MergeDice(addDice, action.poolDie);
 					break;
 				case DieType.Difficulty:
 				case DieType.Challenge:
-					if (stateDice.filter(f => (f.dieId == DieType.Difficulty) || (f.dieId == DieType.Challenge)).reduce((total, obj) => { return total + obj.quantity }, 0) < 6)
-						MergeDice(stateDice, action.poolDie);
+					if (
+						addDice
+							.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)
+							.reduce((total, obj) => {
+								return total + obj.quantity;
+							}, 0) < 6
+					)
+						MergeDice(addDice, action.poolDie);
 					break;
 				case DieType.Setback:
-					if (stateDice.filter(f => (f.dieId == DieType.Setback)).reduce((total, obj) => { return total + obj.quantity }, 0) < 4)
-						MergeDice(stateDice, action.poolDie);
+					if (
+						addDice
+							.filter(f => f.dieId == DieType.Setback)
+							.reduce((total, obj) => {
+								return total + obj.quantity;
+							}, 0) < 4
+					)
+						MergeDice(addDice, action.poolDie);
 					break;
 			}
 
 			return {
 				poolCombinationContainer: state.poolCombinationContainer,
-				searchDice: stateDice,
+				searchDice: addDice,
 				negativePoolId: state.negativePoolId + 1,
 				isLoading: false
 			};
 		case "REMOVE_SEARCH_DIE":
-			var stateDice = CopyDice(state.searchDice);
-			var existingRecord = stateDice.find(f => f.dieId == action.poolDie.dieId);
+		const removeDice = CopyDice(state.searchDice);
+		const existingRecord = removeDice.find(f => f.dieId == action.poolDie.dieId);
 
 			if (existingRecord != null) {
-				if (existingRecord.quantity > 1)
-					existingRecord.quantity -= action.poolDie.quantity;
-				else
-					stateDice.splice(stateDice.indexOf(existingRecord), 1);
+				if (existingRecord.quantity > 1) existingRecord.quantity -= action.poolDie.quantity;
+				else removeDice.splice(removeDice.indexOf(existingRecord), 1);
 			}
 
 			return {
 				poolCombinationContainer: state.poolCombinationContainer,
 				negativePoolId: 0,
-				searchDice: stateDice,
+				searchDice: removeDice,
 				isLoading: false
 			};
 		case "REQUEST_DICE_STATISTICS":

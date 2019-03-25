@@ -1,54 +1,53 @@
-
-
 import * as React from "react";
-import { DieSymbol, DieType, PoolDice, PoolCombinationState, PoolCombinationStatistic } from "../../services/DiceModels";
+import { DieType, PoolDice } from "../../services/DiceModels";
 import Die from "./Die";
 
 // At runtime, Redux will merge together...
-type DiceProps =
-    IDiceProps;        // ... state we've requested from the Redux store // ... plus incoming routing parameters
+type DiceProps = IDiceProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
-    export interface IDiceProps {
-		dice: PoolDice[];
-	}
+export interface IDiceProps {
+	dice: PoolDice[];
+}
 
-export default class Dice extends React.Component<DiceProps, {}>  {
- 	/**
+export default class Dice extends React.Component<DiceProps, {}> {
+	/**
 	 * Returns an icon element with the appropriate css classes
 	 */
-    public render(){
-		var output: JSX.Element[] = [];
+	public render() {
+		let output: JSX.Element[] = [];
 		if (this.props.dice) {
-			this.props.dice.sort((a, b) => {
-				switch (a.dieId) {
-					case DieType.Proficiency:
-					case DieType.Ability:
-					case DieType.Boost:
-						switch (b.dieId) {
-							case DieType.Proficiency:
-								return 1;
-							case DieType.Ability:
-							case DieType.Boost:
-								return 0;
-							default:
-								return -1;
-						}
-					case DieType.Challenge:
-					case DieType.Difficulty:
-					case DieType.Setback:
-						switch (b.dieId) {
-							case DieType.Challenge:
-								return 1;
-							case DieType.Difficulty:
-							case DieType.Setback:
-								return 0;
-							default:
-								return -1;
-						}
-					default:
-						return 0;
-				}
-			}).forEach(item => output = output.concat(this.RenderDieSet(item.dieId, item.quantity)));
+			this.props.dice
+				.sort((a, b) => {
+					switch (a.dieId) {
+						case DieType.Proficiency:
+						case DieType.Ability:
+						case DieType.Boost:
+							switch (b.dieId) {
+								case DieType.Proficiency:
+									return 1;
+								case DieType.Ability:
+								case DieType.Boost:
+									return 0;
+								default:
+									return -1;
+							}
+						case DieType.Challenge:
+						case DieType.Difficulty:
+						case DieType.Setback:
+							switch (b.dieId) {
+								case DieType.Challenge:
+									return 1;
+								case DieType.Difficulty:
+								case DieType.Setback:
+									return 0;
+								default:
+									return -1;
+							}
+						default:
+							return 0;
+					}
+				})
+				.forEach(item => (output = output.concat(this.RenderDieSet(item.dieId, item.quantity))));
 		}
 		return output;
 	}
@@ -59,10 +58,10 @@ export default class Dice extends React.Component<DiceProps, {}>  {
 	 * @param quantity
 	 */
 	private RenderDieSet(dieType: DieType, quantity: number): JSX.Element[] {
-		var output: JSX.Element[] = [];
+		const output: JSX.Element[] = [];
 
-		for (var i = 0; i < quantity; i++) {
-			output.push(<Die dieType={dieType}></Die>);
+		for (let i = 0; i < quantity; i++) {
+			output.push(<Die dieType={dieType} />);
 		}
 
 		return output;

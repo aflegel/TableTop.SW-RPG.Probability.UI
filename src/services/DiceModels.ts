@@ -49,6 +49,5 @@ export enum DieType {
 	Difficulty = 4,
 	Force = 5,
 	Proficiency = 6,
-	Setback = 7,
+	Setback = 7
 }
-

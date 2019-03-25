@@ -1,32 +1,30 @@
 ﻿import * as React from "react";
-import { DieSymbol, DieType, PoolDice, PoolCombinationState, PoolCombinationStatistic } from "../../services/DiceModels";
-import { Line } from "react-chartjs-2";
+import { DieSymbol, PoolCombinationState } from "../../services/DiceModels";
 import GraphBreakdown from "./GraphBreakdown";
 import GraphDetails from "./GraphDetails";
 import GraphLine from "./GraphLine";
 
 // At runtime, Redux will merge together...
-type GraphProps =
-    PoolCombinationState & IGraphProps;        // ... state we've requested from the Redux store // ... plus incoming routing parameters
+type GraphProps = PoolCombinationState & IGraphProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
-    export interface IGraphProps {
-		mode: DieSymbol;
-	}
+export interface IGraphProps {
+	mode: DieSymbol;
+}
 
-export default class Graph extends React.Component<GraphProps, {}>  {
- 	/**
+export default class Graph extends React.Component<GraphProps, {}> {
+	/**
 	 * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
 	 */
-    public render(){
+	public render() {
 		if (this.props.poolCombinationContainer != null && this.props.poolCombinationContainer.baseline != null) {
-
 			//get short list of combinations ordered lowest to highest
-			let baseSet = this.props.poolCombinationContainer.baseline.poolCombinationStatistics.filter(f => f.symbol == this.props.mode)
-				.sort((n1, n2) => n1.quantity - n2.quantity);
+			let baseSet = this.props.poolCombinationContainer.baseline.poolCombinationStatistics.filter(f => f.symbol == this.props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 
 			//from short list get quantities
 			let xAxis = baseSet.map(map => map.quantity.toString());
-			let totalFrequency = baseSet.reduce((total, obj) => { return total + obj.frequency }, 0);
+			let totalFrequency = baseSet.reduce((total, obj) => {
+				return total + obj.frequency;
+			}, 0);
 			let percentageSet = baseSet.map(map => this.GetProbability(map.frequency, totalFrequency));
 			let averageSet = baseSet.map(map => map.alternateTotal / map.frequency);
 
@@ -51,28 +49,31 @@ export default class Graph extends React.Component<GraphProps, {}>  {
 					break;
 			}
 
-			return <div className="row row-fill">
-				<div className="col s12">
-					<h3>Distribution of {DieSymbol[this.props.mode]} and {DieSymbol[counterMode]}</h3>
+			return (
+				<div className="row row-fill">
+					<div className="col s12">
+						<h3>
+							Distribution of {DieSymbol[this.props.mode]} and {DieSymbol[counterMode]}
+						</h3>
 
-					<div className="row">
-						<div className="col l6 m8 s12">
-							<GraphLine label={DieSymbol[this.props.mode]} offLabel={offLabel} mode={this.props.mode} graphData={lineData} ></GraphLine>
-						</div>
-						<div className="col l3 m4 s6">
-						    <GraphBreakdown mode={this.props.mode} counterMode={counterMode} baseSet={baseSet} totalFrequency={totalFrequency}></GraphBreakdown>
-						</div>
-						<div className="col l3 m4 s6">
-                            <GraphDetails mode={this.props.mode}></GraphDetails>
+						<div className="row">
+							<div className="col l6 m8 s12">
+								<GraphLine label={DieSymbol[this.props.mode]} offLabel={offLabel} mode={this.props.mode} graphData={lineData} />
+							</div>
+							<div className="col l3 m4 s6">
+								<GraphBreakdown mode={this.props.mode} counterMode={counterMode} baseSet={baseSet} totalFrequency={totalFrequency} />
+							</div>
+							<div className="col l3 m4 s6">
+								<GraphDetails mode={this.props.mode} />
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>;
-		}
-		else{
+			);
+		} else {
 			return <></>;
 		}
-    }
+	}
 
 	/**
 	 * Returns a standardized object for the chart.js utility
@@ -92,15 +93,15 @@ export default class Graph extends React.Component<GraphProps, {}>  {
 			pointHitRadius: 10,
 			pointHoverRadius: 10,
 			data: dataset
-		}
-    }
+		};
+	}
 
-    	/**
+	/**
 	 * Calculates the probability returned as a number between 0 and 100
 	 * @param top
 	 * @param bottom
 	 */
 	private GetProbability(numerator: number, denominator: number): number {
-		return numerator / denominator * 100;
+		return (numerator / denominator) * 100;
 	}
 }

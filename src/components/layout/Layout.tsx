@@ -4,12 +4,12 @@ import { Footer } from "./Footer";
 
 export class Layout extends React.Component<{}, {}> {
 	public render() {
-		return <div className="light-green darken-2">
-			<NavMenu />
-			<div className="container">
-				{this.props.children}
+		return (
+			<div className="light-green darken-2">
+				<NavMenu />
+				<div className="container">{this.props.children}</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>;
+		);
 	}
 }
