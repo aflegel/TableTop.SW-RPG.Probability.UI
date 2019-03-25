@@ -1,0 +1,22 @@
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
+###############################
+# Core EditorConfig Options   #
+###############################
+# All files
+root = true
+
+[*]
+indent_style = tab
+# Code files
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+end_of_line = lf
+quote_type = double
+trim_trailing_whitespace = true
+max_line_length = 200
+curly_bracket_next_line = true
+continuation_indent_size = 4
+indent_brace_style = BSD KNF
+spaces_around_brackets = outside
+spaces_around_operators = true

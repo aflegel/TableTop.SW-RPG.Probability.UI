@@ -1,20 +1,21 @@
 import * as React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import { ApplicationState } from "../services";
-import * as DiceStatistics from "../services/DiceService";
-import DiceUtility from "../framework/DiceUtility";
-import Graph from "./Graph";
+import { ApplicationState } from "../../services";
+import * as DiceService from "../../services/DiceService";
+import DiceUtility from "../Dice/DiceSymbol";
+import Graph from "../graph/Graph";
 
 import { Line } from "react-chartjs-2";
 import { Chart } from "chart.js";
-import { DieType, DieSymbol, PoolCombinationState, PoolCombinationStatistic, PoolDice, PoolCombination } from "../services/DiceModels";
+import { DieType, DieSymbol, PoolCombinationState, PoolCombinationStatistic, PoolDice, PoolCombination } from "../../services/DiceModels";
+import Dice from "../Dice/Dice";
 
 
 // At runtime, Redux will merge together...
 type DiceStatisticsProps =
 	PoolCombinationState        // ... state we've requested from the Redux store
-	& typeof DiceStatistics.actionCreators     // ... plus action creators we've requested
+	& typeof DiceService.actionCreators     // ... plus action creators we've requested
 	& RouteComponentProps<{ positivePoolId?: number, negativePoolId?: number }>; // ... plus incoming routing parameters
 
 class FetchDiceStatistics extends React.Component<DiceStatisticsProps, {}> {
@@ -51,13 +52,13 @@ class FetchDiceStatistics extends React.Component<DiceStatisticsProps, {}> {
 							{this.RenderPoolData()}
 						</li>
 						<li className="collection-item">
-							{this.RenderGraphAndData(DieSymbol.Success)}
+							<Graph {...this.props} mode={DieSymbol.Success}></Graph>
 						</li>
 						<li className="collection-item">
-							{this.RenderGraphAndData(DieSymbol.Advantage)}
+							<Graph {...this.props} mode={DieSymbol.Advantage}></Graph>
 						</li>
 						<li className="collection-item">
-							{this.RenderGraphAndData(DieSymbol.Triumph)}
+							<Graph {...this.props} mode={DieSymbol.Triumph}></Graph>
 						</li>
 					</ul>
 				</div>
@@ -68,82 +69,25 @@ class FetchDiceStatistics extends React.Component<DiceStatisticsProps, {}> {
 		</div>;
 	}
 
-	/**
-	 * Renders the current search icons as well as a search builder
-	 */
-	private RenderSearch() {
-		return <div className="row row-fill">
-			<div className="col s12">
-				<div className="card">
-					<div className="card-content">
-						<div className="row">
-							<div className="col l4 m6 s12">
-								{this.RenderDieCount(DieType.Proficiency)}
-								{this.RenderDieCount(DieType.Challenge)}
-							</div>
-							<div className="col l4 m6 s12">
-								{this.RenderDieCount(DieType.Ability)}
-								{this.RenderDieCount(DieType.Difficulty)}
-							</div>
-							<div className="col l4 m6 s12">
-								{this.RenderDieCount(DieType.Boost)}
-								{this.RenderDieCount(DieType.Setback)}
-							</div>
-						</div>
 
-						<span>
-							<button onClick={() => { this.props.requestDiceStatistics(); }} className="btn btn-primary">Search</button>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>;
-	}
 
 	/**
 	 * Renders the current search icons as well as a search builder
 	 */
 	private RenderPoolData() {
-		if (this.props.poolCombinationContainer.baseDice != null)
+		if (this.props.poolCombinationContainer.baseDice){
+
+
 			return <div className="row row-fill">
 				<div className="col s12">
 					<h2>Probability Breakdown</h2>
 
-					<h5>{DiceUtility.RenderDice(this.props.poolCombinationContainer.baseDice)}</h5>
+					<h5>
+						<Dice dice={this.props.poolCombinationContainer.baseDice}></Dice>
+					</h5>
 				</div>
 			</div>;
-	}
-
-	private RenderDieCount(dieType: DieType) {
-		var count = 0;
-		var test = this.props.searchDice.filter(f => f.dieId == dieType);
-
-		if (test.length > 0) {
-			count = test[0].quantity
 		}
-
-		return <div className="row">
-			<div className="col s4">
-				<button className="btn light-green darken-3" onClick={() => { this.AddDie(dieType) }}>+</button>
-			</div>
-			<div className="col s4 center-align">
-				<h5 className="">{DiceUtility.RenderDie(dieType)} x{count}</h5>
-			</div>
-			<div className="col s4">
-				<button className="btn light-green darken-3" onClick={() => { this.DeleteDie(dieType) }}>-</button>
-			</div>
-		</div>;
-	}
-
-
-	private DeleteDie(dieType: DieType) {
-		this.props.removeSearchDie({ dieId: dieType, quantity: 1 });
-	}
-
-	private AddDie(dieType: DieType) {
-		var poolDie: PoolDice = { dieId: dieType, quantity: 1 };
-
-		this.props.addSearchDie(poolDie);
 	}
 
 	/**
