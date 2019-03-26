@@ -1,8 +1,10 @@
 import * as React from "react";
-import { DieSymbol, PoolCombinationState, PoolCombination } from "../../Models/PoolContainer";
+import { PoolCombination } from "../../Models/PoolCombination";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
+import { DieSymbol } from "../../Models/DieSymbol";
 
 // At runtime, Redux will merge together...
-type StatisticsResultListProps = PoolCombinationState; // ... state we've requested from the Redux store
+type StatisticsResultListProps = IStatisticsState; // ... state we've requested from the Redux store
 
 export default class StatisticsResultList extends React.Component<StatisticsResultListProps, {}> {
 	/**

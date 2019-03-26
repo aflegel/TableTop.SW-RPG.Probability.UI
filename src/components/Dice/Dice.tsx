@@ -1,6 +1,7 @@
 import * as React from "react";
-import { DieType, PoolDice } from "../../Models/PoolContainer";
 import Die from "./Die";
+import { PoolDice } from "../../Models/PoolDice";
+import { DieType } from "../../Models/DieType";
 
 // At runtime, Redux will merge together...
 type DiceProps = IDiceProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters

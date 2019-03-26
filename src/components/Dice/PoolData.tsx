@@ -1,9 +1,9 @@
 import * as React from "react";
-import { PoolCombinationState } from "../../Models/PoolContainer";
 import Dice from "./Dice";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 
 // At runtime, Redux will merge together...
-type PoolDataProps = PoolCombinationState; // ... state we've requested from the Redux store
+type PoolDataProps = IStatisticsState; // ... state we've requested from the Redux store
 
 export default class PoolData extends React.Component<PoolDataProps, {}> {
 	/**

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { DieType, PoolCombinationState } from "../../Models/PoolContainer";
-import * as DiceService from "../../services/DiceService";
 import DiceCount from "../Dice/DiceCount";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
+import { DieType } from "../../Models/DieType";
 
 // At runtime, Redux will merge together...
-type SearchProps = PoolCombinationState & // ... state we've requested from the Redux store
-	typeof DiceService.actionCreators &
+type SearchProps = IStatisticsState & // ... state we've requested from the Redux store
+	// typeof DiceService.actionCreators &
 	ISearchProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
 export interface ISearchProps {}
@@ -38,7 +38,7 @@ export default class Search extends React.Component<SearchProps, {}> {
 							<span>
 								<button
 									onClick={() => {
-										this.props.requestDiceStatistics();
+										// this.props.requestDiceStatistics();
 									}}
 									className="btn btn-primary"
 								>

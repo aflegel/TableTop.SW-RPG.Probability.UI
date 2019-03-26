@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-export class NavMenu extends React.Component<{}, {}> {
+export class NavMenu extends React.PureComponent {
 	public render() {
 		return (
 			<nav>

@@ -1,23 +1,23 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as DiceService from "../../services/DiceService";
 import Graph from "../graph/Graph";
 
-import { DieSymbol, PoolCombinationState } from "../../Models/PoolContainer";
 import Search from "../Search/Search";
 import StatisticsResultList from "./StatisticsResultList";
 import PoolData from "../Dice/PoolData";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
+import { DieSymbol } from "../../Models/DieSymbol";
 
 // At runtime, Redux will merge together...
-type StatisticsProps = PoolCombinationState & // ... state we've requested from the Redux store
-	typeof DiceService.actionCreators & // ... plus action creators we've requested
+type StatisticsProps = IStatisticsState & // ... state we've requested from the Redux store
+	// typeof DiceService.actionCreators & // ... plus action creators we've requested
 	RouteComponentProps<{ positivePoolId?: string; negativePoolId?: string }>; // ... plus incoming routing parameters
 
 export default class Statistics extends React.Component<StatisticsProps, {}> {
 	componentWillMount() {
 		// This method runs when the component is first added to the page
 		//let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 0;
-		this.props.requestDiceStatistics();
+		// this.props.requestDiceStatistics();
 	}
 
 	componentWillReceiveProps(nextProps: StatisticsProps) {
@@ -25,7 +25,7 @@ export default class Statistics extends React.Component<StatisticsProps, {}> {
 		//let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
 
 		if (this.props.poolCombinationContainer.baseDice == null) {
-			this.props.requestDiceStatistics();
+			// this.props.requestDiceStatistics();
 			return;
 		} else {
 			if (nextProps.searchDice == null) return;

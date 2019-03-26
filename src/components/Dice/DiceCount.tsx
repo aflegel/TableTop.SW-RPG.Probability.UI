@@ -1,12 +1,12 @@
 import * as React from "react";
-import { DieType, PoolDice, PoolCombinationState } from "../../Models/PoolContainer";
-import * as DiceService from "../../services/DiceService";
 import Die from "./Die";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
+import { DieType } from "../../Models/DieType";
+import { PoolDice } from "../../Models/PoolDice";
 
 // At runtime, Redux will merge together...
-type DiceCountProps = PoolCombinationState & // ... state we've requested from the Redux store
-	typeof DiceService.actionCreators &
-	IDiceCount; // ... state we've requested from the Redux store // ... plus incoming routing parameters
+type DiceCountProps = IStatisticsState &
+	IDiceCount;
 
 export interface IDiceCount {
 	dieType: DieType;
@@ -56,12 +56,12 @@ export default class DiceCount extends React.Component<DiceCountProps, {}> {
 	}
 
 	private DeleteDie(dieType: DieType) {
-		this.props.removeSearchDie({ dieId: dieType, quantity: 1 });
+		// this.props.removeSearchDie({ dieId: dieType, quantity: 1 });
 	}
 
 	private AddDie(dieType: DieType) {
 		const poolDie: PoolDice = { dieId: dieType, quantity: 1 };
 
-		this.props.addSearchDie(poolDie);
+		// this.props.addSearchDie(poolDie);
 	}
 }

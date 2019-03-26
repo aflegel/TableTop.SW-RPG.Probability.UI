@@ -1,12 +1,13 @@
-import { DieSymbol, PoolCombinationStatistic } from "../../Models/PoolContainer";
 import * as React from "react";
+import { DieSymbol } from "../../Models/DieSymbol";
+import { PoolStatistic } from "../../Models/PoolStatistic";
 
 type GraphBreakdownProps = IGraphBreakdownProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
 export interface IGraphBreakdownProps {
 	mode: DieSymbol;
 	counterMode: DieSymbol;
-	baseSet: PoolCombinationStatistic[];
+	baseSet: PoolStatistic[];
 	totalFrequency: number;
 }
 

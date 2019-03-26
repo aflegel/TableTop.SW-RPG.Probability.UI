@@ -1,11 +1,12 @@
 ﻿import * as React from "react";
-import { DieSymbol, PoolCombinationState } from "../../Models/PoolContainer";
 import GraphBreakdown from "./GraphBreakdown";
 import GraphDetails from "./GraphDetails";
 import GraphLine, { IGraphLineData, IGraphData } from "./GraphLine";
+import { DieSymbol } from "../../Models/DieSymbol";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 
 // At runtime, Redux will merge together...
-type GraphProps = PoolCombinationState & IGraphProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
+type GraphProps = IStatisticsState & IGraphProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
 export interface IGraphProps {
 	mode: DieSymbol;

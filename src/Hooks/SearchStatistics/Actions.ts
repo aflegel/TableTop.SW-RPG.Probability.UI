@@ -1,9 +1,9 @@
 import { PoolDice } from "../../Models/PoolDice";
 import { PoolContainer } from "../../Models/PoolContainer";
-import { IAddDie, AddDieAction } from "./Models/AddDie";
-import { IRemoveDie, RemoveDieAction } from "./Models/RemoveDie";
-import { IRequestStatistics } from "./Models/RequestDiceStatistics";
-import { IFetchStatistics, FetchStatisticsAction } from "./Models/FetchStatistics";
+import { IAddDie, AddDieAction } from "./Actions/AddDie";
+import { IRemoveDie, RemoveDieAction } from "./Actions/RemoveDie";
+import { IRequestStatistics, RequestStatisticsAction } from "./Actions/RequestStatistics";
+import { IFetchStatistics, FetchStatisticsAction } from "./Actions/FetchStatistics";
 
 // Action interfaces
 export type StatisticsApiActions = IRequestStatistics | IFetchStatistics | IAddDie | IRemoveDie;
@@ -22,4 +22,8 @@ export const addAction = (dice: PoolDice): IAddDie => ({
 export const removeAction = (dice: PoolDice): IRemoveDie => ({
 	poolDie: dice,
 	type: RemoveDieAction
+});
+
+export const requestAction = (): IRequestStatistics => ({
+	type: RequestStatisticsAction
 });
