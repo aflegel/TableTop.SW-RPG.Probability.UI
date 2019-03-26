@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DieSymbol, PoolCombinationState, PoolCombination } from "../../Models/PoolCombinationContainer";
+import { DieSymbol, PoolCombinationState, PoolCombination } from "../../Models/PoolContainer";
 
 // At runtime, Redux will merge together...
 type StatisticsResultListProps = PoolCombinationState; // ... state we've requested from the Redux store

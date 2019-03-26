@@ -1,6 +1,6 @@
 import { DieSymbol } from "./DieSymbol";
 
-export interface PoolCombinationStatistic {
+export interface PoolStatistic {
 	symbol: DieSymbol;
 	quantity: number;
 	frequency: number;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PoolCombinationState } from "../../Models/PoolCombinationContainer";
+import { PoolCombinationState } from "../../Models/PoolContainer";
 import Dice from "./Dice";
 
 // At runtime, Redux will merge together...

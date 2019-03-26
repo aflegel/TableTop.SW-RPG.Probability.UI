@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import * as DiceService from "../../services/DiceService";
 import Graph from "../graph/Graph";
 
-import { DieSymbol, PoolCombinationState } from "../../Models/PoolCombinationContainer";
+import { DieSymbol, PoolCombinationState } from "../../Models/PoolContainer";
 import Search from "../Search/Search";
 import StatisticsResultList from "./StatisticsResultList";
 import PoolData from "../Dice/PoolData";

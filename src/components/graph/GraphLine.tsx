@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DieSymbol } from "../../Models/PoolCombinationContainer";
+import { DieSymbol } from "../../Models/PoolContainer";
 import { Line, ChartData } from "react-chartjs-2";
 
 // At runtime, Redux will merge together...

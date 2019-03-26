@@ -1,31 +1,15 @@
-import { Action, Reducer, ActionCreator } from "redux";
-import { AppThunkAction } from ".";
-import { PoolDice, PoolCombinationContainer, PoolCombinationState, DieType } from "../Models/PoolCombinationContainer";
+import { PoolDice } from "../Models/PoolDice";
+import { PoolCombinationState } from "../Hooks/SearchStatistics/Models/PoolCombinationState";
+import { DieType } from "../Models/DieType";
+import { PoolContainer } from "../Models/PoolContainer";
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
-interface AddSearchDieAction {
-	type: "ADD_SEARCH_DIE";
-	poolDie: PoolDice;
-}
-interface RemoveSearchDieAction {
-	type: "REMOVE_SEARCH_DIE";
-	poolDie: PoolDice;
-}
-
-interface RequestDiceStatisticsAction {
-	type: "REQUEST_DICE_STATISTICS";
-}
-
-interface ReceiveDiceStatisticsAction {
-	type: "RECEIVE_DICE_STATISTICS";
-	poolCombinationContainer: PoolCombinationContainer;
-}
 
 // Declare a "discriminated union" type. This guarantees that all references to "type" properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestDiceStatisticsAction | ReceiveDiceStatisticsAction | AddSearchDieAction | RemoveSearchDieAction;
+type KnownAction =
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -40,7 +24,7 @@ export const actionCreators = {
 		const data = JSON.stringify(getState().diceStatistics.searchDice);
 
 		const fetchTask = fetch(`api/Search/GetStatistics?data=${data}`)
-			.then(response => response.json() as Promise<PoolCombinationContainer>)
+			.then(response => response.json() as Promise<PoolContainer>)
 			.then(data => {
 				dispatch({ type: "RECEIVE_DICE_STATISTICS", poolCombinationContainer: data });
 			});

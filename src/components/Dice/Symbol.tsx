@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { DieSymbol } from "../../Models/PoolCombinationContainer";
+import { DieSymbol } from "../../Models/PoolContainer";
 
 // At runtime, Redux will merge together...
 type SymbolProps = ISymbolProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters

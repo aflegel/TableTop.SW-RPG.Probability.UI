@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DieType, PoolDice } from "../../Models/PoolCombinationContainer";
+import { DieType, PoolDice } from "../../Models/PoolContainer";
 import Die from "./Die";
 
 // At runtime, Redux will merge together...

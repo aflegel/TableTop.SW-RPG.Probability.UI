@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { DieSymbol, PoolCombinationState } from "../../Models/PoolCombinationContainer";
+import { DieSymbol, PoolCombinationState } from "../../Models/PoolContainer";
 import GraphBreakdown from "./GraphBreakdown";
 import GraphDetails from "./GraphDetails";
 import GraphLine, { IGraphLineData, IGraphData } from "./GraphLine";

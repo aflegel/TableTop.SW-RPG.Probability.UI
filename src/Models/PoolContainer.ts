@@ -1,7 +1,7 @@
 import { PoolCombination } from "./PoolCombination";
 import { PoolDice } from "./PoolDice";
 
-export interface PoolCombinationContainer {
+export interface PoolContainer {
 	baseline?: PoolCombination;
 	baseDice?: PoolDice[];
 }
