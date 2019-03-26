@@ -1,8 +1,8 @@
 ﻿import * as React from "react";
-import { DieSymbol, PoolCombinationState } from "../../services/DiceModels";
+import { DieSymbol, PoolCombinationState } from "../../Models/PoolCombinationContainer";
 import GraphBreakdown from "./GraphBreakdown";
 import GraphDetails from "./GraphDetails";
-import GraphLine from "./GraphLine";
+import GraphLine, { IGraphLineData, IGraphData } from "./GraphLine";
 
 // At runtime, Redux will merge together...
 type GraphProps = PoolCombinationState & IGraphProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
@@ -12,6 +12,34 @@ export interface IGraphProps {
 }
 
 export default class Graph extends React.Component<GraphProps, {}> {
+	/**
+	 * Calculates the probability returned as a number between 0 and 100
+	 * @param top
+	 * @param bottom
+	 */
+	private GetProbability = (numerator: number, denominator: number): number => (numerator / denominator) * 100;
+
+	/**
+	 * Returns a standardized object for the chart.js utility
+	 * @param dataset
+	 * @param label
+	 * @param color
+	 */
+	private BuildDataSet = (dataset: number[], label: string, color: string, yAxisId: string): IGraphLineData => {
+		return {
+			label: label,
+			yAxisID: yAxisId,
+			pointBackgroundColor: color,
+			borderColor: color,
+			pointHoverBackgroundColor: color,
+			fill: false,
+			pointRadius: 5,
+			pointHitRadius: 10,
+			pointHoverRadius: 10,
+			data: dataset
+		};
+	}
+
 	/**
 	 * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
 	 */
@@ -28,8 +56,8 @@ export default class Graph extends React.Component<GraphProps, {}> {
 			let percentageSet = baseSet.map(map => this.GetProbability(map.frequency, totalFrequency));
 			let averageSet = baseSet.map(map => map.alternateTotal / map.frequency);
 
-			let datasets = [Graph.BuildDataSet(percentageSet, DieSymbol[this.props.mode], "#58125A", "Probability")];
-			let lineData = { labels: xAxis, datasets: datasets };
+			let datasets: IGraphLineData[] = [this.BuildDataSet(percentageSet, DieSymbol[this.props.mode], "#58125A", "Probability")];
+			let lineData: IGraphData = { labels: xAxis, datasets: datasets };
 
 			let counterMode: DieSymbol = DieSymbol.Failure;
 			let offLabel: string = "";
@@ -37,12 +65,12 @@ export default class Graph extends React.Component<GraphProps, {}> {
 				case DieSymbol.Success:
 					counterMode = DieSymbol.Failure;
 					offLabel = "Average Advantage";
-					datasets = datasets.concat(Graph.BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
+					datasets = datasets.concat(this.BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
 					break;
 				case DieSymbol.Advantage:
 					counterMode = DieSymbol.Threat;
 					offLabel = "Average Success";
-					datasets = datasets.concat(Graph.BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
+					datasets = datasets.concat(this.BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
 					break;
 				case DieSymbol.Triumph:
 					counterMode = DieSymbol.Despair;
@@ -73,35 +101,5 @@ export default class Graph extends React.Component<GraphProps, {}> {
 		} else {
 			return <></>;
 		}
-	}
-
-	/**
-	 * Returns a standardized object for the chart.js utility
-	 * @param dataset
-	 * @param label
-	 * @param color
-	 */
-	private static BuildDataSet(dataset: number[], label: string, color: string, yAxisId: string) {
-		return {
-			label: label,
-			yAxisID: yAxisId,
-			pointBackgroundColor: color,
-			borderColor: color,
-			pointHoverBackgroundColor: color,
-			fill: false,
-			pointRadius: 5,
-			pointHitRadius: 10,
-			pointHoverRadius: 10,
-			data: dataset
-		};
-	}
-
-	/**
-	 * Calculates the probability returned as a number between 0 and 100
-	 * @param top
-	 * @param bottom
-	 */
-	private GetProbability(numerator: number, denominator: number): number {
-		return (numerator / denominator) * 100;
 	}
 }

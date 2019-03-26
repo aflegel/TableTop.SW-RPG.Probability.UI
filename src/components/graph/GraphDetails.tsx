@@ -1,4 +1,4 @@
-import { DieSymbol } from "../../services/DiceModels";
+import { DieSymbol } from "../../Models/PoolCombinationContainer";
 import * as React from "react";
 
 // At runtime, Redux will merge together...

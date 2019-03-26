@@ -1,6 +1,6 @@
 import * as React from "react";
-import { DieSymbol } from "../../services/DiceModels";
-import { Line } from "react-chartjs-2";
+import { DieSymbol } from "../../Models/PoolCombinationContainer";
+import { Line, ChartData } from "react-chartjs-2";
 
 // At runtime, Redux will merge together...
 type GraphLineProps = IGraphLineProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
@@ -9,7 +9,25 @@ export interface IGraphLineProps {
 	label: string;
 	offLabel: string;
 	mode: DieSymbol;
-	graphData: any;
+	graphData: ChartData<IGraphData>;
+}
+
+export interface IGraphLineData {
+	label: string;
+	yAxisID: string;
+	pointBackgroundColor: string;
+	borderColor: string;
+	pointHoverBackgroundColor: string;
+	fill: boolean;
+	pointRadius: number;
+	pointHitRadius: number;
+	pointHoverRadius: number;
+	data: number[];
+}
+
+export interface IGraphData {
+	labels: string[];
+	datasets: IGraphLineData[];
 }
 
 export default class GraphLine extends React.Component<GraphLineProps, {}> {

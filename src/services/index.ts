@@ -1,5 +1,5 @@
 import * as DiceService from "./DiceService";
-import { PoolCombinationState } from "./DiceModels";
+import { PoolCombinationState } from "../Models/PoolCombinationContainer";
 
 // The top-level state object
 export interface ApplicationState {

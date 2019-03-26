@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DieType, PoolDice, PoolCombinationState } from "../../services/DiceModels";
+import { DieType, PoolDice, PoolCombinationState } from "../../Models/PoolCombinationContainer";
 import * as DiceService from "../../services/DiceService";
 import Die from "./Die";
 

@@ -1,4 +1,4 @@
-import { DieSymbol, PoolCombinationStatistic } from "../../services/DiceModels";
+import { DieSymbol, PoolCombinationStatistic } from "../../Models/PoolCombinationContainer";
 import * as React from "react";
 
 type GraphBreakdownProps = IGraphBreakdownProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters

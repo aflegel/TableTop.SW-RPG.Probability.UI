@@ -1,6 +1,6 @@
 import { Action, Reducer, ActionCreator } from "redux";
 import { AppThunkAction } from ".";
-import { PoolDice, PoolCombinationContainer, PoolCombinationState, DieType } from "./DiceModels";
+import { PoolDice, PoolCombinationContainer, PoolCombinationState, DieType } from "../Models/PoolCombinationContainer";
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
