@@ -1,13 +1,11 @@
-import * as React from "react";
+import React, { FunctionComponent } from "react";
 
-export class Footer extends React.PureComponent {
-	public render() {
-		return (
-			<footer className="page-footer light-green darken-4">
-				<div className="footer-copyright">
-					<div className="container">&copy; 2018 BoutinFlegel</div>
-				</div>
-			</footer>
-		);
-	}
-}
+export const Footer: FunctionComponent = () => {
+	return (
+		<footer className="page-footer light-green darken-4">
+			<div className="footer-copyright">
+				<div className="container">&copy; 2019 BoutinFlegel</div>
+			</div>
+		</footer>
+	);
+};

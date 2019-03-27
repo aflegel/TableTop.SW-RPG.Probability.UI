@@ -1,18 +1,13 @@
-﻿import * as React from "react";
+﻿import React, { FunctionComponent } from "react";
 import { DieSymbol } from "../../Models/DieSymbol";
-
-// At runtime, Redux will merge together...
-type SymbolProps = ISymbolProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
 export interface ISymbolProps {
 	dieSymbol: DieSymbol;
 }
 
-export default class Symbol extends React.Component<SymbolProps, {}> {
+export const Symbol: FunctionComponent<ISymbolProps> = (props: ISymbolProps) => {
 	/**
 	 * Returns an icon element with the appropriate css classes
 	 */
-	public render() {
-		return <i className={"ffi ffi-swrpg-" + DieSymbol[this.props.dieSymbol].toString().toLowerCase()} />;
-	}
-}
+	return <i className={"ffi ffi-swrpg-" + DieSymbol[props.dieSymbol].toString().toLowerCase()} />;
+};

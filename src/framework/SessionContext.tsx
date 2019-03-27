@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
 
 export interface SessionContextProps {
 	login: string;
-	updateLogin: (value) => void;
+	updateLogin: (value: any) => void;
 }
 
 export const createDefaultUser = (): SessionContextProps => ({

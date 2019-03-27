@@ -1,9 +1,6 @@
-import * as React from "react";
+import React, { FunctionComponent } from "react";
 import { Line, ChartData } from "react-chartjs-2";
 import { DieSymbol } from "../../Models/DieSymbol";
-
-// At runtime, Redux will merge together...
-type GraphLineProps = IGraphLineProps; // ... state we've requested from the Redux store // ... plus incoming routing parameters
 
 export interface IGraphLineProps {
 	label: string;
@@ -30,54 +27,52 @@ export interface IGraphData {
 	datasets: IGraphLineData[];
 }
 
-export default class GraphLine extends React.Component<GraphLineProps, {}> {
+export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
 	/**
 	 * Renders a standardized chart.js graph given a dataset.
 	 */
-	public render() {
-		let yAxes = [
-			{
-				id: "Probability",
-				position: "left",
-				scaleLabel: {
-					display: true,
-					labelString: "Probability (%)"
-				}
-			}
-		];
-
-		if (this.props.mode == DieSymbol.Advantage || this.props.mode == DieSymbol.Success) {
-			yAxes = yAxes.concat({
-				id: "Average",
-				position: "right",
-				scaleLabel: {
-					display: true,
-					labelString: this.props.offLabel
-				}
-			});
-		}
-
-		const options = {
-			title: {
+	let yAxes = [
+		{
+			id: "Probability",
+			position: "left",
+			scaleLabel: {
 				display: true,
-				text: "Distribution of " + this.props.label
-			},
-			legend: {
-				display: true
-			},
-			scales: {
-				yAxes: yAxes,
-				xAxes: [
-					{
-						scaleLabel: {
-							display: true,
-							labelString: "Net " + this.props.label
-						}
-					}
-				]
+				labelString: "Probability (%)"
 			}
-		};
+		}
+	];
 
-		return <Line data={this.props.graphData} options={options} />;
+	if (props.mode == DieSymbol.Advantage || props.mode == DieSymbol.Success) {
+		yAxes = yAxes.concat({
+			id: "Average",
+			position: "right",
+			scaleLabel: {
+				display: true,
+				labelString: props.offLabel
+			}
+		});
 	}
-}
+
+	const options = {
+		title: {
+			display: true,
+			text: "Distribution of " + props.label
+		},
+		legend: {
+			display: true
+		},
+		scales: {
+			yAxes: yAxes,
+			xAxes: [
+				{
+					scaleLabel: {
+						display: true,
+						labelString: "Net " + props.label
+					}
+				}
+			]
+		}
+	};
+
+	return <Line data={props.graphData} options={options} />;
+};
