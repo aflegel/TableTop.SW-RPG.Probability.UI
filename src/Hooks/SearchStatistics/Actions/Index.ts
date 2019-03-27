@@ -1,9 +1,9 @@
-import { PoolDice } from "../../Models/PoolDice";
-import { PoolContainer } from "../../Models/PoolContainer";
-import { IAddDie, AddDieAction } from "./Actions/AddDie";
-import { IRemoveDie, RemoveDieAction } from "./Actions/RemoveDie";
-import { IRequestStatistics, RequestStatisticsAction } from "./Actions/RequestStatistics";
-import { IFetchStatistics, FetchStatisticsAction } from "./Actions/FetchStatistics";
+import { PoolDice } from "../../../Models/PoolDice";
+import { PoolContainer } from "../../../Models/PoolContainer";
+import { IAddDie, AddDieAction } from "./AddDie";
+import { IRemoveDie, RemoveDieAction } from "./RemoveDie";
+import { IRequestStatistics, RequestStatisticsAction } from "./RequestStatistics";
+import { IFetchStatistics, FetchStatisticsAction } from "./FetchStatistics";
 
 // Action interfaces
 export type StatisticsApiActions = IRequestStatistics | IFetchStatistics | IAddDie | IRemoveDie;

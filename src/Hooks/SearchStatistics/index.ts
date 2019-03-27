@@ -1,16 +1,16 @@
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
-import { reducer } from './Reducer';
-import { initialState } from './StatisticState';
-import { IStatisticsService, statisticsServiceSingleton } from '../../services/DiceService';
-import { requestAction, fetchStatisticsAction } from './Actions';
-import { PoolContainer } from '../../Models/PoolContainer';
+import { reducer } from "./Reducer";
+import { initialState } from "./StatisticState";
+import { IStatisticsService, statisticsServiceSingleton } from "../../Services/DiceService";
+import { requestAction, fetchStatisticsAction } from "./Actions";
+import { PoolContainer } from "../../Models/PoolContainer";
 
 /**
  * Logged Coffee custom hook. Wraps state and API interactions for Logged Coffee.
  */
 export const useStatistics = () => {
-	const [ state, dispatch ] = useReducer(reducer, initialState);
+	const [state, dispatch] = useReducer(reducer, initialState);
 	const service: IStatisticsService = statisticsServiceSingleton;
 
 	/**
@@ -18,12 +18,10 @@ export const useStatistics = () => {
 	 */
 	const getStatisticsAsync = (): void => {
 		dispatch(requestAction());
-		service.getAllAsync()
-			.then((pool: PoolContainer) => {
-				dispatch(fetchStatisticsAction(pool));
-			});
+		service.getAllAsync().then((pool: PoolContainer) => {
+			dispatch(fetchStatisticsAction(pool));
+		});
 	};
-
 
 	return { state, getStatisticsAsync };
 };
