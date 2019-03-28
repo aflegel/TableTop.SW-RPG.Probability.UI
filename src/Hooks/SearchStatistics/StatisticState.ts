@@ -4,21 +4,18 @@ import { DieType } from "../../Models/DieType";
 
 export interface IStatisticsState {
 	isLoading: boolean;
-	negativePoolId: number;
+	poolContainer: PoolContainer;
 	searchDice: PoolDice[];
-	poolCombinationContainer: PoolContainer;
 }
 
 export const initialState: IStatisticsState = {
 	isLoading: true,
-	negativePoolId: 0,
+	poolContainer: {},
 	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
-	poolCombinationContainer: {},
 };
 
 export const unloadedState: IStatisticsState = {
-	poolCombinationContainer: {},
-	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
 	isLoading: false,
-	negativePoolId: 0
+	poolContainer: {},
+	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
 };

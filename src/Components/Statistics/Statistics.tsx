@@ -24,7 +24,7 @@ export const Statistics: FunctionComponent<StatisticsProps> = (props: Statistics
 		// This method runs when incoming props (e.g., route params) change
 		//let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
 
-		if (props.poolCombinationContainer.baseDice == null) {
+		if (props.poolContainer.baseDice == null) {
 			// this.props.requestDiceStatistics();
 			return;
 		} else {

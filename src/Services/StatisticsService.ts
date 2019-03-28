@@ -9,7 +9,7 @@ export interface IStatisticsService {
 export class StatisticsService implements IStatisticsService {
 	private fakeData: PoolContainer = {
 		baseline: {
-			poolCombinationStatistics: [
+			poolStatistics: [
 				{
 					symbol: DieSymbol.Success,
 					quantity: 1,

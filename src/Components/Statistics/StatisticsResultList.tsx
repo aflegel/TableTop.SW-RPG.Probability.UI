@@ -8,10 +8,10 @@ export const StatisticsResultList: FunctionComponent<IStatisticsState> = (props:
 	 * Renders a table with the raw data used for populating the tables and statistics data
 	 */
 
-	if (props.poolCombinationContainer) {
+	if (props.poolContainer) {
 		let containers: PoolCombination[] = [];
 
-		if (props.poolCombinationContainer.baseline) containers = containers.concat(props.poolCombinationContainer.baseline);
+		if (props.poolContainer.baseline) containers = containers.concat(props.poolContainer.baseline);
 
 		return (
 			<div className="row row-fill">
@@ -29,7 +29,7 @@ export const StatisticsResultList: FunctionComponent<IStatisticsState> = (props:
 								</thead>
 								<tbody>
 									{containers.map(poolCombination =>
-										poolCombination.poolCombinationStatistics.map(combination => (
+										poolCombination.poolStatistics.map(combination => (
 											<tr>
 												<td>{DieSymbol[combination.symbol]}</td>
 												<td>{combination.quantity}</td>

@@ -43,9 +43,9 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	/**
 	 * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
 	 */
-	if (props.poolCombinationContainer != null && props.poolCombinationContainer.baseline != null) {
+	if (props.poolContainer != null && props.poolContainer.baseline != null) {
 		//get short list of combinations ordered lowest to highest
-		let baseSet = props.poolCombinationContainer.baseline.poolCombinationStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+		let baseSet = props.poolContainer.baseline.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 
 		//from short list get quantities
 		let xAxis = baseSet.map(map => map.quantity.toString());

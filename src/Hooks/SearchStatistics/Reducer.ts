@@ -72,7 +72,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 
 			return {
 				...state,
-				poolCombinationContainer: state.poolCombinationContainer,
+				poolCombinationContainer: state.poolContainer,
 				searchDice: addDice,
 				isLoading: false
 			};
@@ -87,7 +87,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 
 			return {
 				...state,
-				poolCombinationContainer: state.poolCombinationContainer,
+				poolCombinationContainer: state.poolContainer,
 				searchDice: removeDice,
 				isLoading: false
 			};
