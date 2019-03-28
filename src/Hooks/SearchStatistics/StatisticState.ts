@@ -12,7 +12,7 @@ export interface IStatisticsState {
 export const initialState: IStatisticsState = {
 	isLoading: true,
 	negativePoolId: 0,
-	searchDice: [],
+	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
 	poolCombinationContainer: {},
 };
 

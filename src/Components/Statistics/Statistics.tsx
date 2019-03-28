@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Graph } from "../Graph/Graph";
 
@@ -7,17 +7,20 @@ import { StatisticsResultList } from "./StatisticsResultList";
 import { PoolData } from "../Dice/PoolData";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieSymbol } from "../../Models/DieSymbol";
+import { useStatistics } from "../../Hooks/SearchStatistics";
+
+import "../../Styles/App.scss";
 
 type StatisticsProps = IStatisticsState &
 	// typeof DiceService.actionCreators &
 	RouteComponentProps<{ positivePoolId?: string; negativePoolId?: string }>;
 
 export const Statistics: FunctionComponent<StatisticsProps> = (props: StatisticsProps) => {
-	const componentWillMount = () => {
-		// This method runs when the component is first added to the page
-		//let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 0;
-		// this.props.requestDiceStatistics();
-	};
+	const { state, getStatisticsAsync } = useStatistics();
+
+	useEffect(() => {
+		getStatisticsAsync();
+	}, []);
 
 	const componentWillReceiveProps = (nextProps: StatisticsProps) => {
 		// This method runs when incoming props (e.g., route params) change
@@ -36,26 +39,26 @@ export const Statistics: FunctionComponent<StatisticsProps> = (props: Statistics
 
 	return (
 		<div>
-			<Search {...props} />
+			<Search {...state} />
 			<div className="row row-fill">
 				<div className="col s12">
 					<ul className="collection with-header">
 						<li className="collection-header">
-							<PoolData {...props} />
+							<PoolData {...state} />
 						</li>
 						<li className="collection-item">
-							<Graph {...props} mode={DieSymbol.Success} />
+							<Graph {...state} mode={DieSymbol.Success} />
 						</li>
 						<li className="collection-item">
-							<Graph {...props} mode={DieSymbol.Advantage} />
+							<Graph {...state} mode={DieSymbol.Advantage} />
 						</li>
 						<li className="collection-item">
-							<Graph {...props} mode={DieSymbol.Triumph} />
+							<Graph {...state} mode={DieSymbol.Triumph} />
 						</li>
 					</ul>
 				</div>
 			</div>
-			<StatisticsResultList {...props} />
+			<StatisticsResultList {...state} />
 		</div>
 	);
 };

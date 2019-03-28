@@ -2,7 +2,7 @@ import { useReducer } from "react";
 
 import { reducer } from "./Reducer";
 import { initialState } from "./StatisticState";
-import { IStatisticsService, statisticsServiceSingleton } from "../../Services/DiceService";
+import { IStatisticsService, statisticsServiceSingleton } from "../../Services/StatisticsService";
 import { requestAction, fetchStatisticsAction } from "./Actions";
 import { PoolContainer } from "../../Models/PoolContainer";
 
@@ -33,13 +33,6 @@ export const actionCreators = {
 	requestDiceStatistics: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
 		// Only load data if it's something we don't already have (and are not already loading)
 		//if (positivePoolId !== getState().diceStatistics.positivePoolId) {
-		const data = JSON.stringify(getState().diceStatistics.searchDice);
-
-		const fetchTask = fetch(`api/Search/GetStatistics?data=${data}`)
-			.then(response => response.json() as Promise<PoolContainer>)
-			.then(data => {
-				dispatch({ type: "RECEIVE_DICE_STATISTICS", poolCombinationContainer: data });
-			});
 
 		// addTask(fetchTask); // Ensure server-side prerendering waits for this to complete
 		dispatch({ type: "REQUEST_DICE_STATISTICS" });

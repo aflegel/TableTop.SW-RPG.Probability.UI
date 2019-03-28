@@ -2,6 +2,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "@mdi/font": "^2.2.43",
     "@types/chart.js": "^2.7.50",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
@@ -12,7 +13,7 @@
     "css-loader": "^2.1.1",
     "domain-task": "^3.0.3",
     "materialize-css": "^1.0.0",
-    "@mdi/font": "^2.2.43",
+    "node-sass": "^4.11.0",
     "react": "^16.8.5",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.5",

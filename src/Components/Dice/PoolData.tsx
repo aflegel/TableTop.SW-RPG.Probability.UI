@@ -6,7 +6,7 @@ export const PoolData: FunctionComponent<IStatisticsState> = (props: IStatistics
 	/**
 	 * Renders the current search icons as well as a search builder
 	 */
-	if (props.poolCombinationContainer.baseDice) {
+	if (props.poolCombinationContainer && props.poolCombinationContainer.baseDice) {
 		return (
 			<div className="row row-fill">
 				<div className="col s12">
