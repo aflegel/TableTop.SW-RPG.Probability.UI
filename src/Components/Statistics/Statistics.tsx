@@ -9,8 +9,6 @@ import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { useStatistics } from "../../Hooks/SearchStatistics";
 
-import "../../Styles/App.scss";
-
 type StatisticsProps = IStatisticsState &
 	// typeof DiceService.actionCreators &
 	RouteComponentProps<{ positivePoolId?: string; negativePoolId?: string }>;

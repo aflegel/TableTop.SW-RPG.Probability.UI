@@ -5,13 +5,17 @@ import { Layout } from "./Components/Layout/Layout";
 import { About } from "./Components/About";
 import { Statistics } from "./Components/Statistics/Statistics";
 
+import "./Styles/App.scss";
+
 export const App = () => {
 	return (
 		<SessionProvider>
 			<HashRouter>
 				<Switch>
-					<Route exact path="/" component={Statistics} />
-					<Route path="/About" component={About} />
+					<Layout>
+						<Route exact path="/" component={Statistics} />
+						<Route path="/About" component={About} />
+					</Layout>
 				</Switch>
 			</HashRouter>
 		</SessionProvider>
