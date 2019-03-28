@@ -9,11 +9,11 @@ import { PoolDice } from "../../Models/PoolDice";
 export const reducer = (state: IStatisticsState, action: StatisticsApiActions) => {
 	switch (action.type) {
 		case FetchStatisticsAction:
-			if (action.poolCombinationContainer.baseDice) {
+			if (action.poolContainer.baseDice) {
 				return {
 					...state,
-					poolCombinationContainer: action.poolCombinationContainer,
-					searchDice: action.poolCombinationContainer.baseDice.slice(),
+					poolContainer: action.poolContainer,
+					searchDice: action.poolContainer.baseDice.slice(),
 					isLoading: false
 				};
 			} else {
@@ -72,7 +72,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 
 			return {
 				...state,
-				poolCombinationContainer: state.poolContainer,
+				poolContainer: state.poolContainer,
 				searchDice: addDice,
 				isLoading: false
 			};
@@ -87,7 +87,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 
 			return {
 				...state,
-				poolCombinationContainer: state.poolContainer,
+				poolContainer: state.poolContainer,
 				searchDice: removeDice,
 				isLoading: false
 			};

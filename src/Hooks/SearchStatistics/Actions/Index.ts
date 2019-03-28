@@ -10,7 +10,7 @@ export type StatisticsApiActions = IRequestStatistics | IFetchStatistics | IAddD
 
 // Action creators
 export const fetchStatisticsAction = (poolContainer: PoolContainer): IFetchStatistics => ({
-	poolCombinationContainer: poolContainer,
+	poolContainer: poolContainer,
 	type: FetchStatisticsAction
 });
 

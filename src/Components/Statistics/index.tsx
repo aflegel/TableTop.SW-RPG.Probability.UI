@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { Graph } from "../Graph/Graph";
+import { Graph } from "../Graph";
 
-import { Search } from "../Search/Search";
-import { StatisticsResultList } from "./StatisticsResultList";
+import { Search } from "../Search";
+import { StatisticsResultList } from "./ResultList";
 import { PoolData } from "../Dice/PoolData";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieSymbol } from "../../Models/DieSymbol";

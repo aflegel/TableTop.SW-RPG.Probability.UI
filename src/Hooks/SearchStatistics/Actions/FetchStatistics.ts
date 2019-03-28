@@ -5,5 +5,5 @@ export type FetchStatisticsAction = typeof FetchStatisticsAction;
 
 export interface IFetchStatistics {
 	type: FetchStatisticsAction;
-	poolCombinationContainer: PoolContainer;
+	poolContainer: PoolContainer;
 }

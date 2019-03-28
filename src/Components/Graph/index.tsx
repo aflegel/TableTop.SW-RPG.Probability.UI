@@ -1,7 +1,7 @@
 ﻿import React, { FunctionComponent } from "react";
-import { GraphBreakdown } from "./GraphBreakdown";
-import { GraphDetails } from "./GraphDetails";
-import { GraphLine, IGraphLineData, IGraphData } from "./GraphLine";
+import { GraphBreakdown } from "./Breakdown";
+import { GraphDetails } from "./Details";
+import { GraphLine, IGraphLineData, IGraphData } from "./Line";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 

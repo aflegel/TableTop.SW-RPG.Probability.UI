@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { DiceCount } from "../Dice/DiceCount";
-import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
-import { DieType } from "../../Models/DieType";
+import { DiceCount } from "./Dice/DiceCount";
+import { IStatisticsState } from "../Hooks/SearchStatistics/StatisticState";
+import { DieType } from "../Models/DieType";
 
 export const Search: FunctionComponent<IStatisticsState> = (props: IStatisticsState) => {
 	/**

@@ -3,7 +3,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { SessionProvider } from "./Framework/SessionContext";
 import { Layout } from "./Components/Layout/Layout";
 import { About } from "./Components/About";
-import { Statistics } from "./Components/Statistics/Statistics";
+import { Statistics } from "./Components/Statistics";
 
 import "./Styles/App.scss";
 
