@@ -18,7 +18,7 @@ export const useStatistics = () => {
 	 */
 	const getStatisticsAsync = (): void => {
 		dispatch(requestAction());
-		service.getAllAsync().then((pool: PoolContainer) => {
+		service.getAllAsync(initialState.searchDice).then((pool: PoolContainer) => {
 			dispatch(fetchStatisticsAction(pool));
 		});
 	};

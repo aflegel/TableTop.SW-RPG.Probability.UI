@@ -1,9 +1,12 @@
+import axios from "axios";
+
 import { PoolContainer } from "../Models/PoolContainer";
 import { DieSymbol } from "../Models/DieSymbol";
 import { DieType } from "../Models/DieType";
+import { PoolDice } from "../Models/PoolDice";
 
 export interface IStatisticsService {
-	getAllAsync(): Promise<PoolContainer>;
+	getAllAsync(dice: PoolDice[]): Promise<PoolContainer>;
 }
 
 export class StatisticsService implements IStatisticsService {
@@ -79,10 +82,17 @@ export class StatisticsService implements IStatisticsService {
 		baseDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Proficiency, quantity: 1 }, { dieId: DieType.Setback, quantity: 1 }]
 	};
 
-	public async getAllAsync(): Promise<PoolContainer> {
+	public async getAllAsync(dice: PoolDice[]): Promise<PoolContainer> {
 		return new Promise<PoolContainer>(resolve => {
+
+			const data = JSON.stringify(dice);
+
+			axios
+      			.get(`http://localhost:62546/api/Search?data=${data}`)
+      			.then(result => resolve(result.data));
+
 			/*fetch(`api/Search/GetStatistics?data=${data}`)*/
-			setTimeout(() => resolve(this.fakeData), 500);
+			// setTimeout(() => resolve(this.fakeData), 500);
 		});
 	}
 }

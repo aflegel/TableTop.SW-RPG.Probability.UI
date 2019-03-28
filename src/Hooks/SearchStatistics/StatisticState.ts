@@ -13,9 +13,3 @@ export const initialState: IStatisticsState = {
 	poolContainer: {},
 	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
 };
-
-export const unloadedState: IStatisticsState = {
-	isLoading: false,
-	poolContainer: {},
-	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
-};
