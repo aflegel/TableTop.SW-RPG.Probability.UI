@@ -3,8 +3,9 @@ import { useReducer } from "react";
 import { reducer } from "./Reducer";
 import { initialState } from "./StatisticState";
 import { IStatisticsService, statisticsServiceSingleton } from "../../Services/StatisticsService";
-import { requestAction, fetchStatisticsAction } from "./Actions";
+import { requestAction, fetchStatisticsAction, addAction, removeAction } from "./Actions";
 import { PoolContainer } from "../../Models/PoolContainer";
+import { PoolDice } from "../../Models/PoolDice";
 
 /**
  * Logged Coffee custom hook. Wraps state and API interactions for Logged Coffee.
@@ -23,7 +24,15 @@ export const useStatistics = () => {
 		});
 	};
 
-	return { state, getStatisticsAsync };
+	const addSearchDie = (die: PoolDice): void => {
+		dispatch(addAction(die));
+	};
+
+	const removeSearchDie = (die: PoolDice): void => {
+		dispatch(removeAction(die));
+	};
+
+	return { state, getStatisticsAsync, addSearchDie, removeSearchDie };
 };
 
 /*

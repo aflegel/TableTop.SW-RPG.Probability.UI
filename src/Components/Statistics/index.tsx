@@ -20,21 +20,6 @@ export const Statistics: FunctionComponent<StatisticsProps> = (props: Statistics
 		getStatisticsAsync();
 	}, []);
 
-	const componentWillReceiveProps = (nextProps: StatisticsProps) => {
-		// This method runs when incoming props (e.g., route params) change
-		//let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
-
-		if (props.poolContainer.baseDice == null) {
-			// this.props.requestDiceStatistics();
-			return;
-		} else {
-			if (nextProps.searchDice == null) return;
-			else if (props.searchDice.length != nextProps.searchDice.length) {
-			}
-			//this.props.requestDiceStatistics();
-		}
-	};
-
 	return (
 		<div>
 			<Search {...state} />

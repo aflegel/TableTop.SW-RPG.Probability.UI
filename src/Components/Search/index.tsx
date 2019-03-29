@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from "react";
-import { DiceCount } from "./Dice/DiceCount";
-import { IStatisticsState } from "../Hooks/SearchStatistics/StatisticState";
-import { DieType } from "../Models/DieType";
+import { DiceCount } from "./DiceCount";
+import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
+import { DieType } from "../../Models/DieType";
+import { useStatistics } from "../../Hooks/SearchStatistics";
 
 export const Search: FunctionComponent<IStatisticsState> = (props: IStatisticsState) => {
+	const { getStatisticsAsync } = useStatistics();
+
 	/**
 	 * Renders the current search icons as well as a search builder
 	 */
@@ -30,7 +33,7 @@ export const Search: FunctionComponent<IStatisticsState> = (props: IStatisticsSt
 						<span>
 							<button
 								onClick={() => {
-									// props.requestDiceStatistics();
+									getStatisticsAsync();
 								}}
 								className="btn btn-primary"
 							>

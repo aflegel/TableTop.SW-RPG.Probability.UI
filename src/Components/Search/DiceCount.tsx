@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { Die } from "./Die";
+import { Die } from "../Dice/Die";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
 import { PoolDice } from "../../Models/PoolDice";
+import { useStatistics } from "../../Hooks/SearchStatistics";
 
 // At runtime, Redux will merge together...
 type DiceCountProps = IStatisticsState & IDiceCount;
@@ -15,15 +16,14 @@ export const DiceCount: FunctionComponent<DiceCountProps> = (props: DiceCountPro
 	/**
 	 * Renders the current search icons as well as a search builder
 	 */
+	const { addSearchDie, removeSearchDie } = useStatistics();
 
 	const DeleteDie = () => {
-		// this.props.removeSearchDie({ dieId: dieType, quantity: 1 });
+		removeSearchDie({ dieId: props.dieType, quantity: 1 });
 	};
 
 	const AddDie = () => {
-		const poolDie: PoolDice = { dieId: props.dieType, quantity: 1 };
-
-		// this.props.addSearchDie(poolDie);
+		addSearchDie({ dieId: props.dieType, quantity: 1 });
 	};
 
 	const DieCount = () => {
@@ -44,7 +44,7 @@ export const DiceCount: FunctionComponent<DiceCountProps> = (props: DiceCountPro
 				<button
 					className="btn light-green darken-3"
 					onClick={() => {
-						// AddDie(props.dieType);
+						AddDie();
 					}}
 				>
 					+
@@ -59,7 +59,7 @@ export const DiceCount: FunctionComponent<DiceCountProps> = (props: DiceCountPro
 				<button
 					className="btn light-green darken-3"
 					onClick={() => {
-						// 	DeleteDie(props.dieType);
+						DeleteDie();
 					}}
 				>
 					-
