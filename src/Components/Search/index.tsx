@@ -12,11 +12,6 @@ export interface ISearchProps {
 }
 
 export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
-
-	const FormatDice = (set: IStatisticsState): string => {
-		return "{" + set.searchDice.map(map => "{" + map.dieId + "," + map.quantity + "}").join(",") + "}";
-	}
-
 	/**
 	 * Renders the current search icons as well as a search builder
 	 */
@@ -39,8 +34,6 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 								<DieIncrementer {...props} dieType={DieType.Setback} />
 							</div>
 						</div>
-						<div className="row">props: {FormatDice(props)}</div>
-
 						<span>
 							<button
 								className="btn btn-primary"
