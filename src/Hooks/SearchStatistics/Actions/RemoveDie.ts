@@ -1,9 +1,9 @@
-import { PoolDice } from "../../../Models/PoolDice";
+import { DieType } from "../../../Models/DieType";
 
 export const RemoveDieAction = "REMOVE_DIE";
 export type RemoveDieAction = typeof RemoveDieAction;
 
 export interface IRemoveDie {
 	type: RemoveDieAction;
-	poolDie: PoolDice;
+	dieType: DieType;
 }

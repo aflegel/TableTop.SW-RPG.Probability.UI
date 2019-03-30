@@ -1,11 +1,21 @@
 import React, { FunctionComponent } from "react";
-import { DiceCount } from "./DiceCount";
+import { DieIncrementer } from "./Incrementer";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
-import { useStatistics } from "../../Hooks/SearchStatistics";
 
-export const Search: FunctionComponent<IStatisticsState> = (props: IStatisticsState) => {
-	const { getStatisticsAsync } = useStatistics();
+type SearchProps = IStatisticsState & ISearchProps;
+
+export interface ISearchProps {
+	addDieCallback: Function;
+	removeDieCallback: Function;
+	searchCallback: Function;
+}
+
+export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
+
+	const FormatDice = (set: IStatisticsState): string => {
+		return "{" + set.searchDice.map(map => "{" + map.dieId + "," + map.quantity + "}").join(",") + "}";
+	}
 
 	/**
 	 * Renders the current search icons as well as a search builder
@@ -17,26 +27,24 @@ export const Search: FunctionComponent<IStatisticsState> = (props: IStatisticsSt
 					<div className="card-content">
 						<div className="row">
 							<div className="col l4 m6 s12">
-								<DiceCount {...props} dieType={DieType.Proficiency} />
-								<DiceCount {...props} dieType={DieType.Challenge} />
+								<DieIncrementer {...props} dieType={DieType.Proficiency} />
+								<DieIncrementer {...props} dieType={DieType.Challenge} />
 							</div>
 							<div className="col l4 m6 s12">
-								<DiceCount {...props} dieType={DieType.Ability} />
-								<DiceCount {...props} dieType={DieType.Difficulty} />
+								<DieIncrementer {...props} dieType={DieType.Ability} />
+								<DieIncrementer {...props} dieType={DieType.Difficulty} />
 							</div>
 							<div className="col l4 m6 s12">
-								<DiceCount {...props} dieType={DieType.Boost} />
-								<DiceCount {...props} dieType={DieType.Setback} />
+								<DieIncrementer {...props} dieType={DieType.Boost} />
+								<DieIncrementer {...props} dieType={DieType.Setback} />
 							</div>
 						</div>
+						<div className="row">props: {FormatDice(props)}</div>
 
 						<span>
 							<button
-								onClick={() => {
-									getStatisticsAsync();
-								}}
 								className="btn btn-primary"
-							>
+								onClick={() => { props.searchCallback() }}>
 								Search
 							</button>
 						</span>

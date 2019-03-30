@@ -23,9 +23,9 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 				};
 			}
 		case AddDieAction:
-			const addDice = CopyDice(state.searchDice);
+			const addDice = state.searchDice.slice(); //CopyDice(state.searchDice);
 
-			switch (action.poolDie.dieId) {
+			switch (action.dieType) {
 				case DieType.Ability:
 				case DieType.Proficiency:
 					if (
@@ -35,7 +35,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 								return total + obj.quantity;
 							}, 0) < 6
 					)
-						MergeDice(addDice, action.poolDie);
+						MergeDice(addDice, action.dieType);
 					break;
 				case DieType.Boost:
 					if (
@@ -45,7 +45,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 								return total + obj.quantity;
 							}, 0) < 4
 					)
-						MergeDice(addDice, action.poolDie);
+						MergeDice(addDice, action.dieType);
 					break;
 				case DieType.Difficulty:
 				case DieType.Challenge:
@@ -56,7 +56,7 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 								return total + obj.quantity;
 							}, 0) < 6
 					)
-						MergeDice(addDice, action.poolDie);
+						MergeDice(addDice, action.dieType);
 					break;
 				case DieType.Setback:
 					if (
@@ -66,28 +66,26 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 								return total + obj.quantity;
 							}, 0) < 4
 					)
-						MergeDice(addDice, action.poolDie);
+						MergeDice(addDice, action.dieType);
 					break;
 			}
 
 			return {
 				...state,
-				poolContainer: state.poolContainer,
 				searchDice: addDice,
 				isLoading: false
 			};
 		case RemoveDieAction:
-			const removeDice = CopyDice(state.searchDice);
-			const existingRecord = removeDice.find(f => f.dieId == action.poolDie.dieId);
+			const removeDice = state.searchDice.slice();
+			const existingRecord = removeDice.find(f => f.dieId == action.dieType);
 
-			if (existingRecord != null) {
-				if (existingRecord.quantity > 1) existingRecord.quantity -= action.poolDie.quantity;
+			if (existingRecord) {
+				if (existingRecord.quantity > 1) existingRecord.quantity -= 1;
 				else removeDice.splice(removeDice.indexOf(existingRecord), 1);
 			}
 
 			return {
 				...state,
-				poolContainer: state.poolContainer,
 				searchDice: removeDice,
 				isLoading: false
 			};
@@ -96,21 +94,9 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions) =
 	}
 };
 
-export function FormatDice(dice: PoolDice[]): string {
-	return "{" + dice.map(map => "{" + map.dieId + "," + map.quantity + "}").join(",") + "}";
-}
+export function MergeDice(dice: PoolDice[], addDie: DieType) {
+	const existingRecord = dice.find(f => f.dieId == addDie);
 
-export function CopyDice(dice: PoolDice[]): PoolDice[] {
-	const replication: PoolDice[] = [];
-
-	dice.forEach(item => replication.push({ dieId: item.dieId, quantity: item.quantity }));
-
-	return replication;
-}
-
-export function MergeDice(dice: PoolDice[], addDie: PoolDice) {
-	const existingRecord = dice.find(f => f.dieId == addDie.dieId);
-
-	if (existingRecord != null) existingRecord.quantity += addDie.quantity;
-	else dice.push(addDie);
+	if (existingRecord) existingRecord.quantity += 1;
+	else dice.push({ dieId: addDie, quantity: 1 });
 }

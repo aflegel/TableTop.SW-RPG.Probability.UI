@@ -1,20 +1,13 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { RouteComponentProps } from "react-router-dom";
 import { Graph } from "../Graph";
-
 import { Search } from "../Search";
 import { StatisticsResultList } from "./ResultList";
 import { PoolData } from "../Dice/PoolData";
-import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { useStatistics } from "../../Hooks/SearchStatistics";
 
-type StatisticsProps = IStatisticsState &
-	// typeof DiceService.actionCreators &
-	RouteComponentProps<{ positivePoolId?: string; negativePoolId?: string }>;
-
-export const Statistics: FunctionComponent<StatisticsProps> = (props: StatisticsProps) => {
-	const { state, getStatisticsAsync } = useStatistics();
+export const Statistics: FunctionComponent = () => {
+	const { state, getStatisticsAsync, addSearchDie, removeSearchDie } = useStatistics();
 
 	useEffect(() => {
 		getStatisticsAsync();
@@ -22,7 +15,7 @@ export const Statistics: FunctionComponent<StatisticsProps> = (props: Statistics
 
 	return (
 		<div>
-			<Search {...state} />
+			<Search {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} searchCallback={getStatisticsAsync} />
 			<div className="row row-fill">
 				<div className="col s12">
 					<ul className="collection with-header">

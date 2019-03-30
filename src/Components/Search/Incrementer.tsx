@@ -2,29 +2,21 @@ import React, { FunctionComponent } from "react";
 import { Die } from "../Dice/Die";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
-import { PoolDice } from "../../Models/PoolDice";
-import { useStatistics } from "../../Hooks/SearchStatistics";
 
 // At runtime, Redux will merge together...
-type DiceCountProps = IStatisticsState & IDiceCount;
+type DieIncrementertProps = IStatisticsState & IDieIncrementer;
 
-export interface IDiceCount {
+export interface IDieIncrementer {
 	dieType: DieType;
+	addDieCallback: Function;
+	removeDieCallback: Function;
 }
 
-export const DiceCount: FunctionComponent<DiceCountProps> = (props: DiceCountProps) => {
+export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
+
 	/**
 	 * Renders the current search icons as well as a search builder
 	 */
-	const { addSearchDie, removeSearchDie } = useStatistics();
-
-	const DeleteDie = () => {
-		removeSearchDie({ dieId: props.dieType, quantity: 1 });
-	};
-
-	const AddDie = () => {
-		addSearchDie({ dieId: props.dieType, quantity: 1 });
-	};
 
 	const DieCount = () => {
 		let count = 0;
@@ -43,25 +35,19 @@ export const DiceCount: FunctionComponent<DiceCountProps> = (props: DiceCountPro
 			<div className="col s4">
 				<button
 					className="btn light-green darken-3"
-					onClick={() => {
-						AddDie();
-					}}
-				>
+					onClick={() => { props.addDieCallback(props.dieType) }}>
 					+
 				</button>
 			</div>
 			<div className="col s4 center-align">
 				<h5 className="">
-					<Die {...props} /> x{DieCount()}
+					<Die dieType={props.dieType} /> {props.dieType}x{DieCount()}
 				</h5>
 			</div>
 			<div className="col s4">
 				<button
 					className="btn light-green darken-3"
-					onClick={() => {
-						DeleteDie();
-					}}
-				>
+					onClick={() => { props.removeDieCallback(props.dieType) }}>
 					-
 				</button>
 			</div>
