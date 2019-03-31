@@ -45,18 +45,18 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	 */
 	if (props.poolContainer != null && props.poolContainer.baseline != null) {
 		//get short list of combinations ordered lowest to highest
-		let baseSet = props.poolContainer.baseline.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+		const baseSet = props.poolContainer.baseline.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 
 		//from short list get quantities
-		let xAxis = baseSet.map(map => map.quantity.toString());
-		let totalFrequency = baseSet.reduce((total, obj) => {
+		const xAxis = baseSet.map(map => map.quantity.toString());
+		const totalFrequency = baseSet.reduce((total, obj) => {
 			return total + obj.frequency;
 		}, 0);
-		let percentageSet = baseSet.map(map => GetProbability(map.frequency, totalFrequency));
-		let averageSet = baseSet.map(map => map.alternateTotal / map.frequency);
+		const percentageSet = baseSet.map(map => GetProbability(map.frequency, totalFrequency));
+		const averageSet = baseSet.map(map => map.alternateTotal / map.frequency);
 
-		let datasets: IGraphLineData[] = [BuildDataSet(percentageSet, DieSymbol[props.mode], "#58125A", "Probability")];
-		let lineData: IGraphData = { labels: xAxis, datasets: datasets };
+		const datasets: IGraphLineData[] = [BuildDataSet(percentageSet, DieSymbol[props.mode], "#58125A", "Probability")];
+		const lineData: IGraphData = { labels: xAxis, datasets: datasets };
 
 		let counterMode: DieSymbol = DieSymbol.Failure;
 		let offLabel: string = "";
@@ -64,12 +64,12 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 			case DieSymbol.Success:
 				counterMode = DieSymbol.Failure;
 				offLabel = "Average Advantage";
-				datasets = datasets.concat(BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
+				datasets.push(BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
 				break;
 			case DieSymbol.Advantage:
 				counterMode = DieSymbol.Threat;
 				offLabel = "Average Success";
-				datasets = datasets.concat(BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
+				datasets.push(BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
 				break;
 			case DieSymbol.Triumph:
 				counterMode = DieSymbol.Despair;

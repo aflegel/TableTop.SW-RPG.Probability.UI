@@ -59,7 +59,7 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 						return 0;
 				}
 			})
-			.forEach(item => (output = output.concat(RenderDieSet(item.dieId, item.quantity))));
+			.forEach(item => output.push(...RenderDieSet(item.dieId, item.quantity)));
 	}
 	return <>{output}</>;
 };

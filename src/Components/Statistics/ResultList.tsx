@@ -11,7 +11,7 @@ export const StatisticsResultList: FunctionComponent<IStatisticsState> = (props:
 	if (props.poolContainer) {
 		let containers: PoolCombination[] = [];
 
-		if (props.poolContainer.baseline) containers = containers.concat(props.poolContainer.baseline);
+		if (props.poolContainer.baseline) containers.push(props.poolContainer.baseline);
 
 		return (
 			<div className="row row-fill">
