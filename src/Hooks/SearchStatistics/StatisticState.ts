@@ -11,5 +11,5 @@ export interface IStatisticsState {
 export const initialState: IStatisticsState = {
 	isLoading: true,
 	poolContainer: {},
-	searchDice: [/*{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }*/],
+	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
 };
