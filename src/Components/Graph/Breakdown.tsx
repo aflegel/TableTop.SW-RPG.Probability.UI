@@ -17,24 +17,13 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 	//success mode requires 0 quantity outcomes as well
 	const negativeSet = props.baseSet.filter(f => f.quantity < (props.mode == DieSymbol.Success ? 1 : 0));
 
-	const positiveFrequency = positiveSet.reduce((total, obj) => {
-		return total + obj.frequency;
-	}, 0);
-	const negativeFrequency = negativeSet.reduce((total, obj) => {
-		return total + obj.frequency;
-	}, 0);
+	const positiveFrequency = positiveSet.reduce((total, obj) => { return total + obj.frequency; }, 0);
+	const negativeFrequency = negativeSet.reduce((total, obj) => { return total + obj.frequency; }, 0);
 
-	const average =
-		props.baseSet.reduce((total, obj) => {
-			return total + obj.quantity * obj.frequency;
-		}, 0) / props.totalFrequency;
+	const average = props.baseSet.reduce((total, obj) => { return total + obj.quantity * obj.frequency; }, 0) / props.totalFrequency;
 	//val - avg squared * qty
 	const deviationSet = props.baseSet.map(map => (map.quantity - average) ** 2 * map.frequency);
-	const standardDeviation = Math.sqrt(
-		deviationSet.reduce((total, obj) => {
-			return total + obj;
-		}, 0) / props.totalFrequency
-	);
+	const standardDeviation = Math.sqrt(deviationSet.reduce((total, obj) => { return total + obj; }, 0) / props.totalFrequency);
 
 	const totalLabeling = props.mode == DieSymbol.Success ? "Total Frequency" : "";
 	const totalData = props.mode == DieSymbol.Success ? new Intl.NumberFormat("en-Us").format(props.totalFrequency) : null;

@@ -1,9 +1,10 @@
 ﻿import React, { FunctionComponent } from "react";
 import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
-import { GraphLine, IGraphLineData, IGraphData } from "./Line";
+import { GraphLine } from "./Line";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
+import { PoolStatistic } from "../../Models/PoolStatistic";
 
 type GraphProps = IStatisticsState & IGraphProps;
 
@@ -19,85 +20,50 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	 */
 	const GetProbability = (numerator: number, denominator: number): number => (numerator / denominator) * 100;
 
-	/**
-	 * Returns a standardized object for the chart.js utility
-	 * @param dataset
-	 * @param label
-	 * @param color
-	 */
-	const BuildDataSet = (dataset: number[], label: string, color: string, yAxisId: string): IGraphLineData => {
-		return {
-			label: label,
-			yAxisID: yAxisId,
-			pointBackgroundColor: color,
-			borderColor: color,
-			pointHoverBackgroundColor: color,
-			fill: false,
-			pointRadius: 5,
-			pointHitRadius: 10,
-			pointHoverRadius: 10,
-			data: dataset
-		};
-	};
+
 
 	/**
 	 * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
 	 */
-	if (props.poolContainer != null && props.poolContainer.baseline != null) {
-		//get short list of combinations ordered lowest to highest
-		const baseSet = props.poolContainer.baseline.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 
-		//from short list get quantities
-		const xAxis = baseSet.map(map => map.quantity.toString());
-		const totalFrequency = baseSet.reduce((total, obj) => {
-			return total + obj.frequency;
-		}, 0);
-		const percentageSet = baseSet.map(map => GetProbability(map.frequency, totalFrequency));
-		const averageSet = baseSet.map(map => map.alternateTotal / map.frequency);
+	let filteredSet: PoolStatistic[] = [];
+	if (props.poolContainer.baseline)
+		filteredSet = props.poolContainer.baseline.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 
-		const datasets: IGraphLineData[] = [BuildDataSet(percentageSet, DieSymbol[props.mode], "#58125A", "Probability")];
-		const lineData: IGraphData = { labels: xAxis, datasets: datasets };
+	const totalFrequency = filteredSet.reduce((total, obj) => { return total + obj.frequency; }, 0);
+	let counterMode: DieSymbol = DieSymbol.Failure;
+	let offLabel: string = "";
+	switch (props.mode) {
+		case DieSymbol.Success:
+			counterMode = DieSymbol.Failure;
+			offLabel = "Average Advantage";
+			break;
+		case DieSymbol.Advantage:
+			counterMode = DieSymbol.Threat;
+			offLabel = "Average Success";
+			break;
+		case DieSymbol.Triumph:
+			counterMode = DieSymbol.Despair;
+			break;
+	}
 
-		let counterMode: DieSymbol = DieSymbol.Failure;
-		let offLabel: string = "";
-		switch (props.mode) {
-			case DieSymbol.Success:
-				counterMode = DieSymbol.Failure;
-				offLabel = "Average Advantage";
-				datasets.push(BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
-				break;
-			case DieSymbol.Advantage:
-				counterMode = DieSymbol.Threat;
-				offLabel = "Average Success";
-				datasets.push(BuildDataSet(averageSet, offLabel, "#8D4A8F", "Average"));
-				break;
-			case DieSymbol.Triumph:
-				counterMode = DieSymbol.Despair;
-				break;
-		}
+	return <div className="row row-fill">
+		<div className="col s12">
+			<h3>
+				Distribution of {DieSymbol[props.mode]} and {DieSymbol[counterMode]}
+			</h3>
 
-		return (
-			<div className="row row-fill">
-				<div className="col s12">
-					<h3>
-						Distribution of {DieSymbol[props.mode]} and {DieSymbol[counterMode]}
-					</h3>
-
-					<div className="row">
-						<div className="col l6 m8 s12">
-							<GraphLine label={DieSymbol[props.mode]} offLabel={offLabel} mode={props.mode} graphData={lineData} />
-						</div>
-						<div className="col l3 m4 s6">
-							<GraphBreakdown mode={props.mode} counterMode={counterMode} baseSet={baseSet} totalFrequency={totalFrequency} />
-						</div>
-						<div className="col l3 m4 s6">
-							<GraphDetails mode={props.mode} />
-						</div>
-					</div>
+			<div className="row">
+				<div className="col l6 m8 s12">
+					<GraphLine {...props} label={DieSymbol[props.mode]} offLabel={offLabel} filteredData={filteredSet} totalFrequency={totalFrequency} />
+				</div>
+				<div className="col l3 m4 s6">
+					<GraphBreakdown mode={props.mode} counterMode={counterMode} baseSet={filteredSet} totalFrequency={totalFrequency} />
+				</div>
+				<div className="col l3 m4 s6">
+					<GraphDetails mode={props.mode} />
 				</div>
 			</div>
-		);
-	} else {
-		return <></>;
-	}
+		</div>
+	</div>
 };
