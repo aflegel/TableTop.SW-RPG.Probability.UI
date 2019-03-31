@@ -42,7 +42,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		<YAxis yAxisId="left" label={{ value: props.label, angle: -90, position: 'left' }} />
 		<YAxis yAxisId="right" label={{ value: props.offLabel, angle: -90 }} orientation="right" />
 		<Tooltip label={`Net ${props.label}`} />
-		<Legend margin={{ top: 36, left: 0, right: 0, bottom: 0 }} />
+		<Legend verticalAlign="top" />
 		<Line yAxisId="left" name={props.label} type="monotone" dataKey="probability" stroke="#58125A" />
 		<Line yAxisId="right" name={props.offLabel} type="monotone" dataKey="altAverage" stroke="#8D4A8F" />
 	</LineChart>
