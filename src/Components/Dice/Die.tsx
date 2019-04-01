@@ -5,10 +5,10 @@ export interface IDieProps {
 	dieType: DieType;
 }
 
+/**
+ * Returns an icon element with the appropriate css classes
+ */
 export const Die: FunctionComponent<IDieProps> = (props: IDieProps) => {
-	/**
-	 * Returns an icon element with the appropriate css classes
-	 */
 	let dieSize = 0;
 	switch (props.dieType) {
 		case DieType.Ability:
@@ -26,5 +26,10 @@ export const Die: FunctionComponent<IDieProps> = (props: IDieProps) => {
 			break;
 	}
 
-	return <><i className={"die-stroke ffi ffi-d" + dieSize + " ffi ffi-swrpg-" + DieType[props.dieType].toString().toLowerCase() + "-color"} />{props.dieType}</>;
+	return (
+		<>
+			<i className={"die-stroke ffi ffi-d" + dieSize + " ffi ffi-swrpg-" + DieType[props.dieType].toString().toLowerCase() + "-color"} />
+			{props.dieType}
+		</>
+	);
 };

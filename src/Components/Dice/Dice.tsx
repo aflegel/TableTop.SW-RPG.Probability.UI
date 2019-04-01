@@ -7,6 +7,9 @@ export interface IDiceProps {
 	dice: PoolDice[];
 }
 
+/**
+ * Returns an icon element with the appropriate css classes
+ */
 export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 	/**
 	 * Returns an icon with proper css classes for the die type and size
@@ -23,9 +26,6 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 		return output;
 	};
 
-	/**
-	 * Returns an icon element with the appropriate css classes
-	 */
 	let output: JSX.Element[] = [];
 	if (props.dice) {
 		props.dice

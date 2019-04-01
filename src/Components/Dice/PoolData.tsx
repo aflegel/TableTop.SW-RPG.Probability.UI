@@ -2,23 +2,24 @@ import React, { FunctionComponent } from "react";
 import { Dice } from "./Dice";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 
+/**
+ * Renders the current search icons as well as a search builder
+ */
 export const PoolData: FunctionComponent<IStatisticsState> = (props: IStatisticsState) => {
-	/**
-	 * Renders the current search icons as well as a search builder
-	 */
-	if (props.poolContainer && props.poolContainer.baseDice) {
-		return (
-			<div className="row row-fill">
-				<div className="col s12">
-					<h2>Probability Breakdown</h2>
+	const GetDice = () => {
+		if (props.poolContainer && props.poolContainer.baseDice) {
+			return <Dice dice={props.poolContainer.baseDice} />;
+		} else {
+			return <></>;
+		}
+	};
 
-					<h5>
-						<Dice dice={props.poolContainer.baseDice} />
-					</h5>
-				</div>
+	return (
+		<div className="row row-fill">
+			<div className="col s12">
+				<h2>Probability Breakdown</h2>
+				<h5>{GetDice()}</h5>
 			</div>
-		);
-	} else {
-		return <></>;
-	}
+		</div>
+	);
 };

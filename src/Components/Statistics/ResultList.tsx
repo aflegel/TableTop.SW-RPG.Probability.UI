@@ -2,12 +2,12 @@ import React, { FunctionComponent } from "react";
 import { PoolCombination } from "../../Models/PoolCombination";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieSymbol } from "../../Models/DieSymbol";
+import { Format } from "../Graph/Formatter";
 
+/**
+ * Renders a table with the raw data used for populating the tables and statistics data
+ */
 export const StatisticsResultList: FunctionComponent<IStatisticsState> = (props: IStatisticsState) => {
-	/**
-	 * Renders a table with the raw data used for populating the tables and statistics data
-	 */
-
 	if (props.poolContainer) {
 		let containers: PoolCombination[] = [];
 
@@ -33,8 +33,8 @@ export const StatisticsResultList: FunctionComponent<IStatisticsState> = (props:
 											<tr>
 												<td>{DieSymbol[combination.symbol]}</td>
 												<td>{combination.quantity}</td>
-												<td>{new Intl.NumberFormat("en-Us").format(combination.frequency)}</td>
-												<td>{new Intl.NumberFormat("en-Us").format(combination.alternateTotal)}</td>
+												<td>{Format(combination.frequency, false)}</td>
+												<td>{Format(combination.alternateTotal, false)}</td>
 											</tr>
 										))
 									)}

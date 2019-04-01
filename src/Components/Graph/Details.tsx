@@ -3,62 +3,56 @@ import { DieSymbol } from "../../Models/DieSymbol";
 
 export interface IGraphDetailsProps {
 	mode: DieSymbol;
+	counterMode: DieSymbol;
 }
 
 export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps) => {
-	switch (props.mode) {
-		case DieSymbol.Success:
-			return (
-				<dl>
-					<dt>Success Symbols</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-success" /> and <i className="ffi ffi-swrpg-triumph" />
-					</dd>
-					<dt>Failure Symbols</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-failure" /> and <i className="ffi ffi-swrpg-despair" />
-					</dd>
-					<dt>Calculation</dt>
-					<dd>
-						(<i className="ffi ffi-swrpg-success" /> + <i className="ffi ffi-swrpg-triumph" />) - (<i className="ffi ffi-swrpg-failure" /> + <i className="ffi ffi-swrpg-despair" />)
-					</dd>
-				</dl>
+	const GetCalculation = () => {
+		let plus = <i className={`ffi ffi-swrpg-${DieSymbol[props.mode].toLowerCase()}`} />;
+		let minus = <i className={`ffi ffi-swrpg-${DieSymbol[props.counterMode].toLowerCase()}`} />;
+
+		if (props.mode === DieSymbol.Success) {
+			plus = (
+				<>
+					({plus} + <i className="ffi ffi-swrpg-triumph" />)
+				</>
 			);
-		case DieSymbol.Advantage:
-			return (
-				<dl>
-					<dt>Advantage Symbol</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-advantage" />
-					</dd>
-					<dt>Threat Symbol</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-threat" />
-					</dd>
-					<dt>Calculation</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-advantage" /> - <i className="ffi ffi-swrpg-threat" />
-					</dd>
-				</dl>
+			minus = (
+				<>
+					({minus} + <i className="ffi ffi-swrpg-despair" />)
+				</>
 			);
-		case DieSymbol.Triumph:
+		}
+
+		return (
+			<>
+				{plus} - {minus}
+			</>
+		);
+	};
+
+	const GetExtras = (symbol: DieSymbol) => {
+		if (props.mode === DieSymbol.Success)
 			return (
-				<dl>
-					<dt>Triumph Symbol</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-triumph" />
-					</dd>
-					<dt>Despair Symbol</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-despair" />
-					</dd>
-					<dt>Calculation</dt>
-					<dd>
-						<i className="ffi ffi-swrpg-triumph" /> - <i className="ffi ffi-swrpg-despair" />
-					</dd>
-				</dl>
+				<>
+					and <i className={`ffi ffi-swrpg-${DieSymbol[symbol].toLowerCase()}`} />
+				</>
 			);
-		default:
-			return <></>;
-	}
+		else return <></>;
+	};
+
+	return (
+		<dl>
+			<dt>{DieSymbol[props.mode]} Symbols</dt>
+			<dd>
+				<i className={`ffi ffi-swrpg-${DieSymbol[props.mode].toLowerCase()}`} /> {GetExtras(DieSymbol.Triumph)}
+			</dd>
+			<dt>Failure Symbols</dt>
+			<dd>
+				<i className={`ffi ffi-swrpg-${DieSymbol[props.counterMode].toLowerCase()}`} /> {GetExtras(DieSymbol.Despair)}
+			</dd>
+			<dt>Calculation</dt>
+			<dd>{GetCalculation()}</dd>
+		</dl>
+	);
 };

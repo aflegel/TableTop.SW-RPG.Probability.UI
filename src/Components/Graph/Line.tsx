@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, Label, ResponsiveContainer, ReferenceArea } from "recharts";
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { DieSymbol } from "../../Models/DieSymbol";
+import { Format } from "./Formatter";
 
 export interface IGraphLineProps {
 	label: string;
@@ -59,7 +60,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 	};
 
 	const ValueFormatter = (value: any, name: any, props: any) => {
-		return [new Intl.NumberFormat("en-Us", { minimumFractionDigits: 4 }).format(value), name];
+		return [Format(value, true), name];
 	};
 
 	const LabelFormatter = (label: string | number) => {
@@ -78,7 +79,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 					</YAxis>
 					<Tooltip formatter={ValueFormatter} labelFormatter={LabelFormatter} />
 					<Legend verticalAlign="top" />
-					<Line yAxisId="probability" name={props.label} type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />
+					<Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />
 					{GetAverageLine()}
 					{GetAverageAxis()}
 				</LineChart>
