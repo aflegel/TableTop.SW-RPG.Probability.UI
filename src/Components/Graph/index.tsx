@@ -14,15 +14,6 @@ export interface IGraphProps {
 
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	/**
-	 * Calculates the probability returned as a number between 0 and 100
-	 * @param top
-	 * @param bottom
-	 */
-	const GetProbability = (numerator: number, denominator: number): number => (numerator / denominator) * 100;
-
-
-
-	/**
 	 * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
 	 */
 
@@ -48,19 +39,19 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	}
 
 	return <div className="row row-fill">
-		<div className="col s12">
+		<div className="col m12">
 			<h3>
 				Distribution of {DieSymbol[props.mode]} and {DieSymbol[counterMode]}
 			</h3>
 
 			<div className="row">
-				<div className="col l6 m8 s12">
-					<GraphLine {...props} label={DieSymbol[props.mode]} offLabel={offLabel} filteredData={filteredSet} totalFrequency={totalFrequency} />
+				<div className="col l6 m12">
+					<GraphLine mode={props.mode} label={DieSymbol[props.mode]} offLabel={offLabel} filteredSet={filteredSet} totalFrequency={totalFrequency} />
 				</div>
-				<div className="col l3 m4 s6">
-					<GraphBreakdown mode={props.mode} counterMode={counterMode} baseSet={filteredSet} totalFrequency={totalFrequency} />
+				<div className="col l3 m6">
+					<GraphBreakdown mode={props.mode} counterMode={counterMode} filteredSet={filteredSet} totalFrequency={totalFrequency} />
 				</div>
-				<div className="col l3 m4 s6">
+				<div className="col l3 m6">
 					<GraphDetails mode={props.mode} />
 				</div>
 			</div>
