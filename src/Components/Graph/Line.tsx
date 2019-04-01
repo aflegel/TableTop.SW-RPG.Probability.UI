@@ -50,12 +50,20 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		if (AverageExists()) {
 			return (
 				<YAxis yAxisId="average" type="number" orientation="right">
-					<Label value={props.offLabel} angle={-90} />
+					<Label value={props.offLabel} angle={-90} position="insideRight" />
 				</YAxis>
 			);
 		} else {
 			return <></>;
 		}
+	};
+
+	const ValueFormatter = (value: any, name: any, props: any) => {
+		return [new Intl.NumberFormat("en-Us", { minimumFractionDigits: 4 }).format(value), name];
+	};
+
+	const LabelFormatter = (label: string | number) => {
+		return `Net ${props.label}: ${label}`;
 	};
 
 	if (props.filteredSet && props.filteredSet.length > 0) {
@@ -66,9 +74,9 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 						<Label value={`Net ${props.label}`} offset={0} position="insideBottom" />
 					</XAxis>
 					<YAxis yAxisId="probability" type="number">
-						<Label value="Probability (%)" angle={-90} position="left" />
+						<Label value="Probability (%)" angle={-90} position="insideLeft" />
 					</YAxis>
-					<Tooltip label={`Net ${props.label}`} />
+					<Tooltip formatter={ValueFormatter} labelFormatter={LabelFormatter} />
 					<Legend verticalAlign="top" />
 					<Line yAxisId="probability" name={props.label} type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />
 					{GetAverageLine()}
