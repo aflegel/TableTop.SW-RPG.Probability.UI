@@ -29,7 +29,7 @@ export const Die: FunctionComponent<IDieProps> = (props: IDieProps) => {
 	return (
 		<>
 			<i className={"die-stroke ffi ffi-d" + dieSize + " ffi ffi-swrpg-" + DieType[props.dieType].toString().toLowerCase() + "-color"} />
-			{props.dieType}
+			{DieType[props.dieType]}
 		</>
 	);
 };

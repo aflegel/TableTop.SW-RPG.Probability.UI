@@ -1,4 +1,12 @@
 import React, { FunctionComponent, useEffect } from "react";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+
 import { Graph } from "../Graph";
 import { Search } from "../Search";
 import { StatisticsResultList } from "./ResultList";
@@ -24,29 +32,29 @@ export const Statistics: FunctionComponent = () => {
 	return (
 		<div>
 			<Search {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} searchCallback={getStatisticsAsync} />
-			<div className="row row-fill">
-				<div className="col s12">
-					<ul className="collection with-header">
-						<li className="collection-header">
-							<div className="row row-fill">
-								<div className="col s12">
-									<h2>Probability Breakdown</h2>
-									<h5>{GetDice()}</h5>
-								</div>
-							</div>
-						</li>
-						<li className="collection-item">
+
+			<Card className={""}>
+				<CardContent>
+					<Typography gutterBottom variant="h2" component="h2">
+						Probability Breakdown
+					</Typography>
+					<Typography gutterBottom variant="h5" component="h2">
+						{GetDice()}
+					</Typography>
+					<List>
+						<ListItem divider>
 							<Graph {...state} mode={DieSymbol.Success} />
-						</li>
-						<li className="collection-item">
+						</ListItem>
+						<ListItem divider>
 							<Graph {...state} mode={DieSymbol.Advantage} />
-						</li>
-						<li className="collection-item">
+						</ListItem>
+						<ListItem>
 							<Graph {...state} mode={DieSymbol.Triumph} />
-						</li>
-					</ul>
-				</div>
-			</div>
+						</ListItem>
+					</List>
+				</CardContent>
+			</Card>
+
 			<StatisticsResultList {...state} />
 		</div>
 	);
