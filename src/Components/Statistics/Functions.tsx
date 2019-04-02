@@ -1,4 +1,5 @@
 import { PoolStatistic } from "../../Models/PoolStatistic";
+import { PoolDice } from "../../Models/PoolDice";
 
 /**
  * Returns the total of frequency
@@ -7,6 +8,15 @@ import { PoolStatistic } from "../../Models/PoolStatistic";
 export const GetFrequencyTotal = (set: PoolStatistic[]) =>
 	set.reduce((total, obj) => {
 		return total + obj.frequency;
+	}, 0);
+
+/**
+ * Returns the total of quantity
+ * @param set
+ */
+export const GetQuantityTotal = (set: PoolDice[]) =>
+	set.reduce((total, obj) => {
+		return total + obj.quantity;
 	}, 0);
 
 /**

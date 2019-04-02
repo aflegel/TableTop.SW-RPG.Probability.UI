@@ -8,10 +8,10 @@ import { Format } from "../Graph/Formatter";
  * Renders a table with the raw data used for populating the tables and statistics data
  */
 export const StatisticsResultList: FunctionComponent<IStatisticsState> = (props: IStatisticsState) => {
-	if (props.poolContainer) {
+	if (props.poolCombination) {
 		let containers: PoolCombination[] = [];
 
-		if (props.poolContainer.baseline) containers.push(props.poolContainer.baseline);
+		if (props.poolCombination) containers.push(props.poolCombination);
 
 		return (
 			<div className="row row-fill">

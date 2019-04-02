@@ -1,15 +1,18 @@
 import { PoolDice } from "../../Models/PoolDice";
-import { PoolContainer } from "../../Models/PoolContainer";
 import { DieType } from "../../Models/DieType";
+import { PoolCombination } from "../../Models/PoolCombination";
 
 export interface IStatisticsState {
 	isLoading: boolean;
-	poolContainer: PoolContainer;
+	poolCombination: PoolCombination;
 	searchDice: PoolDice[];
 }
 
 export const initialState: IStatisticsState = {
 	isLoading: true,
-	poolContainer: {},
-	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }],
+	poolCombination: {
+		poolStatistics: [],
+		dice: []
+	},
+	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }]
 };
