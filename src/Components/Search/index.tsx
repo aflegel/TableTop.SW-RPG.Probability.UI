@@ -1,7 +1,12 @@
 import React, { FunctionComponent } from "react";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+
 import { DieIncrementer } from "./Incrementer";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
+import { CardActions, Button } from "@material-ui/core";
 
 type SearchProps = IStatisticsState & ISearchProps;
 
@@ -11,39 +16,44 @@ export interface ISearchProps {
 	searchCallback: Function;
 }
 
+/**
+ * Renders the current search icons as well as a search builder
+ */
 export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
-	/**
-	 * Renders the current search icons as well as a search builder
-	 */
 	return (
-		<div className="row row-fill">
-			<div className="col s12">
-				<div className="card">
-					<div className="card-content">
-						<div className="row">
-							<div className="col l4 m6 s12">
-								<DieIncrementer {...props} dieType={DieType.Proficiency} />
-								<DieIncrementer {...props} dieType={DieType.Challenge} />
-							</div>
-							<div className="col l4 m6 s12">
-								<DieIncrementer {...props} dieType={DieType.Ability} />
-								<DieIncrementer {...props} dieType={DieType.Difficulty} />
-							</div>
-							<div className="col l4 m6 s12">
-								<DieIncrementer {...props} dieType={DieType.Boost} />
-								<DieIncrementer {...props} dieType={DieType.Setback} />
-							</div>
-						</div>
-						<span>
-							<button
-								className="btn btn-primary"
-								onClick={() => { props.searchCallback() }}>
-								Search
-							</button>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
+		<Card className={""}>
+			<CardContent>
+				<Grid container spacing={24}>
+					<Grid item xs={3}>
+						<DieIncrementer {...props} dieType={DieType.Proficiency} />
+					</Grid>
+					<Grid item xs={3}>
+						<DieIncrementer {...props} dieType={DieType.Challenge} />
+					</Grid>
+					<Grid item xs={3}>
+						<DieIncrementer {...props} dieType={DieType.Ability} />
+					</Grid>
+					<Grid item xs={3}>
+						<DieIncrementer {...props} dieType={DieType.Difficulty} />
+					</Grid>
+					<Grid item xs={3}>
+						<DieIncrementer {...props} dieType={DieType.Boost} />
+					</Grid>
+					<Grid item xs={3}>
+						<DieIncrementer {...props} dieType={DieType.Setback} />
+					</Grid>
+				</Grid>
+				<CardActions>
+					<Button
+						color="primary"
+						onClick={() => {
+							props.searchCallback();
+						}}
+					>
+						Search
+					</Button>
+				</CardActions>
+			</CardContent>
+		</Card>
 	);
 };

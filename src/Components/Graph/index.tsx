@@ -6,6 +6,7 @@ import { DieSymbol } from "../../Models/DieSymbol";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { GetFrequencyTotal } from "../Statistics/Functions";
+import { Grid, Typography } from "@material-ui/core";
 
 type GraphProps = IStatisticsState & IGraphProps;
 
@@ -23,7 +24,8 @@ export interface ILabel {
  */
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	let filteredSet: PoolStatistic[] = [];
-	if (props.poolCombination && props.poolCombination.poolStatistics) filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+	if (props.poolCombination && props.poolCombination.poolStatistics)
+		filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 
 	const frequency = GetFrequencyTotal(filteredSet);
 
@@ -43,24 +45,19 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	const label = GetLabels();
 
 	return (
-		<div className="row row-fill">
-			<div className="col m12">
-				<h3>
+		<Grid container>
+			<Grid item xs={12}>
+				<Typography gutterBottom variant="h4" component="h4">
 					Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.counterMode]}
-				</h3>
-
-				<div className="row">
-					<div className="col l6 m12">
-						<GraphLine {...label} mode={props.mode} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
-					</div>
-					<div className="col l3 m6">
-						<GraphBreakdown {...label} mode={props.mode} filteredSet={filteredSet} totalFrequency={frequency} />
-					</div>
-					<div className="col l3 m6">
-						<GraphDetails {...label} mode={props.mode} />
-					</div>
-				</div>
-			</div>
-		</div>
+				</Typography>
+				<GraphLine {...label} mode={props.mode} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
+			</Grid>
+			<Grid item xs={12}>
+				<GraphBreakdown {...label} mode={props.mode} filteredSet={filteredSet} totalFrequency={frequency} />
+			</Grid>
+			<Grid item xs={12}>
+				<GraphDetails {...label} mode={props.mode} />
+			</Grid>
+		</Grid>
 	);
 };

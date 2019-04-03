@@ -69,7 +69,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 
 	if (props.filteredSet && props.filteredSet.length > 0) {
 		return (
-			<ResponsiveContainer minWidth={300} minHeight={400}>
+			<ResponsiveContainer minWidth={300} minHeight={200} maxHeight={400}>
 				<LineChart data={BuildData()}>
 					<XAxis dataKey="quantity">
 						<Label value={`Net ${props.label}`} offset={0} position="insideBottom" />
