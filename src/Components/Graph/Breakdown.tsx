@@ -3,12 +3,15 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import { Typography } from "@material-ui/core";
 
 import { DieSymbol } from "../../Models/DieSymbol";
 import { PoolStatistic } from "../../Models/PoolStatistic";
-import { GetFrequencyTotal, GetAverage, GetStandardDeviation } from "../Statistics/Functions";
-import { Format } from "./Formatter";
+import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation } from "./Functions";
+
 export interface IGraphBreakdownProps {
 	mode: DieSymbol;
 	counterMode: DieSymbol;
@@ -33,22 +36,31 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 				<Typography className={""}>Probability Breakdowns</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
-				<dl>
-					<dt>Total Frequency</dt>
-					<dd>{Format(props.totalFrequency, false)}</dd>
-					<dt>{DieSymbol[props.mode]} Frequency</dt>
-					<dd>{Format(positiveFrequency, false)}</dd>
-					<dt>Probability of {DieSymbol[props.mode]}</dt>
-					<dd>{Format((positiveFrequency / props.totalFrequency) * 100, true)}%</dd>
-					<dt>{DieSymbol[props.counterMode]} Frequency</dt>
-					<dd>{Format(negativeFrequency, false)}</dd>
-					<dt>Probability of {DieSymbol[props.counterMode]}</dt>
-					<dd>{Format((negativeFrequency / props.totalFrequency) * 100, true)}%</dd>
-					<dt>Average {DieSymbol[props.mode]}</dt>
-					<dd>{Format(average, true)}</dd>
-					<dt>Standard Deviation</dt>
-					<dd>{Format(standardDeviation, true)}</dd>
-				</dl>
+				<List>
+					<ListItem>
+						<ListItemText primary="Total Frequency" secondary={Format(props.totalFrequency, false)} />
+					</ListItem>
+
+					<ListItem>
+						<ListItemText primary={DieSymbol[props.mode] + "Frequency"} secondary={Format(positiveFrequency, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={"Probability of " + DieSymbol[props.mode]} secondary={Format((positiveFrequency / props.totalFrequency) * 100, true) + "%"} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={DieSymbol[props.counterMode] + "Frequency"} secondary={Format(negativeFrequency, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={"Probability of " + DieSymbol[props.counterMode]} secondary={Format((negativeFrequency / props.totalFrequency) * 100, true) + "%"} />
+					</ListItem>
+
+					<ListItem>
+						<ListItemText primary={"Average " + DieSymbol[props.mode]} secondary={Format(average, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />
+					</ListItem>
+				</List>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>
 	);

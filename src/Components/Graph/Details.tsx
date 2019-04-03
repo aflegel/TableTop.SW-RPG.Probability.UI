@@ -4,9 +4,13 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Typography } from "@material-ui/core";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import { DieSymbol } from "../../Models/DieSymbol";
 import { Symbol } from "../Dice/Symbol";
+
 export interface IGraphDetailsProps {
 	mode: DieSymbol;
 	counterMode: DieSymbol;
@@ -42,21 +46,24 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography className={""}>Symbols and Calculations</Typography>
+				<Typography>Symbols and Calculations</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
-				<dl>
-					<dt>{DieSymbol[props.mode]} Symbols</dt>
-					<dd>
+				<List>
+					<ListItem>
+						<ListItemText primary={DieSymbol[props.mode] + "Symbols"} />
 						<Symbol dieSymbol={props.mode} /> {GetExtras(DieSymbol.Triumph)}
-					</dd>
-					<dt>{DieSymbol[props.counterMode]} Symbols</dt>
-					<dd>
+					</ListItem>
+
+					<ListItem>
+						<ListItemText primary={DieSymbol[props.counterMode] + "Symbols"} />
 						<Symbol dieSymbol={props.counterMode} /> {GetExtras(DieSymbol.Despair)}
-					</dd>
-					<dt>Calculation</dt>
-					<dd>{GetCalculation(plus, minus)}</dd>
-				</dl>
+					</ListItem>
+					<ListItem>
+						<ListItemText primary="Calculation" />
+						{GetCalculation(plus, minus)}
+					</ListItem>
+				</List>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>
 	);

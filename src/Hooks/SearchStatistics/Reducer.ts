@@ -5,7 +5,7 @@ import { AddDieAction } from "./Actions/AddDie";
 import { RemoveDieAction } from "./Actions/RemoveDie";
 import { DieType } from "../../Models/DieType";
 import { PoolDice } from "../../Models/PoolDice";
-import { GetQuantityTotal } from "../../Components/Statistics/Functions";
+import { GetQuantityTotal } from "../../Components/Graph/Functions";
 
 export const reducer = (state: IStatisticsState, action: StatisticsApiActions): IStatisticsState => {
 	const MergeDice = (dice: PoolDice[], addDie: DieType): void => {

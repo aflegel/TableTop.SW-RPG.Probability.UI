@@ -6,12 +6,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Grid from "@material-ui/core/Grid";
 
-import { Graph } from "../Graph";
-import { Search } from "../Search";
-import { StatisticsResultList } from "./ResultList";
-import { DieSymbol } from "../../Models/DieSymbol";
-import { useStatistics } from "../../Hooks/SearchStatistics";
-import { Dice } from "../Dice/Dice";
+import { Graph } from "./Graph";
+import { Search } from "./Search";
+import { DieSymbol } from "../Models/DieSymbol";
+import { useStatistics } from "../Hooks/SearchStatistics";
+import { Dice } from "./Dice/Dice";
 
 export const Statistics: FunctionComponent = () => {
 	const { state, getStatisticsAsync, addSearchDie, removeSearchDie } = useStatistics();
@@ -55,9 +54,6 @@ export const Statistics: FunctionComponent = () => {
 						</List>
 					</CardContent>
 				</Card>
-			</Grid>
-			<Grid item xs={12}>
-				<StatisticsResultList {...state} />
 			</Grid>
 		</Grid>
 	);

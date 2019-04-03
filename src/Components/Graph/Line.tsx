@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, Label, ResponsiveContainer, ReferenceArea } from "recharts";
+import { LineChart, Line, XAxis, YAxis,  Tooltip, Legend,  Label, ResponsiveContainer } from "recharts";
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { DieSymbol } from "../../Models/DieSymbol";
-import { Format } from "./Formatter";
+import { Format } from "./Functions";
 
 export interface IGraphLineProps {
 	label: string;

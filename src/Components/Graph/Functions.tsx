@@ -49,3 +49,7 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
 		}, 0) / frequency
 	);
 };
+
+export const Format = (predicate: number, digits: boolean): string => {
+	return new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
+};
