@@ -31,16 +31,16 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 
 	const frequency = GetFrequencyTotal(filteredSet);
 
-	const GetLabels = (): ILabel => {
+	const GetLabels = (): ILabel & IGraphProps => {
 		switch (props.mode) {
 			case DieSymbol.Success:
-				return { counterMode: DieSymbol.Failure, offLabel: "Average Advantage" };
+				return { mode: props.mode, counterMode: DieSymbol.Failure, offLabel: "Average Advantage" };
 			case DieSymbol.Advantage:
-				return { counterMode: DieSymbol.Threat, offLabel: "Average Success" };
+				return { mode: props.mode, counterMode: DieSymbol.Threat, offLabel: "Average Success" };
 			case DieSymbol.Triumph:
-				return { counterMode: DieSymbol.Despair, offLabel: "" };
+				return { mode: props.mode, counterMode: DieSymbol.Despair, offLabel: "" };
 			default:
-				return { counterMode: DieSymbol.Blank, offLabel: "" };
+				return { mode: props.mode, counterMode: DieSymbol.Blank, offLabel: "" };
 		}
 	};
 
@@ -53,14 +53,14 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 					<Typography gutterBottom variant="h4" component="h4">
 						Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.counterMode]}
 					</Typography>
-					<GraphLine {...label} mode={props.mode} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
+					<GraphLine {...label} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
 				</Paper>
 			</Grid>
 			<Grid item xs={12}>
-				<GraphBreakdown {...label} mode={props.mode} filteredSet={filteredSet} totalFrequency={frequency} />
+				<GraphBreakdown {...label} filteredSet={filteredSet} totalFrequency={frequency} />
 			</Grid>
 			<Grid item xs={12}>
-				<GraphDetails {...label} mode={props.mode} />
+				<GraphDetails {...label} />
 			</Grid>
 			<Grid item xs={12}>
 				<GraphResultList filteredSet={filteredSet} />

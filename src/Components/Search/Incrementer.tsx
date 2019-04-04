@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from "react";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+
 import { Die } from "../Dice/Die";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
-import Icon from "@material-ui/core/Icon";
-import IconButton from "@material-ui/core/IconButton";
 
 // At runtime, Redux will merge together...
 type DieIncrementertProps = IStatisticsState & IDieIncrementer;
@@ -14,11 +16,10 @@ export interface IDieIncrementer {
 	removeDieCallback: Function;
 }
 
+/**
+ * Renders the current search icons as well as a search builder
+ */
 export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
-	/**
-	 * Renders the current search icons as well as a search builder
-	 */
-
 	const DieCount = () => {
 		let count = 0;
 		if (props.searchDice) {
@@ -32,34 +33,31 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 	};
 
 	return (
-		<div className="row">
-			<div className="col s4">
-				<IconButton
-					color="secondary"
-					className={""}
-					aria-label="Add an alarm"
-					onClick={() => {
-						props.addDieCallback(props.dieType);
-					}}
-				>
-					<Icon>alarm</Icon>
-				</IconButton>
-			</div>
-			<div className="col s4 center-align">
-				<h5 className="">
-					<Die dieType={props.dieType} />x{DieCount()}
-				</h5>
-			</div>
-			<div className="col s4">
-				<button
-					className="btn light-green darken-3"
-					onClick={() => {
-						props.removeDieCallback(props.dieType);
-					}}
-				>
-					-
-				</button>
-			</div>
-		</div>
+		<>
+			<IconButton
+				color="secondary"
+				className={""}
+				aria-label="Add an alarm"
+				onClick={() => {
+					props.addDieCallback(props.dieType);
+				}}
+			>
+				<AddIcon />
+			</IconButton>
+			<h5>
+				<Die dieType={props.dieType} />
+			</h5>
+			<h5>{DieCount()}</h5>
+			<IconButton
+				color="secondary"
+				className={""}
+				aria-label="Add an alarm"
+				onClick={() => {
+					props.removeDieCallback(props.dieType);
+				}}
+			>
+				<RemoveIcon />
+			</IconButton>
+		</>
 	);
 };

@@ -2,11 +2,11 @@ import React, { FunctionComponent } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { CardActions, Button } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
-import { CardActions, Button } from "@material-ui/core";
 
 type SearchProps = IStatisticsState & ISearchProps;
 
@@ -24,22 +24,22 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 		<Card className={""}>
 			<CardContent>
 				<Grid container spacing={24}>
-					<Grid item xs={3}>
+					<Grid item xs={6} sm={4} md={2}>
 						<DieIncrementer {...props} dieType={DieType.Proficiency} />
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={6} sm={4} md={2}>
 						<DieIncrementer {...props} dieType={DieType.Challenge} />
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={6} sm={4} md={2}>
 						<DieIncrementer {...props} dieType={DieType.Ability} />
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={6} sm={4} md={2}>
 						<DieIncrementer {...props} dieType={DieType.Difficulty} />
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={6} sm={4} md={2}>
 						<DieIncrementer {...props} dieType={DieType.Boost} />
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={6} sm={4} md={2}>
 						<DieIncrementer {...props} dieType={DieType.Setback} />
 					</Grid>
 				</Grid>
