@@ -5,6 +5,7 @@ import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
 import { GraphResultList } from "./ResultList";
+import { GraphAdvanced } from "./Advanced";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { PoolStatistic } from "../../Models/PoolStatistic";
@@ -25,12 +26,6 @@ export interface ILabel {
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
-	let filteredSet: PoolStatistic[] = [];
-	if (props.poolCombination && props.poolCombination.poolStatistics)
-		filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
-
-	const frequency = GetFrequencyTotal(filteredSet);
-
 	const GetLabels = (): ILabel & IGraphProps => {
 		switch (props.mode) {
 			case DieSymbol.Success:
@@ -44,7 +39,13 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 		}
 	};
 
+	let filteredSet: PoolStatistic[] = [];
+
+	if (props.poolCombination && props.poolCombination.poolStatistics)
+		filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+
 	const label = GetLabels();
+	const frequency = GetFrequencyTotal(filteredSet);
 
 	return (
 		<Grid container>
@@ -57,10 +58,13 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 				</Paper>
 			</Grid>
 			<Grid item xs={12}>
+				<GraphDetails {...label} />
+			</Grid>
+			<Grid item xs={12}>
 				<GraphBreakdown {...label} filteredSet={filteredSet} totalFrequency={frequency} />
 			</Grid>
 			<Grid item xs={12}>
-				<GraphDetails {...label} />
+				<GraphAdvanced filteredSet={filteredSet} totalFrequency={frequency} />
 			</Grid>
 			<Grid item xs={12}>
 				<GraphResultList filteredSet={filteredSet} />

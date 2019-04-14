@@ -25,10 +25,10 @@ export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGra
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography className={""}>Result Table</Typography>
+				<Typography>Result Table</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
-				<Table className={""}>
+				<Table>
 					<TableHead>
 						<TableRow>
 							<TableCell>Symbol</TableCell>

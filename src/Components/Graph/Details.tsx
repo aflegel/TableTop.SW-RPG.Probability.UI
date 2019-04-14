@@ -43,6 +43,14 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 		else return <></>;
 	};
 
+	const GetPositive = () => {
+		return <><Symbol dieSymbol={props.mode} /> {GetExtras(DieSymbol.Triumph)}</>;
+	}
+
+	const GetNegative = () => {
+		return <><Symbol dieSymbol={props.counterMode} /> {GetExtras(DieSymbol.Despair)}</>;
+	}
+
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -51,17 +59,13 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 			<ExpansionPanelDetails>
 				<List>
 					<ListItem>
-						<ListItemText primary={DieSymbol[props.mode] + "Symbols"} />
-						<Symbol dieSymbol={props.mode} /> {GetExtras(DieSymbol.Triumph)}
-					</ListItem>
-
-					<ListItem>
-						<ListItemText primary={DieSymbol[props.counterMode] + "Symbols"} />
-						<Symbol dieSymbol={props.counterMode} /> {GetExtras(DieSymbol.Despair)}
+						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={GetPositive()} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary="Calculation" />
-						{GetCalculation(plus, minus)}
+						<ListItemText primary={`${DieSymbol[props.counterMode]} Symbols`} secondary={GetNegative()}  />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary="Calculation" secondary={GetCalculation(plus, minus)} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>

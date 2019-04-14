@@ -33,7 +33,7 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography className={""}>Probability Breakdowns</Typography>
+				<Typography>Probability Breakdowns</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<List>

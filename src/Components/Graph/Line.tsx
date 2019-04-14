@@ -24,8 +24,8 @@ export interface ILineData {
 export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
 	/**
 	 * Calculates the probability returned as a number between 0 and 100
-	 * @param top
-	 * @param bottom
+	 * @param numerator
+	 * @param denominator
 	 */
 	const GetProbability = (numerator: number, denominator: number): number => (numerator / denominator) * 100;
 
