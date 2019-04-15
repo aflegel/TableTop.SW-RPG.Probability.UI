@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { LineChart, Line, XAxis, YAxis,  Tooltip, Legend,  Label, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { Format, GetProbability } from "./Functions";
@@ -52,6 +52,14 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	};
 
+	const GetDataSets = () => {
+		if (props.filteredSet && props.filteredSet.length > 0) {
+			return <Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />;
+		} else {
+			return <></>;
+		}
+	}
+
 	const ValueFormatter = (value: any, name: any, props: any) => {
 		return [Format(value, true), name];
 	};
@@ -60,25 +68,22 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		return `Net ${props.label}: ${label}`;
 	};
 
-	if (props.filteredSet && props.filteredSet.length > 0) {
-		return (
-			<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>
-				<LineChart data={BuildData()}>
-					<XAxis dataKey="quantity">
-						<Label value={`Net ${props.label}`} offset={0} position="insideBottom" />
-					</XAxis>
-					<YAxis yAxisId="probability" type="number">
-						<Label value="Probability (%)" angle={-90} position="insideLeft" />
-					</YAxis>
-					<Tooltip formatter={ValueFormatter} labelFormatter={LabelFormatter} />
-					<Legend verticalAlign="top" />
-					<Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />
-					{GetAverageLine()}
-					{GetAverageAxis()}
-				</LineChart>
-			</ResponsiveContainer>
-		);
-	} else {
-		return <></>;
-	}
+	return (
+		<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>
+			<LineChart data={BuildData()}>
+				<XAxis dataKey="quantity">
+					<Label value={`Net ${props.label}`} offset={0} position="insideBottom" />
+				</XAxis>
+				<YAxis yAxisId="probability" type="number">
+					<Label value="Probability (%)" angle={-90} position="insideLeft" />
+				</YAxis>
+				<Tooltip formatter={ValueFormatter} labelFormatter={LabelFormatter} />
+				<Legend verticalAlign="top" />
+				{GetDataSets()}
+				{GetAverageLine()}
+				{GetAverageAxis()}
+			</LineChart>
+		</ResponsiveContainer>
+	);
+
 };
