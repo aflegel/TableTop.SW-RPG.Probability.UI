@@ -40,22 +40,20 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 					<ListItem>
 						<ListItemText primary="Total Frequency" secondary={Format(props.totalFrequency, false)} />
 					</ListItem>
-
 					<ListItem>
-						<ListItemText primary={DieSymbol[props.mode] + "Frequency"} secondary={Format(positiveFrequency, false)} />
+						<ListItemText primary={`${DieSymbol[props.mode]} Frequency`} secondary={Format(positiveFrequency, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={"Probability of " + DieSymbol[props.mode]} secondary={Format((positiveFrequency / props.totalFrequency) * 100, true) + "%"} />
+						<ListItemText primary={`Probability of ${DieSymbol[props.mode]}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={DieSymbol[props.counterMode] + "Frequency"} secondary={Format(negativeFrequency, false)} />
+						<ListItemText primary={`${DieSymbol[props.counterMode]} Frequency`} secondary={Format(negativeFrequency, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={"Probability of " + DieSymbol[props.counterMode]} secondary={Format((negativeFrequency / props.totalFrequency) * 100, true) + "%"} />
+						<ListItemText primary={`Probability of ${DieSymbol[props.counterMode]}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
 					</ListItem>
-
 					<ListItem>
-						<ListItemText primary={"Average " + DieSymbol[props.mode]} secondary={Format(average, false)} />
+						<ListItemText primary={`Average ${DieSymbol[props.mode]}`} secondary={Format(average, false)} />
 					</ListItem>
 					<ListItem>
 						<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />

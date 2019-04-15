@@ -10,9 +10,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { Typography } from "@material-ui/core";
 
-import { DieSymbol } from "../../Models/DieSymbol";
 import { PoolStatistic } from "../../Models/PoolStatistic";
-import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, GetProbability } from "./Functions";
+import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
 
 export interface IGraphAdvancedProps {
 	filteredSet: PoolStatistic[];
@@ -51,10 +50,17 @@ export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGr
 		},
 	];
 
-	const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const ChangeComparison = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setState({
 			...state,
 			comparison: event.target.value,
+		});
+	};
+
+	const ChangeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setState({
+			...state,
+			quantity: +event.target.value,
 		});
 	};
 
@@ -91,10 +97,9 @@ export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGr
 			<ExpansionPanelDetails>
 				<TextField
 					select
-					label="Comparison"
-					value={state.comparison}
-					onChange={HandleChange}
 					margin="normal"
+					value={state.comparison}
+					onChange={ChangeComparison}
 				>
 					{comparisons.map(option => (
 						<MenuItem key={option.value} value={option.value}>
@@ -103,15 +108,15 @@ export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGr
 					))}
 				</TextField>
 				<TextField
-					id="standard-number"
-					label="Number"
 					type="number"
 					margin="normal"
+					value={state.quantity}
+					onChange={ChangeQuantity}
 				/>
 
 				<List>
 					<ListItem>
-						<ListItemText primary="Probability" secondary={GetData()} />
+						<ListItemText primary="Probability" secondary={`${GetData()}%`} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>
