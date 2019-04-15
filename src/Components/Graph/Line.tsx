@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { LineChart, Line, XAxis, YAxis,  Tooltip, Legend,  Label, ResponsiveContainer } from "recharts";
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { DieSymbol } from "../../Models/DieSymbol";
-import { Format } from "./Functions";
+import { Format, GetProbability } from "./Functions";
 
 export interface IGraphLineProps {
 	label: string;
@@ -22,13 +22,6 @@ export interface ILineData {
  * Renders a standardized chart.js graph given a dataset.
  */
 export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
-	/**
-	 * Calculates the probability returned as a number between 0 and 100
-	 * @param numerator
-	 * @param denominator
-	 */
-	const GetProbability = (numerator: number, denominator: number): number => (numerator / denominator) * 100;
-
 	const AverageExists = (): boolean => props.mode === DieSymbol.Success || props.mode === DieSymbol.Advantage;
 
 	const BuildData = (): ILineData[] => {

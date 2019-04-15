@@ -33,6 +33,13 @@ export const GetAverage = (set: PoolStatistic[], frequency: number): number => {
 };
 
 /**
+ * Calculates the probability returned as a number between 0 and 100
+ * @param numerator
+ * @param denominator
+ */
+export const GetProbability = (numerator: number, denominator: number): number => (numerator / denominator) * 100;
+
+/**
  * Returns the Standard Deviation for a given dataset
  * @param set
  * @param frequency

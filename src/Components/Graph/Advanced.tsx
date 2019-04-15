@@ -4,13 +4,15 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { Typography } from "@material-ui/core";
 
 import { DieSymbol } from "../../Models/DieSymbol";
 import { PoolStatistic } from "../../Models/PoolStatistic";
-import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation } from "./Functions";
+import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, GetProbability } from "./Functions";
 
 export interface IGraphAdvancedProps {
 	filteredSet: PoolStatistic[];
@@ -21,40 +23,64 @@ export interface IGraphAdvancedProps {
  * Calculates the statictical model and builds a definition list for that data
  */
 export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGraphAdvancedProps) => {
+	const [state, setState] = React.useState({
+		comparison: "GT",
+		quantity: 0
+	});
 
 	const comparisons = [
 		{
-			value: 'GT',
-			label: '>',
+			value: "GT",
+			label: ">",
 		},
 		{
-			value: 'GTE',
-			label: '>=',
+			value: "GTE",
+			label: ">=",
 		},
 		{
-			value: 'E',
-			label: '=',
+			value: "E",
+			label: "=",
 		},
 		{
-			value: 'LTE',
-			label: '<=',
+			value: "LTE",
+			label: "<=",
 		},
 		{
-			value: 'LT',
-			label: '<',
+			value: "LT",
+			label: "<",
 		},
 	];
 
-	const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-		state = {
-			value: 'E',
-			label: '=',
-		};
+	const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setState({
+			...state,
+			comparison: event.target.value,
+		});
 	};
 
-	let state: any = {
-		value: 'GTE',
-		label: '>=',
+	const GetData = (): string => {
+		let set: PoolStatistic[];
+		switch (state.comparison) {
+			case "GT":
+				set = props.filteredSet.filter(f => f.quantity > state.quantity);
+				break;
+			case "GTE":
+				set = props.filteredSet.filter(f => f.quantity >= state.quantity);
+				break;
+			case "E":
+				set = props.filteredSet.filter(f => f.quantity == state.quantity);
+				break;
+			case "LTE":
+				set = props.filteredSet.filter(f => f.quantity <= state.quantity);
+				break;
+			case "LT":
+				set = props.filteredSet.filter(f => f.quantity < state.quantity);
+				break;
+			default:
+				set = [];
+		}
+
+		return Format(GetProbability(GetFrequencyTotal(set), props.totalFrequency), true);
 	};
 
 	return (
@@ -66,8 +92,8 @@ export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGr
 				<TextField
 					select
 					label="Comparison"
-					value={state.value}
-					onChange={handleChange('currency')}
+					value={state.comparison}
+					onChange={HandleChange}
 					margin="normal"
 				>
 					{comparisons.map(option => (
@@ -80,11 +106,14 @@ export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGr
 					id="standard-number"
 					label="Number"
 					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
 					margin="normal"
 				/>
+
+				<List>
+					<ListItem>
+						<ListItemText primary="Probability" secondary={GetData()} />
+					</ListItem>
+				</List>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>
 	);
