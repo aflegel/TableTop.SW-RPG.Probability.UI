@@ -6,6 +6,8 @@ import { About } from "./Components/About";
 import { Statistics } from "./Components/Statistics";
 
 import "./Styles/App.scss";
+import "sw-rpg-icons/css/sw-rpg-icons.scss";
+import "sw-rpg-icons/css/sw-rpg-colors.scss";
 
 export const App = () => {
 	return (
