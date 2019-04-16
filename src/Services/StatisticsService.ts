@@ -6,7 +6,7 @@ import { PoolDice } from "../Models/PoolDice";
 import { PoolCombination } from "../Models/PoolCombination";
 
 export interface IStatisticsService {
-	getAllAsync(dice: PoolDice[]): Promise<PoolCombination>;
+	GetAllAsync(dice: PoolDice[]): Promise<PoolCombination>;
 }
 
 export class StatisticsService implements IStatisticsService {
@@ -77,7 +77,7 @@ export class StatisticsService implements IStatisticsService {
 		dice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Proficiency, quantity: 1 }, { dieId: DieType.Setback, quantity: 1 }]
 	};
 
-	public async getAllAsync(dice: PoolDice[]): Promise<PoolCombination> {
+	public async GetAllAsync(dice: PoolDice[]): Promise<PoolCombination> {
 		return new Promise<PoolCombination>(resolve => {
 			const data = JSON.stringify(dice);
 
@@ -86,4 +86,4 @@ export class StatisticsService implements IStatisticsService {
 	}
 }
 
-export const statisticsServiceSingleton: IStatisticsService = new StatisticsService();
+export const StatisticsServiceSingleton: IStatisticsService = new StatisticsService();

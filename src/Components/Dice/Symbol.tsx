@@ -8,11 +8,8 @@ export interface ISymbolProps {
 /**
  * Returns an icon element with the appropriate css classes
  */
-export const Symbol: FunctionComponent<ISymbolProps> = (props: ISymbolProps) => {
-	return (
-		<>
-			<i className={"ffi ffi-swrpg-" + DieSymbol[props.dieSymbol].toString().toLowerCase()} />
-			{DieSymbol[props.dieSymbol].toString()}
-		</>
-	);
-};
+export const Symbol: FunctionComponent<ISymbolProps> = (props: ISymbolProps) =>
+	<>
+		<i className={`ffi ffi-swrpg-${DieSymbol[props.dieSymbol].toString().toLowerCase()}`} />
+		{DieSymbol[props.dieSymbol].toString()}
+	</>;

@@ -9,27 +9,23 @@ export interface IDieProps {
  * Returns an icon element with the appropriate css classes
  */
 export const Die: FunctionComponent<IDieProps> = (props: IDieProps) => {
-	let dieSize = 0;
-	switch (props.dieType) {
-		case DieType.Ability:
-		case DieType.Difficulty:
-			dieSize = 8;
-			break;
-		case DieType.Boost:
-		case DieType.Setback:
-			dieSize = 6;
-			break;
-		case DieType.Challenge:
-		case DieType.Proficiency:
-		case DieType.Force:
-			dieSize = 12;
-			break;
-	}
+	const DieSize = () => {
+		switch (props.dieType) {
+			case DieType.Ability:
+			case DieType.Difficulty:
+				return 8;
+			case DieType.Boost:
+			case DieType.Setback:
+				return 6;
+			case DieType.Challenge:
+			case DieType.Proficiency:
+			case DieType.Force:
+				return 12;
+		}
+	};
 
-	return (
-		<>
-			<i className={"die-stroke ffi ffi-d" + dieSize + " ffi ffi-swrpg-" + DieType[props.dieType].toString().toLowerCase() + "-color"} />
-			{DieType[props.dieType]}
-		</>
-	);
+	return <>
+		<i className={`die-stroke ffi ffi-d${DieSize()} ffi-swrpg-${DieType[props.dieType].toString().toLowerCase()}-color`} />
+		{DieType[props.dieType]}
+	</>;
 };

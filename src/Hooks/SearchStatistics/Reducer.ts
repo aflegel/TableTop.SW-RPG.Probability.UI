@@ -11,8 +11,12 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 	const MergeDice = (dice: PoolDice[], addDie: DieType): void => {
 		const existingRecord = dice.find(f => f.dieId == addDie);
 
-		if (existingRecord) existingRecord.quantity += 1;
-		else dice.push({ dieId: addDie, quantity: 1 });
+		if (existingRecord) {
+			existingRecord.quantity += 1;
+		}
+		else {
+			dice.push({ dieId: addDie, quantity: 1 });
+		}
 	};
 
 	switch (action.type) {
@@ -63,8 +67,12 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 			const existingRecord = removeDice.find(f => f.dieId == action.dieType);
 
 			if (existingRecord) {
-				if (existingRecord.quantity > 1) existingRecord.quantity -= 1;
-				else removeDice.splice(removeDice.indexOf(existingRecord), 1);
+				if (existingRecord.quantity > 1) {
+					existingRecord.quantity -= 1;
+				}
+				else {
+					removeDice.splice(removeDice.indexOf(existingRecord), 1);
+				}
 			}
 
 			return {

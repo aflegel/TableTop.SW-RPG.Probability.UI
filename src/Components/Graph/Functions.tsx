@@ -24,13 +24,10 @@ export const GetQuantityTotal = (set: PoolDice[]) =>
  * @param set
  * @param frequency
  */
-export const GetAverage = (set: PoolStatistic[], frequency: number): number => {
-	return (
-		set.reduce((total, obj) => {
-			return total + obj.quantity * obj.frequency;
-		}, 0) / frequency
-	);
-};
+export const GetAverage = (set: PoolStatistic[], frequency: number): number =>
+	set.reduce((total, obj) => {
+		return total + obj.quantity * obj.frequency;
+	}, 0) / frequency;
 
 /**
  * Calculates the probability returned as a number between 0 and 100
@@ -57,6 +54,9 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
 	);
 };
 
-export const Format = (predicate: number, digits: boolean): string => {
-	return new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
-};
+/**
+ * Formats the number as a comma separated thousands and limited to 4 digits if required
+ * @param predicate
+ * @param digits
+ */
+export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);

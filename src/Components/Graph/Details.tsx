@@ -17,8 +17,8 @@ export interface IGraphDetailsProps {
 }
 
 export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps) => {
-	let plus = [<Symbol dieSymbol={props.mode} />];
-	let minus = [<Symbol dieSymbol={props.counterMode} />];
+	const plus = [<Symbol dieSymbol={props.mode} />];
+	const minus = [<Symbol dieSymbol={props.counterMode} />];
 
 	if (props.mode === DieSymbol.Success) {
 		plus.push(<Symbol dieSymbol={DieSymbol.Triumph} />);
