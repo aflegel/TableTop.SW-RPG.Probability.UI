@@ -25,31 +25,9 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 		minus.push(<Symbol dieSymbol={DieSymbol.Despair} />);
 	}
 
-	const GetCalculation = (plus: JSX.Element[], minus: JSX.Element[]) => {
-		return (
-			<>
-				{plus} - {minus}
-			</>
-		);
-	};
+	const GetCalculation = () => <>({Join(plus, "+")}) - ({Join(minus,  "+")})</>;
 
-	const GetExtras = (symbol: DieSymbol) => {
-		if (props.mode === DieSymbol.Success)
-			return (
-				<>
-					and <Symbol dieSymbol={symbol} />
-				</>
-			);
-		else return <></>;
-	};
-
-	const GetPositive = () => {
-		return <><Symbol dieSymbol={props.mode} /> {GetExtras(DieSymbol.Triumph)}</>;
-	}
-
-	const GetNegative = () => {
-		return <><Symbol dieSymbol={props.counterMode} /> {GetExtras(DieSymbol.Despair)}</>;
-	}
+	const Join = (symbols: JSX.Element[], separator: string) => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
 	return (
 		<ExpansionPanel>
@@ -59,13 +37,13 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 			<ExpansionPanelDetails>
 				<List>
 					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={GetPositive()} />
+						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={Join(plus, "and")} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.counterMode]} Symbols`} secondary={GetNegative()}  />
+						<ListItemText primary={`${DieSymbol[props.counterMode]} Symbols`} secondary={Join(minus, "and")}  />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary="Calculation" secondary={GetCalculation(plus, minus)} />
+						<ListItemText primary="Calculation" secondary={GetCalculation()} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>

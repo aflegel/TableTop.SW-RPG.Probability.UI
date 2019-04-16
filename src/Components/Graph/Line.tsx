@@ -24,13 +24,11 @@ export interface ILineData {
 export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
 	const AverageExists = (): boolean => props.mode === DieSymbol.Success || props.mode === DieSymbol.Advantage;
 
-	const BuildData = (): ILineData[] => {
-		return props.filteredSet.map(map => ({
+	const BuildData = (): ILineData[] => props.filteredSet.map(map => ({
 			quantity: map.quantity,
 			probability: GetProbability(map.frequency, props.totalFrequency),
 			average: AverageExists() ? map.alternateTotal / map.frequency : undefined
 		}));
-	};
 
 	const GetAverageAxis = () => {
 		if (AverageExists()) {
@@ -60,13 +58,9 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	}
 
-	const ValueFormatter = (value: any, name: any, props: any) => {
-		return [Format(value, true), name];
-	};
+	const ValueFormatter = (value: any, name: any, props: any) => [Format(value, true), name];
 
-	const LabelFormatter = (label: string | number) => {
-		return `Net ${props.label}: ${label}`;
-	};
+	const LabelFormatter = (label: string | number) => `Net ${props.label}: ${label}`;
 
 	return (
 		<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>

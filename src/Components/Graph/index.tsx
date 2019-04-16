@@ -57,16 +57,16 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 					<GraphLine {...label} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
 				</Paper>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item xs={12} lg={6}>
 				<GraphDetails {...label} />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item xs={12} lg={6}>
 				<GraphBreakdown {...label} filteredSet={filteredSet} totalFrequency={frequency} />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item xs={12} lg={6}>
 				<GraphAdvanced filteredSet={filteredSet} totalFrequency={frequency} />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item xs={12} lg={6}>
 				<GraphResultList filteredSet={filteredSet} />
 			</Grid>
 		</Grid>

@@ -44,14 +44,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 					</Grid>
 				</Grid>
 				<CardActions>
-					<Button
-						color="primary"
-						onClick={() => {
-							props.searchCallback();
-						}}
-					>
-						Search
-					</Button>
+					<Button color="primary" onClick={() => { props.searchCallback() }}>Search</Button>
 				</CardActions>
 			</CardContent>
 		</Card>

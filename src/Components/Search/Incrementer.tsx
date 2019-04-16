@@ -38,10 +38,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 				color="secondary"
 				className={""}
 				aria-label="Add an alarm"
-				onClick={() => {
-					props.addDieCallback(props.dieType);
-				}}
-			>
+				onClick={() => { props.addDieCallback(props.dieType) }}>
 				<AddIcon />
 			</IconButton>
 			<h5>
@@ -52,10 +49,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 				color="secondary"
 				className={""}
 				aria-label="Add an alarm"
-				onClick={() => {
-					props.removeDieCallback(props.dieType);
-				}}
-			>
+				onClick={() => { props.removeDieCallback(props.dieType) }}>
 				<RemoveIcon />
 			</IconButton>
 		</>
