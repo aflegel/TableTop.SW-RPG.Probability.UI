@@ -38,7 +38,7 @@ export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGra
 				</TableHead>
 				<TableBody>
 					{props.filteredSet.map(combination => (
-						<TableRow>
+						<TableRow key={DieSymbol[combination.symbol] + combination.quantity}>
 							<TableCell>{DieSymbol[combination.symbol]}</TableCell>
 							<TableCell align="right">{combination.quantity}</TableCell>
 							<TableCell align="right">{Format(combination.frequency, false)}</TableCell>
