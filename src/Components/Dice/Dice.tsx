@@ -34,24 +34,15 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 					return -1;
 				case DieType.Ability:
 					switch (b.dieId) {
-						case DieType.Ability:
-							return 0;
 						case DieType.Boost:
 							return -1;
 						default:
 							return 1;
 					}
 				case DieType.Boost:
-					switch (b.dieId) {
-						case DieType.Boost:
-							return 0;
-						default:
 							return 1;
-					}
 				case DieType.Challenge:
 					switch (b.dieId) {
-						case DieType.Challenge:
-							return 0;
 						case DieType.Difficulty:
 						case DieType.Setback:
 							return -1;
@@ -60,8 +51,6 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 					}
 				case DieType.Difficulty:
 					switch (b.dieId) {
-						case DieType.Difficulty:
-							return 0;
 						case DieType.Setback:
 							return -1;
 						default:
