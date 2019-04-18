@@ -10,15 +10,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import { DieSymbol } from "../../Models/DieSymbol";
 import { Symbol } from "../Dice/Symbol";
+import { IExtendedModeProps, IModeProps } from ".";
 
-export interface IGraphDetailsProps {
-	mode: DieSymbol;
-	counterMode: DieSymbol;
-}
+export type IGraphDetailsProps = IModeProps & IExtendedModeProps;
 
 export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps) => {
 	const plus = [<Symbol dieSymbol={props.mode} />];
-	const minus = [<Symbol dieSymbol={props.counterMode} />];
+	const minus = [<Symbol dieSymbol={props.negativeMode} />];
 
 	if (props.mode === DieSymbol.Success) {
 		plus.push(<Symbol dieSymbol={DieSymbol.Triumph} />);
@@ -40,7 +38,7 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={Join(plus, "and")} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.counterMode]} Symbols`} secondary={Join(minus, "and")}  />
+						<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={Join(minus, "and")}  />
 					</ListItem>
 					<ListItem>
 						<ListItemText primary="Calculation" secondary={GetCalculation()} />

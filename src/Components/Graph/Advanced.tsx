@@ -12,18 +12,14 @@ import { Typography } from "@material-ui/core";
 
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
-
-export interface IGraphAdvancedProps {
-	filteredSet: PoolStatistic[];
-	totalFrequency: number;
-}
+import { IDataSetProps } from ".";
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphAdvanced: FunctionComponent<IGraphAdvancedProps> = (props: IGraphAdvancedProps) => {
+export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetProps) => {
 	const [state, setState] = React.useState({
-		comparison: "GT",
+		comparison: "LT",
 		quantity: 0
 	});
 

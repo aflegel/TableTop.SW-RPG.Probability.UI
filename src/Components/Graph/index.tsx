@@ -11,63 +11,75 @@ import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { GetFrequencyTotal } from "./Functions";
 
-type GraphProps = IStatisticsState & IGraphProps;
+type GraphProps = IStatisticsState & IModeProps;
 
-export interface IGraphProps {
+export interface IModeProps {
 	mode: DieSymbol;
 }
 
-export interface ILabel {
-	counterMode: DieSymbol;
-	offLabel: string;
+export interface IDataSetProps {
+	totalFrequency: number;
+	filteredSet: PoolStatistic[];
+}
+
+export interface IExtendedModeProps {
+	negativeMode: DieSymbol;
+	alternateMode: DieSymbol;
 }
 
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
-	const GetLabels = (): ILabel & IGraphProps => {
+	const GetLabels = (): IExtendedModeProps & IModeProps => {
+		return { ...props, ...GetAlternate() };
+	};
+
+	const GetAlternate = (): IExtendedModeProps => {
 		switch (props.mode) {
 			case DieSymbol.Success:
-				return { mode: props.mode, counterMode: DieSymbol.Failure, offLabel: "Average Advantage" };
+				return { negativeMode: DieSymbol.Failure, alternateMode: DieSymbol.Advantage };
 			case DieSymbol.Advantage:
-				return { mode: props.mode, counterMode: DieSymbol.Threat, offLabel: "Average Success" };
+				return { negativeMode: DieSymbol.Threat, alternateMode: DieSymbol.Success };
 			case DieSymbol.Triumph:
-				return { mode: props.mode, counterMode: DieSymbol.Despair, offLabel: "" };
+				return { negativeMode: DieSymbol.Despair, alternateMode: DieSymbol.Blank };
 			default:
-				return { mode: props.mode, counterMode: DieSymbol.Blank, offLabel: "" };
+				return { negativeMode: DieSymbol.Blank, alternateMode: DieSymbol.Blank };
 		}
 	};
 
-	let filteredSet: PoolStatistic[] = [];
-
-	if (props.poolCombination && props.poolCombination.poolStatistics)
-		filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+	const GetDataSet = (): IDataSetProps => {
+		let filteredSet: PoolStatistic[] = [];
+		if (props.poolCombination && props.poolCombination.poolStatistics) {
+			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+		}
+		return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
+	};
 
 	const label = GetLabels();
-	const frequency = GetFrequencyTotal(filteredSet);
+	const dataSet = GetDataSet();
 
 	return (
 		<Grid container>
 			<Grid item xs={12}>
 				<Paper>
 					<Typography gutterBottom variant="h4" component="h4">
-						Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.counterMode]}
+						Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.negativeMode]}
 					</Typography>
-					<GraphLine {...label} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
+					<GraphLine {...label} {...dataSet} />
 				</Paper>
 			</Grid>
 			<Grid item xs={12} lg={6}>
 				<GraphDetails {...label} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
-				<GraphBreakdown {...label} filteredSet={filteredSet} totalFrequency={frequency} />
+				<GraphBreakdown {...label} {...dataSet} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
-				<GraphAdvanced filteredSet={filteredSet} totalFrequency={frequency} />
+				<GraphAdvanced  {...dataSet} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
-				<GraphResultList filteredSet={filteredSet} />
+				<GraphResultList {...label} {...dataSet} />
 			</Grid>
 		</Grid>
 	);

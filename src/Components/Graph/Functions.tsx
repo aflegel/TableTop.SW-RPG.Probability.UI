@@ -1,11 +1,12 @@
 import { PoolStatistic } from "../../Models/PoolStatistic";
 import { PoolDice } from "../../Models/PoolDice";
+import { DieSymbol } from "../../Models/DieSymbol";
 
 /**
  * Returns the total of frequency
  * @param set
  */
-export const GetFrequencyTotal = (set: PoolStatistic[]) =>
+export const GetFrequencyTotal = (set: PoolStatistic[]): number =>
 	set.reduce((total, obj) => {
 		return total + obj.frequency;
 	}, 0);
@@ -14,7 +15,7 @@ export const GetFrequencyTotal = (set: PoolStatistic[]) =>
  * Returns the total of quantity
  * @param set
  */
-export const GetQuantityTotal = (set: PoolDice[]) =>
+export const GetQuantityTotal = (set: PoolDice[]): number =>
 	set.reduce((total, obj) => {
 		return total + obj.quantity;
 	}, 0);
@@ -60,3 +61,6 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
  * @param digits
  */
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
+
+export const AverageLabel = (mode: DieSymbol) => `Average ${DieSymbol[mode]}`;
+export const NetLabel = (mode: DieSymbol) => `Net ${DieSymbol[mode]}`;

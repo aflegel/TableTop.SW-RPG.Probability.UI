@@ -10,13 +10,11 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { PoolStatistic } from "../../Models/PoolStatistic";
 import { DieSymbol } from "../../Models/DieSymbol";
-import { Format } from "../Graph/Functions";
+import { Format, NetLabel } from "../Graph/Functions";
+import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
 
-export interface IGraphResultList {
-	filteredSet: PoolStatistic[];
-}
+export type IGraphResultList = IModeProps & IExtendedModeProps & IDataSetProps;
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
@@ -24,22 +22,20 @@ export interface IGraphResultList {
 export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGraphResultList) =>
 	<ExpansionPanel>
 		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-			<Typography>Result Table</Typography>
+			<Typography>Data Table</Typography>
 		</ExpansionPanelSummary>
 		<ExpansionPanelDetails>
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell>Symbol</TableCell>
-						<TableCell align="right">Quantity</TableCell>
+						<TableCell align="right">{NetLabel(props.mode)}</TableCell>
 						<TableCell align="right">Frequency</TableCell>
-						<TableCell align="right">Alternate Total</TableCell>
+						<TableCell align="right">Total {DieSymbol[props.alternateMode]}</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{props.filteredSet.map(combination => (
 						<TableRow key={DieSymbol[combination.symbol] + combination.quantity}>
-							<TableCell>{DieSymbol[combination.symbol]}</TableCell>
 							<TableCell align="right">{combination.quantity}</TableCell>
 							<TableCell align="right">{Format(combination.frequency, false)}</TableCell>
 							<TableCell align="right">{Format(combination.alternateTotal, false)}</TableCell>

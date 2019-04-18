@@ -1,16 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
-import { PoolStatistic } from "../../Models/PoolStatistic";
 import { DieSymbol } from "../../Models/DieSymbol";
-import { Format, GetProbability } from "./Functions";
+import { Format, AverageLabel, NetLabel, GetProbability } from "./Functions";
+import { IModeProps, IDataSetProps, IExtendedModeProps } from ".";
 
-export interface IGraphLineProps {
-	label: string;
-	offLabel: string;
-	mode: DieSymbol;
-	totalFrequency: number;
-	filteredSet: PoolStatistic[];
-}
+export type IGraphLineProps = IModeProps & IExtendedModeProps & IDataSetProps;
 
 export interface ILineData {
 	quantity: number;
@@ -25,14 +19,14 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 	const AverageExists = (): boolean => props.mode === DieSymbol.Success || props.mode === DieSymbol.Advantage;
 
 	const BuildData = (): ILineData[] => props.filteredSet.map(map => ({
-			quantity: map.quantity,
-			probability: GetProbability(map.frequency, props.totalFrequency),
-			average: AverageExists() ? map.alternateTotal / map.frequency : undefined
-		}));
+		quantity: map.quantity,
+		probability: GetProbability(map.frequency, props.totalFrequency),
+		average: AverageExists() ? map.alternateTotal / map.frequency : undefined
+	}));
 
 	const GetAverageAxis = () => {
 		if (AverageExists()) {
-			return <Line yAxisId="average" name={props.offLabel} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />;
+			return <Line yAxisId="average" name={AverageLabel(props.alternateMode)} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />;
 		} else {
 			return <></>;
 		}
@@ -42,7 +36,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		if (AverageExists()) {
 			return (
 				<YAxis yAxisId="average" type="number" orientation="right">
-					<Label value={props.offLabel} angle={-90} position="insideRight" />
+					<Label value={AverageLabel(props.alternateMode)} angle={-90} position="insideRight" />
 				</YAxis>
 			);
 		} else {
@@ -60,13 +54,13 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 
 	const ValueFormatter = (value: any, name: any, props: any) => [Format(value, true), name];
 
-	const LabelFormatter = (label: string | number) => `Net ${props.label}: ${label}`;
+	const LabelFormatter = (label: string | number) => `${NetLabel(props.mode)}: ${label}`;
 
 	return (
 		<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>
 			<LineChart data={BuildData()}>
 				<XAxis dataKey="quantity">
-					<Label value={`Net ${props.label}`} offset={0} position="insideBottom" />
+					<Label value={NetLabel(props.mode)} offset={0} position="insideBottom" />
 				</XAxis>
 				<YAxis yAxisId="probability" type="number">
 					<Label value="Probability (%)" angle={-90} position="insideLeft" />

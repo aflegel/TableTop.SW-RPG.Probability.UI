@@ -9,15 +9,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { Typography } from "@material-ui/core";
 
 import { DieSymbol } from "../../Models/DieSymbol";
-import { PoolStatistic } from "../../Models/PoolStatistic";
-import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation } from "./Functions";
+import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, AverageLabel } from "./Functions";
+import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
 
-export interface IGraphBreakdownProps {
-	mode: DieSymbol;
-	counterMode: DieSymbol;
-	filteredSet: PoolStatistic[];
-	totalFrequency: number;
-}
+export type IGraphBreakdownProps = IModeProps & IExtendedModeProps & IDataSetProps;
 
 /**
  * Calculates the statictical model and builds a definition list for that data
@@ -47,13 +42,13 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 						<ListItemText primary={`Probability of ${DieSymbol[props.mode]}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.counterMode]} Frequency`} secondary={Format(negativeFrequency, false)} />
+						<ListItemText primary={`${DieSymbol[props.negativeMode]} Frequency`} secondary={Format(negativeFrequency, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`Probability of ${DieSymbol[props.counterMode]}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
+						<ListItemText primary={`Probability of ${DieSymbol[props.negativeMode]}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`Average ${DieSymbol[props.mode]}`} secondary={Format(average, false)} />
+						<ListItemText primary={AverageLabel(props.mode)} secondary={Format(average, false)} />
 					</ListItem>
 					<ListItem>
 						<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />
