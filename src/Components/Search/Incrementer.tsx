@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import IconButton from "@material-ui/core/IconButton";
+import { IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
@@ -7,7 +7,6 @@ import { Die } from "../Dice/Die";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
 
-// At runtime, Redux will merge together...
 type DieIncrementertProps = IStatisticsState & IDieIncrementer;
 
 export interface IDieIncrementer {
@@ -17,7 +16,7 @@ export interface IDieIncrementer {
 }
 
 /**
- * Renders the current search icons as well as a search builder
+ * Renders buttons, icon, and quantity to increment the search
  */
 export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
 	const DieCount = () => {
@@ -36,8 +35,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 		<>
 			<IconButton
 				color="secondary"
-				className={""}
-				aria-label="Add an alarm"
+				aria-label={`Add one ${DieType[props.dieType]}`}
 				onClick={() => { props.addDieCallback(props.dieType) }}>
 				<AddIcon />
 			</IconButton>
@@ -47,8 +45,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 			<h5>{DieCount()}</h5>
 			<IconButton
 				color="secondary"
-				className={""}
-				aria-label="Add an alarm"
+				aria-label={`Remove one ${DieType[props.dieType]}`}
 				onClick={() => { props.removeDieCallback(props.dieType) }}>
 				<RemoveIcon />
 			</IconButton>

@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import { CardActions, Button } from "@material-ui/core";
+import { Grid, Card, CardContent, CardActions, Button } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
@@ -20,7 +17,7 @@ export interface ISearchProps {
  * Renders the current search icons as well as a search builder
  */
 export const Search: FunctionComponent<SearchProps> = (props: SearchProps) =>
-	<Card className={""}>
+	<Card>
 		<CardContent>
 			<Grid container spacing={24}>
 				<Grid item xs={6} sm={4} md={2}>

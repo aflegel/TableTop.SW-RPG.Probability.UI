@@ -1,10 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Grid from "@material-ui/core/Grid";
+import { Grid, Card, CardContent, Typography, List, ListItem } from "@material-ui/core";
 
 import { Graph } from "./Graph";
 import { Search } from "./Search";
@@ -33,7 +28,7 @@ export const Statistics: FunctionComponent = () => {
 				<Search {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} searchCallback={getStatisticsAsync} />
 			</Grid>
 			<Grid item xs={12}>
-				<Card className={""}>
+				<Card>
 					<CardContent>
 						<Typography gutterBottom variant="h2" component="h2">
 							Probability Breakdown

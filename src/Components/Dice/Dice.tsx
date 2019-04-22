@@ -12,7 +12,7 @@ export interface IDiceProps {
  */
 export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 	/**
-	 * Returns an icon with proper css classes for the die type and size
+	 * Returns a set icons with proper css classes for the die type and size
 	 * @param dieType
 	 * @param quantity
 	 */
