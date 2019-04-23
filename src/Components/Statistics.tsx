@@ -8,7 +8,7 @@ import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
 
 export const Statistics: FunctionComponent = () => {
-	const { state, getStatisticsAsync, addSearchDie, removeSearchDie } = useStatistics();
+	const { state, getStatisticsAsync } = useStatistics();
 
 	const getDice = () => {
 		if (state.poolCombination && state.poolCombination.dice) {
@@ -19,13 +19,13 @@ export const Statistics: FunctionComponent = () => {
 	};
 
 	useEffect(() => {
-		getStatisticsAsync();
+		getStatisticsAsync(state.searchDice);
 	}, []);
 
 	return (
 		<Grid container spacing={24}>
 			<Grid item xs={12}>
-				<Search {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} searchCallback={getStatisticsAsync} />
+				<Search {...state} searchCallback={getStatisticsAsync} />
 			</Grid>
 			<Grid item xs={12}>
 				<Card>

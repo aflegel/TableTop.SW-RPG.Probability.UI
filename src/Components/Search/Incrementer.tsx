@@ -4,10 +4,10 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 import { Die } from "../Dice/Die";
-import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
+import { ISearchState } from ".";
 
-type DieIncrementertProps = IStatisticsState & IDieIncrementer;
+type DieIncrementertProps = ISearchState & IDieIncrementer;
 
 export interface IDieIncrementer {
 	dieType: DieType;
@@ -21,8 +21,8 @@ export interface IDieIncrementer {
 export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
 	const dieCount = () => {
 		let count = 0;
-		if (props.searchDice) {
-			const test = props.searchDice.filter(f => f.dieId == props.dieType);
+		if (props.dice) {
+			const test = props.dice.filter(f => f.dieId == props.dieType);
 
 			if (test && test[0]) {
 				count = test[0].quantity;
