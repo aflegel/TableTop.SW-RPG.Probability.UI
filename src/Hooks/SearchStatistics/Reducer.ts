@@ -8,7 +8,7 @@ import { PoolDice } from "../../Models/PoolDice";
 import { GetQuantityTotal } from "../../Components/Graph/Functions";
 
 export const reducer = (state: IStatisticsState, action: StatisticsApiActions): IStatisticsState => {
-	const MergeDice = (dice: PoolDice[], addDie: DieType): void => {
+	const mergeDice = (dice: PoolDice[], addDie: DieType): void => {
 		const existingRecord = dice.find(f => f.dieId == addDie);
 
 		if (existingRecord) {
@@ -43,17 +43,17 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 			switch (action.dieType) {
 				case DieType.Ability:
 				case DieType.Proficiency:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) mergeDice(addDice, action.dieType);
 					break;
 				case DieType.Boost:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Boost)) < 4) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Boost)) < 4) mergeDice(addDice, action.dieType);
 					break;
 				case DieType.Difficulty:
 				case DieType.Challenge:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) mergeDice(addDice, action.dieType);
 					break;
 				case DieType.Setback:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Setback)) < 4) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Setback)) < 4) mergeDice(addDice, action.dieType);
 					break;
 			}
 
