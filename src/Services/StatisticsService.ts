@@ -79,9 +79,7 @@ export class StatisticsService implements IStatisticsService {
 
 	public async GetAllAsync(dice: PoolDice[]): Promise<PoolCombination> {
 		return new Promise<PoolCombination>(resolve => {
-			const data = JSON.stringify(dice);
-
-			axios.get(`http://localhost:62546/api/Search?data=${data}`).then(result => resolve(result.data));
+			axios.post(`http://localhost:62546/Search`, dice, { headers: { "Content-Type": "application/json; charset=utf-8" } }).then(result => resolve(result.data));
 		});
 	}
 }
