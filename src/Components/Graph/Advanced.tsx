@@ -38,21 +38,21 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 		},
 	];
 
-	const ChangeComparison = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const changeComparison = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setState({
 			...state,
 			comparison: event.target.value,
 		});
 	};
 
-	const ChangeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const changeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setState({
 			...state,
 			quantity: +event.target.value,
 		});
 	};
 
-	const GetData = (): string => {
+	const getData = (): string => {
 		let set: PoolStatistic[];
 		switch (state.comparison) {
 			case "GT":
@@ -87,7 +87,7 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 					select
 					margin="normal"
 					value={state.comparison}
-					onChange={ChangeComparison}
+					onChange={changeComparison}
 				>
 					{comparisons.map(option => (
 						<MenuItem key={option.value} value={option.value}>
@@ -99,12 +99,12 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 					type="number"
 					margin="normal"
 					value={state.quantity}
-					onChange={ChangeQuantity}
+					onChange={changeQuantity}
 				/>
 
 				<List>
 					<ListItem>
-						<ListItemText primary="Probability" secondary={`${GetData()}%`} />
+						<ListItemText primary="Probability" secondary={`${getData()}%`} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>

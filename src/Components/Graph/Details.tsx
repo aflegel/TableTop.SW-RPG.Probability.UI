@@ -17,9 +17,9 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 		minus.push(<Symbol dieSymbol={DieSymbol.Despair} />);
 	}
 
-	const GetCalculation = () => <>({Join(plus, "+")}) - ({Join(minus,  "+")})</>;
+	const getCalculation = () => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
 
-	const Join = (symbols: JSX.Element[], separator: string) => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
+	const join = (symbols: JSX.Element[], separator: string) => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
 	return (
 		<ExpansionPanel>
@@ -29,13 +29,13 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 			<ExpansionPanelDetails>
 				<List>
 					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={Join(plus, "and")} />
+						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={join(plus, "and")} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={Join(minus, "and")}  />
+						<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={join(minus, "and")}  />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary="Calculation" secondary={GetCalculation()} />
+						<ListItemText primary="Calculation" secondary={getCalculation()} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>

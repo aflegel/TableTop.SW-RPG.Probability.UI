@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
@@ -19,7 +19,7 @@ export interface IDieIncrementer {
  * Renders buttons, icon, and quantity to increment the search
  */
 export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
-	const DieCount = () => {
+	const dieCount = () => {
 		let count = 0;
 		if (props.searchDice) {
 			const test = props.searchDice.filter(f => f.dieId == props.dieType);
@@ -39,10 +39,10 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 				onClick={() => { props.addDieCallback(props.dieType) }}>
 				<AddIcon />
 			</IconButton>
-			<h5>
+			<Typography variant="h5">
 				<Die dieType={props.dieType} />
-			</h5>
-			<h5>{DieCount()}</h5>
+			</Typography>
+			<Typography variant="h4">{dieCount()}</Typography>
 			<IconButton
 				color="secondary"
 				aria-label={`Remove one ${DieType[props.dieType]}`}

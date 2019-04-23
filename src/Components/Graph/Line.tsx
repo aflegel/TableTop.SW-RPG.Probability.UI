@@ -16,24 +16,24 @@ export interface ILineData {
  * Renders a standardized chart.js graph given a dataset.
  */
 export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
-	const AverageExists = (): boolean => props.mode === DieSymbol.Success || props.mode === DieSymbol.Advantage;
+	const averageExists = (): boolean => props.mode === DieSymbol.Success || props.mode === DieSymbol.Advantage;
 
-	const BuildData = (): ILineData[] => props.filteredSet.map(map => ({
+	const buildData = (): ILineData[] => props.filteredSet.map(map => ({
 		quantity: map.quantity,
 		probability: GetProbability(map.frequency, props.totalFrequency),
-		average: AverageExists() ? map.alternateTotal / map.frequency : undefined
+		average: averageExists() ? map.alternateTotal / map.frequency : undefined
 	}));
 
-	const GetAverageAxis = () => {
-		if (AverageExists()) {
+	const getAverageAxis = () => {
+		if (averageExists()) {
 			return <Line yAxisId="average" name={AverageLabel(props.alternateMode)} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />;
 		} else {
 			return <></>;
 		}
 	};
 
-	const GetAverageLine = () => {
-		if (AverageExists()) {
+	const getAverageLine = () => {
+		if (averageExists()) {
 			return (
 				<YAxis yAxisId="average" type="number" orientation="right">
 					<Label value={AverageLabel(props.alternateMode)} angle={-90} position="insideRight" />
@@ -44,7 +44,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	};
 
-	const GetDataSets = () => {
+	const getDataSets = () => {
 		if (props.filteredSet && props.filteredSet.length > 0) {
 			return <Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />;
 		} else {
@@ -52,24 +52,24 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	}
 
-	const ValueFormatter = (value: any, name: any, props: any) => [Format(value, true), name];
+	const valueFormatter = (value: any, name: any, props: any) => [Format(value, true), name];
 
-	const LabelFormatter = (label: string | number) => `${NetLabel(props.mode)}: ${label}`;
+	const labelFormatter = (label: string | number) => `${NetLabel(props.mode)}: ${label}`;
 
 	return (
 		<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>
-			<LineChart data={BuildData()}>
+			<LineChart data={buildData()}>
 				<XAxis dataKey="quantity">
 					<Label value={NetLabel(props.mode)} offset={0} position="insideBottom" />
 				</XAxis>
 				<YAxis yAxisId="probability" type="number">
 					<Label value="Probability (%)" angle={-90} position="insideLeft" />
 				</YAxis>
-				<Tooltip formatter={ValueFormatter} labelFormatter={LabelFormatter} />
+				<Tooltip formatter={valueFormatter} labelFormatter={labelFormatter} />
 				<Legend verticalAlign="top" />
-				{GetDataSets()}
-				{GetAverageLine()}
-				{GetAverageAxis()}
+				{getDataSets()}
+				{getAverageLine()}
+				{getAverageAxis()}
 			</LineChart>
 		</ResponsiveContainer>
 	);

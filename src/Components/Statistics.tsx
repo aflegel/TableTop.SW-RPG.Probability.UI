@@ -10,7 +10,7 @@ import { Dice } from "./Dice/Dice";
 export const Statistics: FunctionComponent = () => {
 	const { state, getStatisticsAsync, addSearchDie, removeSearchDie } = useStatistics();
 
-	const GetDice = () => {
+	const getDice = () => {
 		if (state.poolCombination && state.poolCombination.dice) {
 			return <Dice dice={state.poolCombination.dice} />;
 		} else {
@@ -34,7 +34,7 @@ export const Statistics: FunctionComponent = () => {
 							Probability Breakdown
 						</Typography>
 						<Typography gutterBottom variant="h5" component="h2">
-							{GetDice()}
+							{getDice()}
 						</Typography>
 						<List>
 							<ListItem divider>

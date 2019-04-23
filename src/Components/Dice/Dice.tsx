@@ -1,32 +1,18 @@
 import React, { FunctionComponent } from "react";
-import { Die } from "./Die";
 import { PoolDice } from "../../Models/PoolDice";
 import { DieType } from "../../Models/DieType";
+import { DieSeries } from "./DieSeries"
 
 export interface IDiceProps {
 	dice: PoolDice[];
 }
 
 /**
- * Returns an icon element with the appropriate css classes
+ * Returns a sorted array of icons for the given dice set
  */
 export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
-	/**
-	 * Returns a set icons with proper css classes for the die type and size
-	 * @param dieType
-	 * @param quantity
-	 */
-	const RenderDieSet = (dieType: DieType, quantity: number): JSX.Element[] => {
-		const output: JSX.Element[] = [];
-
-		for (let i = 0; i < quantity; i++) {
-			output.push(<Die dieType={dieType} key={DieType[dieType] + i} />);
-		}
-
-		return output;
-	};
-
 	const output: JSX.Element[] = [];
+
 	if (props.dice) {
 		props.dice.sort((a, b) => {
 			switch (a.dieId) {
@@ -40,7 +26,7 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 							return 1;
 					}
 				case DieType.Boost:
-							return 1;
+					return 1;
 				case DieType.Challenge:
 					switch (b.dieId) {
 						case DieType.Difficulty:
@@ -61,7 +47,8 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
 				default:
 					return 0;
 			}
-		}).forEach(item => output.push(...RenderDieSet(item.dieId, item.quantity)));
+		}).forEach(item => output.push(<DieSeries dice={item} key={`${item.dieId}${item.quantity}`}></DieSeries>));
 	}
+
 	return <>{output}</>;
 };

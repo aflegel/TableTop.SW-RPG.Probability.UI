@@ -1,6 +1,6 @@
 import React from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
-import { Layout } from "./Components/Layout/Layout";
+import { Layout } from "./Components/Layout";
 import { About } from "./Components/About";
 import { Statistics } from "./Components/Statistics";
 

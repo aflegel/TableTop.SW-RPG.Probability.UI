@@ -1,5 +1,5 @@
 ﻿import React, { FunctionComponent } from "react";
-import { Grid, Typography, Paper } from "@material-ui/core";
+import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 
 import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
@@ -31,11 +31,11 @@ export interface IExtendedModeProps {
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
-	const GetLabels = (): IExtendedModeProps & IModeProps => {
-		return { ...props, ...GetAlternate() };
+	const getLabels = (): IExtendedModeProps & IModeProps => {
+		return { ...props, ...getModes() };
 	};
 
-	const GetAlternate = (): IExtendedModeProps => {
+	const getModes = (): IExtendedModeProps => {
 		switch (props.mode) {
 			case DieSymbol.Success:
 				return { negativeMode: DieSymbol.Failure, alternateMode: DieSymbol.Advantage };
@@ -48,7 +48,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 		}
 	};
 
-	const GetDataSet = (): IDataSetProps => {
+	const getDataSet = (): IDataSetProps => {
 		let filteredSet: PoolStatistic[] = [];
 		if (props.poolCombination && props.poolCombination.poolStatistics) {
 			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
@@ -56,18 +56,20 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 		return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
 	};
 
-	const label = GetLabels();
-	const dataSet = GetDataSet();
+	const label = getLabels();
+	const dataSet = getDataSet();
 
 	return (
 		<Grid container>
 			<Grid item xs={12}>
-				<Paper>
-					<Typography gutterBottom variant="h4" component="h4">
-						Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.negativeMode]}
-					</Typography>
-					<GraphLine {...label} {...dataSet} />
-				</Paper>
+				<Card>
+					<CardContent>
+						<Typography gutterBottom variant="h4" component="h4">
+							Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.negativeMode]}
+						</Typography>
+						<GraphLine {...label} {...dataSet} />
+					</CardContent>
+				</Card>
 			</Grid>
 			<Grid item xs={12} lg={6}>
 				<GraphDetails {...label} />
