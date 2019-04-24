@@ -1,66 +1,88 @@
 ﻿import React, { FunctionComponent } from "react";
+import { Grid, Typography, Card, CardContent } from "@material-ui/core";
+
 import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
+import { GraphResultList } from "./ResultList";
+import { GraphAdvanced } from "./Advanced";
 import { DieSymbol } from "../../Models/DieSymbol";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { PoolStatistic } from "../../Models/PoolStatistic";
-import { GetFrequencyTotal } from "../Statistics/Functions";
+import { GetFrequencyTotal } from "./Functions";
 
-type GraphProps = IStatisticsState & IGraphProps;
+type GraphProps = IStatisticsState & IModeProps;
 
-export interface IGraphProps {
+export interface IModeProps {
 	mode: DieSymbol;
 }
 
-export interface ILabel {
-	counterMode: DieSymbol;
-	offLabel: string;
+export interface IDataSetProps {
+	totalFrequency: number;
+	filteredSet: PoolStatistic[];
+}
+
+export interface IExtendedModeProps {
+	negativeMode: DieSymbol;
+	alternateMode: DieSymbol;
 }
 
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
-	let filteredSet: PoolStatistic[] = [];
-	if (props.poolCombination && props.poolCombination.poolStatistics) filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+	const getLabels = (): IExtendedModeProps & IModeProps => {
+		return { ...props, ...getModes() };
+	};
 
-	const frequency = GetFrequencyTotal(filteredSet);
-
-	const GetLabels = (): ILabel => {
+	const getModes = (): IExtendedModeProps => {
 		switch (props.mode) {
 			case DieSymbol.Success:
-				return { counterMode: DieSymbol.Failure, offLabel: "Average Advantage" };
+				return { negativeMode: DieSymbol.Failure, alternateMode: DieSymbol.Advantage };
 			case DieSymbol.Advantage:
-				return { counterMode: DieSymbol.Threat, offLabel: "Average Success" };
+				return { negativeMode: DieSymbol.Threat, alternateMode: DieSymbol.Success };
 			case DieSymbol.Triumph:
-				return { counterMode: DieSymbol.Despair, offLabel: "" };
+				return { negativeMode: DieSymbol.Despair, alternateMode: DieSymbol.Blank };
 			default:
-				return { counterMode: DieSymbol.Blank, offLabel: "" };
+				return { negativeMode: DieSymbol.Blank, alternateMode: DieSymbol.Blank };
 		}
 	};
 
-	const label = GetLabels();
+	const getDataSet = (): IDataSetProps => {
+		let filteredSet: PoolStatistic[] = [];
+		if (props.poolCombination && props.poolCombination.poolStatistics) {
+			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+		}
+		return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
+	};
+
+	const label = getLabels();
+	const dataSet = getDataSet();
 
 	return (
-		<div className="row row-fill">
-			<div className="col m12">
-				<h3>
-					Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.counterMode]}
-				</h3>
-
-				<div className="row">
-					<div className="col l6 m12">
-						<GraphLine {...label} mode={props.mode} label={DieSymbol[props.mode]} filteredSet={filteredSet} totalFrequency={frequency} />
-					</div>
-					<div className="col l3 m6">
-						<GraphBreakdown {...label} mode={props.mode} filteredSet={filteredSet} totalFrequency={frequency} />
-					</div>
-					<div className="col l3 m6">
-						<GraphDetails {...label} mode={props.mode} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Grid container>
+			<Grid item xs={12}>
+				<Card>
+					<CardContent>
+						<Typography gutterBottom variant="h4" component="h4">
+							Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.negativeMode]}
+						</Typography>
+						<GraphLine {...label} {...dataSet} />
+					</CardContent>
+				</Card>
+			</Grid>
+			<Grid item xs={12} lg={6}>
+				<GraphDetails {...label} />
+			</Grid>
+			<Grid item xs={12} lg={6}>
+				<GraphBreakdown {...label} {...dataSet} />
+			</Grid>
+			<Grid item xs={12} lg={6}>
+				<GraphAdvanced  {...dataSet} />
+			</Grid>
+			<Grid item xs={12} lg={6}>
+				<GraphResultList {...label} {...dataSet} />
+			</Grid>
+		</Grid>
 	);
 };

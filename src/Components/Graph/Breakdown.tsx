@@ -1,14 +1,12 @@
 import React, { FunctionComponent } from "react";
+import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 import { DieSymbol } from "../../Models/DieSymbol";
-import { PoolStatistic } from "../../Models/PoolStatistic";
-import { GetFrequencyTotal, GetAverage, GetStandardDeviation } from "../Statistics/Functions";
-import { Format } from "./Formatter";
-export interface IGraphBreakdownProps {
-	mode: DieSymbol;
-	counterMode: DieSymbol;
-	filteredSet: PoolStatistic[];
-	totalFrequency: number;
-}
+import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, AverageLabel } from "./Functions";
+import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
+
+export type IGraphBreakdownProps = IModeProps & IExtendedModeProps & IDataSetProps;
 
 /**
  * Calculates the statictical model and builds a definition list for that data
@@ -22,21 +20,35 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 	const standardDeviation = GetStandardDeviation(props.filteredSet, props.totalFrequency, average);
 
 	return (
-		<dl>
-			<dt>{props.mode == DieSymbol.Success ? "Total Frequency" : ""}</dt>
-			<dd>{props.mode == DieSymbol.Success ? Format(props.totalFrequency, false) : null}</dd>
-			<dt>{DieSymbol[props.mode]} Frequency</dt>
-			<dd>{Format(positiveFrequency, false)}</dd>
-			<dt>Probability of {DieSymbol[props.mode]}</dt>
-			<dd>{Format((positiveFrequency / props.totalFrequency) * 100, true)}%</dd>
-			<dt>{DieSymbol[props.counterMode]} Frequency</dt>
-			<dd>{Format(negativeFrequency, false)}</dd>
-			<dt>Probability of {DieSymbol[props.counterMode]}</dt>
-			<dd>{Format((negativeFrequency / props.totalFrequency) * 100, true)}%</dd>
-			<dt>Average {DieSymbol[props.mode]}</dt>
-			<dd>{Format(average, true)}</dd>
-			<dt>Standard Deviation</dt>
-			<dd>{Format(standardDeviation, true)}</dd>
-		</dl>
+		<ExpansionPanel>
+			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+				<Typography>Probability Breakdowns</Typography>
+			</ExpansionPanelSummary>
+			<ExpansionPanelDetails>
+				<List>
+					<ListItem>
+						<ListItemText primary="Total Frequency" secondary={Format(props.totalFrequency, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={`${DieSymbol[props.mode]} Frequency`} secondary={Format(positiveFrequency, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={`Probability of ${DieSymbol[props.mode]}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={`${DieSymbol[props.negativeMode]} Frequency`} secondary={Format(negativeFrequency, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={`Probability of ${DieSymbol[props.negativeMode]}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={AverageLabel(props.mode)} secondary={Format(average, false)} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />
+					</ListItem>
+				</List>
+			</ExpansionPanelDetails>
+		</ExpansionPanel>
 	);
 };

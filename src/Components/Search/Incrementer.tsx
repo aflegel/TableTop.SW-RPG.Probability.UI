@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from "react";
+import { IconButton, Typography } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+
 import { Die } from "../Dice/Die";
 import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models/DieType";
 
-// At runtime, Redux will merge together...
 type DieIncrementertProps = IStatisticsState & IDieIncrementer;
 
 export interface IDieIncrementer {
@@ -12,13 +15,11 @@ export interface IDieIncrementer {
 	removeDieCallback: Function;
 }
 
+/**
+ * Renders buttons, icon, and quantity to increment the search
+ */
 export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
-
-	/**
-	 * Renders the current search icons as well as a search builder
-	 */
-
-	const DieCount = () => {
+	const dieCount = () => {
 		let count = 0;
 		if (props.searchDice) {
 			const test = props.searchDice.filter(f => f.dieId == props.dieType);
@@ -31,26 +32,23 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 	};
 
 	return (
-		<div className="row">
-			<div className="col s4">
-				<button
-					className="btn light-green darken-3"
-					onClick={() => { props.addDieCallback(props.dieType) }}>
-					+
-				</button>
-			</div>
-			<div className="col s4 center-align">
-				<h5 className="">
-					<Die dieType={props.dieType} /> {props.dieType}x{DieCount()}
-				</h5>
-			</div>
-			<div className="col s4">
-				<button
-					className="btn light-green darken-3"
-					onClick={() => { props.removeDieCallback(props.dieType) }}>
-					-
-				</button>
-			</div>
-		</div>
+		<>
+			<IconButton
+				color="secondary"
+				aria-label={`Add one ${DieType[props.dieType]}`}
+				onClick={() => { props.addDieCallback(props.dieType) }}>
+				<AddIcon />
+			</IconButton>
+			<Typography variant="h5">
+				<Die dieType={props.dieType} />
+			</Typography>
+			<Typography variant="h4">{dieCount()}</Typography>
+			<IconButton
+				color="secondary"
+				aria-label={`Remove one ${DieType[props.dieType]}`}
+				onClick={() => { props.removeDieCallback(props.dieType) }}>
+				<RemoveIcon />
+			</IconButton>
+		</>
 	);
 };

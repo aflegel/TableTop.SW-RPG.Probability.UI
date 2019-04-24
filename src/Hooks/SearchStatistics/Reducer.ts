@@ -5,14 +5,18 @@ import { AddDieAction } from "./Actions/AddDie";
 import { RemoveDieAction } from "./Actions/RemoveDie";
 import { DieType } from "../../Models/DieType";
 import { PoolDice } from "../../Models/PoolDice";
-import { GetQuantityTotal } from "../../Components/Statistics/Functions";
+import { GetQuantityTotal } from "../../Components/Graph/Functions";
 
 export const reducer = (state: IStatisticsState, action: StatisticsApiActions): IStatisticsState => {
-	const MergeDice = (dice: PoolDice[], addDie: DieType): void => {
+	const mergeDice = (dice: PoolDice[], addDie: DieType): void => {
 		const existingRecord = dice.find(f => f.dieId == addDie);
 
-		if (existingRecord) existingRecord.quantity += 1;
-		else dice.push({ dieId: addDie, quantity: 1 });
+		if (existingRecord) {
+			existingRecord.quantity += 1;
+		}
+		else {
+			dice.push({ dieId: addDie, quantity: 1 });
+		}
 	};
 
 	switch (action.type) {
@@ -39,17 +43,17 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 			switch (action.dieType) {
 				case DieType.Ability:
 				case DieType.Proficiency:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) mergeDice(addDice, action.dieType);
 					break;
 				case DieType.Boost:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Boost)) < 4) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Boost)) < 4) mergeDice(addDice, action.dieType);
 					break;
 				case DieType.Difficulty:
 				case DieType.Challenge:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) mergeDice(addDice, action.dieType);
 					break;
 				case DieType.Setback:
-					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Setback)) < 4) MergeDice(addDice, action.dieType);
+					if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Setback)) < 4) mergeDice(addDice, action.dieType);
 					break;
 			}
 
@@ -63,8 +67,12 @@ export const reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 			const existingRecord = removeDice.find(f => f.dieId == action.dieType);
 
 			if (existingRecord) {
-				if (existingRecord.quantity > 1) existingRecord.quantity -= 1;
-				else removeDice.splice(removeDice.indexOf(existingRecord), 1);
+				if (existingRecord.quantity > 1) {
+					existingRecord.quantity -= 1;
+				}
+				else {
+					removeDice.splice(removeDice.indexOf(existingRecord), 1);
+				}
 			}
 
 			return {

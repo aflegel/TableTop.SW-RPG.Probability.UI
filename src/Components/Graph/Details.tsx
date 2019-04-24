@@ -1,58 +1,44 @@
 import React, { FunctionComponent } from "react";
-import { DieSymbol } from "../../Models/DieSymbol";
+import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-export interface IGraphDetailsProps {
-	mode: DieSymbol;
-	counterMode: DieSymbol;
-}
+import { DieSymbol } from "../../Models/DieSymbol";
+import { Symbol } from "../Dice/Symbol";
+import { IExtendedModeProps, IModeProps } from ".";
+
+export type IGraphDetailsProps = IModeProps & IExtendedModeProps;
 
 export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps) => {
-	const GetCalculation = () => {
-		let plus = <i className={`ffi ffi-swrpg-${DieSymbol[props.mode].toLowerCase()}`} />;
-		let minus = <i className={`ffi ffi-swrpg-${DieSymbol[props.counterMode].toLowerCase()}`} />;
+	const plus = [<Symbol dieSymbol={props.mode} />];
+	const minus = [<Symbol dieSymbol={props.negativeMode} />];
 
-		if (props.mode === DieSymbol.Success) {
-			plus = (
-				<>
-					({plus} + <i className="ffi ffi-swrpg-triumph" />)
-				</>
-			);
-			minus = (
-				<>
-					({minus} + <i className="ffi ffi-swrpg-despair" />)
-				</>
-			);
-		}
+	if (props.mode === DieSymbol.Success) {
+		plus.push(<Symbol dieSymbol={DieSymbol.Triumph} />);
+		minus.push(<Symbol dieSymbol={DieSymbol.Despair} />);
+	}
 
-		return (
-			<>
-				{plus} - {minus}
-			</>
-		);
-	};
+	const getCalculation = () => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
 
-	const GetExtras = (symbol: DieSymbol) => {
-		if (props.mode === DieSymbol.Success)
-			return (
-				<>
-					and <i className={`ffi ffi-swrpg-${DieSymbol[symbol].toLowerCase()}`} />
-				</>
-			);
-		else return <></>;
-	};
+	const join = (symbols: JSX.Element[], separator: string) => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
 	return (
-		<dl>
-			<dt>{DieSymbol[props.mode]} Symbols</dt>
-			<dd>
-				<i className={`ffi ffi-swrpg-${DieSymbol[props.mode].toLowerCase()}`} /> {GetExtras(DieSymbol.Triumph)}
-			</dd>
-			<dt>Failure Symbols</dt>
-			<dd>
-				<i className={`ffi ffi-swrpg-${DieSymbol[props.counterMode].toLowerCase()}`} /> {GetExtras(DieSymbol.Despair)}
-			</dd>
-			<dt>Calculation</dt>
-			<dd>{GetCalculation()}</dd>
-		</dl>
+		<ExpansionPanel>
+			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+				<Typography>Symbols and Calculations</Typography>
+			</ExpansionPanelSummary>
+			<ExpansionPanelDetails>
+				<List>
+					<ListItem>
+						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={join(plus, "and")} />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={join(minus, "and")}  />
+					</ListItem>
+					<ListItem>
+						<ListItemText primary="Calculation" secondary={getCalculation()} />
+					</ListItem>
+				</List>
+			</ExpansionPanelDetails>
+		</ExpansionPanel>
 	);
 };
