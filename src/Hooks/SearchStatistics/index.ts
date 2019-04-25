@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 
-import { reducer } from "./Reducer";
-import { initialState } from "./StatisticState";
+import { Reducer } from "./Reducer";
+import { InitialState } from "./StatisticState";
 import { IStatisticsService, StatisticsServiceSingleton } from "../../Services/StatisticsService";
 import { fetchStatisticsAction } from "./Actions";
 import { PoolCombination } from "../../Models/PoolCombination";
@@ -11,7 +11,7 @@ import { PoolDice } from "../../Models/PoolDice";
  * Wraps API interactions to search for dice results
  */
 export const useStatistics = () => {
-	const [state, dispatch] = useReducer(reducer, initialState);
+	const [state, dispatch] = useReducer(Reducer, InitialState);
 	const service: IStatisticsService = StatisticsServiceSingleton;
 
 	/**

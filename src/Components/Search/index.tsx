@@ -25,60 +25,79 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 		dice: props.searchDice,
 	});
 
-	const mergeDice = (dice: PoolDice[], addDie: DieType): void => {
-		const existingRecord = dice.find(f => f.dieId == addDie);
+	const updateState = (dice: PoolDice[]): void => {
+		setState({ dice: dice });
+	}
 
-		if (existingRecord) {
-			existingRecord.quantity += 1;
-		}
-		else {
-			dice.push({ dieId: addDie, quantity: 1 });
-		}
-	};
+	/**
+	 * Increases the quantity or adds a new die to the list
+	 * @param dieType
+	 */
+	const addSearchDie = (dieType: DieType): void => {
+		/**
+		 * Handles adding or updating the poolDice
+		 * @param dice passed by reference so a return is not required
+		 * @param addDie
+		 */
+		const updateQuantity = (dice: PoolDice[], addDie: DieType): void => {
+			const existingRecord = dice.find(f => f.dieId == addDie);
 
-	const addSearchDie = (dieType: DieType) => {
-		const addDice = state.dice.slice();
+			if (existingRecord) {
+				existingRecord.quantity += 1;
+			}
+			else {
+				dice.push({ dieId: addDie, quantity: 1 });
+			}
+		};
+
+		const dice = state.dice.slice();
 
 		switch (dieType) {
 			case DieType.Ability:
 			case DieType.Proficiency:
-				if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) mergeDice(addDice, dieType);
+				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) {
+					updateQuantity(dice, dieType);
+				}
 				break;
 			case DieType.Boost:
-				if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Boost)) < 4) mergeDice(addDice, dieType);
+				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Boost)) < 4) {
+					updateQuantity(dice, dieType);
+				}
 				break;
 			case DieType.Difficulty:
 			case DieType.Challenge:
-				if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) mergeDice(addDice, dieType);
+				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) {
+					updateQuantity(dice, dieType);
+				}
 				break;
 			case DieType.Setback:
-				if (GetQuantityTotal(addDice.filter(f => f.dieId == DieType.Setback)) < 4) mergeDice(addDice, dieType);
+				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Setback)) < 4) {
+					updateQuantity(dice, dieType);
+				}
 				break;
 		}
 
-		setState({
-			...state,
-			dice: addDice
-		});
+		updateState(dice);
 	};
 
-	const removeSearchDie = (dieType: DieType) => {
-		const removeDice = state.dice.slice();
-		const existingRecord = removeDice.find(f => f.dieId == dieType);
+	/**
+	 * Reduces the search dice by 1 or removing the die from the pool
+	 * @param dieType
+	 */
+	const removeSearchDie = (dieType: DieType): void => {
+		const dice = state.dice.slice();
+		const existingRecord = dice.find(f => f.dieId == dieType);
 
 		if (existingRecord) {
 			if (existingRecord.quantity > 1) {
 				existingRecord.quantity -= 1;
 			}
 			else {
-				removeDice.splice(removeDice.indexOf(existingRecord), 1);
+				dice.splice(dice.indexOf(existingRecord), 1);
 			}
 		}
 
-		setState({
-			...state,
-			dice: removeDice
-		});
+		updateState(dice);
 	};
 
 	return <Card>
