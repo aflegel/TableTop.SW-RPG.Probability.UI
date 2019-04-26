@@ -43,8 +43,11 @@ export const Statistics: FunctionComponent = () => {
 							<ListItem divider>
 								<Graph {...state} mode={DieSymbol.Advantage} />
 							</ListItem>
-							<ListItem>
+							<ListItem divider>
 								<Graph {...state} mode={DieSymbol.Triumph} />
+							</ListItem>
+							<ListItem>
+								<Graph {...state} mode={DieSymbol.Despair} />
 							</ListItem>
 						</List>
 					</CardContent>

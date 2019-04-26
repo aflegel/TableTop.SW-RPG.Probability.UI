@@ -16,16 +16,17 @@ export interface ILineData {
  * Renders a standardized chart.js graph given a dataset.
  */
 export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
-	const averageExists = (): boolean => props.mode === DieSymbol.Success || props.mode === DieSymbol.Advantage;
+	const hasAverage: boolean = props.mode === DieSymbol.Advantage || props.mode === DieSymbol.Success;
+	const hasData: boolean = props.filteredSet && props.filteredSet.length > 0;
 
 	const buildData = (): ILineData[] => props.filteredSet.map(map => ({
 		quantity: map.quantity,
 		probability: GetProbability(map.frequency, props.totalFrequency),
-		average: averageExists() ? map.alternateTotal / map.frequency : undefined
+		average: hasAverage ? map.alternateTotal / map.frequency : undefined
 	}));
 
 	const getAverageAxis = () => {
-		if (averageExists()) {
+		if (hasData && hasAverage) {
 			return <Line yAxisId="average" name={AverageLabel(props.alternateMode)} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />;
 		} else {
 			return <></>;
@@ -33,7 +34,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 	};
 
 	const getAverageLine = () => {
-		if (averageExists()) {
+		if (hasData && hasAverage) {
 			return (
 				<YAxis yAxisId="average" type="number" orientation="right">
 					<Label value={AverageLabel(props.alternateMode)} angle={-90} position="insideRight" />
@@ -45,7 +46,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 	};
 
 	const getDataSets = () => {
-		if (props.filteredSet && props.filteredSet.length > 0) {
+		if (hasData) {
 			return <Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />;
 		} else {
 			return <></>;

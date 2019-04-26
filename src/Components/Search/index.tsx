@@ -128,9 +128,3 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 		</CardContent>
 	</Card>
 };
-/*
-case AddDieAction:
-
-		case RemoveDieAction:
-
-*/
