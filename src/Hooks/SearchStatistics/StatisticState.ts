@@ -8,7 +8,7 @@ export interface IStatisticsState {
 	searchDice: PoolDice[];
 }
 
-export const initialState: IStatisticsState = {
+export const InitialState: IStatisticsState = {
 	isLoading: true,
 	poolCombination: {
 		poolStatistics: [],

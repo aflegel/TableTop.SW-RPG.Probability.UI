@@ -42,7 +42,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 			case DieSymbol.Advantage:
 				return { negativeMode: DieSymbol.Threat, alternateMode: DieSymbol.Success };
 			case DieSymbol.Triumph:
-				return { negativeMode: DieSymbol.Despair, alternateMode: DieSymbol.Blank };
+				return { negativeMode: DieSymbol.Despair, alternateMode: DieSymbol.Despair };
 			default:
 				return { negativeMode: DieSymbol.Blank, alternateMode: DieSymbol.Blank };
 		}
