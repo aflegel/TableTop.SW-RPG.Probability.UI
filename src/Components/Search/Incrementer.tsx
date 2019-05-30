@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 import { Die } from "../Dice/Die";
-import { DieType } from "../../Models/DieType";
+import { DieType } from "../../Models";
 import { ISearchState } from ".";
 
 type DieIncrementertProps = ISearchState & IDieIncrementer;

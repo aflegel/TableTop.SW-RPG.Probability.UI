@@ -2,9 +2,8 @@ import React, { FunctionComponent } from "react";
 import { Grid, Card, CardContent, CardActions, Button } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
-import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
-import { DieType } from "../../Models/DieType";
-import { PoolDice } from "../../Models/PoolDice";
+import { IStatisticsState } from "../../Hooks/SearchStatistics";
+import { DieType, PoolDice } from "../../Models";
 import { GetQuantityTotal } from "../Graph/Functions";
 
 type SearchProps = IStatisticsState & ISearchProps;

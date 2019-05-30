@@ -1,6 +1,4 @@
-import { PoolStatistic } from "../../Models/PoolStatistic";
-import { PoolDice } from "../../Models/PoolDice";
-import { DieSymbol } from "../../Models/DieSymbol";
+import { PoolStatistic, PoolDice, DieSymbol, DieType } from "../../Models";
 
 /**
  * Returns the total of frequency
@@ -56,6 +54,13 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
 };
 
 /**
+ * Returns a shortened list of
+ * @param dice
+ * @param dicer
+ */
+export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => pool.filter(f => !!dice.find(die => die == f.dieId));
+
+/**
  * Formats the number as a comma separated thousands and limited to 4 digits if required
  * @param predicate
  * @param digits
@@ -63,4 +68,5 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
 export const AverageLabel = (mode: DieSymbol) => `Average ${DieSymbol[mode]}`;
+
 export const NetLabel = (mode: DieSymbol) => `Net ${DieSymbol[mode]}`;

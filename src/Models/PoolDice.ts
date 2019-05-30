@@ -1,4 +1,4 @@
-import { DieType } from "./DieType";
+import { DieType } from ".";
 
 export interface PoolDice {
 	dieId: DieType;

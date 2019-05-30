@@ -6,9 +6,8 @@ import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
 import { GraphResultList } from "./ResultList";
 import { GraphAdvanced } from "./Advanced";
-import { DieSymbol } from "../../Models/DieSymbol";
-import { IStatisticsState } from "../../Hooks/SearchStatistics/StatisticState";
-import { PoolStatistic } from "../../Models/PoolStatistic";
+import { DieSymbol, PoolStatistic } from "../../Models";
+import { IStatisticsState } from "../../Hooks/SearchStatistics";
 import { GetFrequencyTotal } from "./Functions";
 
 type GraphProps = IStatisticsState & IModeProps;

@@ -4,8 +4,10 @@ import { Reducer } from "./Reducer";
 import { InitialState } from "./StatisticState";
 import { IStatisticsService, StatisticsServiceSingleton } from "../../Services/StatisticsService";
 import { fetchStatisticsAction } from "./Actions";
-import { PoolCombination } from "../../Models/PoolCombination";
-import { PoolDice } from "../../Models/PoolDice";
+import { PoolCombination, PoolDice } from "../../Models";
+
+export * from "./StatisticState";
+export * from "./Actions";
 
 /**
  * Wraps API interactions to search for dice results

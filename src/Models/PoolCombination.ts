@@ -1,5 +1,4 @@
-import { PoolStatistic } from "./PoolStatistic";
-import { PoolDice } from "./PoolDice";
+import { PoolStatistic, PoolDice } from ".";
 
 export interface PoolCombination {
 	poolStatistics: PoolStatistic[];

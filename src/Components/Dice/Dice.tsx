@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { PoolDice } from "../../Models/PoolDice";
-import { DieType } from "../../Models/DieType";
+import { PoolDice, DieType } from "../../Models";
 import { DieSeries } from "./DieSeries"
 
 export interface IDiceProps {

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { DieType } from "../../Models/DieType";
+import { DieType } from "../../Models";
 
 export interface IDieProps {
 	dieType: DieType;

@@ -1,5 +1,5 @@
 ﻿import React, { FunctionComponent } from "react";
-import { DieSymbol } from "../../Models/DieSymbol";
+import { DieSymbol } from "../../Models";
 
 export interface ISymbolProps {
 	dieSymbol: DieSymbol;

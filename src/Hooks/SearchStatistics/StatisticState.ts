@@ -1,6 +1,4 @@
-import { PoolDice } from "../../Models/PoolDice";
-import { DieType } from "../../Models/DieType";
-import { PoolCombination } from "../../Models/PoolCombination";
+import { PoolDice, DieType, PoolCombination } from "../../Models";
 
 export interface IStatisticsState {
 	isLoading: boolean;

@@ -3,7 +3,7 @@ import { Grid, Card, CardContent, Typography, List, ListItem } from "@material-u
 
 import { Graph } from "./Graph";
 import { Search } from "./Search";
-import { DieSymbol } from "../Models/DieSymbol";
+import { DieSymbol } from "../Models";
 import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
 

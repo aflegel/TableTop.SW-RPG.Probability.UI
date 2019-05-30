@@ -1,5 +1,7 @@
 import { IFetchStatistics, FetchStatisticsAction } from "./FetchStatistics";
-import { PoolCombination } from "../../../Models/PoolCombination";
+import { PoolCombination } from "../../../Models";
+
+export * from "./FetchStatistics";
 
 // Action interfaces
 export type StatisticsApiActions = IFetchStatistics;

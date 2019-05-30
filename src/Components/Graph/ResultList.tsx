@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { DieSymbol } from "../../Models/DieSymbol";
+import { DieSymbol } from "../../Models";
 import { Format, NetLabel } from "../Graph/Functions";
 import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
 
