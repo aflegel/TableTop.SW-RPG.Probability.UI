@@ -42,10 +42,10 @@ export const GetProbability = (numerator: number, denominator: number): number =
  * @param mean
  */
 export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, mean: number): number => {
-	//(val - mean) squared * qty
+	// (val - mean) squared * qty
 	const deviationSet = set.map(map => (map.quantity - mean) ** 2 * map.frequency);
 
-	//sqrt(sum(deviations) / frequency)
+	// sqrt(sum(deviations) / frequency)
 	return Math.sqrt(
 		deviationSet.reduce((total, obj) => {
 			return total + obj;
@@ -58,7 +58,7 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
  * @param dice
  * @param dicer
  */
-export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => pool.filter(f => !!dice.find(die => die == f.dieId));
+export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => pool.filter(f => !!dice.find(die => die === f.dieId));
 
 /**
  * Formats the number as a comma separated thousands and limited to 4 digits if required

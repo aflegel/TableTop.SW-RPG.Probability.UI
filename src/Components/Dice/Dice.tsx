@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { PoolDice, DieType } from "../../Models";
-import { DieSeries } from "./DieSeries"
+import { DieSeries } from "./DieSeries";
 
 export interface IDiceProps {
 	dice: PoolDice[];

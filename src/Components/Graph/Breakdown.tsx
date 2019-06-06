@@ -13,8 +13,8 @@ export type IGraphBreakdownProps = IModeProps & IExtendedModeProps & IDataSetPro
  */
 export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: IGraphBreakdownProps) => {
 	const positiveFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity > 0));
-	//success mode requires 0 quantity outcomes as well
-	const negativeFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity < (props.mode == DieSymbol.Success ? 1 : 0)));
+	// success mode requires 0 quantity outcomes as well
+	const negativeFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity < (props.mode === DieSymbol.Success ? 1 : 0)));
 
 	const average = GetAverage(props.filteredSet, props.totalFrequency);
 	const standardDeviation = GetStandardDeviation(props.filteredSet, props.totalFrequency, average);

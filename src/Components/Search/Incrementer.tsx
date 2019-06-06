@@ -19,10 +19,10 @@ export interface IDieIncrementer {
  * Renders buttons, icon, and quantity to increment the search
  */
 export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps) => {
-	const dieCount = () => {
+	const dieCount = (): number => {
 		let count = 0;
 		if (props.dice) {
-			const test = props.dice.filter(f => f.dieId == props.dieType);
+			const test = props.dice.filter(f => f.dieId === props.dieType);
 
 			if (test && test[0]) {
 				count = test[0].quantity;
@@ -36,7 +36,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 			<IconButton
 				color="secondary"
 				aria-label={`Add one ${DieType[props.dieType]}`}
-				onClick={() => { props.addDieCallback(props.dieType) }}>
+				onClick={(): void => { props.addDieCallback(props.dieType); }}>
 				<AddIcon />
 			</IconButton>
 			<Typography variant="h5">
@@ -46,7 +46,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 			<IconButton
 				color="secondary"
 				aria-label={`Remove one ${DieType[props.dieType]}`}
-				onClick={() => { props.removeDieCallback(props.dieType) }}>
+				onClick={(): void => { props.removeDieCallback(props.dieType); }}>
 				<RemoveIcon />
 			</IconButton>
 		</>

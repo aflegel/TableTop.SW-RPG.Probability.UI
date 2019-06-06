@@ -50,7 +50,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 	const getDataSet = (): IDataSetProps => {
 		let filteredSet: PoolStatistic[] = [];
 		if (props.poolCombination && props.poolCombination.poolStatistics) {
-			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol == props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol === props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 		}
 		return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
 	};

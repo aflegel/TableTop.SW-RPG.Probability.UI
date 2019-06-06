@@ -62,7 +62,7 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 				set = props.filteredSet.filter(f => f.quantity >= state.quantity);
 				break;
 			case "E":
-				set = props.filteredSet.filter(f => f.quantity == state.quantity);
+				set = props.filteredSet.filter(f => f.quantity === state.quantity);
 				break;
 			case "LTE":
 				set = props.filteredSet.filter(f => f.quantity <= state.quantity);

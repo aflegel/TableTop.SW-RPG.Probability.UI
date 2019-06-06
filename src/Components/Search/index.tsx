@@ -26,7 +26,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 
 	const updateState = (dice: PoolDice[]): void => {
 		setState({ dice: dice });
-	}
+	};
 
 	/**
 	 * Increases the quantity or adds a new die to the list
@@ -39,7 +39,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 		 * @param addDie
 		 */
 		const updateQuantity = (dice: PoolDice[], addDie: DieType): void => {
-			const existingRecord = dice.find(f => f.dieId == addDie);
+			const existingRecord = dice.find(f => f.dieId === addDie);
 
 			if (existingRecord) {
 				existingRecord.quantity += 1;
@@ -54,23 +54,23 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 		switch (dieType) {
 			case DieType.Ability:
 			case DieType.Proficiency:
-				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Ability || f.dieId == DieType.Proficiency)) < 6) {
+				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Ability || f.dieId === DieType.Proficiency)) < 6) {
 					updateQuantity(dice, dieType);
 				}
 				break;
 			case DieType.Boost:
-				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Boost)) < 4) {
+				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Boost)) < 4) {
 					updateQuantity(dice, dieType);
 				}
 				break;
 			case DieType.Difficulty:
 			case DieType.Challenge:
-				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Difficulty || f.dieId == DieType.Challenge)) < 6) {
+				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Difficulty || f.dieId === DieType.Challenge)) < 6) {
 					updateQuantity(dice, dieType);
 				}
 				break;
 			case DieType.Setback:
-				if (GetQuantityTotal(dice.filter(f => f.dieId == DieType.Setback)) < 4) {
+				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Setback)) < 4) {
 					updateQuantity(dice, dieType);
 				}
 				break;
@@ -85,7 +85,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 	 */
 	const removeSearchDie = (dieType: DieType): void => {
 		const dice = state.dice.slice();
-		const existingRecord = dice.find(f => f.dieId == dieType);
+		const existingRecord = dice.find(f => f.dieId === dieType);
 
 		if (existingRecord) {
 			if (existingRecord.quantity > 1) {
@@ -122,8 +122,8 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 				</Grid>
 			</Grid>
 			<CardActions>
-				<Button color="primary" onClick={() => { props.searchCallback(state.dice) }}>Search</Button>
+				<Button color="primary" onClick={(): void => { props.searchCallback(state.dice); }}>Search</Button>
 			</CardActions>
 		</CardContent>
-	</Card>
+	</Card>;
 };

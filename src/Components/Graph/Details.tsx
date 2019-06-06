@@ -17,9 +17,9 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 		minus.push(<Symbol dieSymbol={DieSymbol.Despair} />);
 	}
 
-	const getCalculation = () => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
-
 	const join = (symbols: JSX.Element[], separator: string) => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
+
+	const getCalculation = () => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
 
 	return (
 		<ExpansionPanel>

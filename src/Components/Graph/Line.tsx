@@ -51,7 +51,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		} else {
 			return <></>;
 		}
-	}
+	};
 
 	const valueFormatter = (value: any, name: any, props: any) => [Format(value, true), name];
 
@@ -74,5 +74,4 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 			</LineChart>
 		</ResponsiveContainer>
 	);
-
 };
