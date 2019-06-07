@@ -30,10 +30,6 @@ export interface IExtendedModeProps {
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
-	const getLabels = (): IExtendedModeProps & IModeProps => {
-		return { ...props, ...getModes() };
-	};
-
 	const getModes = (): IExtendedModeProps => {
 		switch (props.mode) {
 			case DieSymbol.Success:
@@ -45,6 +41,10 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps) => {
 			default:
 				return { negativeMode: DieSymbol.Blank, alternateMode: DieSymbol.Blank };
 		}
+	};
+
+	const getLabels = (): IExtendedModeProps & IModeProps => {
+		return { ...props, ...getModes() };
 	};
 
 	const getDataSet = (): IDataSetProps => {
