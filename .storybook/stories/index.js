@@ -5,6 +5,9 @@ import { DieSeries } from "../../src/Components/Dice/DieSeries";
 import { Dice } from "../../src/Components/Dice/Dice";
 import { DieType } from "../../src/Models";
 
+const sharedProps = { dice: [{ dieId: DieType.Ability, quantity: 3 }, { dieId: DieType.Difficulty, quantity: 2 }] };
+
+
 storiesOf("Die", module)
 	.add("Basic Icons", () => (
 		<>
@@ -16,22 +19,5 @@ storiesOf("Die", module)
 			<Die dieType={DieType.Setback} />
 		</>
 	))
-	.add("Icon Series", () => {
-		const props = { dice: { dieId: DieType.Ability, quantity: 3 } };
-
-		return (
-			<>
-				<DieSeries {...props} />
-			</>
-		);
-	})
-
-	.add("Dice Pool", () => {
-		const props = { dice: [{ dieId: DieType.Ability, quantity: 3 }, { dieId: DieType.Difficulty, quantity: 2 }] };
-
-		return (
-			<>
-				<Dice {...props} />
-			</>
-		);
-	});
+	.add("Icon Series", () => <DieSeries dice={sharedProps.dice.find(f => f.dieId === DieType.Ability)} />)
+	.add("Dice Pool", () => <Dice {...sharedProps} />);

@@ -47,40 +47,8 @@ const sharedProps = {
 };
 
 storiesOf("Graph", module)
-	.add("Details", () => {
-		const props = { mode: DieSymbol.Success, negativeMode: DieSymbol.Failure };
-
-		return (
-			<>
-				<GraphDetails {...sharedProps} />
-			</>
-		);
-	})
-	.add("Breakdown", () => {
-		return (
-			<>
-				<GraphBreakdown {...sharedProps} />
-			</>
-		);
-	})
-	.add("Result List", () => {
-		return (
-			<>
-				<GraphResultList {...sharedProps} />
-			</>
-		);
-	})
-	.add("Line Graph", () => {
-		return (
-			<>
-				<GraphLine {...sharedProps} />
-			</>
-		);
-	})
-	.add("Advanced", () => {
-		return (
-			<>
-				<GraphAdvanced {...sharedProps} />
-			</>
-		);
-	});
+	.add("Details", () => <GraphDetails {...sharedProps} />)
+	.add("Breakdown", () => <GraphBreakdown {...sharedProps} />)
+	.add("Result List", () => <GraphResultList {...sharedProps} />)
+	.add("Line Graph", () => <GraphLine {...sharedProps} />)
+	.add("Advanced", () => <GraphAdvanced {...sharedProps} />);
