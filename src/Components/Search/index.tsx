@@ -101,7 +101,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
 
 	return <Card>
 		<CardContent>
-			<Grid container spacing={24}>
+			<Grid container spacing={10}>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Proficiency} />
 				</Grid>

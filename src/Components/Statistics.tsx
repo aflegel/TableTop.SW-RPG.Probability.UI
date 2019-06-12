@@ -23,7 +23,7 @@ export const Statistics: FunctionComponent = () => {
 	}, []);
 
 	return (
-		<Grid container spacing={24}>
+		<Grid container spacing={10}>
 			<Grid item xs={12}>
 				<Search {...state} searchCallback={getStatisticsAsync} />
 			</Grid>
