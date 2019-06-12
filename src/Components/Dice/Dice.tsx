@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { PoolDice, DieType } from "../../Models";
 import { DieSeries } from "./DieSeries";
 
@@ -9,7 +9,7 @@ export interface IDiceProps {
 /**
  * Returns a sorted array of icons for the given dice set
  */
-export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps) => {
+export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps): ReactElement => {
 	const output: JSX.Element[] = [];
 
 	if (props.dice) {

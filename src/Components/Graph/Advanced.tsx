@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText, MenuItem, TextField } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -9,7 +9,7 @@ import { IDataSetProps } from ".";
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetProps) => {
+export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetProps): ReactElement => {
 	const [state, setState] = React.useState({
 		comparison: "LT",
 		quantity: 0
@@ -38,14 +38,14 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 		},
 	];
 
-	const changeComparison = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const changeComparison = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setState({
 			...state,
 			comparison: event.target.value,
 		});
 	};
 
-	const changeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const changeQuantity = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setState({
 			...state,
 			quantity: +event.target.value,

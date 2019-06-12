@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -8,7 +8,7 @@ import { IExtendedModeProps, IModeProps } from ".";
 
 export type IGraphDetailsProps = IModeProps & IExtendedModeProps;
 
-export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps) => {
+export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps): ReactElement => {
 	const plus = [<Symbol dieSymbol={props.mode} />];
 	const minus = [<Symbol dieSymbol={props.negativeMode} />];
 
@@ -17,9 +17,9 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 		minus.push(<Symbol dieSymbol={DieSymbol.Despair} />);
 	}
 
-	const join = (symbols: JSX.Element[], separator: string) => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
+	const join = (symbols: JSX.Element[], separator: string): ReactElement => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
-	const getCalculation = () => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
+	const getCalculation = (): ReactElement => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
 
 	return (
 		<ExpansionPanel>

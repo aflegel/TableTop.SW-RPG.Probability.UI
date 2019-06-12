@@ -67,6 +67,6 @@ export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => poo
  */
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
-export const AverageLabel = (mode: DieSymbol) => `Average ${DieSymbol[mode]}`;
+export const AverageLabel = (mode: DieSymbol): string => `Average ${DieSymbol[mode]}`;
 
-export const NetLabel = (mode: DieSymbol) => `Net ${DieSymbol[mode]}`;
+export const NetLabel = (mode: DieSymbol): string => `Net ${DieSymbol[mode]}`;

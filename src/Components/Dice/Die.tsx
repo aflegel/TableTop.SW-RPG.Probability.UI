@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { DieType } from "../../Models";
 
 export interface IDieProps {
@@ -9,8 +9,8 @@ export interface IDieProps {
 /**
  * Returns an icon element with the appropriate css classes
  */
-export const Die: FunctionComponent<IDieProps> = (props: IDieProps) => {
-	const dieSize = () => {
+export const Die: FunctionComponent<IDieProps> = (props: IDieProps): ReactElement => {
+	const dieSize = (): number => {
 		switch (props.dieType) {
 			case DieType.Ability:
 			case DieType.Difficulty:

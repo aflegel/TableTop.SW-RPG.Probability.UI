@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { Layout } from "./Components/Layout";
 import { About } from "./Components/About";
@@ -8,7 +8,7 @@ import "./Styles/App.scss";
 import "sw-rpg-icons/css/sw-rpg-icons.scss";
 import "sw-rpg-icons/css/sw-rpg-colors.scss";
 
-export const App = () => {
+export const App = (): ReactElement => {
 	return (
 		<HashRouter>
 			<Switch>

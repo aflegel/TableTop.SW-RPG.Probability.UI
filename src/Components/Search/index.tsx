@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { Grid, Card, CardContent, CardActions, Button } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
@@ -19,7 +19,7 @@ export interface ISearchState {
 /**
  * Renders the current search icons as well as a search builder
  */
-export const Search: FunctionComponent<SearchProps> = (props: SearchProps) => {
+export const Search: FunctionComponent<SearchProps> = (props: SearchProps): ReactElement => {
 	const [state, setState] = React.useState<ISearchState>({
 		dice: props.searchDice,
 	});

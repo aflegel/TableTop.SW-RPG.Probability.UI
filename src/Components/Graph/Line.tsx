@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
 import { DieSymbol } from "../../Models";
 import { Format, AverageLabel, NetLabel, GetProbability } from "./Functions";
@@ -15,7 +15,7 @@ export interface ILineData {
 /**
  * Renders a standardized chart.js graph given a dataset.
  */
-export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps) => {
+export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps): ReactElement => {
 	const hasAverage: boolean = props.mode === DieSymbol.Advantage || props.mode === DieSymbol.Success;
 	const hasData: boolean = props.filteredSet && props.filteredSet.length > 0;
 
@@ -25,7 +25,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		average: hasAverage ? map.alternateTotal / map.frequency : undefined
 	}));
 
-	const getAverageAxis = () => {
+	const getAverageAxis = (): ReactElement => {
 		if (hasData && hasAverage) {
 			return <Line yAxisId="average" name={AverageLabel(props.alternateMode)} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />;
 		} else {
@@ -33,7 +33,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	};
 
-	const getAverageLine = () => {
+	const getAverageLine = (): ReactElement => {
 		if (hasData && hasAverage) {
 			return (
 				<YAxis yAxisId="average" type="number" orientation="right">
@@ -45,7 +45,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	};
 
-	const getDataSets = () => {
+	const getDataSets = (): ReactElement => {
 		if (hasData) {
 			return <Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />;
 		} else {
@@ -53,9 +53,9 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 		}
 	};
 
-	const valueFormatter = (value: any, name: any, props: any) => [Format(value, true), name];
+	const valueFormatter = (value: any, name: any, props: any): string[] => [Format(value, true), name];
 
-	const labelFormatter = (label: string | number) => `${NetLabel(props.mode)}: ${label}`;
+	const labelFormatter = (label: string | number): string => `${NetLabel(props.mode)}: ${label}`;
 
 	return (
 		<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>

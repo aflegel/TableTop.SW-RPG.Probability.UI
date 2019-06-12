@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, ReactElement } from "react";
 import { Grid, Card, CardContent, Typography, List, ListItem } from "@material-ui/core";
 
 import { Graph } from "./Graph";
@@ -7,10 +7,10 @@ import { DieSymbol } from "../Models";
 import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
 
-export const Statistics: FunctionComponent = () => {
+export const Statistics: FunctionComponent = (): ReactElement => {
 	const { state, getStatisticsAsync } = useStatistics();
 
-	const getDice = () => {
+	const getDice = (): ReactElement => {
 		if (state.poolCombination && state.poolCombination.dice) {
 			return <Dice dice={state.poolCombination.dice} />;
 		} else {

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -11,7 +11,7 @@ export type IGraphResultList = IModeProps & IExtendedModeProps & IDataSetProps;
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGraphResultList) =>
+export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGraphResultList): ReactElement =>
 	<ExpansionPanel>
 		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
 			<Typography>Data Table</Typography>

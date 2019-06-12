@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 
-export const About: FunctionComponent = () =>
+export const About: FunctionComponent = (): ReactElement =>
 	<div className="row row-fill">
 		<div className="col s12">
 			<ul className="collection with-header">
