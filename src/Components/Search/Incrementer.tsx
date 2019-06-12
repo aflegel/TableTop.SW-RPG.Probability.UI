@@ -40,7 +40,7 @@ export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: D
 				<AddIcon />
 			</IconButton>
 			<Typography variant="h5">
-				<Die dieType={props.dieType} />
+				<Die dieType={props.dieType} ariaLabel={DieType[props.dieType]} />
 			</Typography>
 			<Typography variant="h4">{dieCount()}</Typography>
 			<IconButton

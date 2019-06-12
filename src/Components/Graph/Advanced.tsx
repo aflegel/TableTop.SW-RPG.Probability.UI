@@ -88,6 +88,7 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 					margin="normal"
 					value={state.comparison}
 					onChange={changeComparison}
+					aria-label="Comparison"
 				>
 					{comparisons.map(option => (
 						<MenuItem key={option.value} value={option.value}>
@@ -100,6 +101,7 @@ export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetP
 					margin="normal"
 					value={state.quantity}
 					onChange={changeQuantity}
+					aria-label="Compare to"
 				/>
 
 				<List>

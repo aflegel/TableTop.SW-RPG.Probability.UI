@@ -3,6 +3,7 @@ import { DieType } from "../../Models";
 
 export interface IDieProps {
 	dieType: DieType;
+	ariaLabel?: string;
 }
 
 /**
@@ -24,5 +25,5 @@ export const Die: FunctionComponent<IDieProps> = (props: IDieProps) => {
 		}
 	};
 
-	return <i className={`die-stroke ffi ffi-d${dieSize()} ffi-swrpg-${DieType[props.dieType].toString().toLowerCase()}-color`} />;
+	return <i aria-label={props.ariaLabel} className={`die-stroke ffi ffi-d${dieSize()} ffi-swrpg-${DieType[props.dieType].toString().toLowerCase()}-color`} />;
 };
