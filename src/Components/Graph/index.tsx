@@ -8,7 +8,7 @@ import { GraphResultList } from "./ResultList";
 import { GraphAdvanced } from "./Advanced";
 import { DieSymbol, PoolStatistic } from "../../Models";
 import { IStatisticsState } from "../../Hooks/SearchStatistics";
-import { GetFrequencyTotal } from "./Functions";
+import { GetFrequencyTotal, IsBlank } from "./Functions";
 
 type GraphProps = IStatisticsState & IModeProps;
 
@@ -36,8 +36,6 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 				return { negativeMode: DieSymbol.Failure, alternateMode: DieSymbol.Advantage };
 			case DieSymbol.Advantage:
 				return { negativeMode: DieSymbol.Threat, alternateMode: DieSymbol.Success };
-			case DieSymbol.Triumph:
-				return { negativeMode: DieSymbol.Despair, alternateMode: DieSymbol.Despair };
 			default:
 				return { negativeMode: DieSymbol.Blank, alternateMode: DieSymbol.Blank };
 		}
@@ -58,13 +56,15 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 	const label = getLabels();
 	const dataSet = getDataSet();
 
+	const extraLabel = (): string => !IsBlank(label.negativeMode) ? `and ${DieSymbol[label.negativeMode]}` : "";
+
 	return (
 		<Grid container>
 			<Grid item xs={12}>
 				<Card>
 					<CardContent>
 						<Typography gutterBottom variant="h4" component="h4">
-							Distribution of {DieSymbol[props.mode]} and {DieSymbol[label.negativeMode]}
+							Distribution of {DieSymbol[props.mode]} {extraLabel()}
 						</Typography>
 						<GraphLine {...label} {...dataSet} />
 					</CardContent>

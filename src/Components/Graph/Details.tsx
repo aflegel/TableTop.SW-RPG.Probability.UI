@@ -5,6 +5,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DieSymbol } from "../../Models";
 import { Symbol } from "../Dice/Symbol";
 import { IExtendedModeProps, IModeProps } from ".";
+import { IsBlank } from "./Functions";
 
 export type IGraphDetailsProps = IModeProps & IExtendedModeProps;
 
@@ -19,7 +20,21 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 
 	const join = (symbols: JSX.Element[], separator: string): ReactElement => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
-	const getCalculation = (): ReactElement => <>({join(plus, "+")}) - ({join(minus,  "+")})</>;
+	const getCalculation = (): ReactElement => <>({join(plus, "+")}) - ({join(minus, "+")})</>;
+
+	const extraCalculations = (): ReactElement => {
+		if (!IsBlank(props.alternateMode)) {
+			return <>
+				<ListItem>
+					<ListItemText primary="Calculation" secondary={getCalculation()} />
+				</ListItem>
+				<ListItem>
+					<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={join(minus, "and")} />
+				</ListItem></>;
+		} else {
+			return <></>;
+		}
+	};
 
 	return (
 		<ExpansionPanel>
@@ -31,12 +46,7 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 					<ListItem>
 						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={join(plus, "and")} />
 					</ListItem>
-					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={join(minus, "and")}  />
-					</ListItem>
-					<ListItem>
-						<ListItemText primary="Calculation" secondary={getCalculation()} />
-					</ListItem>
+					{extraCalculations()}
 				</List>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>

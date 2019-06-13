@@ -3,7 +3,7 @@ import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetail
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { DieSymbol } from "../../Models";
-import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, AverageLabel } from "./Functions";
+import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, AverageLabel, IsBlank } from "./Functions";
 import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
 
 export type IGraphBreakdownProps = IModeProps & IExtendedModeProps & IDataSetProps;
@@ -18,6 +18,21 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 
 	const average = GetAverage(props.filteredSet, props.totalFrequency);
 	const standardDeviation = GetStandardDeviation(props.filteredSet, props.totalFrequency, average);
+
+	const extraBreakdown = (): ReactElement => {
+		if (!IsBlank(props.alternateMode)) {
+			return <>
+				<ListItem>
+					<ListItemText primary={`${DieSymbol[props.negativeMode]} Frequency`} secondary={Format(negativeFrequency, false)} />
+				</ListItem>
+				<ListItem>
+					<ListItemText primary={`Probability of ${DieSymbol[props.negativeMode]}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
+				</ListItem>
+			</>;
+		} else {
+			return <></>;
+		}
+	};
 
 	return (
 		<ExpansionPanel>
@@ -35,12 +50,7 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 					<ListItem>
 						<ListItemText primary={`Probability of ${DieSymbol[props.mode]}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
 					</ListItem>
-					<ListItem>
-						<ListItemText primary={`${DieSymbol[props.negativeMode]} Frequency`} secondary={Format(negativeFrequency, false)} />
-					</ListItem>
-					<ListItem>
-						<ListItemText primary={`Probability of ${DieSymbol[props.negativeMode]}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
-					</ListItem>
+					{extraBreakdown()}
 					<ListItem>
 						<ListItemText primary={AverageLabel(props.mode)} secondary={Format(average, false)} />
 					</ListItem>

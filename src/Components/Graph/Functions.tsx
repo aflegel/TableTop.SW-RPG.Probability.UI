@@ -70,3 +70,5 @@ export const Format = (predicate: number, digits: boolean): string => new Intl.N
 export const AverageLabel = (mode: DieSymbol): string => `Average ${DieSymbol[mode]}`;
 
 export const NetLabel = (mode: DieSymbol): string => `Net ${DieSymbol[mode]}`;
+
+export const IsBlank = (mode: DieSymbol): boolean => mode === DieSymbol.Blank;
