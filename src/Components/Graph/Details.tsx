@@ -22,19 +22,15 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 
 	const getCalculation = (): ReactElement => <>({join(plus, "+")}) - ({join(minus, "+")})</>;
 
-	const extraCalculations = (): ReactElement => {
-		if (!IsBlank(props.alternateMode)) {
-			return <>
-				<ListItem>
-					<ListItemText primary="Calculation" secondary={getCalculation()} />
-				</ListItem>
-				<ListItem>
-					<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={join(minus, "and")} />
-				</ListItem></>;
-		} else {
-			return <></>;
-		}
-	};
+	const alternateCalculations = (): ReactElement =>
+		<>
+			<ListItem>
+				<ListItemText primary="Calculation" secondary={getCalculation()} />
+			</ListItem>
+			<ListItem>
+				<ListItemText primary={`${DieSymbol[props.negativeMode]} Symbols`} secondary={join(minus, "and")} />
+			</ListItem>
+		</>;
 
 	return (
 		<ExpansionPanel>
@@ -46,7 +42,7 @@ export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGrap
 					<ListItem>
 						<ListItemText primary={`${DieSymbol[props.mode]} Symbols`} secondary={join(plus, "and")} />
 					</ListItem>
-					{extraCalculations()}
+					{!IsBlank(props.alternateMode) && alternateCalculations()}
 				</List>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>

@@ -72,3 +72,5 @@ export const AverageLabel = (mode: DieSymbol): string => `Average ${DieSymbol[mo
 export const NetLabel = (mode: DieSymbol): string => `Net ${DieSymbol[mode]}`;
 
 export const IsBlank = (mode: DieSymbol): boolean => mode === DieSymbol.Blank;
+
+export const ValueFormatter = (value: any, name: any, props: any): string[] => [Format(value, true), name];

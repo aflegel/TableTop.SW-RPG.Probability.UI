@@ -13,21 +13,9 @@ export type IGraphResultList = IModeProps & IExtendedModeProps & IDataSetProps;
  */
 export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGraphResultList): ReactElement => {
 
-	const extraTotal = (): ReactElement => {
-		if (!IsBlank(props.alternateMode)) {
-			return <TableCell align="right">Total {DieSymbol[props.alternateMode]}</TableCell>;
-		} else {
-			return <></>;
-		}
-	};
+	const totalTitle = (): ReactElement => <TableCell align="right">Total {DieSymbol[props.alternateMode]}</TableCell>;
 
-	const extraCombinationTotal = (combination: PoolStatistic): ReactElement => {
-		if (!IsBlank(props.alternateMode)) {
-			return <TableCell align="right">{Format(combination.alternateTotal, false)}</TableCell>;
-		} else {
-			return <></>;
-		}
-	};
+	const totalValue = (combination: PoolStatistic): ReactElement => <TableCell align="right">{Format(combination.alternateTotal, false)}</TableCell>;
 
 	return <ExpansionPanel>
 		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -39,7 +27,7 @@ export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGra
 					<TableRow>
 						<TableCell align="right">{NetLabel(props.mode)}</TableCell>
 						<TableCell align="right">Frequency</TableCell>
-						{extraTotal()}
+						{!IsBlank(props.alternateMode) && totalTitle()}
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -47,11 +35,11 @@ export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGra
 						<TableRow key={DieSymbol[combination.symbol] + combination.quantity}>
 							<TableCell align="right">{combination.quantity}</TableCell>
 							<TableCell align="right">{Format(combination.frequency, false)}</TableCell>
-							{extraCombinationTotal(combination)}
+							{!IsBlank(props.alternateMode) && totalValue(combination)}
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
 		</ExpansionPanelDetails>
-	</ExpansionPanel>
+	</ExpansionPanel>;
 };

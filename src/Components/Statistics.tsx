@@ -10,13 +10,9 @@ import { Dice } from "./Dice/Dice";
 export const Statistics: FunctionComponent = (): ReactElement => {
 	const { state, getStatisticsAsync } = useStatistics();
 
-	const getDice = (): ReactElement => {
-		if (state.poolCombination && state.poolCombination.dice) {
-			return <Dice dice={state.poolCombination.dice} />;
-		} else {
-			return <></>;
-		}
-	};
+	const getDice = (): ReactElement => <Dice dice={state.poolCombination.dice} />;
+
+	const hasData = state.poolCombination && state.poolCombination.dice;
 
 	useEffect(() => {
 		getStatisticsAsync(state.searchDice);
@@ -34,7 +30,7 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 							Probability Breakdown
 						</Typography>
 						<Typography gutterBottom variant="h5" component="h2">
-							{getDice()}
+							{hasData && getDice()}
 						</Typography>
 						<List>
 							<ListItem divider>
