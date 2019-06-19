@@ -46,7 +46,7 @@ export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineP
 				</YAxis>
 				<Tooltip formatter={ValueFormatter} labelFormatter={labelFormatter} />
 				<Legend verticalAlign="top" />
-				{hasData  && getDataSets()}
+				{hasData && getDataSets()}
 				{hasData && !IsBlank(props.alternateMode) && getAverageLine()}
 				{hasData && !IsBlank(props.alternateMode) && getAverageAxis()}
 			</LineChart>

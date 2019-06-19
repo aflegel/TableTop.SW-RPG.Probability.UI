@@ -58,7 +58,7 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
  * @param dice
  * @param dicer
  */
-export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => pool.filter(f => !!dice.find(die => die === f.dieId));
+export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => pool.filter(f => !!dice.find(die => die === f.dieType));
 
 /**
  * Formats the number as a comma separated thousands and limited to 4 digits if required
@@ -67,10 +67,10 @@ export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => poo
  */
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
-export const AverageLabel = (mode: DieSymbol): string => `Average ${DieSymbol[mode]}`;
+export const AverageLabel = (mode: DieSymbol): string => `Average ${mode}`;
 
-export const NetLabel = (mode: DieSymbol): string => `Net ${DieSymbol[mode]}`;
+export const NetLabel = (mode: DieSymbol): string => `Net ${mode}`;
 
-export const IsBlank = (mode: DieSymbol): boolean => mode === DieSymbol.Blank;
+export const IsBlank = (mode: DieSymbol): boolean => mode === "Blank";
 
 export const ValueFormatter = (value: any, name: any, props: any): string[] => [Format(value, true), name];

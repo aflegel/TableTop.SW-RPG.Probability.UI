@@ -12,18 +12,18 @@ export interface IDieProps {
 export const Die: FunctionComponent<IDieProps> = (props: IDieProps): ReactElement => {
 	const dieSize = (): number => {
 		switch (props.dieType) {
-			case DieType.Ability:
-			case DieType.Difficulty:
+			case "Ability":
+			case "Difficulty":
 				return 8;
-			case DieType.Boost:
-			case DieType.Setback:
+			case "Boost":
+			case "Setback":
 				return 6;
-			case DieType.Challenge:
-			case DieType.Proficiency:
-			case DieType.Force:
+			case "Challenge":
+			case "Proficiency":
+			case "Force":
 				return 12;
 		}
 	};
 
-	return <i aria-label={props.ariaLabel} className={`die-stroke ffi ffi-d${dieSize()} ffi-swrpg-${DieType[props.dieType].toString().toLowerCase()}-color`} />;
+	return <i aria-label={props.ariaLabel} className={`die-stroke ffi ffi-d${dieSize()} ffi-swrpg-${props.dieType.toLowerCase()}-color`} />;
 };

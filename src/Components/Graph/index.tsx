@@ -32,12 +32,12 @@ export interface IExtendedModeProps {
 export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactElement => {
 	const getModes = (): IExtendedModeProps => {
 		switch (props.mode) {
-			case DieSymbol.Success:
-				return { negativeMode: DieSymbol.Failure, alternateMode: DieSymbol.Advantage };
-			case DieSymbol.Advantage:
-				return { negativeMode: DieSymbol.Threat, alternateMode: DieSymbol.Success };
+			case "Success":
+				return { negativeMode: "Failure", alternateMode: "Advantage" };
+			case "Advantage":
+				return { negativeMode: "Threat", alternateMode: "Success" };
 			default:
-				return { negativeMode: DieSymbol.Blank, alternateMode: DieSymbol.Blank };
+				return { negativeMode: "Blank", alternateMode: "Blank" };
 		}
 	};
 
@@ -56,7 +56,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 	const label = getLabels();
 	const dataSet = getDataSet();
 
-	const extraLabel = (): string => !IsBlank(label.negativeMode) ? `and ${DieSymbol[label.negativeMode]}` : "";
+	const extraLabel = (): string => !IsBlank(label.negativeMode) ? `and ${label.negativeMode}` : "";
 
 	return (
 		<Grid container>
@@ -64,7 +64,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 				<Card>
 					<CardContent>
 						<Typography gutterBottom variant="h4" component="h4">
-							Distribution of {DieSymbol[props.mode]} {extraLabel()}
+							Distribution of {props.mode} {extraLabel()}
 						</Typography>
 						<GraphLine {...label} {...dataSet} />
 					</CardContent>
@@ -77,7 +77,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 				<GraphBreakdown {...label} {...dataSet} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
-				<GraphAdvanced  {...dataSet} />
+				<GraphAdvanced {...dataSet} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
 				<GraphResultList {...label} {...dataSet} />

@@ -13,7 +13,7 @@ export type IGraphResultList = IModeProps & IExtendedModeProps & IDataSetProps;
  */
 export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGraphResultList): ReactElement => {
 
-	const totalTitle = (): ReactElement => <TableCell align="right">Total {DieSymbol[props.alternateMode]}</TableCell>;
+	const totalTitle = (): ReactElement => <TableCell align="right">Total {props.alternateMode}</TableCell>;
 
 	const totalValue = (combination: PoolStatistic): ReactElement => <TableCell align="right">{Format(combination.alternateTotal, false)}</TableCell>;
 
@@ -32,7 +32,7 @@ export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGra
 				</TableHead>
 				<TableBody>
 					{props.filteredSet.map(combination => (
-						<TableRow key={DieSymbol[combination.symbol] + combination.quantity}>
+						<TableRow key={combination.symbol + combination.quantity}>
 							<TableCell align="right">{combination.quantity}</TableCell>
 							<TableCell align="right">{Format(combination.frequency, false)}</TableCell>
 							{!IsBlank(props.alternateMode) && totalValue(combination)}

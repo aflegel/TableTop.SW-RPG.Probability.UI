@@ -12,5 +12,5 @@ export const InitialState: IStatisticsState = {
 		poolStatistics: [],
 		dice: []
 	},
-	searchDice: [{ dieId: DieType.Ability, quantity: 1 }, { dieId: DieType.Difficulty, quantity: 1 }]
+	searchDice: [{ dieType: "Ability", quantity: 1 }, { dieType: "Difficulty", quantity: 1 }]
 };

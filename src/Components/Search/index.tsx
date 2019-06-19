@@ -39,38 +39,38 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 		 * @param addDie
 		 */
 		const updateQuantity = (dice: PoolDice[], addDie: DieType): void => {
-			const existingRecord = dice.find(f => f.dieId === addDie);
+			const existingRecord = dice.find(f => f.dieType === addDie);
 
 			if (existingRecord) {
 				existingRecord.quantity += 1;
 			}
 			else {
-				dice.push({ dieId: addDie, quantity: 1 });
+				dice.push({ dieType: addDie, quantity: 1 });
 			}
 		};
 
 		const dice = state.dice.slice();
 
 		switch (dieType) {
-			case DieType.Ability:
-			case DieType.Proficiency:
-				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Ability || f.dieId === DieType.Proficiency)) < 6) {
+			case "Ability":
+			case "Proficiency":
+				if (GetQuantityTotal(dice.filter(f => f.dieType === "Ability" || f.dieType === "Proficiency")) < 6) {
 					updateQuantity(dice, dieType);
 				}
 				break;
-			case DieType.Boost:
-				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Boost)) < 4) {
+			case "Boost":
+				if (GetQuantityTotal(dice.filter(f => f.dieType === "Boost")) < 4) {
 					updateQuantity(dice, dieType);
 				}
 				break;
-			case DieType.Difficulty:
-			case DieType.Challenge:
-				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Difficulty || f.dieId === DieType.Challenge)) < 6) {
+			case "Difficulty":
+			case "Challenge":
+				if (GetQuantityTotal(dice.filter(f => f.dieType === "Difficulty" || f.dieType === "Challenge")) < 6) {
 					updateQuantity(dice, dieType);
 				}
 				break;
-			case DieType.Setback:
-				if (GetQuantityTotal(dice.filter(f => f.dieId === DieType.Setback)) < 4) {
+			case "Setback":
+				if (GetQuantityTotal(dice.filter(f => f.dieType === "Setback")) < 4) {
 					updateQuantity(dice, dieType);
 				}
 				break;
@@ -85,7 +85,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 	 */
 	const removeSearchDie = (dieType: DieType): void => {
 		const dice = state.dice.slice();
-		const existingRecord = dice.find(f => f.dieId === dieType);
+		const existingRecord = dice.find(f => f.dieType === dieType);
 
 		if (existingRecord) {
 			if (existingRecord.quantity > 1) {
@@ -103,22 +103,22 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 		<CardContent>
 			<Grid container spacing={10}>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Proficiency} />
+					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Proficiency" />
 				</Grid>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Challenge} />
+					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Challenge" />
 				</Grid>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Ability} />
+					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Ability" />
 				</Grid>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Difficulty} />
+					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Difficulty" />
 				</Grid>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Boost} />
+					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Boost" />
 				</Grid>
 				<Grid item xs={6} sm={4} md={2} className="content-centered">
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={DieType.Setback} />
+					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Setback" />
 				</Grid>
 			</Grid>
 			<CardActions>

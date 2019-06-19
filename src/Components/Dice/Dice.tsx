@@ -14,39 +14,39 @@ export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps): ReactEle
 
 	if (props.dice) {
 		props.dice.sort((a, b) => {
-			switch (a.dieId) {
-				case DieType.Proficiency:
+			switch (a.dieType) {
+				case "Proficiency":
 					return -1;
-				case DieType.Ability:
-					switch (b.dieId) {
-						case DieType.Boost:
+				case "Ability":
+					switch (b.dieType) {
+						case "Boost":
 							return -1;
 						default:
 							return 1;
 					}
-				case DieType.Boost:
+				case "Boost":
 					return 1;
-				case DieType.Challenge:
-					switch (b.dieId) {
-						case DieType.Difficulty:
-						case DieType.Setback:
+				case "Challenge":
+					switch (b.dieType) {
+						case "Difficulty":
+						case "Setback":
 							return -1;
 						default:
 							return 1;
 					}
-				case DieType.Difficulty:
-					switch (b.dieId) {
-						case DieType.Setback:
+				case "Difficulty":
+					switch (b.dieType) {
+						case "Setback":
 							return -1;
 						default:
 							return 1;
 					}
-				case DieType.Setback:
+				case "Setback":
 					return 1;
 				default:
 					return 0;
 			}
-		}).forEach(item => output.push(<DieSeries dice={item} key={`${item.dieId}${item.quantity}`}></DieSeries>));
+		}).forEach(item => output.push(<DieSeries dice={item} key={`${item.dieType}${item.quantity}`} />));
 	}
 
 	return <>{output}</>;
