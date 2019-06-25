@@ -4,7 +4,9 @@ import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, Theme,
 import { Graph } from "./Graph";
 import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
+import { useResults } from "../Hooks/SearchResults";
 import { Dice } from "./Dice/Dice";
+import { RollResultList } from "./Test/RollResultList";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -18,23 +20,31 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Statistics: FunctionComponent = (): ReactElement => {
-	const { state, getStatisticsAsync } = useStatistics();
+	const { statistics, getStatisticsAsync } = useStatistics();
+	const { results, getResultsAsync } = useResults();
 	const classes = useStyles();
 
-	const getDice = (): ReactElement => <Dice dice={state.poolCombination.dice} />;
+	const getDice = (): ReactElement => <Dice dice={statistics.poolCombination.dice} />;
 
 	const emptyDataReturn = (): ReactElement => <p>No data was returned for the query</p>;
 
-	const hasData = state.poolCombination && state.poolCombination.dice;
+	const hasData = statistics.poolCombination && statistics.poolCombination.dice;
 
 	useEffect(() => {
-		getStatisticsAsync(state.searchDice);
+		getStatisticsAsync(statistics.searchDice);
 	}, []);
 
 	return (<div className={classes.root}>
 		<Grid container>
 			<Grid item xs={12}>
-				<Search {...state} searchCallback={getStatisticsAsync} />
+				<Search {...statistics} searchCallback={getStatisticsAsync} resultsCallback={getResultsAsync} />
+			</Grid>
+			<Grid item xs={12} className={classes.bottomSpace}>
+				<Card>
+					<CardContent className={classes.bottomSpace}>
+						<RollResultList {...results}></RollResultList>
+					</CardContent>
+				</Card>
 			</Grid>
 			<Grid item xs={12} className={classes.bottomSpace}>
 				<Card>
@@ -48,16 +58,16 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 						</Typography>
 						<List>
 							<ListItem divider>
-								<Graph {...state} mode="Success" />
+								<Graph {...statistics} mode="Success" />
 							</ListItem>
 							<ListItem divider>
-								<Graph {...state} mode="Advantage" />
+								<Graph {...statistics} mode="Advantage" />
 							</ListItem>
 							<ListItem divider>
-								<Graph {...state} mode="Triumph" />
+								<Graph {...statistics} mode="Triumph" />
 							</ListItem>
 							<ListItem>
-								<Graph {...state} mode="Despair" />
+								<Graph {...statistics} mode="Despair" />
 							</ListItem>
 						</List>
 					</CardContent>

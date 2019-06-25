@@ -2,7 +2,7 @@ import { useReducer } from "react";
 
 import { Reducer } from "./Reducer";
 import { InitialState } from "./StatisticState";
-import { IStatisticsService, StatisticsServiceSingleton } from "../../Services/StatisticsService";
+import { IStatisticsService, StatisticsServiceSingleton } from "./Service";
 import { fetchStatisticsAction } from "./Actions";
 import { PoolCombination, PoolDice } from "../../Models";
 
@@ -13,7 +13,7 @@ export * from "./Actions";
  * Wraps API interactions to search for dice results
  */
 export const useStatistics = () => {
-	const [state, dispatch] = useReducer(Reducer, InitialState);
+	const [statistics, dispatch] = useReducer(Reducer, InitialState);
 	const service: IStatisticsService = StatisticsServiceSingleton;
 
 	/**
@@ -25,5 +25,5 @@ export const useStatistics = () => {
 		});
 	};
 
-	return { state, getStatisticsAsync };
+	return { statistics, getStatisticsAsync };
 };

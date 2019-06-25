@@ -10,6 +10,7 @@ type SearchProps = IStatisticsState & ISearchProps;
 
 export interface ISearchProps {
 	searchCallback: Function;
+	resultsCallback: Function;
 }
 
 export interface ISearchState {
@@ -33,47 +34,29 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 	 * @param dieType
 	 */
 	const addSearchDie = (dieType: DieType): void => {
-		/**
-		 * Handles adding or updating the poolDice
-		 * @param dice passed by reference so a return is not required
-		 * @param addDie
-		 */
-		const updateQuantity = (dice: PoolDice[], addDie: DieType): void => {
-			const existingRecord = dice.find(f => f.dieType === addDie);
-
-			if (existingRecord) {
-				existingRecord.quantity += 1;
-			}
-			else {
-				dice.push({ dieType: addDie, quantity: 1 });
-			}
-		};
-
 		const dice = state.dice.slice();
+		const existingRecord = dice.find(f => f.dieType === dieType);
+		let count = 6;
 
-		switch (dieType) {
-			case "Ability":
-			case "Proficiency":
-				if (GetQuantityTotal(dice.filter(f => f.dieType === "Ability" || f.dieType === "Proficiency")) < 6) {
-					updateQuantity(dice, dieType);
-				}
-				break;
-			case "Boost":
-				if (GetQuantityTotal(dice.filter(f => f.dieType === "Boost")) < 4) {
-					updateQuantity(dice, dieType);
-				}
-				break;
-			case "Difficulty":
-			case "Challenge":
-				if (GetQuantityTotal(dice.filter(f => f.dieType === "Difficulty" || f.dieType === "Challenge")) < 6) {
-					updateQuantity(dice, dieType);
-				}
-				break;
-			case "Setback":
-				if (GetQuantityTotal(dice.filter(f => f.dieType === "Setback")) < 4) {
-					updateQuantity(dice, dieType);
-				}
-				break;
+		if (dieType === "Ability" || dieType === "Proficiency") {
+			count = GetQuantityTotal(dice.filter(f => f.dieType === "Ability" || f.dieType === "Proficiency"));
+		}
+		else if (dieType === "Difficulty" || dieType === "Challenge") {
+			count = GetQuantityTotal(dice.filter(f => f.dieType === "Difficulty" || f.dieType === "Challenge"));
+		}
+		else {
+			count = GetQuantityTotal(dice.filter(f => f.dieType === dieType));
+		}
+
+		if (count >= 6) {
+			return;
+		}
+
+		if (existingRecord) {
+			existingRecord.quantity += 1;
+		}
+		else {
+			dice.push({ dieType: dieType, quantity: 1 });
 		}
 
 		updateState(dice);
@@ -123,6 +106,7 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 			</Grid>
 			<CardActions>
 				<Button color="primary" onClick={(): void => { props.searchCallback(state.dice); }}>Search</Button>
+				<Button color="primary" onClick={(): void => { props.resultsCallback(state.dice); }}>Results</Button>
 			</CardActions>
 		</CardContent>
 	</Card>;

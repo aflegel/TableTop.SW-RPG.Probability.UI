@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { DieType, PoolDice, PoolCombination } from "../Models";
+import { DieType, PoolDice, PoolCombination } from "../../Models";
 
 export interface IStatisticsService {
 	GetAllAsync(dice: PoolDice[]): Promise<PoolCombination>;
