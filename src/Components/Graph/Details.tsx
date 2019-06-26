@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { DieSymbol } from "../../Models";
 import { Symbol } from "../Dice/Symbol";
 import { IExtendedModeProps, IModeProps } from ".";
 import { IsBlank } from "./Functions";

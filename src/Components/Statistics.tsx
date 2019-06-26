@@ -4,9 +4,8 @@ import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, Theme,
 import { Graph } from "./Graph";
 import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
-import { useResults } from "../Hooks/SearchResults";
 import { Dice } from "./Dice/Dice";
-import { RollResultList } from "./Test/RollResultList";
+import { RollResultList } from "./ResultList";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -20,8 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Statistics: FunctionComponent = (): ReactElement => {
-	const { statistics, getStatisticsAsync } = useStatistics();
-	const { results, getResultsAsync } = useResults();
+	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
 
 	const getDice = (): ReactElement => <Dice dice={statistics.poolCombination.dice} />;
@@ -42,7 +40,7 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 			<Grid item xs={12} className={classes.bottomSpace}>
 				<Card>
 					<CardContent className={classes.bottomSpace}>
-						<RollResultList {...results}></RollResultList>
+						<RollResultList {...statistics}></RollResultList>
 					</CardContent>
 				</Card>
 			</Grid>

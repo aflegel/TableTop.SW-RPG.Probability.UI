@@ -3,8 +3,8 @@ import { useReducer } from "react";
 import { Reducer } from "./Reducer";
 import { InitialState } from "./StatisticState";
 import { IStatisticsService, StatisticsServiceSingleton } from "./Service";
-import { fetchStatisticsAction } from "./Actions";
-import { PoolCombination, PoolDice } from "../../Models";
+import { fetchStatisticsAction, fetchResultsAction } from "./Actions";
+import { PoolCombination, PoolDice, PoolResult } from "../../Models";
 
 export * from "./StatisticState";
 export * from "./Actions";
@@ -25,5 +25,11 @@ export const useStatistics = () => {
 		});
 	};
 
-	return { statistics, getStatisticsAsync };
+	const getResultsAsync = (dice: PoolDice[]): void => {
+		service.GetResultsAsync(dice).then((pool: PoolResult) => {
+			dispatch(fetchResultsAction(pool));
+		});
+	};
+
+	return { statistics, getStatisticsAsync, getResultsAsync };
 };

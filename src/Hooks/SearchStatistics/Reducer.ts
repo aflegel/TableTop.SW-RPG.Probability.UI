@@ -1,5 +1,5 @@
 import { IStatisticsState } from ".";
-import { StatisticsApiActions, FetchStatisticsAction } from "./Actions";
+import { StatisticsApiActions, FetchStatisticsAction, FetchResultsAction } from "./Actions";
 
 export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): IStatisticsState => {
 	switch (action.type) {
@@ -15,6 +15,23 @@ export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 					...state,
 					poolCombination: {
 						poolStatistics: [],
+						dice: []
+					},
+					isLoading: false
+				};
+			}
+		case FetchResultsAction:
+			if (action.poolResult) {
+				return {
+					...state,
+					poolResult: action.poolResult,
+					isLoading: false
+				};
+			} else {
+				return {
+					...state,
+					poolResult: {
+						poolResults: [],
 						dice: []
 					},
 					isLoading: false

@@ -1,9 +1,10 @@
 import axios from "axios";
 
-import { DieType, PoolDice, PoolCombination } from "../../Models";
+import { DieType, PoolDice, PoolCombination, PoolResult } from "../../Models";
 
 export interface IStatisticsService {
 	GetAllAsync(dice: PoolDice[]): Promise<PoolCombination>;
+	GetResultsAsync(dice: PoolDice[]): Promise<PoolResult>;
 }
 
 export class StatisticsService implements IStatisticsService {
@@ -77,6 +78,12 @@ export class StatisticsService implements IStatisticsService {
 	public async GetAllAsync(dice: PoolDice[]): Promise<PoolCombination> {
 		return new Promise<PoolCombination>(resolve => {
 			axios.post(`http://localhost:62546/Search`, dice, { headers: { "Content-Type": "application/json; charset=utf-8" } }).then(result => resolve(result.data));
+		});
+	}
+
+	public async GetResultsAsync(dice: PoolDice[]): Promise<PoolResult> {
+		return new Promise<PoolResult>(resolve => {
+			axios.post(`http://localhost:62546/Roll`, dice, { headers: { "Content-Type": "application/json; charset=utf-8" } }).then(result => resolve(result.data));
 		});
 	}
 }
