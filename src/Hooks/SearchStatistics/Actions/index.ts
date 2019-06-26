@@ -1,6 +1,6 @@
 import { IFetchStatistics, FetchStatisticsAction } from "./FetchStatistics";
 import { IFetchResults, FetchResultsAction } from "./FetchResults";
-import { PoolCombination, PoolResult } from "../../../Models";
+import { PoolCombination, PoolRoll } from "../../../Models";
 
 export * from "./FetchStatistics";
 export * from "./FetchResults";
@@ -15,7 +15,7 @@ export const fetchStatisticsAction = (combination: PoolCombination): IFetchStati
 	type: FetchStatisticsAction
 });
 
-export const fetchResultsAction = (combination: PoolResult): IFetchResults => ({
-	poolResult: combination,
+export const fetchResultsAction = (rolls: PoolRoll): IFetchResults => ({
+	poolRoll: rolls,
 	type: FetchResultsAction
 });

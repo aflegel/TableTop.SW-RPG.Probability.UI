@@ -10,7 +10,7 @@ export interface ISymbolsProps {
  * Returns a sorted array of icons for the given dice set
  */
 export const Symbols: FunctionComponent<ISymbolsProps> = (props: ISymbolsProps): ReactElement => {
-	const symbolSorter = (a: RollSymbol, b: RollSymbol) => {
+	const symbolSorter = (a: RollSymbol, b: RollSymbol): number => {
 		switch (a.symbol) {
 			case "Triumph":
 				return -1;

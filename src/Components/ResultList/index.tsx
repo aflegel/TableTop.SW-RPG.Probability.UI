@@ -3,11 +3,11 @@ import { Typography, Table, TableBody, TableRow, TableHead, TableCell, Expansion
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ResultListRow } from "./ResultRow";
 
-import { PoolResult } from "../../Models/PoolResult";
 import { Dice } from "../Dice/Dice";
+import { PoolRoll } from "../../Models";
 
 export interface IGraphResultListProps {
-	poolResult: PoolResult;
+	poolRoll: PoolRoll;
 }
 
 /**
@@ -15,16 +15,16 @@ export interface IGraphResultListProps {
  */
 export const RollResultList: FunctionComponent<IGraphResultListProps> = (props: IGraphResultListProps): ReactElement => {
 
-	const getTotal = () => {
-		if (props.poolResult.poolResults && props.poolResult.poolResults.length > 0) {
-			return <>{props.poolResult.poolResults.length}, {props.poolResult.poolResults.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>;
+	const getTotal = (): ReactElement => {
+		if (props.poolRoll.positiveResults && props.poolRoll.positiveResults.length > 0) {
+			return <>{props.poolRoll.positiveResults.length}, {props.poolRoll.positiveResults.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>;
 		}
-		else { return 0; }
-	}
+		else { return <></>; }
+	};
 
 	return <ExpansionPanel>
 		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-			<Typography><Dice dice={props.poolResult.dice} /></Typography>
+			<Typography><Dice dice={props.poolRoll.dice} /></Typography>
 		</ExpansionPanelSummary>
 		<ExpansionPanelDetails>
 			<Table>
@@ -35,7 +35,7 @@ export const RollResultList: FunctionComponent<IGraphResultListProps> = (props: 
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<ResultListRow poolResults={props.poolResult.poolResults} />
+					<ResultListRow poolResults={props.poolRoll.positiveResults} />
 				</TableBody>
 				<TableFooter>
 					<TableRow>

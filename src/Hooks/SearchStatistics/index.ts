@@ -4,7 +4,7 @@ import { Reducer } from "./Reducer";
 import { InitialState } from "./StatisticState";
 import { IStatisticsService, StatisticsServiceSingleton } from "./Service";
 import { fetchStatisticsAction, fetchResultsAction } from "./Actions";
-import { PoolCombination, PoolDice, PoolResult } from "../../Models";
+import { PoolCombination, PoolDice, PoolRoll } from "../../Models";
 
 export * from "./StatisticState";
 export * from "./Actions";
@@ -26,7 +26,7 @@ export const useStatistics = () => {
 	};
 
 	const getResultsAsync = (dice: PoolDice[]): void => {
-		service.GetResultsAsync(dice).then((pool: PoolResult) => {
+		service.GetResultsAsync(dice).then((pool: PoolRoll) => {
 			dispatch(fetchResultsAction(pool));
 		});
 	};

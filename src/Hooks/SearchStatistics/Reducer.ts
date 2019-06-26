@@ -21,17 +21,18 @@ export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 				};
 			}
 		case FetchResultsAction:
-			if (action.poolResult) {
+			if (action.poolRoll) {
 				return {
 					...state,
-					poolResult: action.poolResult,
+					poolRoll: action.poolRoll,
 					isLoading: false
 				};
 			} else {
 				return {
 					...state,
-					poolResult: {
-						poolResults: [],
+					poolRoll: {
+						positiveResults: [],
+						negativeResults: [],
 						dice: []
 					},
 					isLoading: false

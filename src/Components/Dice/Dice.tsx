@@ -10,7 +10,7 @@ export interface IDiceProps {
  * Returns a sorted array of icons for the given dice set
  */
 export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps): ReactElement => {
-	const dieSorter = (a: PoolDice, b: PoolDice) => {
+	const dieSorter = (a: PoolDice, b: PoolDice): number => {
 		switch (a.dieType) {
 			case "Proficiency":
 				return -1;

@@ -1,16 +1,17 @@
-import { PoolDice, DieType, PoolCombination, PoolResult } from "../../Models";
+import { PoolDice, PoolCombination, PoolRoll } from "../../Models";
 
 export interface IStatisticsState {
 	isLoading: boolean;
 	poolCombination: PoolCombination;
-	poolResult: PoolResult;
+	poolRoll: PoolRoll;
 	searchDice: PoolDice[];
 }
 
 export const InitialState: IStatisticsState = {
 	isLoading: true,
-	poolResult: {
-		poolResults: [],
+	poolRoll: {
+		positiveResults: [],
+		negativeResults: [],
 		dice: []
 	},
 	poolCombination: {

@@ -1,7 +1,6 @@
-import { PoolStatistic, PoolDice } from ".";
-import { PoolRoll } from "./PoolRoll";
+import { RollSymbol } from ".";
 
 export interface PoolResult {
-	poolResults: PoolRoll[];
-	dice: PoolDice[];
+	rollSymbols: RollSymbol[];
+	frequency: number;
 }
