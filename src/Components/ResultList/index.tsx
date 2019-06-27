@@ -4,10 +4,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ResultListRow } from "./ResultRow";
 
 import { Dice } from "../Dice/Dice";
-import { PoolRoll } from "../../Models";
+import { Roll } from "../../Models/Roll";
 
 export interface IGraphResultListProps {
-	poolRoll: PoolRoll;
+	poolRoll: Roll;
 }
 
 /**
@@ -16,8 +16,8 @@ export interface IGraphResultListProps {
 export const RollResultList: FunctionComponent<IGraphResultListProps> = (props: IGraphResultListProps): ReactElement => {
 
 	const getTotal = (): ReactElement => {
-		if (props.poolRoll.positiveResults && props.poolRoll.positiveResults.length > 0) {
-			return <>{props.poolRoll.positiveResults.length}, {props.poolRoll.positiveResults.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>;
+		if (props.poolRoll.results && props.poolRoll.results.length > 0) {
+			return <>{props.poolRoll.results.length}, {props.poolRoll.results.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>;
 		}
 		else { return <></>; }
 	};
@@ -35,7 +35,7 @@ export const RollResultList: FunctionComponent<IGraphResultListProps> = (props: 
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<ResultListRow poolResults={props.poolRoll.positiveResults} />
+					<ResultListRow poolResults={props.poolRoll.results} />
 				</TableBody>
 				<TableFooter>
 					<TableRow>

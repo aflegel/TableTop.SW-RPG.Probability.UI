@@ -6,9 +6,10 @@ import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
 import { GraphResultList } from "./ResultList";
 import { GraphAdvanced } from "./Advanced";
-import { DieSymbol, PoolStatistic } from "../../Models";
+import { DieSymbol } from "../../Models";
 import { IStatisticsState } from "../../Hooks/SearchStatistics";
 import { GetFrequencyTotal, IsBlank } from "./Functions";
+import { PoolStatistic } from "../../Models/Statistics";
 
 type GraphProps = IStatisticsState & IModeProps;
 
@@ -47,8 +48,8 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 
 	const getDataSet = (): IDataSetProps => {
 		let filteredSet: PoolStatistic[] = [];
-		if (props.poolCombination && props.poolCombination.poolStatistics) {
-			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol === props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+		if (props.poolCombination && props.poolCombination.statistics) {
+			filteredSet = props.poolCombination.statistics.filter(f => f.symbol === props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 		}
 		return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
 	};

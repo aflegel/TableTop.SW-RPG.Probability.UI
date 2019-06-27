@@ -1,15 +1,16 @@
 import axios from "axios";
 
-import { PoolDice, PoolCombination, PoolRoll } from "../../Models";
-
+import { PoolDice } from "../../Models";
+import { RollContainer } from "../../Models/Roll";
+import { PoolCombination } from "../../Models/Statistics";
 export interface IStatisticsService {
 	GetAllAsync(dice: PoolDice[]): Promise<PoolCombination>;
-	GetResultsAsync(dice: PoolDice[]): Promise<PoolRoll>;
+	GetResultsAsync(dice: PoolDice[]): Promise<RollContainer>;
 }
 
 export class StatisticsService implements IStatisticsService {
 	private fakeData: PoolCombination = {
-		poolStatistics: [
+		statistics: [
 			{
 				symbol: "Success",
 				quantity: 1,
@@ -81,8 +82,8 @@ export class StatisticsService implements IStatisticsService {
 		});
 	}
 
-	public async GetResultsAsync(dice: PoolDice[]): Promise<PoolRoll> {
-		return new Promise<PoolRoll>(resolve => {
+	public async GetResultsAsync(dice: PoolDice[]): Promise<RollContainer> {
+		return new Promise<RollContainer>(resolve => {
 			axios.post(`http://localhost:62546/Roll`, dice, { headers: { "Content-Type": "application/json; charset=utf-8" } }).then(result => resolve(result.data));
 		});
 	}

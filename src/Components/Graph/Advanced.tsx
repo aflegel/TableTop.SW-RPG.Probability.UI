@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText, MenuItem, TextField } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { PoolStatistic } from "../../Models";
+import { PoolStatistic } from "../../Models/Statistics";
 import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
 import { IDataSetProps } from ".";
 

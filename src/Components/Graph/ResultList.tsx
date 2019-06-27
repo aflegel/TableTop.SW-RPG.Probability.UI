@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { DieSymbol, PoolStatistic } from "../../Models";
+import { PoolStatistic } from "../../Models/Statistics";
 import { Format, NetLabel, IsBlank } from "../Graph/Functions";
 import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
 

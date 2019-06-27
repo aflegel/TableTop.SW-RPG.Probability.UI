@@ -40,7 +40,8 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 			<Grid item xs={12} className={classes.bottomSpace}>
 				<Card>
 					<CardContent className={classes.bottomSpace}>
-						<RollResultList {...statistics}></RollResultList>
+						<RollResultList poolRoll={statistics.poolRoll.positiveRolls}></RollResultList>
+						<RollResultList poolRoll={statistics.poolRoll.negativeRolls}></RollResultList>
 					</CardContent>
 				</Card>
 			</Grid>

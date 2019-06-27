@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import { Symbol } from "./Symbol";
-import { RollSymbol } from "../../Models";
+import { RollSymbol } from "../../Models/Roll";
 
 export interface ISymbolSeriesProps {
 	symbol: RollSymbol;

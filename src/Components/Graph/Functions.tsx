@@ -1,4 +1,5 @@
-import { PoolStatistic, PoolDice, DieSymbol, DieType } from "../../Models";
+import { DieSymbol, DieType, PoolDice } from "../../Models";
+import { PoolStatistic } from "../../Models/Statistics";
 
 /**
  * Returns the total of frequency

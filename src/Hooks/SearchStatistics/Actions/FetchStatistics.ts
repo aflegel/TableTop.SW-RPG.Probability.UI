@@ -1,4 +1,4 @@
-import { PoolCombination } from "../../../Models";
+import { PoolCombination } from "../../../Models/Statistics";
 
 export const FetchStatisticsAction = "FETCH_STATISTICS";
 export type FetchStatisticsAction = typeof FetchStatisticsAction;

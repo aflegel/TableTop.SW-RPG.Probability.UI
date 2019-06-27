@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from "react";
-import { RollSymbol } from "../../Models";
+import { RollSymbol } from "../../Models/Roll";
 import { SymbolSeries } from "./SymbolSeries";
 
 export interface ISymbolsProps {

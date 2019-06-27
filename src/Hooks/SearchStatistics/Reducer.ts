@@ -14,7 +14,7 @@ export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 				return {
 					...state,
 					poolCombination: {
-						poolStatistics: [],
+						statistics: [],
 						dice: []
 					},
 					isLoading: false
@@ -31,9 +31,14 @@ export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 				return {
 					...state,
 					poolRoll: {
-						positiveResults: [],
-						negativeResults: [],
-						dice: []
+						positiveRolls: {
+							dice: [],
+							results: []
+						},
+						negativeRolls: {
+							dice: [],
+							results: []
+						},
 					},
 					isLoading: false
 				};
