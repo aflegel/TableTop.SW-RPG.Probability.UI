@@ -4,7 +4,7 @@ import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
-import { GraphResultList } from "./ResultList";
+import { GraphStatisticsList } from "./StatisticsList";
 import { GraphAdvanced } from "./Advanced";
 import { DieSymbol } from "../../Models";
 import { IStatisticsState } from "../../Hooks/SearchStatistics";
@@ -81,7 +81,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 				<GraphAdvanced {...dataSet} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
-				<GraphResultList {...label} {...dataSet} />
+				<GraphStatisticsList {...label} {...dataSet} />
 			</Grid>
 		</Grid>
 	);

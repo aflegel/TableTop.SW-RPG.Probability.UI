@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from "react";
-import { Grid, Card, CardContent, CardActions, Button } from "@material-ui/core";
+import { Grid, Card, CardContent, CardActions, Button, makeStyles, Theme, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
 import { IStatisticsState } from "../../Hooks/SearchStatistics";
@@ -10,12 +10,19 @@ type SearchProps = IStatisticsState & ISearchProps;
 
 export interface ISearchProps {
 	searchCallback: Function;
-	resultsCallback: Function;
 }
 
 export interface ISearchState {
 	dice: PoolDice[];
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		contentCentered: {
+			textAlign: "center",
+		}
+	}),
+);
 
 /**
  * Renders the current search icons as well as a search builder
@@ -28,6 +35,8 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 	const updateState = (dice: PoolDice[]): void => {
 		setState({ dice: dice });
 	};
+
+	const classes = useStyles();
 
 	/**
 	 * Increases the quantity or adds a new die to the list
@@ -85,28 +94,27 @@ export const Search: FunctionComponent<SearchProps> = (props: SearchProps): Reac
 	return <Card>
 		<CardContent>
 			<Grid container spacing={10}>
-				<Grid item xs={6} sm={4} md={2} className="content-centered">
+				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Proficiency" />
 				</Grid>
-				<Grid item xs={6} sm={4} md={2} className="content-centered">
+				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Challenge" />
 				</Grid>
-				<Grid item xs={6} sm={4} md={2} className="content-centered">
+				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Ability" />
 				</Grid>
-				<Grid item xs={6} sm={4} md={2} className="content-centered">
+				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Difficulty" />
 				</Grid>
-				<Grid item xs={6} sm={4} md={2} className="content-centered">
+				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Boost" />
 				</Grid>
-				<Grid item xs={6} sm={4} md={2} className="content-centered">
+				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
 					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Setback" />
 				</Grid>
 			</Grid>
 			<CardActions>
 				<Button color="primary" onClick={(): void => { props.searchCallback(state.dice); }}>Search</Button>
-				<Button color="primary" onClick={(): void => { props.resultsCallback(state.dice); }}>Results</Button>
 			</CardActions>
 		</CardContent>
 	</Card>;

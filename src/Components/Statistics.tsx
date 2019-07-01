@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useEffect, ReactElement } from "react";
-import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 
 import { Graph } from "./Graph";
 import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
-import { RollResultList } from "./ResultList";
+import { ResultListContainer } from "./ResultList";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -28,6 +28,8 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 
 	const hasData = statistics.poolCombination && statistics.poolCombination.dice;
 
+	const fetchResults = () => getResultsAsync(statistics.poolCombination.dice);
+
 	useEffect(() => {
 		getStatisticsAsync(statistics.searchDice);
 	}, []);
@@ -35,15 +37,7 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 	return (<div className={classes.root}>
 		<Grid container>
 			<Grid item xs={12}>
-				<Search {...statistics} searchCallback={getStatisticsAsync} resultsCallback={getResultsAsync} />
-			</Grid>
-			<Grid item xs={12} className={classes.bottomSpace}>
-				<Card>
-					<CardContent className={classes.bottomSpace}>
-						<RollResultList poolRoll={statistics.poolRoll.positiveRolls}></RollResultList>
-						<RollResultList poolRoll={statistics.poolRoll.negativeRolls}></RollResultList>
-					</CardContent>
-				</Card>
+				<Search {...statistics} searchCallback={getStatisticsAsync} />
 			</Grid>
 			<Grid item xs={12} className={classes.bottomSpace}>
 				<Card>
@@ -67,6 +61,9 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 							</ListItem>
 							<ListItem>
 								<Graph {...statistics} mode="Despair" />
+							</ListItem>
+							<ListItem>
+								<ResultListContainer {...statistics} resultCallback={fetchResults} />
 							</ListItem>
 						</List>
 					</CardContent>

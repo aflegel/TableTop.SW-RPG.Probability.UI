@@ -1,5 +1,6 @@
 import { IStatisticsState } from ".";
 import { StatisticsApiActions, FetchStatisticsAction, FetchResultsAction } from "./Actions";
+import { InitialState } from "./StatisticState";
 
 export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): IStatisticsState => {
 	switch (action.type) {
@@ -8,6 +9,7 @@ export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): 
 				return {
 					...state,
 					poolCombination: action.poolCombination,
+					poolRoll: InitialState.poolRoll,
 					isLoading: false
 				};
 			} else {

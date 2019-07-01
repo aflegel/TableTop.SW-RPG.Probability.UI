@@ -1,49 +1,28 @@
 import React, { FunctionComponent, ReactElement } from "react";
-import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TableFooter } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { ResultListRow } from "./ResultRow";
+import { Grid, Button } from "@material-ui/core";
+import { RollResultList } from "./ResultList";
 
-import { Dice } from "../Dice/Dice";
-import { Roll } from "../../Models/Roll";
+import { RollContainer } from "../../Models/Roll";
 
 export interface IGraphResultListProps {
-	poolRoll: Roll;
+	poolRoll: RollContainer;
+	resultCallback: Function;
 }
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const RollResultList: FunctionComponent<IGraphResultListProps> = (props: IGraphResultListProps): ReactElement => {
+export const ResultListContainer: FunctionComponent<IGraphResultListProps> = (props: IGraphResultListProps): ReactElement => {
 
-	const getTotal = (): ReactElement => {
-		if (props.poolRoll.results && props.poolRoll.results.length > 0) {
-			return <>{props.poolRoll.results.length}, {props.poolRoll.results.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>;
-		}
-		else { return <></>; }
-	};
-
-	return <ExpansionPanel>
-		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-			<Typography><Dice dice={props.poolRoll.dice} /></Typography>
-		</ExpansionPanelSummary>
-		<ExpansionPanelDetails>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell align="right">Symbols</TableCell>
-						<TableCell align="right">Frequency</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					<ResultListRow poolResults={props.poolRoll.results} />
-				</TableBody>
-				<TableFooter>
-					<TableRow>
-						<TableCell></TableCell>
-						<TableCell align="right">{getTotal()}</TableCell>
-					</TableRow>
-				</TableFooter>
-			</Table>
-		</ExpansionPanelDetails>
-	</ExpansionPanel>;
+	return <Grid container>
+		<Grid item xs={12}>
+			<Button color="primary" onClick={(): void => { props.resultCallback(); }}>Results</Button>
+		</Grid>
+		<Grid item xs={12} md={6}>
+			<RollResultList poolRoll={props.poolRoll.positiveRolls}></RollResultList>
+		</Grid>
+		<Grid item xs={12} md={6}>
+			<RollResultList poolRoll={props.poolRoll.negativeRolls}></RollResultList>
+		</Grid>
+	</Grid>;
 };
