@@ -5,8 +5,9 @@ import { GraphBreakdown } from "../../src/Components/Graph/Breakdown";
 import { GraphStatisticsList } from "../../src/Components/Graph/StatisticsList";
 import { GraphLine } from "../../src/Components/Graph/Line";
 import { GraphAdvanced } from "../../src/Components/Graph/Advanced";
+import { IModeProps, IExtendedModeProps, IDataSetProps } from "../../src/Components/Graph";
 
-const sharedProps = {
+const sharedProps: IModeProps & IExtendedModeProps & IDataSetProps = {
 	mode: "Success",
 	negativeMode: "Failure",
 	alternateMode: "Advantage",

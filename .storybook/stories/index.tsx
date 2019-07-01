@@ -2,10 +2,9 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { Die } from "../../src/Components/Dice/Die";
 import { DieSeries } from "../../src/Components/Dice/DieSeries";
-import { Dice } from "../../src/Components/Dice/Dice";
+import { Dice, IDiceProps } from "../../src/Components/Dice/Dice";
 
-const sharedProps = { dice: [{ dieType: "Ability", quantity: 3 }, { dieType: "Difficulty", quantity: 2 }] };
-
+const sharedProps: IDiceProps = { dice: [{ dieType: "Ability", quantity: 3 }, { dieType: "Difficulty", quantity: 2 }] };
 
 storiesOf("Die", module)
 	.add("Basic Icons", () => (
@@ -18,5 +17,5 @@ storiesOf("Die", module)
 			<Die dieType="Setback" />
 		</>
 	))
-	.add("Icon Series", () => <DieSeries dice={sharedProps.dice.find(f => f.dieType === "Ability")} />)
+	.add("Icon Series", () => <DieSeries dice={{ dieType: "Difficulty", quantity: 2 }} />)
 	.add("Dice Pool", () => <Dice {...sharedProps} />);
