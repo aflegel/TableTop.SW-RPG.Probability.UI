@@ -28,31 +28,29 @@ export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: I
 			</ListItem>
 		</>;
 
-	return (
-		<ExpansionPanel>
-			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Probability Breakdowns</Typography>
-			</ExpansionPanelSummary>
-			<ExpansionPanelDetails>
-				<List>
-					<ListItem>
-						<ListItemText primary="Total Frequency" secondary={Format(props.totalFrequency, false)} />
-					</ListItem>
-					<ListItem>
-						<ListItemText primary={`${props.mode} Frequency`} secondary={Format(positiveFrequency, false)} />
-					</ListItem>
-					<ListItem>
-						<ListItemText primary={`Probability of ${props.mode}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
-					</ListItem>
-					{!IsBlank(props.alternateMode) && alternateBreakdown()}
-					<ListItem>
-						<ListItemText primary={AverageLabel(props.mode)} secondary={Format(average, false)} />
-					</ListItem>
-					<ListItem>
-						<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />
-					</ListItem>
-				</List>
-			</ExpansionPanelDetails>
-		</ExpansionPanel>
-	);
+	return <ExpansionPanel>
+		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+			<Typography>Probability Breakdowns</Typography>
+		</ExpansionPanelSummary>
+		<ExpansionPanelDetails>
+			<List>
+				<ListItem>
+					<ListItemText primary="Total Frequency" secondary={Format(props.totalFrequency, false)} />
+				</ListItem>
+				<ListItem>
+					<ListItemText primary={`${props.mode} Frequency`} secondary={Format(positiveFrequency, false)} />
+				</ListItem>
+				<ListItem>
+					<ListItemText primary={`Probability of ${props.mode}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
+				</ListItem>
+				{!IsBlank(props.alternateMode) && alternateBreakdown()}
+				<ListItem>
+					<ListItemText primary={AverageLabel(props.mode)} secondary={Format(average, false)} />
+				</ListItem>
+				<ListItem>
+					<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />
+				</ListItem>
+			</List>
+		</ExpansionPanelDetails>
+	</ExpansionPanel>;
 };

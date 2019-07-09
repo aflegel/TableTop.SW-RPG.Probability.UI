@@ -1,4 +1,13 @@
 {
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+		  "jsx": true
+		},
+		"useJSXTextNode": true,
+		"project": "./tsconfig.json",
+		"tsconfigRootDir": "../../",
+	  },
 	"extends": [],
 	"defaultSeverity": "warning",
 	"linterOptions": {
@@ -9,7 +18,7 @@
 		"callable-types": true,
 		"class-name": true,
 		"comment-format": [true, "check-space"],
-		"curly": true,
+		"curly": 1,
 		"deprecation": {
 			"severity": "warn"
 		},
@@ -39,15 +48,15 @@
 			}
 		],
 		"no-arg": true,
-		"no-bitwise": true,
+		"no-bitwise": 1,
 		"no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
 		"no-construct": true,
-		"no-debugger": true,
+		"no-debugger": 1,
 		"no-duplicate-super": true,
 		"no-duplicate-variable": true,
-		"no-empty": false,
+		"no-empty": 0,
 		"no-empty-interface": true,
-		"no-eval": true,
+		"no-eval": 2,
 		"no-inferrable-types": [true, "ignore-params"],
 		"no-misused-new": true,
 		"no-boolean-literal-compare": true,
@@ -65,9 +74,9 @@
 		"no-var-keyword": true,
 		"object-literal-sort-keys": false,
 		"one-line": [true, "check-whitespace"],
-		"prefer-const": true,
+		"prefer-const": 2,
 		"quotemark": [true, "double"],
-		"radix": true,
+		"radix": 1,
 		"semicolon": [true, "always"],
 		"triple-equals": [true, "allow-null-check"],
 		"typedef": [true, "call-signature", "parameter", "arrow-call-signature", "property-declaration"],

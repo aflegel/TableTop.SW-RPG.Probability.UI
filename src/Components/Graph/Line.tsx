@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
-import { DieSymbol } from "../../Models";
 import { AverageLabel, NetLabel, GetProbability, IsBlank, ValueFormatter } from "./Functions";
 import { IModeProps, IDataSetProps, IExtendedModeProps } from ".";
 
