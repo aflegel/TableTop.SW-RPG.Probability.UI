@@ -2,14 +2,14 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { PoolDice } from "../../Models";
 import { DieSeries } from "./DieSeries";
 
-export interface IDiceProps {
+export interface DiceProps {
 	dice: PoolDice[];
 }
 
 /**
  * Returns a sorted array of icons for the given dice set
  */
-export const Dice: FunctionComponent<IDiceProps> = (props: IDiceProps): ReactElement => {
+export const Dice: FunctionComponent<DiceProps> = (props: DiceProps): ReactElement => {
 	const dieSorter = (a: PoolDice, b: PoolDice): number => {
 		switch (a.dieType) {
 			case "Proficiency":

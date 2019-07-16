@@ -1,11 +1,11 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
 import { AverageLabel, NetLabel, GetProbability, IsBlank, ValueFormatter } from "./Functions";
-import { IModeProps, IDataSetProps, IExtendedModeProps } from ".";
+import { ModeProps, DataSetProps, ExtendedModeProps } from ".";
 
-export type IGraphLineProps = IModeProps & IExtendedModeProps & IDataSetProps;
+export type GraphLineProps = ModeProps & ExtendedModeProps & DataSetProps;
 
-export interface ILineData {
+export interface LineData {
 	quantity: number;
 	probability: number;
 	average?: number;
@@ -14,10 +14,10 @@ export interface ILineData {
 /**
  * Renders a standardized chart.js graph given a dataset.
  */
-export const GraphLine: FunctionComponent<IGraphLineProps> = (props: IGraphLineProps): ReactElement => {
+export const GraphLine: FunctionComponent<GraphLineProps> = (props: GraphLineProps): ReactElement => {
 	const hasData: boolean = props.filteredSet && props.filteredSet.length > 0;
 
-	const buildData = (): ILineData[] => props.filteredSet.map(map => ({
+	const buildData = (): LineData[] => props.filteredSet.map(map => ({
 		quantity: map.quantity,
 		probability: GetProbability(map.frequency, props.totalFrequency),
 		average: !IsBlank(props.alternateMode) ? map.alternateTotal / map.frequency : undefined

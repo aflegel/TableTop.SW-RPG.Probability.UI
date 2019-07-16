@@ -1,8 +1,8 @@
-import { IStatisticsState } from ".";
+import { StatisticsState } from ".";
 import { StatisticsApiActions, FetchStatisticsAction, FetchResultsAction } from "./Actions";
 import { InitialState } from "./StatisticState";
 
-export const Reducer = (state: IStatisticsState, action: StatisticsApiActions): IStatisticsState => {
+export const Reducer = (state: StatisticsState, action: StatisticsApiActions): StatisticsState => {
 	switch (action.type) {
 		case FetchStatisticsAction:
 			if (action.poolCombination) {

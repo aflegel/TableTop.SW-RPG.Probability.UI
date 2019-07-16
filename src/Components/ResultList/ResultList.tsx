@@ -6,14 +6,14 @@ import { ResultListRow } from "./ResultListRow";
 import { Dice } from "../Dice/Dice";
 import { Roll } from "../../Models/Roll";
 
-export interface IGraphResultListProps {
+export interface GraphResultListProps {
 	poolRoll: Roll;
 }
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const RollResultList: FunctionComponent<IGraphResultListProps> = (props: IGraphResultListProps): ReactElement => {
+export const RollResultList: FunctionComponent<GraphResultListProps> = (props: GraphResultListProps): ReactElement => {
 
 	const getTotal = (): ReactElement => {
 		if (props.poolRoll.results && props.poolRoll.results.length > 0) {

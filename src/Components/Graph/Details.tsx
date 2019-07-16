@@ -3,14 +3,14 @@ import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetail
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { Symbol } from "../Dice/Symbol";
-import { IExtendedModeProps, IModeProps } from ".";
+import { ExtendedModeProps, ModeProps } from ".";
 import { IsBlank } from "./Functions";
 
-export type IGraphDetailsProps = IModeProps & IExtendedModeProps;
+export type GraphDetailsProps = ModeProps & ExtendedModeProps;
 
-export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps): ReactElement => {
-	const plus = [<Symbol dieSymbol={props.mode} />];
-	const minus = [<Symbol dieSymbol={props.negativeMode} />];
+export const GraphDetails: FunctionComponent<GraphDetailsProps> = (props: GraphDetailsProps): ReactElement => {
+	const plus = [<Symbol key={props.mode} dieSymbol={props.mode} />];
+	const minus = [<Symbol key={props.negativeMode} dieSymbol={props.negativeMode} />];
 
 	if (props.mode === "Success") {
 		plus.push(<Symbol dieSymbol="Triumph" />);

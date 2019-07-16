@@ -3,14 +3,14 @@ import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetail
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, AverageLabel, IsBlank } from "./Functions";
-import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
+import { ModeProps, ExtendedModeProps, DataSetProps } from ".";
 
-export type IGraphBreakdownProps = IModeProps & IExtendedModeProps & IDataSetProps;
+export type GraphBreakdownProps = ModeProps & ExtendedModeProps & DataSetProps;
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphBreakdown: FunctionComponent<IGraphBreakdownProps> = (props: IGraphBreakdownProps): ReactElement => {
+export const GraphBreakdown: FunctionComponent<GraphBreakdownProps> = (props: GraphBreakdownProps): ReactElement => {
 	const positiveFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity > 0));
 	// success mode requires 0 quantity outcomes as well
 	const negativeFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity < (props.mode === "Success" ? 1 : 0)));

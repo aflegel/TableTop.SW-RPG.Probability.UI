@@ -2,14 +2,14 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { RollSymbol } from "../../Models/Roll";
 import { SymbolSeries } from "./SymbolSeries";
 
-export interface ISymbolsProps {
+export interface SymbolsProps {
 	symbols: RollSymbol[];
 }
 
 /**
  * Returns a sorted array of icons for the given dice set
  */
-export const Symbols: FunctionComponent<ISymbolsProps> = (props: ISymbolsProps): ReactElement => {
+export const Symbols: FunctionComponent<SymbolsProps> = (props: SymbolsProps): ReactElement => {
 	const symbolSorter = (a: RollSymbol, b: RollSymbol): number => {
 		switch (a.symbol) {
 			case "Triumph":

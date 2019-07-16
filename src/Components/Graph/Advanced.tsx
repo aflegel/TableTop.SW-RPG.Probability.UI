@@ -4,12 +4,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { PoolStatistic } from "../../Models/Statistics";
 import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
-import { IDataSetProps } from ".";
+import { DataSetProps } from ".";
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetProps): ReactElement => {
+export const GraphAdvanced: FunctionComponent<DataSetProps> = (props: DataSetProps): ReactElement => {
 	const [state, setState] = React.useState({
 		comparison: "LT",
 		quantity: 0

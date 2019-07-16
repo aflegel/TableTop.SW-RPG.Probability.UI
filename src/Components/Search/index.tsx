@@ -2,17 +2,17 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { Grid, Card, CardContent, CardActions, Button, makeStyles, Theme, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
-import { IStatisticsState } from "../../Hooks/SearchStatistics";
+import { StatisticsState } from "../../Hooks/SearchStatistics";
 import { DieType, PoolDice } from "../../Models";
 import { GetQuantityTotal } from "../Graph/Functions";
 
-type SearchProps = IStatisticsState & ISearchProps;
+type SearchProps = StatisticsState & SearchCallbackProps;
 
-export interface ISearchProps {
+export interface SearchCallbackProps {
 	searchCallback: Function;
 }
 
-export interface ISearchState {
+export interface SearchState {
 	dice: PoolDice[];
 }
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
  * Renders the current search icons as well as a search builder
  */
 export const Search: FunctionComponent<SearchProps> = (props: SearchProps): ReactElement => {
-	const [state, setState] = React.useState<ISearchState>({
+	const [state, setState] = React.useState<SearchState>({
 		dice: props.searchDice,
 	});
 

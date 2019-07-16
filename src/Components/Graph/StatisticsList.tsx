@@ -4,14 +4,14 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { PoolStatistic } from "../../Models/Statistics";
 import { Format, NetLabel, IsBlank } from "./Functions";
-import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
+import { ModeProps, ExtendedModeProps, DataSetProps } from ".";
 
-export type IGraphResultList = IModeProps & IExtendedModeProps & IDataSetProps;
+export type GraphResultList = ModeProps & ExtendedModeProps & DataSetProps;
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const GraphStatisticsList: FunctionComponent<IGraphResultList> = (props: IGraphResultList): ReactElement => {
+export const GraphStatisticsList: FunctionComponent<GraphResultList> = (props: GraphResultList): ReactElement => {
 
 	const totalTitle = (): ReactElement => <TableCell align="right">Total {props.alternateMode}</TableCell>;
 
@@ -31,13 +31,13 @@ export const GraphStatisticsList: FunctionComponent<IGraphResultList> = (props: 
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{props.filteredSet.map(combination => (
+					{props.filteredSet.map(combination =>
 						<TableRow key={combination.symbol + combination.quantity}>
 							<TableCell align="right">{combination.quantity}</TableCell>
 							<TableCell align="right">{Format(combination.frequency, false)}</TableCell>
 							{!IsBlank(props.alternateMode) && totalValue(combination)}
 						</TableRow>
-					))}
+					)}
 				</TableBody>
 			</Table>
 		</ExpansionPanelDetails>

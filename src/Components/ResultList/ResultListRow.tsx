@@ -3,14 +3,14 @@ import { TableRow, TableCell } from "@material-ui/core";
 import { RollResult } from "../../Models/Roll";
 import { Symbols } from "../Dice/Symbols";
 
-export interface IGraphResultListRowProps {
+export interface GraphResultListRowProps {
 	poolResults: RollResult[];
 }
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const ResultListRow: FunctionComponent<IGraphResultListRowProps> = (props: IGraphResultListRowProps): ReactElement => {
+export const ResultListRow: FunctionComponent<GraphResultListRowProps> = (props: GraphResultListRowProps): ReactElement => {
 	const resultSorter = (n1: RollResult, n2: RollResult): number => {
 		const freq = n2.frequency - n1.frequency;
 

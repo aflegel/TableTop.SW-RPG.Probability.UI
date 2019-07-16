@@ -7,7 +7,7 @@ import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
 import { ResultListContainer } from "./ResultList";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			flexGrow: 1,
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		bottomSpace: {
 			margin: "40px 0"
 		}
-	}),
+	})
 );
 
 export const Statistics: FunctionComponent = (): ReactElement => {

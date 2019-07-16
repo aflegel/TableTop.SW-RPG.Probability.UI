@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { DieType } from "../../Models";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 
-export interface IDieProps {
+export interface DieProps {
 	dieType: DieType;
 	ariaLabel?: string;
 }
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 /**
  * Returns an icon element with the appropriate css classes
  */
-export const Die: FunctionComponent<IDieProps> = (props: IDieProps): ReactElement => {
+export const Die: FunctionComponent<DieProps> = (props: DieProps): ReactElement => {
 
 	const classes = useStyles();
 

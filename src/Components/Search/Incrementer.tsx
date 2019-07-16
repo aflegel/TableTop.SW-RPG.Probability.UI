@@ -5,11 +5,11 @@ import RemoveIcon from "@material-ui/icons/Remove";
 
 import { Die } from "../Dice/Die";
 import { DieType } from "../../Models";
-import { ISearchState } from ".";
+import { SearchState } from ".";
 
-type DieIncrementertProps = ISearchState & IDieIncrementer;
+type DieIncrementertProps = SearchState & DieIncrementer;
 
-export interface IDieIncrementer {
+export interface DieIncrementer {
 	dieType: DieType;
 	addDieCallback: Function;
 	removeDieCallback: Function;

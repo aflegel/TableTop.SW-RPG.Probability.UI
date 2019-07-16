@@ -2,14 +2,14 @@ import React, { FunctionComponent, ReactElement } from "react";
 import { Die } from "./Die";
 import { PoolDice } from "../../Models";
 
-export interface IDieSeriesProps {
+export interface DieSeriesProps {
 	dice: PoolDice;
 }
 
 /**
  * Returns a set icons for the die and quantity
  */
-export const DieSeries: FunctionComponent<IDieSeriesProps> = (props: IDieSeriesProps): ReactElement => {
+export const DieSeries: FunctionComponent<DieSeriesProps> = (props: DieSeriesProps): ReactElement => {
 	const output: JSX.Element[] = [];
 
 	for (let i = 0; i < props.dice.quantity; i++) {

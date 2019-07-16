@@ -66,6 +66,7 @@ export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => poo
  * @param predicate
  * @param digits
  */
+// eslint-disable-next-line no-undef
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
 export const AverageLabel = (mode: DieSymbol): string => `Average ${mode}`;
@@ -74,4 +75,11 @@ export const NetLabel = (mode: DieSymbol): string => `Net ${mode}`;
 
 export const IsBlank = (mode: DieSymbol): boolean => mode === "Blank";
 
+/**
+ * A formatter for the popover label in the Graph
+ * @param value
+ * @param name
+ * @param props
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export const ValueFormatter = (value: any, name: any, props: any): string[] => [Format(value, true), name];

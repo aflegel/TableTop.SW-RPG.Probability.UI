@@ -4,7 +4,7 @@ import { RollResultList } from "./ResultList";
 
 import { RollContainer } from "../../Models/Roll";
 
-export interface IGraphResultListProps {
+export interface GraphResultListProps {
 	poolRoll: RollContainer;
 	resultCallback: Function;
 }
@@ -12,7 +12,7 @@ export interface IGraphResultListProps {
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const ResultListContainer: FunctionComponent<IGraphResultListProps> = (props: IGraphResultListProps): ReactElement => {
+export const ResultListContainer: FunctionComponent<GraphResultListProps> = (props: GraphResultListProps): ReactElement => {
 
 	return <Grid container>
 		<Grid item xs={12}>
