@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { RollResultList } from "./ResultList";
 
@@ -12,7 +12,7 @@ export interface GraphResultListProps {
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const ResultListContainer: FunctionComponent<GraphResultListProps> = (props: GraphResultListProps): ReactElement => {
+export const ResultListContainer = (props: GraphResultListProps): ReactElement => {
 
 	return <Grid container>
 		<Grid item xs={12}>

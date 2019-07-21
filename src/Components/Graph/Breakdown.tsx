@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -10,7 +10,7 @@ export type GraphBreakdownProps = ModeProps & ExtendedModeProps & DataSetProps;
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphBreakdown: FunctionComponent<GraphBreakdownProps> = (props: GraphBreakdownProps): ReactElement => {
+export const GraphBreakdown = (props: GraphBreakdownProps): ReactElement => {
 	const positiveFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity > 0));
 	// success mode requires 0 quantity outcomes as well
 	const negativeFrequency = GetFrequencyTotal(props.filteredSet.filter(f => f.quantity < (props.mode === "Success" ? 1 : 0)));

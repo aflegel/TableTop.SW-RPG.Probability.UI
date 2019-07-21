@@ -1,4 +1,4 @@
-﻿import React, { FunctionComponent, ReactElement } from "react";
+﻿import React, { ReactElement } from "react";
 import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 
 import { GraphBreakdown } from "./Breakdown";
@@ -30,7 +30,7 @@ export interface ExtendedModeProps {
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
-export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactElement => {
+export const Graph = (props: GraphProps): ReactElement => {
 	const getModes = (): ExtendedModeProps => {
 		switch (props.mode) {
 			case "Success":

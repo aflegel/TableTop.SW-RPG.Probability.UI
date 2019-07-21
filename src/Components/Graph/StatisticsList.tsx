@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -11,8 +11,7 @@ export type GraphResultList = ModeProps & ExtendedModeProps & DataSetProps;
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const GraphStatisticsList: FunctionComponent<GraphResultList> = (props: GraphResultList): ReactElement => {
-
+export const GraphStatisticsList = (props: GraphResultList): ReactElement => {
 	const totalTitle = (): ReactElement => <TableCell align="right">Total {props.alternateMode}</TableCell>;
 
 	const totalValue = (combination: PoolStatistic): ReactElement => <TableCell align="right">{Format(combination.alternateTotal, false)}</TableCell>;

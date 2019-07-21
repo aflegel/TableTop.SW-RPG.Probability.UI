@@ -1,11 +1,8 @@
-import { DieSymbol, DieType, PoolDice } from "../../Models";
-import { PoolStatistic } from "../../Models/Statistics";
-
 /**
  * Returns the total of frequency
  * @param set
  */
-export const GetFrequencyTotal = (set: PoolStatistic[]): number =>
+export const GetFrequencyTotal = (set: import("../../Models/Statistics").PoolStatistic[]): number =>
 	set.reduce((total, obj) => {
 		return total + obj.frequency;
 	}, 0);
@@ -14,7 +11,7 @@ export const GetFrequencyTotal = (set: PoolStatistic[]): number =>
  * Returns the total of quantity
  * @param set
  */
-export const GetQuantityTotal = (set: PoolDice[]): number =>
+export const GetQuantityTotal = (set: import("../../Models").PoolDice[]): number =>
 	set.reduce((total, obj) => {
 		return total + obj.quantity;
 	}, 0);
@@ -24,7 +21,7 @@ export const GetQuantityTotal = (set: PoolDice[]): number =>
  * @param set
  * @param frequency
  */
-export const GetAverage = (set: PoolStatistic[], frequency: number): number =>
+export const GetAverage = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number): number =>
 	set.reduce((total, obj) => {
 		return total + obj.quantity * obj.frequency;
 	}, 0) / frequency;
@@ -42,7 +39,7 @@ export const GetProbability = (numerator: number, denominator: number): number =
  * @param frequency
  * @param mean
  */
-export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, mean: number): number => {
+export const GetStandardDeviation = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number, mean: number): number => {
 	// (val - mean) squared * qty
 	const deviationSet = set.map(map => (map.quantity - mean) ** 2 * map.frequency);
 
@@ -59,7 +56,7 @@ export const GetStandardDeviation = (set: PoolStatistic[], frequency: number, me
  * @param dice
  * @param dicer
  */
-export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => pool.filter(f => !!dice.find(die => die === f.dieType));
+export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import("../../Models").DieType[]): import("../../Models").PoolDice[] => pool.filter(f => !!dice.find(die => die === f.dieType));
 
 /**
  * Formats the number as a comma separated thousands and limited to 4 digits if required
@@ -69,11 +66,11 @@ export const FilterPool = (pool: PoolDice[], dice: DieType[]): PoolDice[] => poo
 // eslint-disable-next-line no-undef
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
-export const AverageLabel = (mode: DieSymbol): string => `Average ${mode}`;
+export const AverageLabel = (mode: import("../../Models").DieSymbol): string => `Average ${mode}`;
 
-export const NetLabel = (mode: DieSymbol): string => `Net ${mode}`;
+export const NetLabel = (mode: import("../../Models").DieSymbol): string => `Net ${mode}`;
 
-export const IsBlank = (mode: DieSymbol): boolean => mode === "Blank";
+export const IsBlank = (mode: import("../../Models").DieSymbol): boolean => mode === "Blank";
 
 /**
  * A formatter for the popover label in the Graph

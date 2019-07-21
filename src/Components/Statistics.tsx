@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, ReactElement } from "react";
+import React, { useEffect, ReactElement } from "react";
 import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, Theme, createStyles } from "@material-ui/core";
 
 import { Graph } from "./Graph";
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-export const Statistics: FunctionComponent = (): ReactElement => {
+export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
 

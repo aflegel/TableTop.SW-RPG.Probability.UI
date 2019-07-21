@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 import { RollResult } from "../../Models/Roll";
 import { Symbols } from "../Dice/Symbols";
@@ -10,7 +10,7 @@ export interface GraphResultListRowProps {
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const ResultListRow: FunctionComponent<GraphResultListRowProps> = (props: GraphResultListRowProps): ReactElement => {
+export const ResultListRow = (props: GraphResultListRowProps): ReactElement => {
 	const resultSorter = (n1: RollResult, n2: RollResult): number => {
 		const freq = n2.frequency - n1.frequency;
 

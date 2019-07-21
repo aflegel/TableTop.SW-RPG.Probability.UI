@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { DieType } from "../../Models";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 
@@ -7,7 +7,7 @@ export interface DieProps {
 	ariaLabel?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		dieStroke: {
 			WebkitTextStrokeWidth: "1px",
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 /**
  * Returns an icon element with the appropriate css classes
  */
-export const Die: FunctionComponent<DieProps> = (props: DieProps): ReactElement => {
+export const Die = (props: DieProps): ReactElement => {
 
 	const classes = useStyles();
 

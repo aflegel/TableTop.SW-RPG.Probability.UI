@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TableFooter } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ResultListRow } from "./ResultListRow";
@@ -13,7 +13,7 @@ export interface GraphResultListProps {
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const RollResultList: FunctionComponent<GraphResultListProps> = (props: GraphResultListProps): ReactElement => {
+export const RollResultList = (props: GraphResultListProps): ReactElement => {
 
 	const getTotal = (): ReactElement => {
 		if (props.poolRoll.results && props.poolRoll.results.length > 0) {

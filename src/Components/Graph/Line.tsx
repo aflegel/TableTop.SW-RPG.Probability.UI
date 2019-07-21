@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
 import { AverageLabel, NetLabel, GetProbability, IsBlank, ValueFormatter } from "./Functions";
 import { ModeProps, DataSetProps, ExtendedModeProps } from ".";
@@ -14,7 +14,7 @@ export interface LineData {
 /**
  * Renders a standardized chart.js graph given a dataset.
  */
-export const GraphLine: FunctionComponent<GraphLineProps> = (props: GraphLineProps): ReactElement => {
+export const GraphLine = (props: GraphLineProps): ReactElement => {
 	const hasData: boolean = props.filteredSet && props.filteredSet.length > 0;
 
 	const buildData = (): LineData[] => props.filteredSet.map(map => ({

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { RollSymbol } from "../../Models/Roll";
 import { SymbolSeries } from "./SymbolSeries";
 
@@ -9,7 +9,7 @@ export interface SymbolsProps {
 /**
  * Returns a sorted array of icons for the given dice set
  */
-export const Symbols: FunctionComponent<SymbolsProps> = (props: SymbolsProps): ReactElement => {
+export const Symbols = (props: SymbolsProps): ReactElement => {
 	const symbolSorter = (a: RollSymbol, b: RollSymbol): number => {
 		switch (a.symbol) {
 			case "Triumph":
