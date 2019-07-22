@@ -1,0 +1,18 @@
+{
+	"dependencies": {
+		"@storybook/addon-info": "^5.1.9",
+		"@types/jest": "^24.0.15",
+		"@types/storybook__react": "^4.0.2",
+		"awesome-typescript-loader": "^5.2.1",
+		"react-docgen-typescript-loader": "^3.1.0",
+		"storybook": "^1.0.0",
+		"ts-jest": "^24.0.2"
+	},
+	"main": "index.js",
+	"scripts": {
+		"storybook": "start-storybook"
+	},
+	"name": "boutinflegel-tabletop-visualizer-storybook",
+	"private": true,
+	"version": "1.0.0"
+}
