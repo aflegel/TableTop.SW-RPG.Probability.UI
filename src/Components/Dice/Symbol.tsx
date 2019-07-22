@@ -1,12 +1,12 @@
-﻿import React, { FunctionComponent, ReactElement } from "react";
+﻿import React, { ReactElement } from "react";
 import { DieSymbol } from "../../Models";
 
-export interface ISymbolProps {
+export interface SymbolProps {
 	dieSymbol: DieSymbol;
 }
 
 /**
  * Returns an icon element with the appropriate css classes
  */
-export const Symbol: FunctionComponent<ISymbolProps> = (props: ISymbolProps): ReactElement =>
+export const Symbol = (props: SymbolProps): ReactElement =>
 	<i className={`ffi ffi-swrpg-${props.dieSymbol.toLowerCase()}`} />;

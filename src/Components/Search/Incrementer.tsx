@@ -1,15 +1,15 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { IconButton, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 import { Die } from "../Dice/Die";
 import { DieType } from "../../Models";
-import { ISearchState } from ".";
+import { SearchState } from ".";
 
-type DieIncrementertProps = ISearchState & IDieIncrementer;
+type DieIncrementertProps = SearchState & DieIncrementer;
 
-export interface IDieIncrementer {
+export interface DieIncrementer {
 	dieType: DieType;
 	addDieCallback: Function;
 	removeDieCallback: Function;
@@ -18,7 +18,7 @@ export interface IDieIncrementer {
 /**
  * Renders buttons, icon, and quantity to increment the search
  */
-export const DieIncrementer: FunctionComponent<DieIncrementertProps> = (props: DieIncrementertProps): ReactElement => {
+export const DieIncrementer = (props: DieIncrementertProps): ReactElement => {
 	const dieCount = (): number => {
 		let count = 0;
 		if (props.dice) {

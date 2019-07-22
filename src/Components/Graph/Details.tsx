@@ -1,24 +1,23 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { DieSymbol } from "../../Models";
 import { Symbol } from "../Dice/Symbol";
-import { IExtendedModeProps, IModeProps } from ".";
+import { ExtendedModeProps, ModeProps } from ".";
 import { IsBlank } from "./Functions";
 
-export type IGraphDetailsProps = IModeProps & IExtendedModeProps;
+export type GraphDetailsProps = ModeProps & ExtendedModeProps;
 
-export const GraphDetails: FunctionComponent<IGraphDetailsProps> = (props: IGraphDetailsProps): ReactElement => {
-	const plus = [<Symbol dieSymbol={props.mode} />];
-	const minus = [<Symbol dieSymbol={props.negativeMode} />];
+export const GraphDetails = (props: GraphDetailsProps): ReactElement => {
+	const plus = [<Symbol key={props.mode} dieSymbol={props.mode} />];
+	const minus = [<Symbol key={props.negativeMode} dieSymbol={props.negativeMode} />];
 
 	if (props.mode === "Success") {
 		plus.push(<Symbol dieSymbol="Triumph" />);
 		minus.push(<Symbol dieSymbol="Despair" />);
 	}
 
-	const join = (symbols: JSX.Element[], separator: string): ReactElement => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
+	const join = (symbols: ReactElement[], separator: string): ReactElement => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
 	const getCalculation = (): ReactElement => <>({join(plus, "+")}) - ({join(minus, "+")})</>;
 

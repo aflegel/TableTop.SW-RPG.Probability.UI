@@ -1,0 +1,29 @@
+### Search Testing
+POST http://localhost:62546/Search HTTP/1.1
+content-type: application/json; charset=utf-8
+
+[
+	{
+		"dieType": "Ability",
+		"quantity": 1
+	},
+	{
+		"dieType": "Difficulty",
+		"quantity": 1
+	}
+]
+
+### Roll Testing
+POST http://localhost:62546/Roll HTTP/1.1
+content-type: application/json; charset=utf-8
+
+[
+	{
+		"dieType": "Ability",
+		"quantity": 1
+	},
+	{
+		"dieType": "Difficulty",
+		"quantity": 1
+	}
+]

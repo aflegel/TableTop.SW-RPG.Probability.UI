@@ -1,15 +1,15 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText, MenuItem, TextField } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { PoolStatistic } from "../../Models";
+import { PoolStatistic } from "../../Models/Statistics";
 import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
-import { IDataSetProps } from ".";
+import { DataSetProps } from ".";
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphAdvanced: FunctionComponent<IDataSetProps> = (props: IDataSetProps): ReactElement => {
+export const GraphAdvanced = (props: DataSetProps): ReactElement => {
 	const [state, setState] = React.useState({
 		comparison: "LT",
 		quantity: 0

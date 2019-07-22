@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
-export const NavMenu: FunctionComponent = (): ReactElement =>
+export const NavMenu = (): ReactElement =>
 	<AppBar position="static">
 		<Toolbar>
 			<Typography variant="h6" color="inherit">

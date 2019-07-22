@@ -1,0 +1,26 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true // Allows for the parsing of JSX
+		}
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"rules": {
+		"no-var": 2,
+		"react/prop-types": ["off"],
+		"@typescript-eslint/indent": ["error", "tab"],
+		"@typescript-eslint/explicit-function-return-type": ["off"]
+	}
+}

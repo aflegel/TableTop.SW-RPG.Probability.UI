@@ -1,27 +1,28 @@
-﻿import React, { FunctionComponent, ReactElement } from "react";
+﻿import React, { ReactElement } from "react";
 import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 
 import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
-import { GraphResultList } from "./ResultList";
+import { GraphStatisticsList } from "./StatisticsList";
 import { GraphAdvanced } from "./Advanced";
-import { DieSymbol, PoolStatistic } from "../../Models";
-import { IStatisticsState } from "../../Hooks/SearchStatistics";
+import { DieSymbol } from "../../Models";
+import { StatisticsState } from "../../Hooks/SearchStatistics";
 import { GetFrequencyTotal, IsBlank } from "./Functions";
+import { PoolStatistic } from "../../Models/Statistics";
 
-type GraphProps = IStatisticsState & IModeProps;
+type GraphProps = StatisticsState & ModeProps;
 
-export interface IModeProps {
+export interface ModeProps {
 	mode: DieSymbol;
 }
 
-export interface IDataSetProps {
+export interface DataSetProps {
 	totalFrequency: number;
 	filteredSet: PoolStatistic[];
 }
 
-export interface IExtendedModeProps {
+export interface ExtendedModeProps {
 	negativeMode: DieSymbol;
 	alternateMode: DieSymbol;
 }
@@ -29,8 +30,8 @@ export interface IExtendedModeProps {
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
-export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactElement => {
-	const getModes = (): IExtendedModeProps => {
+export const Graph = (props: GraphProps): ReactElement => {
+	const getModes = (): ExtendedModeProps => {
 		switch (props.mode) {
 			case "Success":
 				return { negativeMode: "Failure", alternateMode: "Advantage" };
@@ -41,14 +42,14 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 		}
 	};
 
-	const getLabels = (): IExtendedModeProps & IModeProps => {
+	const getLabels = (): ExtendedModeProps & ModeProps => {
 		return { ...props, ...getModes() };
 	};
 
-	const getDataSet = (): IDataSetProps => {
+	const getDataSet = (): DataSetProps => {
 		let filteredSet: PoolStatistic[] = [];
-		if (props.poolCombination && props.poolCombination.poolStatistics) {
-			filteredSet = props.poolCombination.poolStatistics.filter(f => f.symbol === props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
+		if (props.poolCombination && props.poolCombination.statistics) {
+			filteredSet = props.poolCombination.statistics.filter(f => f.symbol === props.mode).sort((n1, n2) => n1.quantity - n2.quantity);
 		}
 		return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
 	};
@@ -80,7 +81,7 @@ export const Graph: FunctionComponent<GraphProps> = (props: GraphProps): ReactEl
 				<GraphAdvanced {...dataSet} />
 			</Grid>
 			<Grid item xs={12} lg={6}>
-				<GraphResultList {...label} {...dataSet} />
+				<GraphStatisticsList {...label} {...dataSet} />
 			</Grid>
 		</Grid>
 	);

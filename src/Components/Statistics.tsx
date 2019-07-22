@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useEffect, ReactElement } from "react";
-import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, Theme, createStyles } from "@material-ui/core";
+import React, { useEffect, ReactElement } from "react";
+import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, createStyles } from "@material-ui/core";
 
 import { Graph } from "./Graph";
 import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
+import { ResultListContainer } from "./ResultList";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			flexGrow: 1,
@@ -14,27 +15,29 @@ const useStyles = makeStyles((theme: Theme) =>
 		bottomSpace: {
 			margin: "40px 0"
 		}
-	}),
+	})
 );
 
-export const Statistics: FunctionComponent = (): ReactElement => {
-	const { state, getStatisticsAsync } = useStatistics();
+export const Statistics = (): ReactElement => {
+	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
 
-	const getDice = (): ReactElement => <Dice dice={state.poolCombination.dice} />;
+	const getDice = (): ReactElement => <Dice dice={statistics.poolCombination.dice} />;
 
 	const emptyDataReturn = (): ReactElement => <p>No data was returned for the query</p>;
 
-	const hasData = state.poolCombination && state.poolCombination.dice;
+	const hasData = statistics.poolCombination && statistics.poolCombination.dice;
+
+	const fetchResults = () => getResultsAsync(statistics.poolCombination.dice);
 
 	useEffect(() => {
-		getStatisticsAsync(state.searchDice);
+		getStatisticsAsync(statistics.searchDice);
 	}, []);
 
 	return (<div className={classes.root}>
 		<Grid container>
 			<Grid item xs={12}>
-				<Search {...state} searchCallback={getStatisticsAsync} />
+				<Search {...statistics} searchCallback={getStatisticsAsync} />
 			</Grid>
 			<Grid item xs={12} className={classes.bottomSpace}>
 				<Card>
@@ -48,16 +51,19 @@ export const Statistics: FunctionComponent = (): ReactElement => {
 						</Typography>
 						<List>
 							<ListItem divider>
-								<Graph {...state} mode="Success" />
+								<Graph {...statistics} mode="Success" />
 							</ListItem>
 							<ListItem divider>
-								<Graph {...state} mode="Advantage" />
+								<Graph {...statistics} mode="Advantage" />
 							</ListItem>
 							<ListItem divider>
-								<Graph {...state} mode="Triumph" />
+								<Graph {...statistics} mode="Triumph" />
 							</ListItem>
 							<ListItem>
-								<Graph {...state} mode="Despair" />
+								<Graph {...statistics} mode="Despair" />
+							</ListItem>
+							<ListItem>
+								<ResultListContainer {...statistics} resultCallback={fetchResults} />
 							</ListItem>
 						</List>
 					</CardContent>

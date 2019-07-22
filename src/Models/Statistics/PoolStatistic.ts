@@ -1,4 +1,4 @@
-import { DieSymbol } from ".";
+import { DieSymbol } from "..";
 
 export interface PoolStatistic {
 	symbol: DieSymbol;

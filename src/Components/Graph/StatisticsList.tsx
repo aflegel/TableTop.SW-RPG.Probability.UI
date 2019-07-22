@@ -1,18 +1,17 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { DieSymbol, PoolStatistic } from "../../Models";
-import { Format, NetLabel, IsBlank } from "../Graph/Functions";
-import { IModeProps, IExtendedModeProps, IDataSetProps } from ".";
+import { PoolStatistic } from "../../Models/Statistics";
+import { Format, NetLabel, IsBlank } from "./Functions";
+import { ModeProps, ExtendedModeProps, DataSetProps } from ".";
 
-export type IGraphResultList = IModeProps & IExtendedModeProps & IDataSetProps;
+export type GraphResultList = ModeProps & ExtendedModeProps & DataSetProps;
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGraphResultList): ReactElement => {
-
+export const GraphStatisticsList = (props: GraphResultList): ReactElement => {
 	const totalTitle = (): ReactElement => <TableCell align="right">Total {props.alternateMode}</TableCell>;
 
 	const totalValue = (combination: PoolStatistic): ReactElement => <TableCell align="right">{Format(combination.alternateTotal, false)}</TableCell>;
@@ -31,13 +30,13 @@ export const GraphResultList: FunctionComponent<IGraphResultList> = (props: IGra
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{props.filteredSet.map(combination => (
+					{props.filteredSet.map(combination =>
 						<TableRow key={combination.symbol + combination.quantity}>
 							<TableCell align="right">{combination.quantity}</TableCell>
 							<TableCell align="right">{Format(combination.frequency, false)}</TableCell>
 							{!IsBlank(props.alternateMode) && totalValue(combination)}
 						</TableRow>
-					))}
+					)}
 				</TableBody>
 			</Table>
 		</ExpansionPanelDetails>
