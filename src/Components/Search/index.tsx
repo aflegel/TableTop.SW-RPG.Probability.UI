@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Grid, Card, CardContent, CardActions, Button, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
 import { StatisticsState } from "../../Hooks/SearchStatistics";
@@ -16,7 +16,7 @@ export interface SearchState {
 	dice: PoolDice[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		contentCentered: {
 			textAlign: "center",

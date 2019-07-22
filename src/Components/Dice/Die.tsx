@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { DieType } from "../../Models";
-import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import { createStyles, makeStyles } from "@material-ui/core";
 
 export interface DieProps {
 	dieType: DieType;

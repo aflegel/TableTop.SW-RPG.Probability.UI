@@ -32,16 +32,7 @@ export const Reducer = (state: StatisticsState, action: StatisticsApiActions): S
 			} else {
 				return {
 					...state,
-					poolRoll: {
-						positiveRolls: {
-							dice: [],
-							results: []
-						},
-						negativeRolls: {
-							dice: [],
-							results: []
-						},
-					},
+					poolRoll: InitialState.poolRoll,
 					isLoading: false
 				};
 			}
