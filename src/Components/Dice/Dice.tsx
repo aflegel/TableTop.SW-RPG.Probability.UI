@@ -45,10 +45,5 @@ export const Dice = (props: DiceProps): ReactElement => {
 		}
 	};
 
-	if (props.dice) {
-		return <>{props.dice.sort(dieSorter).map(item => <DieSeries dice={item} key={`${item.dieType}${item.quantity}`} />)}</>;
-	}
-	else {
-		return <></>;
-	}
+	return <>{props.dice && props.dice.sort(dieSorter).map(item => <DieSeries dice={item} key={`${item.dieType}${item.quantity}`} />)}</>;
 };

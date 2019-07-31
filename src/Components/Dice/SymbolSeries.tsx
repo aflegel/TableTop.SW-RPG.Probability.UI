@@ -13,7 +13,7 @@ export const SymbolSeries = (props: SymbolSeriesProps): ReactElement => {
 	const output: ReactElement[] = [];
 
 	for (let i = 0; i < props.symbol.quantity; i++) {
-		output.push(<Symbol dieSymbol={props.symbol.symbol} key={`${props.symbol.symbol}${i}`}  />);
+		output.push(<Symbol dieSymbol={props.symbol.symbol} key={`${props.symbol.symbol}${i}`} />);
 	}
 
 	return <>{output}</>;

@@ -18,16 +18,6 @@ export const GraphBreakdown = (props: GraphBreakdownProps): ReactElement => {
 	const average = GetAverage(props.filteredSet, props.totalFrequency);
 	const standardDeviation = GetStandardDeviation(props.filteredSet, props.totalFrequency, average);
 
-	const alternateBreakdown = (): ReactElement =>
-		<>
-			<ListItem>
-				<ListItemText primary={`${props.negativeMode} Frequency`} secondary={Format(negativeFrequency, false)} />
-			</ListItem>
-			<ListItem>
-				<ListItemText primary={`Probability of ${props.negativeMode}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
-			</ListItem>
-		</>;
-
 	return <ExpansionPanel>
 		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
 			<Typography>Probability Breakdowns</Typography>
@@ -43,7 +33,17 @@ export const GraphBreakdown = (props: GraphBreakdownProps): ReactElement => {
 				<ListItem>
 					<ListItemText primary={`Probability of ${props.mode}`} secondary={`${Format((positiveFrequency / props.totalFrequency) * 100, true)}%`} />
 				</ListItem>
-				{!IsBlank(props.alternateMode) && alternateBreakdown()}
+				{
+					!IsBlank(props.alternateMode) &&
+					<>
+						<ListItem>
+							<ListItemText primary={`${props.negativeMode} Frequency`} secondary={Format(negativeFrequency, false)} />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary={`Probability of ${props.negativeMode}`} secondary={`${Format((negativeFrequency / props.totalFrequency) * 100, true)}%`} />
+						</ListItem>
+					</>
+				}
 				<ListItem>
 					<ListItemText primary={AverageLabel(props.mode)} secondary={Format(average, false)} />
 				</ListItem>

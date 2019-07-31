@@ -45,10 +45,5 @@ export const Symbols = (props: SymbolsProps): ReactElement => {
 		}
 	};
 
-	if (props.symbols) {
-		return <>{props.symbols.sort(symbolSorter).map(icon => <SymbolSeries symbol={icon} key={`${icon.symbol}${icon.quantity}`} />)}</>;
-	}
-	else {
-		return <></>;
-	}
+	return <>{props.symbols && props.symbols.sort(symbolSorter).map(icon => <SymbolSeries symbol={icon} key={`${icon.symbol}${icon.quantity}`} />)}</>;
 };

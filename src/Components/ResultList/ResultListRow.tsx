@@ -41,16 +41,13 @@ export const ResultListRow = (props: GraphResultListRowProps): ReactElement => {
 		return `${symbol}${roll.frequency}`;
 	};
 
-	if (props.poolResults && props.poolResults.length) {
-		return <>{
-			props.poolResults.sort(resultSorter).map(roll => (
-				<TableRow key={rowKey(roll)}>
-					<TableCell align="right"><Symbols symbols={roll.symbols} /></TableCell>
-					<TableCell align="right">{roll.frequency}</TableCell>
-				</TableRow>
-			))
-		}</>;
-	} else {
-		return <></>;
-	}
+	return <>{
+		props.poolResults && props.poolResults.length &&
+		props.poolResults.sort(resultSorter).map(roll => (
+			<TableRow key={rowKey(roll)}>
+				<TableCell align="right"><Symbols symbols={roll.symbols} /></TableCell>
+				<TableCell align="right">{roll.frequency}</TableCell>
+			</TableRow>
+		))
+	}</>;
 };

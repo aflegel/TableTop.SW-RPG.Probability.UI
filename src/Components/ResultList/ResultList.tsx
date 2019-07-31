@@ -15,12 +15,7 @@ export interface GraphResultListProps {
  */
 export const RollResultList = (props: GraphResultListProps): ReactElement => {
 
-	const getTotal = (): ReactElement => {
-		if (props.poolRoll.results && props.poolRoll.results.length > 0) {
-			return <>{props.poolRoll.results.length}, {props.poolRoll.results.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>;
-		}
-		else { return <></>; }
-	};
+	const hasData = props.poolRoll.results && props.poolRoll.results.length > 0;
 
 	return <ExpansionPanel>
 		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -40,7 +35,7 @@ export const RollResultList = (props: GraphResultListProps): ReactElement => {
 				<TableFooter>
 					<TableRow>
 						<TableCell></TableCell>
-						<TableCell align="right">{getTotal()}</TableCell>
+						<TableCell align="right">{hasData && <>{props.poolRoll.results.length}, {props.poolRoll.results.map(s => s.frequency).reduce((prev, curr) => (prev || 0) + curr)}</>}</TableCell>
 					</TableRow>
 				</TableFooter>
 			</Table>
