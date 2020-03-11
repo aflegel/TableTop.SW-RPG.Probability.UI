@@ -19,36 +19,25 @@ export interface DieIncrementer {
  * Renders buttons, icon, and quantity to increment the search
  */
 export const DieIncrementer = (props: DieIncrementertProps): ReactElement => {
-	const dieCount = (): number => {
-		let count = 0;
-		if (props.dice) {
-			const test = props.dice.filter(f => f.dieType === props.dieType);
+	const die = props.dice ? props.dice.find(f => f.dieType === props.dieType) : undefined;
+	const count = die ? die.quantity : 0;
 
-			if (test && test[0]) {
-				count = test[0].quantity;
-			}
-		}
-		return count;
-	};
-
-	return (
-		<>
-			<IconButton
-				color="secondary"
-				aria-label={`Add one ${props.dieType}`}
-				onClick={(): void => { props.addDieCallback(props.dieType); }}>
-				<AddIcon />
-			</IconButton>
-			<Typography variant="h5">
-				<Die dieType={props.dieType} ariaLabel={props.dieType} />
-			</Typography>
-			<Typography variant="h4">{dieCount()}</Typography>
-			<IconButton
-				color="secondary"
-				aria-label={`Remove one ${props.dieType}`}
-				onClick={(): void => { props.removeDieCallback(props.dieType); }}>
-				<RemoveIcon />
-			</IconButton>
-		</>
-	);
+	return <>
+		<IconButton
+			color="secondary"
+			aria-label={`Add one ${props.dieType}`}
+			onClick={(): void => { props.addDieCallback(props.dieType); }}>
+			<AddIcon />
+		</IconButton>
+		<Typography variant="h5">
+			<Die dieType={props.dieType} ariaLabel={props.dieType} />
+		</Typography>
+		<Typography variant="h4">{count}</Typography>
+		<IconButton
+			color="secondary"
+			aria-label={`Remove one ${props.dieType}`}
+			onClick={(): void => { props.removeDieCallback(props.dieType); }}>
+			<RemoveIcon />
+		</IconButton>
+	</>;
 };

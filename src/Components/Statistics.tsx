@@ -22,10 +22,6 @@ export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
 
-	const getDice = (): ReactElement => <Dice dice={statistics.poolCombination.dice} />;
-
-	const emptyDataReturn = (): ReactElement => <p>No data was returned for the query</p>;
-
 	const hasData = statistics.poolCombination && statistics.poolCombination.dice;
 
 	const fetchResults = () => getResultsAsync(statistics.poolCombination.dice);
@@ -46,8 +42,8 @@ export const Statistics = (): ReactElement => {
 							Probability Breakdown
 						</Typography>
 						<Typography gutterBottom variant="h5" component="h2">
-							{hasData && getDice()}
-							{!hasData && emptyDataReturn()}
+							{hasData && <Dice dice={statistics.poolCombination.dice} />}
+							{!hasData && <p>No data was returned for the query</p>}
 						</Typography>
 						<List>
 							<ListItem divider>

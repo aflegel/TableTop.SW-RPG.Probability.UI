@@ -57,15 +57,13 @@ export const Graph = (props: GraphProps): ReactElement => {
 	const label = getLabels();
 	const dataSet = getDataSet();
 
-	const extraLabel = (): string => !IsBlank(label.negativeMode) ? `and ${label.negativeMode}` : "";
-
 	return (
 		<Grid container>
 			<Grid item xs={12}>
 				<Card>
 					<CardContent>
 						<Typography gutterBottom variant="h4" component="h4">
-							Distribution of {props.mode} {extraLabel()}
+							Distribution of {props.mode} {!IsBlank(label.negativeMode) ? `and ${label.negativeMode}` : ""}
 						</Typography>
 						<GraphLine {...label} {...dataSet} />
 					</CardContent>

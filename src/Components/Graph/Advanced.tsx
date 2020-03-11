@@ -83,27 +83,14 @@ export const GraphAdvanced = (props: DataSetProps): ReactElement => {
 				<Typography>Advanced</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
-				<TextField
-					select
-					margin="normal"
-					value={state.comparison}
-					onChange={changeComparison}
-					aria-label="Comparison"
-				>
+				<TextField select margin="normal" value={state.comparison} onChange={changeComparison} aria-label="Comparison">
 					{comparisons.map(option => (
 						<MenuItem key={option.value} value={option.value}>
 							{option.label}
 						</MenuItem>
 					))}
 				</TextField>
-				<TextField
-					type="number"
-					margin="normal"
-					value={state.quantity}
-					onChange={changeQuantity}
-					aria-label="Compare to"
-				/>
-
+				<TextField type="number" margin="normal" value={state.quantity} onChange={changeQuantity} aria-label="Compare to" />
 				<List>
 					<ListItem>
 						<ListItemText primary="Probability" secondary={`${getData()}%`} />

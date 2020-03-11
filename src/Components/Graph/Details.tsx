@@ -19,31 +19,27 @@ export const GraphDetails = (props: GraphDetailsProps): ReactElement => {
 
 	const join = (symbols: ReactElement[], separator: string): ReactElement => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
 
-	const getCalculation = (): ReactElement => <>({join(plus, "+")}) - ({join(minus, "+")})</>;
-
-	const alternateCalculations = (): ReactElement =>
-		<>
-			<ListItem>
-				<ListItemText primary="Calculation" secondary={getCalculation()} />
-			</ListItem>
-			<ListItem>
-				<ListItemText primary={`${props.negativeMode} Symbols`} secondary={join(minus, "and")} />
-			</ListItem>
-		</>;
-
-	return (
-		<ExpansionPanel>
-			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Symbols and Calculations</Typography>
-			</ExpansionPanelSummary>
-			<ExpansionPanelDetails>
-				<List>
-					<ListItem>
-						<ListItemText primary={`${props.mode} Symbols`} secondary={join(plus, "and")} />
-					</ListItem>
-					{!IsBlank(props.alternateMode) && alternateCalculations()}
-				</List>
-			</ExpansionPanelDetails>
-		</ExpansionPanel>
-	);
+	return <ExpansionPanel>
+		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+			<Typography>Symbols and Calculations</Typography>
+		</ExpansionPanelSummary>
+		<ExpansionPanelDetails>
+			<List>
+				<ListItem>
+					<ListItemText primary={`${props.mode} Symbols`} secondary={join(plus, "and")} />
+				</ListItem>
+				{
+					!IsBlank(props.alternateMode) &&
+					<>
+						<ListItem>
+							<ListItemText primary="Calculation" secondary={<>({join(plus, "+")}) - ({join(minus, "+")})</>} />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary={`${props.negativeMode} Symbols`} secondary={join(minus, "and")} />
+						</ListItem>
+					</>
+				}
+			</List>
+		</ExpansionPanelDetails>
+	</ExpansionPanel>;
 };
