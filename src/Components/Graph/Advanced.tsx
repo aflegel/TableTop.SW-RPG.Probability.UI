@@ -1,42 +1,44 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText, MenuItem, TextField } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { PoolStatistic } from "../../Models/Statistics";
 import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
-import { DataSetProps } from ".";
+import { DataContext } from "./DataContext";
+
+const comparisons = [
+	{
+		value: "GT",
+		label: ">",
+	},
+	{
+		value: "GTE",
+		label: ">=",
+	},
+	{
+		value: "E",
+		label: "=",
+	},
+	{
+		value: "LTE",
+		label: "<=",
+	},
+	{
+		value: "LT",
+		label: "<",
+	},
+];
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const GraphAdvanced = (props: DataSetProps): ReactElement => {
+export const GraphAdvanced = (): ReactElement => {
+	const { filteredSet, totalFrequency } = useContext(DataContext);
+
 	const [state, setState] = React.useState({
 		comparison: "LT",
 		quantity: 0
 	});
-
-	const comparisons = [
-		{
-			value: "GT",
-			label: ">",
-		},
-		{
-			value: "GTE",
-			label: ">=",
-		},
-		{
-			value: "E",
-			label: "=",
-		},
-		{
-			value: "LTE",
-			label: "<=",
-		},
-		{
-			value: "LT",
-			label: "<",
-		},
-	];
 
 	const changeComparison = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setState({
@@ -56,25 +58,25 @@ export const GraphAdvanced = (props: DataSetProps): ReactElement => {
 		let set: PoolStatistic[];
 		switch (state.comparison) {
 			case "GT":
-				set = props.filteredSet.filter(f => f.quantity > state.quantity);
+				set = filteredSet.filter(f => f.quantity > state.quantity);
 				break;
 			case "GTE":
-				set = props.filteredSet.filter(f => f.quantity >= state.quantity);
+				set = filteredSet.filter(f => f.quantity >= state.quantity);
 				break;
 			case "E":
-				set = props.filteredSet.filter(f => f.quantity === state.quantity);
+				set = filteredSet.filter(f => f.quantity === state.quantity);
 				break;
 			case "LTE":
-				set = props.filteredSet.filter(f => f.quantity <= state.quantity);
+				set = filteredSet.filter(f => f.quantity <= state.quantity);
 				break;
 			case "LT":
-				set = props.filteredSet.filter(f => f.quantity < state.quantity);
+				set = filteredSet.filter(f => f.quantity < state.quantity);
 				break;
 			default:
 				set = [];
 		}
 
-		return Format(GetProbability(GetFrequencyTotal(set), props.totalFrequency), true);
+		return Format(GetProbability(GetFrequencyTotal(set), totalFrequency), true);
 	};
 
 	return (
