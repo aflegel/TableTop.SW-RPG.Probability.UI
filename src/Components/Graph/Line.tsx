@@ -1,16 +1,8 @@
 import React, { ReactElement, useContext } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
 import { AverageLabel, NetLabel, GetProbability, IsBlank, ValueFormatter } from "./Functions";
-import { ModeProps, ExtendedModeProps, ModeContext } from "./ModeContext";
-import { DataSetProps, DataContext } from "./DataContext";
-
-export type GraphLineProps = ModeProps & ExtendedModeProps & DataSetProps;
-
-export interface LineData {
-	quantity: number;
-	probability: number;
-	average?: number;
-}
+import { ModeContext } from "./ModeContext";
+import { DataContext } from "./DataContext";
 
 /**
  * Renders a standardized chart.js graph given a dataset.
