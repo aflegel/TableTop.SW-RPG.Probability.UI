@@ -51,8 +51,6 @@ export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElemen
 			setState(dice);
 	};
 
-	const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "Boost", "Setback"];
-
 	return <Card>
 		<DiceContext.Provider value={state}>
 			<CardContent>

@@ -32,8 +32,6 @@ export const Statistics = (): ReactElement => {
 		getStatisticsAsync(statistics.searchDice);
 	}, [statistics.searchDice]);
 
-	const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"]
-
 	return (<div className={classes.root}>
 
 		<Grid container>
