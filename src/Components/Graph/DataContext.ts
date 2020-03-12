@@ -1,4 +1,4 @@
-import React from "react";
+import { createContext } from "react";
 import { PoolStatistic } from "../../Models/Statistics";
 
 export interface DataSetProps {
@@ -11,5 +11,5 @@ const emptyData: DataSetProps = {
 	totalFrequency: 0
 };
 
-export const DataContext = React.createContext(emptyData);
+export const DataContext = createContext(emptyData);
 

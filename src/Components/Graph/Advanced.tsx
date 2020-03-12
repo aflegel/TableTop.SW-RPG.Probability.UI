@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from "react";
+import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText, MenuItem, TextField } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -35,19 +35,19 @@ const comparisons = [
 export const GraphAdvanced = (): ReactElement => {
 	const { filteredSet, totalFrequency } = useContext(DataContext);
 
-	const [state, setState] = React.useState({
+	const [state, setState] = useState({
 		comparison: "LT",
 		quantity: 0
 	});
 
-	const changeComparison = (event: React.ChangeEvent<HTMLInputElement>): void => {
+	const changeComparison = (event: ChangeEvent<HTMLInputElement>): void => {
 		setState({
 			...state,
 			comparison: event.target.value,
 		});
 	};
 
-	const changeQuantity = (event: React.ChangeEvent<HTMLInputElement>): void => {
+	const changeQuantity = (event: ChangeEvent<HTMLInputElement>): void => {
 		setState({
 			...state,
 			quantity: +event.target.value,

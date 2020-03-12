@@ -6,7 +6,7 @@ import { ResultListRow } from "./ResultListRow";
 import { Dice } from "../Dice/Dice";
 import { Roll } from "../../Models/Roll";
 
-export interface GraphResultListProps {
+interface GraphResultListProps {
 	poolRoll: Roll;
 }
 

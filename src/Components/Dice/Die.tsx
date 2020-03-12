@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { DieType } from "../../Models";
 import { createStyles, makeStyles } from "@material-ui/core";
 
-export interface DieProps {
+interface DieProps {
 	dieType: DieType;
 	ariaLabel?: string;
 }

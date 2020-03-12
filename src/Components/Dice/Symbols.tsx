@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { RollSymbol } from "../../Models/Roll";
 import { SymbolSeries } from "./SymbolSeries";
 
-export interface SymbolsProps {
+interface SymbolsProps {
 	symbols: RollSymbol[];
 }
 

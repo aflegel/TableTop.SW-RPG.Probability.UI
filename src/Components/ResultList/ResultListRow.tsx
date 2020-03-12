@@ -3,7 +3,7 @@ import { TableRow, TableCell } from "@material-ui/core";
 import { RollResult } from "../../Models/Roll";
 import { Symbols } from "../Dice/Symbols";
 
-export interface GraphResultListRowProps {
+interface GraphResultListRowProps {
 	poolResults: RollResult[];
 }
 

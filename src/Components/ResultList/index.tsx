@@ -4,7 +4,7 @@ import { RollResultList } from "./ResultList";
 
 import { RollContainer } from "../../Models/Roll";
 
-export interface GraphResultListProps {
+interface GraphResultListProps {
 	poolRoll: RollContainer;
 	resultCallback: Function;
 }

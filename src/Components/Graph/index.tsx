@@ -6,13 +6,13 @@ import { GraphDetails } from "./Details";
 import { GraphLine } from "./Line";
 import { GraphStatisticsList } from "./StatisticsList";
 import { GraphAdvanced } from "./Advanced";
-import { StatisticsState } from "../../Hooks/SearchStatistics";
+import { StatisticsResults } from "../../Hooks/SearchStatistics";
 import { GetFrequencyTotal, IsBlank } from "./Functions";
 import { PoolStatistic } from "../../Models/Statistics";
 import { ModeProps, ModeContext, GetExtendedModes } from "./ModeContext";
 import { DataSetProps, DataContext } from "./DataContext";
 
-type GraphProps = StatisticsState & ModeProps;
+type GraphProps = StatisticsResults & ModeProps;
 
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
