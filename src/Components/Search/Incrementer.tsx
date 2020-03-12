@@ -5,9 +5,9 @@ import RemoveIcon from "@material-ui/icons/Remove";
 
 import { Die } from "../Dice/Die";
 import { DieType } from "../../Models";
-import { DiceContext } from "../DiceContext";
+import { DiceContext } from "../Dice/DiceContext";
 
-export interface DieIncrementer {
+interface DieIncrementer {
 	dieType: DieType;
 	addDieCallback: Function;
 	removeDieCallback: Function;

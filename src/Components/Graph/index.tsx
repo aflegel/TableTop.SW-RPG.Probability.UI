@@ -36,7 +36,7 @@ export const Graph = (props: GraphProps): ReactElement => {
 						<Card>
 							<CardContent>
 								<Typography gutterBottom variant="h4" component="h4">
-									Distribution of {props.mode} {!IsBlank(label.negativeMode) ? `and ${label.negativeMode}` : ""}
+									Distribution of {label.mode} {!IsBlank(label.negativeMode) ? `and ${label.negativeMode}` : ""}
 								</Typography>
 								<GraphLine />
 							</CardContent>

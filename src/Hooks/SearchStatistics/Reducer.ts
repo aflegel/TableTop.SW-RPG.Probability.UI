@@ -10,7 +10,6 @@ export const Reducer = (state: StatisticsState, action: StatisticsApiActions): S
 					...state,
 					poolCombination: action.poolCombination,
 					poolRoll: InitialState.poolRoll,
-					isLoading: false
 				};
 			} else {
 				return {
@@ -19,7 +18,6 @@ export const Reducer = (state: StatisticsState, action: StatisticsApiActions): S
 						statistics: [],
 						dice: []
 					},
-					isLoading: false
 				};
 			}
 		case FetchResultsAction:
@@ -27,13 +25,11 @@ export const Reducer = (state: StatisticsState, action: StatisticsApiActions): S
 				return {
 					...state,
 					poolRoll: action.poolRoll,
-					isLoading: false
 				};
 			} else {
 				return {
 					...state,
 					poolRoll: InitialState.poolRoll,
-					isLoading: false
 				};
 			}
 		default:

@@ -1,15 +1,13 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
-import { StatisticsState } from "../../Hooks/SearchStatistics";
-import { DieType, PoolDice } from "../../Models";
+import { StatisticsDice } from "../../Hooks/SearchStatistics";
+import { DieType } from "../../Models";
 import { AddDice, RemoveDice } from "./Functions";
-import { DiceContext } from "../DiceContext";
+import { DiceContext } from "../Dice/DiceContext";
 
-
-type SearchProps = StatisticsState & SearchCallbackProps;
-export interface SearchCallbackProps {
+interface SearchCallbackProps {
 	searchCallback: Function;
 }
 
@@ -24,8 +22,8 @@ const useStyles = makeStyles(() =>
 /**
  * Renders the current search icons as well as a search builder
  */
-export const Search = (props: SearchProps): ReactElement => {
-	const [state, setState] = React.useState<PoolDice[]>(props.searchDice);
+export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElement => {
+	const [state, setState] = useState(props.searchDice);
 
 	const classes = useStyles();
 

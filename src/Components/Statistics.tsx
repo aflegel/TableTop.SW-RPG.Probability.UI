@@ -37,7 +37,7 @@ export const Statistics = (): ReactElement => {
 
 		<Grid container>
 			<Grid item xs={12}>
-				<Search {...statistics} searchCallback={getStatisticsAsync} />
+				<Search searchDice={statistics.searchDice} searchCallback={getStatisticsAsync} />
 			</Grid>
 			<Grid item xs={12} className={classes.bottomSpace}>
 				<Card>

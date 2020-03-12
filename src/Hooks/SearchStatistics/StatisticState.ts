@@ -2,15 +2,18 @@ import { PoolDice } from "../../Models";
 import { RollContainer } from "../../Models/Roll";
 import { PoolCombination } from "../../Models/Statistics";
 
-export interface StatisticsState {
-	isLoading: boolean;
+export type StatisticsState = StatisticsResults & StatisticsDice;
+
+export interface StatisticsResults {
 	poolCombination: PoolCombination;
 	poolRoll: RollContainer;
+}
+
+export interface StatisticsDice {
 	searchDice: PoolDice[];
 }
 
 export const InitialState: StatisticsState = {
-	isLoading: true,
 	poolRoll: {
 		positiveRolls: {
 			dice: [],
