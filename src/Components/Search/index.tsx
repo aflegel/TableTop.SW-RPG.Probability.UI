@@ -19,6 +19,8 @@ const useStyles = makeStyles(() =>
 	}),
 );
 
+const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "Boost", "Setback"];
+
 /**
  * Renders the current search icons as well as a search builder
  */
@@ -49,9 +51,6 @@ export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElemen
 		if (dice.length)
 			setState(dice);
 	};
-
-	const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "Boost", "Setback"];
-
 
 	return <Card>
 		<DiceContext.Provider value={state}>

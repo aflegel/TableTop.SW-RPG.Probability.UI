@@ -1,6 +1,5 @@
 import React, { useEffect, ReactElement } from "react";
 import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, createStyles } from "@material-ui/core";
-
 import { Graph } from "./Graph";
 import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
@@ -19,6 +18,8 @@ const useStyles = makeStyles(() =>
 	})
 );
 
+const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"]
+
 export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
@@ -30,8 +31,6 @@ export const Statistics = (): ReactElement => {
 	useEffect(() => {
 		getStatisticsAsync(statistics.searchDice);
 	}, [statistics.searchDice]);
-
-	const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"]
 
 	return (<div className={classes.root}>
 
