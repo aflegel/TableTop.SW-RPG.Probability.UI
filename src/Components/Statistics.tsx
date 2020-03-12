@@ -6,6 +6,7 @@ import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
 import { ResultListContainer } from "./ResultList";
+import { DieSymbol } from "../Models";
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -30,6 +31,8 @@ export const Statistics = (): ReactElement => {
 		getStatisticsAsync(statistics.searchDice);
 	}, [statistics.searchDice]);
 
+	const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"]
+
 	return (<div className={classes.root}>
 
 		<Grid container>
@@ -47,18 +50,13 @@ export const Statistics = (): ReactElement => {
 							{!hasData && <p>No data was returned for the query</p>}
 						</Typography>
 						<List>
-							<ListItem divider>
-								<Graph {...statistics} mode="Success" />
-							</ListItem>
-							<ListItem divider>
-								<Graph {...statistics} mode="Advantage" />
-							</ListItem>
-							<ListItem divider>
-								<Graph {...statistics} mode="Triumph" />
-							</ListItem>
-							<ListItem>
-								<Graph {...statistics} mode="Despair" />
-							</ListItem>
+							{
+								list.map(graph => (
+									<ListItem divider key={graph}>
+										<Graph {...statistics} mode={graph} />
+									</ListItem>
+								))
+							}
 							<ListItem>
 								<ResultListContainer {...statistics} resultCallback={fetchResults} />
 							</ListItem>
