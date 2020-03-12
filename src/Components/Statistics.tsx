@@ -28,9 +28,10 @@ export const Statistics = (): ReactElement => {
 
 	useEffect(() => {
 		getStatisticsAsync(statistics.searchDice);
-	}, []);
+	}, [statistics.searchDice]);
 
 	return (<div className={classes.root}>
+
 		<Grid container>
 			<Grid item xs={12}>
 				<Search {...statistics} searchCallback={getStatisticsAsync} />

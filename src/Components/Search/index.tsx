@@ -4,16 +4,13 @@ import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles 
 import { DieIncrementer } from "./Incrementer";
 import { StatisticsState } from "../../Hooks/SearchStatistics";
 import { DieType, PoolDice } from "../../Models";
-import { GetQuantityTotal } from "../Graph/Functions";
+import { AddDice, RemoveDice } from "./Functions";
+import { DiceContext } from "../DiceContext";
+
 
 type SearchProps = StatisticsState & SearchCallbackProps;
-
 export interface SearchCallbackProps {
 	searchCallback: Function;
-}
-
-export interface SearchState {
-	dice: PoolDice[];
 }
 
 const useStyles = makeStyles(() =>
@@ -28,13 +25,7 @@ const useStyles = makeStyles(() =>
  * Renders the current search icons as well as a search builder
  */
 export const Search = (props: SearchProps): ReactElement => {
-	const [state, setState] = React.useState<SearchState>({
-		dice: props.searchDice,
-	});
-
-	const updateState = (dice: PoolDice[]): void => {
-		setState({ dice: dice });
-	};
+	const [state, setState] = React.useState<PoolDice[]>(props.searchDice);
 
 	const classes = useStyles();
 
@@ -43,32 +34,11 @@ export const Search = (props: SearchProps): ReactElement => {
 	 * @param dieType
 	 */
 	const addSearchDie = (dieType: DieType): void => {
-		const dice = state.dice.slice();
-		const existingRecord = dice.find(f => f.dieType === dieType);
-		let count = 6;
 
-		if (dieType === "Ability" || dieType === "Proficiency") {
-			count = GetQuantityTotal(dice.filter(f => f.dieType === "Ability" || f.dieType === "Proficiency"));
-		}
-		else if (dieType === "Difficulty" || dieType === "Challenge") {
-			count = GetQuantityTotal(dice.filter(f => f.dieType === "Difficulty" || f.dieType === "Challenge"));
-		}
-		else {
-			count = GetQuantityTotal(dice.filter(f => f.dieType === dieType));
-		}
+		const dice = AddDice(dieType, state.slice());
 
-		if (count >= 6) {
-			return;
-		}
-
-		if (existingRecord) {
-			existingRecord.quantity += 1;
-		}
-		else {
-			dice.push({ dieType: dieType, quantity: 1 });
-		}
-
-		updateState(dice);
+		if (dice.length)
+			setState(dice);
 	};
 
 	/**
@@ -76,46 +46,31 @@ export const Search = (props: SearchProps): ReactElement => {
 	 * @param dieType
 	 */
 	const removeSearchDie = (dieType: DieType): void => {
-		const dice = state.dice.slice();
-		const existingRecord = dice.find(f => f.dieType === dieType);
+		const dice = RemoveDice(dieType, state.slice());
 
-		if (existingRecord) {
-			if (existingRecord.quantity > 1) {
-				existingRecord.quantity -= 1;
-			}
-			else {
-				dice.splice(dice.indexOf(existingRecord), 1);
-			}
-		}
-
-		updateState(dice);
+		if (dice.length)
+			setState(dice);
 	};
 
+	const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "Boost", "Setback"];
+
+
 	return <Card>
-		<CardContent>
-			<Grid container spacing={10}>
-				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Proficiency" />
+		<DiceContext.Provider value={state}>
+			<CardContent>
+				<Grid container spacing={10}>
+					{
+						list.map(incrementer => (
+							<Grid item xs={6} sm={4} md={2} className={classes.contentCentered} key={incrementer}>
+								<DieIncrementer addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={incrementer} />
+							</Grid>
+						))
+					}
 				</Grid>
-				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Challenge" />
-				</Grid>
-				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Ability" />
-				</Grid>
-				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Difficulty" />
-				</Grid>
-				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Boost" />
-				</Grid>
-				<Grid item xs={6} sm={4} md={2} className={classes.contentCentered}>
-					<DieIncrementer {...state} addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType="Setback" />
-				</Grid>
-			</Grid>
-			<CardActions>
-				<Button color="primary" onClick={(): void => { props.searchCallback(state.dice); }}>Search</Button>
-			</CardActions>
-		</CardContent>
+				<CardActions>
+					<Button color="primary" onClick={(): void => { props.searchCallback(state); }}>Search</Button>
+				</CardActions>
+			</CardContent>
+		</DiceContext.Provider>
 	</Card>;
 };
