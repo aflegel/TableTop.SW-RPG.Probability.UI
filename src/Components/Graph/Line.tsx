@@ -1,7 +1,8 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
 import { AverageLabel, NetLabel, GetProbability, IsBlank, ValueFormatter } from "./Functions";
-import { ModeProps, DataSetProps, ExtendedModeProps } from ".";
+import { ModeProps, ExtendedModeProps, ModeContext } from "./ModeContext";
+import { DataSetProps, DataContext } from "./DataContext";
 
 export type GraphLineProps = ModeProps & ExtendedModeProps & DataSetProps;
 
@@ -14,21 +15,24 @@ export interface LineData {
 /**
  * Renders a standardized chart.js graph given a dataset.
  */
-export const GraphLine = (props: GraphLineProps): ReactElement => {
-	const hasData: boolean = props.filteredSet && props.filteredSet.length > 0;
+export const GraphLine = (): ReactElement => {
+	const { filteredSet, totalFrequency } = useContext(DataContext);
+	const { mode, alternateMode } = useContext(ModeContext);
 
-	const mappedDataSet = props.filteredSet.map(map => ({
+	const hasData: boolean = filteredSet && filteredSet.length > 0;
+
+	const mappedDataSet = filteredSet.map(map => ({
 		quantity: map.quantity,
-		probability: GetProbability(map.frequency, props.totalFrequency),
-		average: !IsBlank(props.alternateMode) ? map.alternateTotal / map.frequency : undefined
+		probability: GetProbability(map.frequency, totalFrequency),
+		average: !IsBlank(alternateMode) ? map.alternateTotal / map.frequency : undefined
 	}));
 
-	const labelFormatter = (label: string | number): string => `${NetLabel(props.mode)}: ${label}`;
+	const labelFormatter = (label: string | number): string => `${NetLabel(mode)}: ${label}`;
 
 	return <ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>
 		<LineChart data={mappedDataSet}>
 			<XAxis dataKey="quantity">
-				<Label value={NetLabel(props.mode)} offset={0} position="insideBottom" />
+				<Label value={NetLabel(mode)} offset={0} position="insideBottom" />
 			</XAxis>
 			<YAxis yAxisId="probability" type="number">
 				<Label value="Probability (%)" angle={-90} position="insideLeft" />
@@ -37,14 +41,14 @@ export const GraphLine = (props: GraphLineProps): ReactElement => {
 			<Legend verticalAlign="top" />
 			{hasData && <Line yAxisId="probability" name="Probability (%)" type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />}
 			{
-				hasData && !IsBlank(props.alternateMode) &&
+				hasData && !IsBlank(alternateMode) &&
 				<YAxis yAxisId="average" type="number" orientation="right">
-					<Label value={AverageLabel(props.alternateMode)} angle={-90} position="insideRight" />
+					<Label value={AverageLabel(alternateMode)} angle={-90} position="insideRight" />
 				</YAxis>
 			}
 			{
-				hasData && !IsBlank(props.alternateMode) &&
-				<Line yAxisId="average" name={AverageLabel(props.alternateMode)} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />
+				hasData && !IsBlank(alternateMode) &&
+				<Line yAxisId="average" name={AverageLabel(alternateMode)} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />
 			}
 		</LineChart>
 	</ResponsiveContainer>;

@@ -1,18 +1,17 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { Symbol } from "../Dice/Symbol";
-import { ExtendedModeProps, ModeProps } from ".";
+import { ModeContext } from "./ModeContext";
 import { IsBlank } from "./Functions";
 
-export type GraphDetailsProps = ModeProps & ExtendedModeProps;
+export const GraphDetails = (): ReactElement => {
+	const { mode, alternateMode, negativeMode } = useContext(ModeContext);
+	const plus = [<Symbol key={mode} dieSymbol={mode} />];
+	const minus = [<Symbol key={negativeMode} dieSymbol={negativeMode} />];
 
-export const GraphDetails = (props: GraphDetailsProps): ReactElement => {
-	const plus = [<Symbol key={props.mode} dieSymbol={props.mode} />];
-	const minus = [<Symbol key={props.negativeMode} dieSymbol={props.negativeMode} />];
-
-	if (props.mode === "Success") {
+	if (mode === "Success") {
 		plus.push(<Symbol dieSymbol="Triumph" />);
 		minus.push(<Symbol dieSymbol="Despair" />);
 	}
@@ -26,16 +25,16 @@ export const GraphDetails = (props: GraphDetailsProps): ReactElement => {
 		<ExpansionPanelDetails>
 			<List>
 				<ListItem>
-					<ListItemText primary={`${props.mode} Symbols`} secondary={join(plus, "and")} />
+					<ListItemText primary={`${mode} Symbols`} secondary={join(plus, "and")} />
 				</ListItem>
 				{
-					!IsBlank(props.alternateMode) &&
+					!IsBlank(alternateMode) &&
 					<>
 						<ListItem>
 							<ListItemText primary="Calculation" secondary={<>({join(plus, "+")}) - ({join(minus, "+")})</>} />
 						</ListItem>
 						<ListItem>
-							<ListItemText primary={`${props.negativeMode} Symbols`} secondary={join(minus, "and")} />
+							<ListItemText primary={`${negativeMode} Symbols`} secondary={join(minus, "and")} />
 						</ListItem>
 					</>
 				}
