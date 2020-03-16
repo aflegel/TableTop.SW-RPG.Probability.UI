@@ -1,6 +1,6 @@
-import { Roll } from "./Roll";
+import { RollResult } from "./RollResult";
 
 export interface RollContainer {
-	positiveRolls: Roll;
-	negativeRolls: Roll;
+	positiveResults: RollResult[];
+	negativeResults: RollResult[];
 }

@@ -11,14 +11,12 @@ import { ModeProps, ModeContext, GetExtendedModes } from "./ModeContext";
 import { DataSetProps, DataContext } from "./DataContext";
 import { GetFrequencyTotal } from "./Functions";
 import { StatisticsResults } from "../../Hooks/SearchStatistics/StatisticState";
-import { PoolStatistic, PoolCombination } from "../../Models/Statistics";
+import { PoolCombination } from "../../Models/Statistics";
 import { DieSymbol } from "../../Models";
 
 const getDataSet = (poolCombination: PoolCombination, mode: DieSymbol): DataSetProps => {
-	let filteredSet: PoolStatistic[] = [];
-	if (poolCombination && poolCombination.statistics) {
-		filteredSet = poolCombination.statistics.filter(f => f.symbol === mode).sort((n1, n2) => n1.quantity - n2.quantity);
-	}
+	const filteredSet = poolCombination?.statistics?.filter(f => f.symbol === mode).sort((n1, n2) => n1.quantity - n2.quantity) ?? [];
+
 	return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
 };
 
