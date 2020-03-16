@@ -29,6 +29,23 @@ const comparisons = [
 	},
 ];
 
+const filterByComparison = (dataSet: PoolStatistic[], comparison: string, quantity: number): PoolStatistic[] => {
+	switch (comparison) {
+		case "GT":
+			return dataSet.filter(f => f.quantity > quantity);
+		case "GTE":
+			return dataSet.filter(f => f.quantity >= quantity);
+		case "E":
+			return dataSet.filter(f => f.quantity === quantity);
+		case "LTE":
+			return dataSet.filter(f => f.quantity <= quantity);
+		case "LT":
+			return dataSet.filter(f => f.quantity < quantity);
+		default:
+			return [];
+	}
+};
+
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
@@ -54,31 +71,6 @@ export const GraphAdvanced = (): ReactElement => {
 		});
 	};
 
-	const getData = (): string => {
-		let set: PoolStatistic[];
-		switch (state.comparison) {
-			case "GT":
-				set = filteredSet.filter(f => f.quantity > state.quantity);
-				break;
-			case "GTE":
-				set = filteredSet.filter(f => f.quantity >= state.quantity);
-				break;
-			case "E":
-				set = filteredSet.filter(f => f.quantity === state.quantity);
-				break;
-			case "LTE":
-				set = filteredSet.filter(f => f.quantity <= state.quantity);
-				break;
-			case "LT":
-				set = filteredSet.filter(f => f.quantity < state.quantity);
-				break;
-			default:
-				set = [];
-		}
-
-		return Format(GetProbability(GetFrequencyTotal(set), totalFrequency), true);
-	};
-
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -95,7 +87,7 @@ export const GraphAdvanced = (): ReactElement => {
 				<TextField type="number" margin="normal" value={state.quantity} onChange={changeQuantity} aria-label="Compare to" />
 				<List>
 					<ListItem>
-						<ListItemText primary="Probability" secondary={`${getData()}%`} />
+						<ListItemText primary="Probability" secondary={`${Format(GetProbability(GetFrequencyTotal(filterByComparison(filteredSet, state.comparison, state.quantity)), totalFrequency), true)}%`} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>
