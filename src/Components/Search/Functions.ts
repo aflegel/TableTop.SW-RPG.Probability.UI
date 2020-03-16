@@ -2,27 +2,23 @@ import { PoolDice } from "../../Models";
 import { DieType } from "../../Models";
 import { GetQuantityTotal } from "../Graph/Functions";
 
+const filterDice = (dieType: DieType, dice: PoolDice[]): PoolDice[] =>
+	(dieType === "Ability" || dieType === "Proficiency")
+		? dice.filter(f => f.dieType === "Ability" || f.dieType === "Proficiency")
+		: (dieType === "Difficulty" || dieType === "Challenge")
+			? dice.filter(f => f.dieType === "Difficulty" || f.dieType === "Challenge")
+			: dice.filter(f => f.dieType === dieType)
+
 /**
  * Increases the quantity or adds a new die to the list
  * @param dieType
  */
 export const AddDice = (dieType: DieType, dice: PoolDice[]): PoolDice[] => {
-	const existingRecord = dice.find(f => f.dieType === dieType);
-	let count = 6;
-
-	if (dieType === "Ability" || dieType === "Proficiency") {
-		count = GetQuantityTotal(dice.filter(f => f.dieType === "Ability" || f.dieType === "Proficiency"));
-	}
-	else if (dieType === "Difficulty" || dieType === "Challenge") {
-		count = GetQuantityTotal(dice.filter(f => f.dieType === "Difficulty" || f.dieType === "Challenge"));
-	}
-	else {
-		count = GetQuantityTotal(dice.filter(f => f.dieType === dieType));
-	}
-
-	if (count >= 6) {
+	if (GetQuantityTotal(filterDice(dieType, dice)) >= 6) {
 		return [];
 	}
+
+	const existingRecord = dice.find(f => f.dieType === dieType);
 
 	if (existingRecord) {
 		existingRecord.quantity += 1;
