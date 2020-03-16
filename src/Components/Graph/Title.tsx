@@ -3,7 +3,6 @@ import { Typography } from "@material-ui/core";
 import { ModeContext } from "./ModeContext";
 import { IsBlank } from "./Functions";
 
-
 export const GraphTitle = (): ReactElement => {
 	const { mode, negativeMode } = useContext(ModeContext);
 

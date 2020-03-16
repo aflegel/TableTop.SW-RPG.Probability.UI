@@ -1,6 +1,5 @@
-import { StatisticsState } from ".";
 import { StatisticsApiActions, FetchStatisticsAction, FetchResultsAction } from "./Actions";
-import { InitialState } from "./StatisticState";
+import { InitialState , StatisticsState} from "./StatisticState";
 
 export const Reducer = (state: StatisticsState, action: StatisticsApiActions): StatisticsState => {
 	switch (action.type) {

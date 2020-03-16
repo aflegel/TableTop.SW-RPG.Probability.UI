@@ -3,18 +3,14 @@
  * @param set
  */
 export const GetFrequencyTotal = (set: import("../../Models/Statistics").PoolStatistic[]): number =>
-	set.reduce((total, obj) => {
-		return total + obj.frequency;
-	}, 0);
+	set.reduce((total, obj) => total + obj.frequency, 0);
 
 /**
  * Returns the total of quantity
  * @param set
  */
 export const GetQuantityTotal = (set: import("../../Models").PoolDice[]): number =>
-	set.reduce((total, obj) => {
-		return total + obj.quantity;
-	}, 0);
+	set.reduce((total, obj) => total + obj.quantity, 0);
 
 /**
  * Gets the average (modified by the statistic frequency)
@@ -22,9 +18,7 @@ export const GetQuantityTotal = (set: import("../../Models").PoolDice[]): number
  * @param frequency
  */
 export const GetAverage = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number): number =>
-	set.reduce((total, obj) => {
-		return total + obj.quantity * obj.frequency;
-	}, 0) / frequency;
+	set.reduce((total, obj) => total + obj.quantity * obj.frequency, 0) / frequency;
 
 /**
  * Calculates the probability returned as a number between 0 and 100
@@ -39,24 +33,21 @@ export const GetProbability = (numerator: number, denominator: number): number =
  * @param frequency
  * @param mean
  */
-export const GetStandardDeviation = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number, mean: number): number => {
-	// (val - mean) squared * qty
-	const deviationSet = set.map(map => (map.quantity - mean) ** 2 * map.frequency);
-
+export const GetStandardDeviation = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number, mean: number): number =>
 	// sqrt(sum(deviations) / frequency)
-	return Math.sqrt(
-		deviationSet.reduce((total, obj) => {
-			return total + obj;
-		}, 0) / frequency
-	);
-};
+	Math.sqrt(
+		// (val - mean) squared * qty
+		set.map(map => (map.quantity - mean) ** 2 * map.frequency)
+			.reduce((total, obj) => total + obj, 0) / frequency);
+
 
 /**
  * Returns a shortened list of
  * @param dice
  * @param dicer
  */
-export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import("../../Models").DieType[]): import("../../Models").PoolDice[] => pool.filter(f => !!dice.find(die => die === f.dieType));
+export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import("../../Models").DieType[]): import("../../Models").PoolDice[] =>
+	pool.filter(f => !!dice.find(die => die === f.dieType));
 
 /**
  * Formats the number as a comma separated thousands and limited to 4 digits if required

@@ -10,7 +10,7 @@ import { GraphTitle } from "./Title";
 import { ModeProps, ModeContext, GetExtendedModes } from "./ModeContext";
 import { DataSetProps, DataContext } from "./DataContext";
 import { GetFrequencyTotal } from "./Functions";
-import { StatisticsResults } from "../../Hooks/SearchStatistics";
+import { StatisticsResults } from "../../Hooks/SearchStatistics/StatisticState";
 import { PoolStatistic, PoolCombination } from "../../Models/Statistics";
 import { DieSymbol } from "../../Models";
 

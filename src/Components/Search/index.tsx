@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
-import { StatisticsDice } from "../../Hooks/SearchStatistics";
+import { StatisticsDice } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType } from "../../Models";
 import { AddDice, RemoveDice } from "./Functions";
 import { DiceContext } from "../Dice/DiceContext";

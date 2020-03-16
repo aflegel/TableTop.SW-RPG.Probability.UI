@@ -2,16 +2,20 @@ import axios from "axios";
 import { useReducer } from "react";
 
 import { Reducer } from "./Reducer";
-import { InitialState } from "./StatisticState";
+import { InitialState, StatisticsState } from "./StatisticState";
 import { fetchStatisticsAction, fetchResultsAction } from "./Actions";
 import { PoolDice } from "../../Models";
 
-export * from "./StatisticState";
+interface StatisticsHook {
+	statistics: StatisticsState;
+	getStatisticsAsync: (dice: PoolDice[]) => Promise<void>;
+	getResultsAsync: (dice: PoolDice[]) => Promise<void>;
+}
 
 /**
  * Wraps API interactions to search for dice results
  */
-export const useStatistics = () => {
+export const useStatistics = (): StatisticsHook => {
 	const [statistics, dispatch] = useReducer(Reducer, InitialState);
 
 	const jsonHeader = { headers: { "Content-Type": "application/json; charset=utf-8" } };
