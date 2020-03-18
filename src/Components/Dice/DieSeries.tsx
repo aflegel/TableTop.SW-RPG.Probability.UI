@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Die } from "./Die";
 import { PoolDice } from "../../Models";
 
-export interface DieSeriesProps {
+interface DieSeriesProps {
 	dice: PoolDice;
 }
 

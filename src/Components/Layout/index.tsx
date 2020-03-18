@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { NavMenu } from "./NavMenu";
 import { Footer } from "./Footer";
 import { CssBaseline } from "@material-ui/core";
 
-export interface ChildrenProps {
-	children?: React.ReactNode;
+interface ChildrenProps {
+	children?: ReactNode;
 }
 
 export const Layout = (props: ChildrenProps): ReactElement =>

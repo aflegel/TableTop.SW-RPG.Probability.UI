@@ -1,7 +1,7 @@
 ﻿import React, { ReactElement } from "react";
 import { DieSymbol } from "../../Models";
 
-export interface SymbolProps {
+interface SymbolProps {
 	dieSymbol: DieSymbol;
 }
 

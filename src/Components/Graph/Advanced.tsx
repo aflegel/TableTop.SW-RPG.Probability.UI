@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from "react";
+import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText, MenuItem, TextField } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -29,54 +29,46 @@ const comparisons = [
 	},
 ];
 
+const filterByComparison = (dataSet: PoolStatistic[], comparison: string, quantity: number): PoolStatistic[] => {
+	switch (comparison) {
+		case "GT":
+			return dataSet.filter(f => f.quantity > quantity);
+		case "GTE":
+			return dataSet.filter(f => f.quantity >= quantity);
+		case "E":
+			return dataSet.filter(f => f.quantity === quantity);
+		case "LTE":
+			return dataSet.filter(f => f.quantity <= quantity);
+		case "LT":
+			return dataSet.filter(f => f.quantity < quantity);
+		default:
+			return [];
+	}
+};
+
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
 export const GraphAdvanced = (): ReactElement => {
 	const { filteredSet, totalFrequency } = useContext(DataContext);
 
-	const [state, setState] = React.useState({
+	const [state, setState] = useState({
 		comparison: "LT",
 		quantity: 0
 	});
 
-	const changeComparison = (event: React.ChangeEvent<HTMLInputElement>): void => {
+	const changeComparison = (event: ChangeEvent<HTMLInputElement>): void => {
 		setState({
 			...state,
 			comparison: event.target.value,
 		});
 	};
 
-	const changeQuantity = (event: React.ChangeEvent<HTMLInputElement>): void => {
+	const changeQuantity = (event: ChangeEvent<HTMLInputElement>): void => {
 		setState({
 			...state,
 			quantity: +event.target.value,
 		});
-	};
-
-	const getData = (): string => {
-		let set: PoolStatistic[];
-		switch (state.comparison) {
-			case "GT":
-				set = filteredSet.filter(f => f.quantity > state.quantity);
-				break;
-			case "GTE":
-				set = filteredSet.filter(f => f.quantity >= state.quantity);
-				break;
-			case "E":
-				set = filteredSet.filter(f => f.quantity === state.quantity);
-				break;
-			case "LTE":
-				set = filteredSet.filter(f => f.quantity <= state.quantity);
-				break;
-			case "LT":
-				set = filteredSet.filter(f => f.quantity < state.quantity);
-				break;
-			default:
-				set = [];
-		}
-
-		return Format(GetProbability(GetFrequencyTotal(set), totalFrequency), true);
 	};
 
 	return (
@@ -95,7 +87,7 @@ export const GraphAdvanced = (): ReactElement => {
 				<TextField type="number" margin="normal" value={state.quantity} onChange={changeQuantity} aria-label="Compare to" />
 				<List>
 					<ListItem>
-						<ListItemText primary="Probability" secondary={`${getData()}%`} />
+						<ListItemText primary="Probability" secondary={`${Format(GetProbability(GetFrequencyTotal(filterByComparison(filteredSet, state.comparison, state.quantity)), totalFrequency), true)}%`} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>

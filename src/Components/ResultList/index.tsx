@@ -1,10 +1,9 @@
 import React, { ReactElement } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { RollResultList } from "./ResultList";
-
 import { RollContainer } from "../../Models/Roll";
 
-export interface GraphResultListProps {
+interface GraphResultListProps {
 	poolRoll: RollContainer;
 	resultCallback: Function;
 }

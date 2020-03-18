@@ -1,11 +1,11 @@
-import React from "react";
+import { createContext } from "react";
 import { DieSymbol } from "../../Models";
 
 export interface ModeProps {
 	mode: DieSymbol;
 }
 
-export interface ExtendedModeProps {
+interface ExtendedModeProps {
 	negativeMode: DieSymbol;
 	alternateMode: DieSymbol;
 }
@@ -27,4 +27,4 @@ export const GetExtendedModes = (mode: DieSymbol): ExtendedModeProps & ModeProps
 	}
 };
 
-export const ModeContext = React.createContext(emptyMode);
+export const ModeContext = createContext(emptyMode);
