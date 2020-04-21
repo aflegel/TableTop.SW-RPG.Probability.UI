@@ -26,7 +26,6 @@ const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "B
  */
 export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElement => {
 	const [state, setState] = useState(props.searchDice);
-
 	const classes = useStyles();
 
 	/**

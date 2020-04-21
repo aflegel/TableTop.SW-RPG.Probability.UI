@@ -18,10 +18,10 @@ export const ResultListContainer = (props: GraphResultListProps): ReactElement =
 			<Button color="primary" onClick={(): void => { props.resultCallback(); }}>Results</Button>
 		</Grid>
 		<Grid item xs={12} md={6}>
-			<RollResultList poolRoll={props.poolRoll.positiveRolls}></RollResultList>
+			<RollResultList poolRoll={props.poolRoll.positiveResults}></RollResultList>
 		</Grid>
 		<Grid item xs={12} md={6}>
-			<RollResultList poolRoll={props.poolRoll.negativeRolls}></RollResultList>
+			<RollResultList poolRoll={props.poolRoll.negativeResults}></RollResultList>
 		</Grid>
 	</Grid>;
 };

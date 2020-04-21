@@ -24,7 +24,7 @@ export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
 
-	const hasData = statistics.poolCombination && statistics.poolCombination.dice;
+	const hasData = statistics?.poolCombination?.dice?.length;
 
 	const fetchResults = () => getResultsAsync(statistics.poolCombination.dice);
 

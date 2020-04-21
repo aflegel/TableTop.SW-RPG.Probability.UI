@@ -15,14 +15,8 @@ export interface StatisticsDice {
 
 export const InitialState: StatisticsState = {
 	poolRoll: {
-		positiveRolls: {
-			dice: [],
-			results: []
-		},
-		negativeRolls: {
-			dice: [],
-			results: []
-		},
+		positiveResults: [],
+		negativeResults: [],
 	},
 	poolCombination: {
 		statistics: [],

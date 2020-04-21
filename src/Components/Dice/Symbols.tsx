@@ -45,4 +45,4 @@ const symbolSorter = (a: RollSymbol, b: RollSymbol): number => {
  * Returns a sorted array of icons for the given dice set
  */
 export const Symbols = (props: SymbolsProps): ReactElement =>
-	<>{props.symbols && props.symbols.sort(symbolSorter).map(icon => <SymbolSeries symbol={icon} key={`${icon.symbol}${icon.quantity}`} />)}</>;
+	<>{props?.symbols?.sort(symbolSorter).map(icon => <SymbolSeries symbol={icon} key={`${icon.symbol}${icon.quantity}`} />)}</>;

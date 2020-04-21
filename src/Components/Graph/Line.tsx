@@ -11,7 +11,7 @@ export const GraphLine = (): ReactElement => {
 	const { filteredSet, totalFrequency } = useContext(DataContext);
 	const { mode, alternateMode } = useContext(ModeContext);
 
-	const hasData: boolean = filteredSet && filteredSet.length > 0;
+	const hasData = filteredSet?.length;
 
 	const mappedDataSet = filteredSet.map(map => ({
 		quantity: map.quantity,

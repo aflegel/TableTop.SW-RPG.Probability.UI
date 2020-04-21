@@ -45,4 +45,4 @@ const dieSorter = (a: PoolDice, b: PoolDice): number => {
  * Returns a sorted array of icons for the given dice set
  */
 export const Dice = (props: DiceProps): ReactElement =>
-	<>{props.dice && props.dice.sort(dieSorter).map(item => <DieSeries dice={item} key={`${item.dieType}${item.quantity}`} />)}</>;
+	<>{props?.dice?.sort(dieSorter).map(item => <DieSeries dice={item} key={`${item.dieType}${item.quantity}`} />)}</>;
