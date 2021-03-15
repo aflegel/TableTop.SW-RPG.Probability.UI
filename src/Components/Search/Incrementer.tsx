@@ -9,8 +9,8 @@ import { DiceContext } from "../Dice/DiceContext";
 
 interface DieIncrementer {
 	dieType: DieType;
-	addDieCallback: Function;
-	removeDieCallback: Function;
+	addDieCallback: (param: DieType) => void;
+	removeDieCallback: (param: DieType) => void;
 }
 
 /**
@@ -19,24 +19,32 @@ interface DieIncrementer {
 export const DieIncrementer = (props: DieIncrementer): ReactElement => {
 	const dice = useContext(DiceContext);
 
-	const die = dice ? dice.find(f => f.dieType === props.dieType) : undefined;
+	const die = dice ? dice.find((f) => f.dieType === props.dieType) : undefined;
 
-	return <>
-		<IconButton
-			color="secondary"
-			aria-label={`Add one ${props.dieType}`}
-			onClick={(): void => { props.addDieCallback(props.dieType); }}>
-			<AddIcon />
-		</IconButton>
-		<Typography variant="h5">
-			<Die dieType={props.dieType} ariaLabel={props.dieType} />
-		</Typography>
-		<Typography variant="h4">{die ? die.quantity : 0}</Typography>
-		<IconButton
-			color="secondary"
-			aria-label={`Remove one ${props.dieType}`}
-			onClick={(): void => { props.removeDieCallback(props.dieType); }}>
-			<RemoveIcon />
-		</IconButton>
-	</>;
+	return (
+		<>
+			<IconButton
+				color="secondary"
+				aria-label={`Add one ${props.dieType}`}
+				onClick={(): void => {
+					props.addDieCallback(props.dieType);
+				}}
+			>
+				<AddIcon />
+			</IconButton>
+			<Typography variant="h5">
+				<Die dieType={props.dieType} ariaLabel={props.dieType} />
+			</Typography>
+			<Typography variant="h4">{die ? die.quantity : 0}</Typography>
+			<IconButton
+				color="secondary"
+				aria-label={`Remove one ${props.dieType}`}
+				onClick={(): void => {
+					props.removeDieCallback(props.dieType);
+				}}
+			>
+				<RemoveIcon />
+			</IconButton>
+		</>
+	);
 };

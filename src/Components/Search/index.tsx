@@ -3,20 +3,20 @@ import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles 
 
 import { DieIncrementer } from "./Incrementer";
 import { StatisticsDice } from "../../Hooks/SearchStatistics/StatisticState";
-import { DieType } from "../../Models";
+import { DieType, PoolDice } from "../../Models";
 import { AddDice, RemoveDice } from "./Functions";
 import { DiceContext } from "../Dice/DiceContext";
 
 interface SearchCallbackProps {
-	searchCallback: Function;
+	searchCallback: (param: PoolDice[]) => void;
 }
 
 const useStyles = makeStyles(() =>
 	createStyles({
 		contentCentered: {
 			textAlign: "center",
-		}
-	}),
+		},
+	})
 );
 
 const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "Boost", "Setback"];
@@ -33,11 +33,9 @@ export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElemen
 	 * @param dieType
 	 */
 	const addSearchDie = (dieType: DieType): void => {
-
 		const dice = AddDice(dieType, state.slice());
 
-		if (dice.length)
-			setState(dice);
+		if (dice.length) setState(dice);
 	};
 
 	/**
@@ -47,26 +45,32 @@ export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElemen
 	const removeSearchDie = (dieType: DieType): void => {
 		const dice = RemoveDice(dieType, state.slice());
 
-		if (dice.length)
-			setState(dice);
+		if (dice.length) setState(dice);
 	};
 
-	return <Card>
-		<DiceContext.Provider value={state}>
-			<CardContent>
-				<Grid container spacing={10}>
-					{
-						list.map(incrementer => (
+	return (
+		<Card>
+			<DiceContext.Provider value={state}>
+				<CardContent>
+					<Grid container spacing={10}>
+						{list.map((incrementer) => (
 							<Grid item xs={6} sm={4} md={2} className={classes.contentCentered} key={incrementer}>
 								<DieIncrementer addDieCallback={addSearchDie} removeDieCallback={removeSearchDie} dieType={incrementer} />
 							</Grid>
-						))
-					}
-				</Grid>
-				<CardActions>
-					<Button color="primary" onClick={(): void => { props.searchCallback(state); }}>Search</Button>
-				</CardActions>
-			</CardContent>
-		</DiceContext.Provider>
-	</Card>;
+						))}
+					</Grid>
+					<CardActions>
+						<Button
+							color="primary"
+							onClick={(): void => {
+								props.searchCallback(state);
+							}}
+						>
+							Search
+						</Button>
+					</CardActions>
+				</CardContent>
+			</DiceContext.Provider>
+		</Card>
+	);
 };
