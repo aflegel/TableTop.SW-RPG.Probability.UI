@@ -11,9 +11,9 @@ const useStyles = makeStyles(() =>
 	createStyles({
 		dieStroke: {
 			WebkitTextStrokeWidth: "1px",
-			WebkitTextStrokeColor: "black"
-		}
-	}),
+			WebkitTextStrokeColor: "black",
+		},
+	})
 );
 
 const dieSize = (dieType: DieType): number => {

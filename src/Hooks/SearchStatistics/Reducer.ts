@@ -1,5 +1,5 @@
 import { StatisticsApiActions, FetchStatisticsAction, FetchResultsAction } from "./Actions";
-import { InitialState , StatisticsState} from "./StatisticState";
+import { InitialState, StatisticsState } from "./StatisticState";
 
 export const Reducer = (state: StatisticsState, action: StatisticsApiActions): StatisticsState => {
 	switch (action.type) {
@@ -15,7 +15,7 @@ export const Reducer = (state: StatisticsState, action: StatisticsApiActions): S
 					...state,
 					poolCombination: {
 						statistics: [],
-						dice: []
+						dice: [],
 					},
 				};
 			}

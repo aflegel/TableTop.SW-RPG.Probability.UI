@@ -5,7 +5,15 @@ import { Symbol } from "../Dice/Symbol";
 import { ModeContext } from "./ModeContext";
 import { IsBlank } from "./Functions";
 
-const join = (symbols: ReactElement[], separator: string): ReactElement => <>{symbols.reduce((prev, curr) => <>{prev} {separator} {curr}</>)}</>;
+const join = (symbols: ReactElement[], separator: string): ReactElement => (
+	<>
+		{symbols.reduce((prev, curr) => (
+			<>
+				{prev} {separator} {curr}
+			</>
+		))}
+	</>
+);
 
 export const GraphDetails = (): ReactElement => {
 	const { mode, alternateMode, negativeMode } = useContext(ModeContext);
@@ -17,27 +25,35 @@ export const GraphDetails = (): ReactElement => {
 		minus.push(<Symbol dieSymbol="Despair" />);
 	}
 
-	return <ExpansionPanel>
-		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-			<Typography>Symbols and Calculations</Typography>
-		</ExpansionPanelSummary>
-		<ExpansionPanelDetails>
-			<List>
-				<ListItem>
-					<ListItemText primary={`${mode} Symbols`} secondary={join(plus, "and")} />
-				</ListItem>
-				{
-					!IsBlank(alternateMode) &&
-					<>
-						<ListItem>
-							<ListItemText primary="Calculation" secondary={<>({join(plus, "+")}) - ({join(minus, "+")})</>} />
-						</ListItem>
-						<ListItem>
-							<ListItemText primary={`${negativeMode} Symbols`} secondary={join(minus, "and")} />
-						</ListItem>
-					</>
-				}
-			</List>
-		</ExpansionPanelDetails>
-	</ExpansionPanel>;
+	return (
+		<ExpansionPanel>
+			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+				<Typography>Symbols and Calculations</Typography>
+			</ExpansionPanelSummary>
+			<ExpansionPanelDetails>
+				<List>
+					<ListItem>
+						<ListItemText primary={`${mode} Symbols`} secondary={join(plus, "and")} />
+					</ListItem>
+					{!IsBlank(alternateMode) && (
+						<>
+							<ListItem>
+								<ListItemText
+									primary="Calculation"
+									secondary={
+										<>
+											({join(plus, "+")}) - ({join(minus, "+")})
+										</>
+									}
+								/>
+							</ListItem>
+							<ListItem>
+								<ListItemText primary={`${negativeMode} Symbols`} secondary={join(minus, "and")} />
+							</ListItem>
+						</>
+					)}
+				</List>
+			</ExpansionPanelDetails>
+		</ExpansionPanel>
+	);
 };

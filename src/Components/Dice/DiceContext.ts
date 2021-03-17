@@ -3,4 +3,4 @@ import { PoolDice } from "../../Models";
 
 const emptyData: PoolDice[] = [];
 
-export const DiceContext = createContext(emptyData)
+export const DiceContext = createContext(emptyData);

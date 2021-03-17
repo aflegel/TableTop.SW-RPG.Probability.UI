@@ -22,7 +22,7 @@ export const useStatistics = (): StatisticsHook => {
 
 	/**
 	 * Gets dice statistics from the API.
- 	*/
+	 */
 	const getStatisticsAsync = async (dice: PoolDice[]): Promise<void> => {
 		const result = await axios.post(`http://localhost:62546/Search`, dice, jsonHeader);
 		dispatch(fetchStatisticsAction(result.data));

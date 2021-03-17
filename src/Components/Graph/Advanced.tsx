@@ -32,15 +32,15 @@ const comparisons = [
 const filterByComparison = (dataSet: PoolStatistic[], comparison: string, quantity: number): PoolStatistic[] => {
 	switch (comparison) {
 		case "GT":
-			return dataSet.filter(f => f.quantity > quantity);
+			return dataSet.filter((f) => f.quantity > quantity);
 		case "GTE":
-			return dataSet.filter(f => f.quantity >= quantity);
+			return dataSet.filter((f) => f.quantity >= quantity);
 		case "E":
-			return dataSet.filter(f => f.quantity === quantity);
+			return dataSet.filter((f) => f.quantity === quantity);
 		case "LTE":
-			return dataSet.filter(f => f.quantity <= quantity);
+			return dataSet.filter((f) => f.quantity <= quantity);
 		case "LT":
-			return dataSet.filter(f => f.quantity < quantity);
+			return dataSet.filter((f) => f.quantity < quantity);
 		default:
 			return [];
 	}
@@ -54,7 +54,7 @@ export const GraphAdvanced = (): ReactElement => {
 
 	const [state, setState] = useState({
 		comparison: "LT",
-		quantity: 0
+		quantity: 0,
 	});
 
 	const changeComparison = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -78,7 +78,7 @@ export const GraphAdvanced = (): ReactElement => {
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<TextField select margin="normal" value={state.comparison} onChange={changeComparison} aria-label="Comparison">
-					{comparisons.map(option => (
+					{comparisons.map((option) => (
 						<MenuItem key={option.value} value={option.value}>
 							{option.label}
 						</MenuItem>
@@ -87,7 +87,10 @@ export const GraphAdvanced = (): ReactElement => {
 				<TextField type="number" margin="normal" value={state.quantity} onChange={changeQuantity} aria-label="Compare to" />
 				<List>
 					<ListItem>
-						<ListItemText primary="Probability" secondary={`${Format(GetProbability(GetFrequencyTotal(filterByComparison(filteredSet, state.comparison, state.quantity)), totalFrequency), true)}%`} />
+						<ListItemText
+							primary="Probability"
+							secondary={`${Format(GetProbability(GetFrequencyTotal(filterByComparison(filteredSet, state.comparison, state.quantity)), totalFrequency), true)}%`}
+						/>
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>

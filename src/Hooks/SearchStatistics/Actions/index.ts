@@ -9,14 +9,13 @@ export * from "./FetchResults";
 // Action interfaces
 export type StatisticsApiActions = FetchStatistics | FetchResults;
 
-
 // Action creators
 export const fetchStatisticsAction = (combination: PoolCombination): FetchStatistics => ({
 	poolCombination: combination,
-	type: FetchStatisticsAction
+	type: FetchStatisticsAction,
 });
 
 export const fetchResultsAction = (rolls: RollContainer): FetchResults => ({
 	poolRoll: rolls,
-	type: FetchResultsAction
+	type: FetchResultsAction,
 });

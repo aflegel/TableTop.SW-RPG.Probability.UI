@@ -13,8 +13,8 @@ interface ExtendedModeProps {
 const emptyMode: ExtendedModeProps & ModeProps = {
 	mode: "Success",
 	negativeMode: "Failure",
-	alternateMode: "Advantage"
-}
+	alternateMode: "Advantage",
+};
 
 export const GetExtendedModes = (mode: DieSymbol): ExtendedModeProps & ModeProps => {
 	switch (mode) {
