@@ -60,7 +60,7 @@
 			"prefer-arrow-callback": "warn",
 			"require-await": "error",
 			"@typescript-eslint/indent": [
-				"error",
+				"warn",
 				"tab"
 			],
 			"@typescript-eslint/explicit-function-return-type": "warn"
