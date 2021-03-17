@@ -15,7 +15,7 @@ import { PoolCombination } from "../../Models/Statistics";
 import { DieSymbol } from "../../Models";
 
 const getDataSet = (poolCombination: PoolCombination, mode: DieSymbol): DataSetProps => {
-	const filteredSet = poolCombination?.statistics?.filter(f => f.symbol === mode).sort((n1, n2) => n1.quantity - n2.quantity) ?? [];
+	const filteredSet = poolCombination?.statistics?.filter((f) => f.symbol === mode).sort((n1, n2) => n1.quantity - n2.quantity) ?? [];
 
 	return { filteredSet: filteredSet, totalFrequency: GetFrequencyTotal(filteredSet) };
 };
@@ -23,7 +23,7 @@ const getDataSet = (poolCombination: PoolCombination, mode: DieSymbol): DataSetP
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
-export const Graph = (props: StatisticsResults & ModeProps): ReactElement =>
+export const Graph = (props: StatisticsResults & ModeProps): ReactElement => (
 	<Grid container>
 		<DataContext.Provider value={getDataSet(props.poolCombination, props.mode)}>
 			<ModeContext.Provider value={GetExtendedModes(props.mode)}>
@@ -49,4 +49,5 @@ export const Graph = (props: StatisticsResults & ModeProps): ReactElement =>
 				</Grid>
 			</ModeContext.Provider>
 		</DataContext.Provider>
-	</Grid>;
+	</Grid>
+);

@@ -7,10 +7,11 @@ interface ChildrenProps {
 	children?: ReactNode;
 }
 
-export const Layout = (props: ChildrenProps): ReactElement =>
+export const Layout = (props: ChildrenProps): ReactElement => (
 	<div className="light-green darken-2">
 		<CssBaseline />
 		<NavMenu />
 		<div className="container">{props.children}</div>
 		<Footer />
-	</div>;
+	</div>
+);

@@ -20,7 +20,10 @@ export const InitialState: StatisticsState = {
 	},
 	poolCombination: {
 		statistics: [],
-		dice: []
+		dice: [],
 	},
-	searchDice: [{ dieType: "Ability", quantity: 1 }, { dieType: "Difficulty", quantity: 1 }]
+	searchDice: [
+		{ dieType: "Ability", quantity: 1 },
+		{ dieType: "Difficulty", quantity: 1 },
+	],
 };

@@ -13,12 +13,12 @@ const useStyles = makeStyles(() =>
 			flexGrow: 1,
 		},
 		bottomSpace: {
-			margin: "40px 0"
-		}
+			margin: "40px 0",
+		},
 	})
 );
 
-const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"]
+const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"];
 
 export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
@@ -32,38 +32,36 @@ export const Statistics = (): ReactElement => {
 		getStatisticsAsync(statistics.searchDice);
 	}, [statistics.searchDice]);
 
-	return (<div className={classes.root}>
-
-		<Grid container>
-			<Grid item xs={12}>
-				<Search searchDice={statistics.searchDice} searchCallback={getStatisticsAsync} />
-			</Grid>
-			<Grid item xs={12} className={classes.bottomSpace}>
-				<Card>
-					<CardContent>
-						<Typography gutterBottom variant="h2" component="h2">
-							Probability Breakdown
-						</Typography>
-						<Typography gutterBottom variant="h5" component="h2">
-							{hasData && <Dice dice={statistics.poolCombination.dice} />}
-							{!hasData && <p>No data was returned for the query</p>}
-						</Typography>
-						<List>
-							{
-								list.map(graph => (
+	return (
+		<div className={classes.root}>
+			<Grid container>
+				<Grid item xs={12}>
+					<Search searchDice={statistics.searchDice} searchCallback={getStatisticsAsync} />
+				</Grid>
+				<Grid item xs={12} className={classes.bottomSpace}>
+					<Card>
+						<CardContent>
+							<Typography gutterBottom variant="h2" component="h2">
+								Probability Breakdown
+							</Typography>
+							<Typography gutterBottom variant="h5" component="h2">
+								{hasData && <Dice dice={statistics.poolCombination.dice} />}
+								{!hasData && <p>No data was returned for the query</p>}
+							</Typography>
+							<List>
+								{list.map((graph) => (
 									<ListItem divider key={graph}>
 										<Graph {...statistics} mode={graph} />
 									</ListItem>
-								))
-							}
-							<ListItem>
-								<ResultListContainer {...statistics} resultCallback={fetchResults} />
-							</ListItem>
-						</List>
-					</CardContent>
-				</Card>
+								))}
+								<ListItem>
+									<ResultListContainer {...statistics} resultCallback={fetchResults} />
+								</ListItem>
+							</List>
+						</CardContent>
+					</Card>
+				</Grid>
 			</Grid>
-		</Grid>
-	</div>
+		</div>
 	);
 };

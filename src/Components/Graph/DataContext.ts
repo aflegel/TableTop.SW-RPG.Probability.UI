@@ -8,8 +8,7 @@ export interface DataSetProps {
 
 const emptyData: DataSetProps = {
 	filteredSet: [],
-	totalFrequency: 0
+	totalFrequency: 0,
 };
 
 export const DataContext = createContext(emptyData);
-

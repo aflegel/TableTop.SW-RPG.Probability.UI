@@ -2,23 +2,20 @@
  * Returns the total of frequency
  * @param set
  */
-export const GetFrequencyTotal = (set: import("../../Models/Statistics").PoolStatistic[]): number =>
-	set.reduce((total, obj) => total + obj.frequency, 0);
+export const GetFrequencyTotal = (set: import("../../Models/Statistics").PoolStatistic[]): number => set.reduce((total, obj) => total + obj.frequency, 0);
 
 /**
  * Returns the total of quantity
  * @param set
  */
-export const GetQuantityTotal = (set: import("../../Models").PoolDice[]): number =>
-	set.reduce((total, obj) => total + obj.quantity, 0);
+export const GetQuantityTotal = (set: import("../../Models").PoolDice[]): number => set.reduce((total, obj) => total + obj.quantity, 0);
 
 /**
  * Gets the average (modified by the statistic frequency)
  * @param set
  * @param frequency
  */
-export const GetAverage = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number): number =>
-	set.reduce((total, obj) => total + obj.quantity * obj.frequency, 0) / frequency;
+export const GetAverage = (set: import("../../Models/Statistics").PoolStatistic[], frequency: number): number => set.reduce((total, obj) => total + obj.quantity * obj.frequency, 0) / frequency;
 
 /**
  * Calculates the probability returned as a number between 0 and 100
@@ -37,9 +34,8 @@ export const GetStandardDeviation = (set: import("../../Models/Statistics").Pool
 	// sqrt(sum(deviations) / frequency)
 	Math.sqrt(
 		// (val - mean) squared * qty
-		set.map(map => (map.quantity - mean) ** 2 * map.frequency)
-			.reduce((total, obj) => total + obj, 0) / frequency);
-
+		set.map((map) => (map.quantity - mean) ** 2 * map.frequency).reduce((total, obj) => total + obj, 0) / frequency
+	);
 
 /**
  * Returns a shortened list of
@@ -47,7 +43,7 @@ export const GetStandardDeviation = (set: import("../../Models/Statistics").Pool
  * @param dicer
  */
 export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import("../../Models").DieType[]): import("../../Models").PoolDice[] =>
-	pool.filter(f => !!dice.find(die => die === f.dieType));
+	pool.filter((f) => !!dice.find((die) => die === f.dieType));
 
 /**
  * Formats the number as a comma separated thousands and limited to 4 digits if required
