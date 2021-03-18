@@ -53,10 +53,6 @@ export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import
 // eslint-disable-next-line no-undef
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
-export const AverageLabel = (mode: import("../../Models").DieSymbol): string => `Average ${mode}`;
-
-export const NetLabel = (mode: import("../../Models").DieSymbol): string => `Net ${mode}`;
-
 export const IsBlank = (mode: import("../../Models").DieSymbol): boolean => mode === "Blank";
 
 /**
