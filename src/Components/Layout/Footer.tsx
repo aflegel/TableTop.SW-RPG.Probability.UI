@@ -5,7 +5,7 @@ export const Footer = (): ReactElement => (
 	<AppBar position="static" color="default">
 		<Toolbar>
 			<Typography variant="caption" color="inherit">
-				&copy; 2019 BoutinFlegel
+				&copy; 2021 BoutinFlegel
 			</Typography>
 		</Toolbar>
 	</AppBar>

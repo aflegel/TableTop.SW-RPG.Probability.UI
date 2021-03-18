@@ -5,6 +5,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { PoolStatistic } from "../../Models/Statistics";
 import { Format, GetFrequencyTotal, GetProbability } from "./Functions";
 import { DataContext } from "./DataContext";
+import { FormattedMessage } from "react-intl";
 
 const comparisons = [
 	{
@@ -74,7 +75,9 @@ export const GraphAdvanced = (): ReactElement => {
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Advanced</Typography>
+				<Typography>
+					<FormattedMessage id="Advanced" />
+				</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<TextField select margin="normal" value={state.comparison} onChange={changeComparison} aria-label="Comparison">
@@ -88,7 +91,7 @@ export const GraphAdvanced = (): ReactElement => {
 				<List>
 					<ListItem>
 						<ListItemText
-							primary="Probability"
+							primary={<FormattedMessage id="Advanced.Probability" />}
 							secondary={`${Format(GetProbability(GetFrequencyTotal(filterByComparison(filteredSet, state.comparison, state.quantity)), totalFrequency), true)}%`}
 						/>
 					</ListItem>

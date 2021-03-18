@@ -25,7 +25,7 @@ export const NavMenu = (): ReactElement => {
 								<InputLabel id="language">Language</InputLabel>
 								<Select labelId="language" onChange={handleChange} value={intlWrapper.current.locale}>
 									<MenuItem value="en-us">English</MenuItem>
-									<MenuItem value="jp">Japanese</MenuItem>
+									<MenuItem value="jp">日本語</MenuItem>
 									<MenuItem value="mi">Te Reo</MenuItem>
 								</Select>
 							</FormControl>

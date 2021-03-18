@@ -22,5 +22,11 @@ export const enUs: Record<string, string> = {
 	"Breakdowns.Average": "Average {a}",
 	"Breakdowns.StandardDeviation": "Standard Deviation",
 	Advanced: "Advanced",
+	"Advanced.Probability": "Probability",
+	"Advanced.Compare": "Compare to",
+	"Advanced.And": "and",
 	DataTable: "Data Table",
+	"DataTable.Net": "Net {a}",
+	"DataTable.Frequency": "Frequency",
+	"DataTable.Total": "Total {a}",
 };
