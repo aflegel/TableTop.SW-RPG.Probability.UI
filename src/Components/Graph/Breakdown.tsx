@@ -2,14 +2,16 @@ import React, { ReactElement, useContext } from "react";
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, List, ListItem, ListItemText } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, AverageLabel, IsBlank } from "./Functions";
+import { Format, GetFrequencyTotal, GetAverage, GetStandardDeviation, IsBlank } from "./Functions";
 import { ModeContext } from "./ModeContext";
 import { DataContext } from "./DataContext";
+import { FormattedMessage, useIntl } from "react-intl";
 
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
 export const GraphBreakdown = (): ReactElement => {
+	const intl = useIntl();
 	const { filteredSet, totalFrequency } = useContext(DataContext);
 	const { mode, alternateMode, negativeMode } = useContext(ModeContext);
 
@@ -23,34 +25,42 @@ export const GraphBreakdown = (): ReactElement => {
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Probability Breakdowns</Typography>
+				<Typography>
+					<FormattedMessage id="Breakdowns" />
+				</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<List>
 					<ListItem>
-						<ListItemText primary="Total Frequency" secondary={Format(totalFrequency, false)} />
+						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Total" })} secondary={Format(totalFrequency, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`${mode} Frequency`} secondary={Format(positiveFrequency, false)} />
+						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Frequency" }, { a: intl.messages[`Dice.${mode}`] })} secondary={Format(positiveFrequency, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={`Probability of ${mode}`} secondary={`${Format((positiveFrequency / totalFrequency) * 100, true)}%`} />
+						<ListItemText
+							primary={intl.formatMessage({ id: "Breakdowns.Probability" }, { a: intl.messages[`Dice.${mode}`] })}
+							secondary={`${Format((positiveFrequency / totalFrequency) * 100, true)}%`}
+						/>
 					</ListItem>
 					{!IsBlank(alternateMode) && (
 						<>
 							<ListItem>
-								<ListItemText primary={`${negativeMode} Frequency`} secondary={Format(negativeFrequency, false)} />
+								<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Frequency" }, { a: intl.messages[`Dice.${negativeMode}`] })} secondary={Format(negativeFrequency, false)} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary={`Probability of ${negativeMode}`} secondary={`${Format((negativeFrequency / totalFrequency) * 100, true)}%`} />
+								<ListItemText
+									primary={intl.formatMessage({ id: "Breakdowns.Probability" }, { a: intl.messages[`Dice.${negativeMode}`] })}
+									secondary={`${Format((negativeFrequency / totalFrequency) * 100, true)}%`}
+								/>
 							</ListItem>
 						</>
 					)}
 					<ListItem>
-						<ListItemText primary={AverageLabel(mode)} secondary={Format(average, false)} />
+						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Average" }, { a: intl.messages[`Dice.${mode}`] })} secondary={Format(average, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary="Standard Deviation" secondary={Format(standardDeviation, false)} />
+						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.StandardDeviation" })} secondary={Format(standardDeviation, false)} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>
