@@ -2,6 +2,7 @@ import React, { createContext, ReactElement, ReactNode, useState } from "react";
 import { IntlProvider } from "react-intl";
 import { enUs } from "../Content/en-us";
 import { mi } from "../Content/mi";
+import { jp } from "../Content/jp";
 
 interface IntlWrapper {
 	current: { locale: string; messages: Record<string, string> };
@@ -17,7 +18,9 @@ const fetchMessages = (locale: Locales) => {
 		case "mi":
 			return mi;
 		case "jp":
-			break;
+			return jp;
+		default:
+			return enUs;
 	}
 };
 
@@ -26,11 +29,7 @@ export const IntlWrapperContext = createContext<IntlWrapper>({
 	update: fetchMessages,
 });
 
-interface ChildrenProps {
-	children?: ReactNode;
-}
-
-export const IntlContainer = (props: ChildrenProps): ReactElement => {
+export const IntlContainer = (props: { children?: ReactNode }): ReactElement => {
 	const [userLocale, setUserLocale] = useState({ locale: "en-us", messages: enUs });
 
 	const updateContext = (locale: Locales) => {

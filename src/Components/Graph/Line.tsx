@@ -27,7 +27,7 @@ export const GraphLine = (): ReactElement => {
 		<ResponsiveContainer minWidth={300} minHeight={300} maxHeight={400}>
 			<LineChart data={mappedDataSet}>
 				<XAxis dataKey="quantity">
-					<Label value={intl.formatMessage({ id: "DataTable.Net" }, { a: mode })} offset={0} position="insideBottom" />
+					<Label value={intl.formatMessage({ id: "DataTable.Net" }, { a: intl.messages[`Dice.${mode}`] }) as string} offset={0} position="insideBottom" />
 				</XAxis>
 				<YAxis yAxisId="probability" type="number">
 					<Label value={`${intl.formatMessage({ id: "Advanced.Probability" })} (%)`} angle={-90} position="insideLeft" />
@@ -37,11 +37,18 @@ export const GraphLine = (): ReactElement => {
 				{hasData && <Line yAxisId="probability" name={`${intl.formatMessage({ id: "Advanced.Probability" })} (%)`} type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />}
 				{hasData && !IsBlank(alternateMode) && (
 					<YAxis yAxisId="average" type="number" orientation="right">
-						<Label value={intl.formatMessage({ id: "Breakdowns.Average" }, { a: alternateMode })} angle={-90} position="insideRight" />
+						<Label value={intl.formatMessage({ id: "Breakdowns.Average" }, { a: intl.messages[`Dice.${alternateMode}`] }) as string} angle={-90} position="insideRight" />
 					</YAxis>
 				)}
 				{hasData && !IsBlank(alternateMode) && (
-					<Line yAxisId="average" name={intl.formatMessage({ id: "Breakdowns.Average" }, { a: alternateMode })} type="monotone" dataKey="average" stroke="#8D4A8F" strokeWidth={5} />
+					<Line
+						yAxisId="average"
+						name={intl.formatMessage({ id: "Breakdowns.Average" }, { a: intl.messages[`Dice.${alternateMode}`] }) as string}
+						type="monotone"
+						dataKey="average"
+						stroke="#8D4A8F"
+						strokeWidth={5}
+					/>
 				)}
 			</LineChart>
 		</ResponsiveContainer>
