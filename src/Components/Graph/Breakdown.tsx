@@ -32,35 +32,38 @@ export const GraphBreakdown = (): ReactElement => {
 			<ExpansionPanelDetails>
 				<List>
 					<ListItem>
-						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Total" })} secondary={Format(totalFrequency, false)} />
+						<ListItemText primary={<FormattedMessage id="Breakdowns.Total" />} secondary={Format(totalFrequency, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Frequency" }, { a: intl.messages[`Dice.${mode}`] })} secondary={Format(positiveFrequency, false)} />
+						<ListItemText primary={<FormattedMessage id="Breakdowns.Frequency" values={{ a: intl.messages[`Dice.${mode}`] }} />} secondary={Format(positiveFrequency, false)} />
 					</ListItem>
 					<ListItem>
 						<ListItemText
-							primary={intl.formatMessage({ id: "Breakdowns.Probability" }, { a: intl.messages[`Dice.${mode}`] })}
+							primary={<FormattedMessage id="Breakdowns.Probability" values={{ a: intl.messages[`Dice.${mode}`] }} />}
 							secondary={`${Format((positiveFrequency / totalFrequency) * 100, true)}%`}
 						/>
 					</ListItem>
 					{!IsBlank(alternateMode) && (
 						<>
 							<ListItem>
-								<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Frequency" }, { a: intl.messages[`Dice.${negativeMode}`] })} secondary={Format(negativeFrequency, false)} />
+								<ListItemText
+									primary={<FormattedMessage id="Breakdowns.Frequency" values={{ a: intl.messages[`Dice.${negativeMode}`] }} />}
+									secondary={Format(negativeFrequency, false)}
+								/>
 							</ListItem>
 							<ListItem>
 								<ListItemText
-									primary={intl.formatMessage({ id: "Breakdowns.Probability" }, { a: intl.messages[`Dice.${negativeMode}`] })}
+									primary={<FormattedMessage id="Breakdowns.Probability" values={{ a: intl.messages[`Dice.${negativeMode}`] }} />}
 									secondary={`${Format((negativeFrequency / totalFrequency) * 100, true)}%`}
 								/>
 							</ListItem>
 						</>
 					)}
 					<ListItem>
-						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.Average" }, { a: intl.messages[`Dice.${mode}`] })} secondary={Format(average, false)} />
+						<ListItemText primary={<FormattedMessage id="Breakdowns.Average" values={{ a: intl.messages[`Dice.${mode}`] }} />} secondary={Format(average, false)} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={intl.formatMessage({ id: "Breakdowns.StandardDeviation" })} secondary={Format(standardDeviation, false)} />
+						<ListItemText primary={<FormattedMessage id="Breakdowns.StandardDeviation" />} secondary={Format(standardDeviation, false)} />
 					</ListItem>
 				</List>
 			</ExpansionPanelDetails>
