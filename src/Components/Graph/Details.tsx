@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Symbol } from "../Dice/Symbol";
 import { ModeContext } from "./ModeContext";
 import { IsBlank } from "./Functions";
+import { FormattedMessage } from "react-intl";
 
 const join = (symbols: ReactElement[], separator: string): ReactElement => (
 	<>
@@ -28,7 +29,9 @@ export const GraphDetails = (): ReactElement => {
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Symbols and Calculations</Typography>
+				<Typography>
+					<FormattedMessage id="Symbols" />
+				</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<List>

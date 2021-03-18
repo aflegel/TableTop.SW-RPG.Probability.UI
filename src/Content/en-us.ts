@@ -1,5 +1,3 @@
-import { IntlConfig } from "react-intl";
-
 export const enUs: Record<string, string> = {
 	Title: "En Visualizer",
 	"Dice.Advantage": "Advantage",
@@ -10,18 +8,19 @@ export const enUs: Record<string, string> = {
 	"Dice.Success": "Success",
 	"Dice.Threat": "Threat",
 	"Dice.Triumph": "Triumph",
-};
-
-/**
- * Ideally this will be inferred using the default strategies, but because Te Reo does not have this support we must include the english defaults as well
- */
-export const enConfig: IntlConfig = {
-	locale: "en-us",
-	formats: {},
-	messages: enUs,
-	defaultLocale: "en-us",
-	defaultFormats: {},
-	onError: () => {
-		const test = "";
-	},
+	Search: "Search",
+	Distribution: "Distribution of {a}",
+	"Distribution.And": " and {b}",
+	ProbabilityHeader: "Probability Breakdown",
+	Symbols: "Symbols and Calculations",
+	"Symbols.Mode": "{a} Symbols",
+	"Symbols.Calculation": "Calculation",
+	Breakdowns: "Probability Breakdowns",
+	"Breakdowns.Total": "Total Frequency",
+	"Breakdowns.Frequency": "{a} Frequency",
+	"Breakdowns.Probability": "Probability of {a}",
+	"Breakdowns.Average": "Average {a}",
+	"Breakdowns.StandardDeviation": "Standard Deviation",
+	Advanced: "Advanced",
+	DataTable: "Data Table",
 };

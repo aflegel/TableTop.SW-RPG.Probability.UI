@@ -6,8 +6,6 @@
  * 2. Te Reo has no support at the time of writing in Chrome
  */
 
-import { IntlConfig } from "react-intl";
-
 export const mi: Record<string, string> = {
 	Title: "TR Visualizer",
 	"Dice.Advantage": "Painga",
@@ -18,15 +16,19 @@ export const mi: Record<string, string> = {
 	"Dice.Success": "Angitu",
 	"Dice.Threat": "Fakamanamana",
 	"Dice.Triumph": "Wikitoria",
-};
-
-export const miConfig: IntlConfig = {
-	locale: "mi",
-	formats: {},
-	messages: mi,
-	defaultLocale: "en-us",
-	defaultFormats: {},
-	onError: () => {
-		const test = "";
-	},
+	Search: "Rapu",
+	Distribution: "Tohatoha o {a}",
+	"Distribution.And": " me {b}",
+	ProbabilityHeader: "Pakaruhanga Puku",
+	Symbols: "Tohu me te Tatau",
+	"Symbols.Mode": "{a} Symbols",
+	"Symbols.Calculation": "Calculation",
+	Breakdowns: "Probability Breakdowns",
+	"Breakdowns.Total": "Total Frequency",
+	"Breakdowns.Frequency": "{a} Frequency",
+	"Breakdowns.Probability": "Probability of {a}",
+	"Breakdowns.Average": "Average {a}",
+	"Breakdowns.StandardDeviation": "Standard Deviation",
+	Advanced: "Advanced",
+	DataTable: "Data Table",
 };

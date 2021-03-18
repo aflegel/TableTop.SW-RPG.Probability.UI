@@ -1,10 +1,9 @@
 import { createContext } from "react";
-import { IntlConfig } from "react-intl";
-import { enConfig } from "../Content/en-us";
-import { miConfig } from "../Content/mi";
+import { enUs } from "../Content/en-us";
+import { mi } from "../Content/mi";
 
 export interface IntlWrapper {
-	current: IntlConfig;
+	current: { locale: string; messages: Record<string, string> };
 	update: (locale: Locales) => void;
 }
 
@@ -13,15 +12,15 @@ export type Locales = "mi" | "en-us" | "jp";
 export const fetchMessages = (locale: Locales) => {
 	switch (locale) {
 		case "en-us":
-			return enConfig;
+			return enUs;
 		case "mi":
-			return miConfig;
+			return mi;
 		case "jp":
 			break;
 	}
 };
 
 export const IntlWrapperContext = createContext<IntlWrapper>({
-	current: miConfig,
+	current: { locale: "en-us", messages: enUs },
 	update: fetchMessages,
 });
