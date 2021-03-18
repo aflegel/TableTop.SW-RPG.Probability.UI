@@ -2,8 +2,6 @@
  * Some notes
  *
  * 1. This content should be driven from some connected CMS, but for the sake of simplicity it is included here.
- *
- * 2. Te Reo has no support at the time of writing in Chrome
  */
 
 export const mi: Record<string, string> = {
@@ -23,12 +21,12 @@ export const mi: Record<string, string> = {
 	Symbols: "Tohu me te Tatau",
 	"Symbols.Mode": "{a} Symbols",
 	"Symbols.Calculation": "Calculation",
-	Breakdowns: "Probability Breakdowns",
-	"Breakdowns.Total": "Total Frequency",
-	"Breakdowns.Frequency": "{a} Frequency",
-	"Breakdowns.Probability": "Probability of {a}",
-	"Breakdowns.Average": "Average {a}",
-	"Breakdowns.StandardDeviation": "Standard Deviation",
-	Advanced: "Advanced",
-	DataTable: "Data Table",
+	Breakdowns: "Nga Papahinga Puku",
+	"Breakdowns.Total": "Mahinga Tapeke",
+	"Breakdowns.Frequency": "{a} Auautanga",
+	"Breakdowns.Probability": "Te tupono o {a}",
+	"Breakdowns.Average": "Wawaenga {a}",
+	"Breakdowns.StandardDeviation": "Wehenga Paerewa",
+	Advanced: "Arā Atu Anō",
+	DataTable: "Papa Ripanga",
 };
