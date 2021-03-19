@@ -22,7 +22,9 @@ export const NavMenu = (): ReactElement => {
 					<Grid item>
 						<Typography variant="h6" color="inherit">
 							<FormControl>
-								<InputLabel id="language">Language</InputLabel>
+								<InputLabel id="language">
+									<FormattedMessage id="Language" />
+								</InputLabel>
 								<Select labelId="language" onChange={handleChange} value={intlWrapper.current.locale}>
 									<MenuItem value="en-us">English</MenuItem>
 									<MenuItem value="jp">日本語</MenuItem>

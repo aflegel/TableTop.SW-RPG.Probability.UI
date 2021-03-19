@@ -1,11 +1,6 @@
-/**
- * Some notes
- *
- * 1. This content should be driven from some connected CMS, but for the sake of simplicity it is included here.
- */
-
 export const mi: Record<string, string> = {
-	Title: "TR Visualizer",
+	Title: "Visualizer",
+	Language: "Reo",
 	"Dice.Advantage": "Painga",
 	"Dice.Boost": "Whakarei",
 	"Dice.Despair": "Hepohepo",

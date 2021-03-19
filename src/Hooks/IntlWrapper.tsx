@@ -11,6 +11,11 @@ interface IntlWrapper {
 
 export type Locales = "mi" | "en-us" | "jp";
 
+/**
+ * Some notes
+ *
+ * 1. This content should be driven from some connected CMS, but for the sake of simplicity it is included here.
+ */
 const fetchMessages = (locale: Locales) => {
 	switch (locale) {
 		case "en-us":

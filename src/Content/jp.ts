@@ -1,5 +1,6 @@
 export const jp: Record<string, string> = {
-	Title: "Jp Visualizer",
+	Title: "Visualizer",
+	Language: "語",
 	"Dice.Advantage": "利点",
 	"Dice.Boost": "高める",
 	"Dice.Despair": "絶望",

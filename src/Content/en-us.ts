@@ -1,5 +1,6 @@
 export const enUs: Record<string, string> = {
-	Title: "En Visualizer",
+	Title: "Visualizer",
+	Language: "Language",
 	"Dice.Advantage": "Advantage",
 	"Dice.Boost": "Boost",
 	"Dice.Despair": "Despair",
