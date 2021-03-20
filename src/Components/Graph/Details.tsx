@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Symbol } from "../Dice/Symbol";
 import { ModeContext } from "./ModeContext";
 import { IsBlank } from "./Functions";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const join = (symbols: ReactElement[], separator: string): ReactElement => (
 	<>
@@ -16,6 +17,7 @@ const join = (symbols: ReactElement[], separator: string): ReactElement => (
 );
 
 export const GraphDetails = (): ReactElement => {
+	const intl = useIntl();
 	const { mode, alternateMode, negativeMode } = useContext(ModeContext);
 	const plus = [<Symbol key={mode} dieSymbol={mode} />];
 	const minus = [<Symbol key={negativeMode} dieSymbol={negativeMode} />];
@@ -28,18 +30,20 @@ export const GraphDetails = (): ReactElement => {
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Symbols and Calculations</Typography>
+				<Typography>
+					<FormattedMessage id="Symbols" />
+				</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<List>
 					<ListItem>
-						<ListItemText primary={`${mode} Symbols`} secondary={join(plus, "and")} />
+						<ListItemText primary={<FormattedMessage id="Symbols.Mode" values={{ a: intl.messages[`Dice.${mode}`] }} />} secondary={join(plus, intl.messages["Advanced.And"] as string)} />
 					</ListItem>
 					{!IsBlank(alternateMode) && (
 						<>
 							<ListItem>
 								<ListItemText
-									primary="Calculation"
+									primary={<FormattedMessage id="Symbols.Calculation" />}
 									secondary={
 										<>
 											({join(plus, "+")}) - ({join(minus, "+")})
@@ -48,7 +52,10 @@ export const GraphDetails = (): ReactElement => {
 								/>
 							</ListItem>
 							<ListItem>
-								<ListItemText primary={`${negativeMode} Symbols`} secondary={join(minus, "and")} />
+								<ListItemText
+									primary={<FormattedMessage id="Symbols.Mode" values={{ a: intl.messages[`Dice.${negativeMode}`] }} />}
+									secondary={join(minus, intl.messages["Advanced.And"] as string)}
+								/>
 							</ListItem>
 						</>
 					)}

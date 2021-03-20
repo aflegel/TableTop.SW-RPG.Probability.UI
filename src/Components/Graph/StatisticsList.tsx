@@ -1,9 +1,10 @@
 import React, { ReactElement, useContext } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Format, NetLabel, IsBlank } from "./Functions";
+import { Format, IsBlank } from "./Functions";
 import { ModeContext } from "./ModeContext";
 import { DataContext } from "./DataContext";
+import { FormattedMessage } from "react-intl";
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
@@ -15,15 +16,25 @@ export const GraphStatisticsList = (): ReactElement => {
 	return (
 		<ExpansionPanel>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography>Data Table</Typography>
+				<Typography>
+					<FormattedMessage id="DataTable" />
+				</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell align="right">{NetLabel(mode)}</TableCell>
-							<TableCell align="right">Frequency</TableCell>
-							{!IsBlank(alternateMode) && <TableCell align="right">Total {alternateMode}</TableCell>}
+							<TableCell align="right">
+								<FormattedMessage id="DataTable.Net" values={{ a: mode }} />
+							</TableCell>
+							<TableCell align="right">
+								<FormattedMessage id="DataTable.Frequency" />
+							</TableCell>
+							{!IsBlank(alternateMode) && (
+								<TableCell align="right">
+									<FormattedMessage id="DataTable.Total" values={{ a: alternateMode }} />
+								</TableCell>
+							)}
 						</TableRow>
 					</TableHead>
 					<TableBody>

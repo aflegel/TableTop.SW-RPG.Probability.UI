@@ -6,6 +6,7 @@ import { StatisticsDice } from "../../Hooks/SearchStatistics/StatisticState";
 import { DieType, PoolDice } from "../../Models";
 import { AddDice, RemoveDice } from "./Functions";
 import { DiceContext } from "../Dice/DiceContext";
+import { FormattedMessage } from "react-intl";
 
 interface SearchCallbackProps {
 	searchCallback: (param: PoolDice[]) => void;
@@ -66,7 +67,7 @@ export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElemen
 								props.searchCallback(state);
 							}}
 						>
-							Search
+							<FormattedMessage id="Search" />
 						</Button>
 					</CardActions>
 				</CardContent>

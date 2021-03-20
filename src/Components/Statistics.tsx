@@ -6,6 +6,7 @@ import { useStatistics } from "../Hooks/SearchStatistics";
 import { Dice } from "./Dice/Dice";
 import { ResultListContainer } from "./ResultList";
 import { DieSymbol } from "../Models";
+import { FormattedMessage } from "react-intl";
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -42,7 +43,7 @@ export const Statistics = (): ReactElement => {
 					<Card>
 						<CardContent>
 							<Typography gutterBottom variant="h2" component="h2">
-								Probability Breakdown
+								<FormattedMessage id="ProbabilityHeader" />
 							</Typography>
 							<Typography gutterBottom variant="h5" component="h2">
 								{hasData && <Dice dice={statistics.poolCombination.dice} />}

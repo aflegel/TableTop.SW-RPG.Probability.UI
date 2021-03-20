@@ -12,6 +12,7 @@
 		"node-sass": "^4.14.1",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
+		"react-intl": "^5.13.3",
 		"react-scripts": "^4.0.3",
 		"recharts": "^1.8.5",
 		"sw-rpg-icons": "^1.7.1",
@@ -34,6 +35,37 @@
 		"not ie <= 11",
 		"not op_mini all"
 	],
+	"eslintConfig": {
+		"parser": "@typescript-eslint/parser",
+		"extends": [
+			"eslint:recommended",
+			"plugin:react/recommended",
+			"plugin:@typescript-eslint/recommended"
+		],
+		"parserOptions": {
+			"ecmaVersion": 2020,
+			"sourceType": "module",
+			"ecmaFeatures": {
+				"jsx": true
+			}
+		},
+		"settings": {
+			"react": {
+				"version": "detect"
+			}
+		},
+		"rules": {
+			"no-var": "error",
+			"react/prop-types": "off",
+			"prefer-arrow-callback": "warn",
+			"require-await": "error",
+			"@typescript-eslint/indent": [
+				"warn",
+				"tab"
+			],
+			"@typescript-eslint/explicit-function-return-type": "warn"
+		}
+	},
 	"devDependencies": {
 		"@typescript-eslint/parser": "^4.18.0",
 		"eslint": "^7.22.0",
