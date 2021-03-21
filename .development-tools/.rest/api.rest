@@ -27,3 +27,7 @@ content-type: application/json; charset=utf-8
 		"quantity": 1
 	}
 ]
+
+### Healthcheck
+
+GET http://localhost:62546/HealthCheck
