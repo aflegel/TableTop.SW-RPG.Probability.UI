@@ -30,4 +30,5 @@ export const mi: Record<string, string> = {
 	"DataTable.Net": "{a} Kupenga",
 	"DataTable.Frequency": "Auautanga",
 	"DataTable.Total": "{a} Katoa",
+	BadRequest: "Kaore he raraunga i whakahokia mai mo te uiui",
 };

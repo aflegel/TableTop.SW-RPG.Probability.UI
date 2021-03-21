@@ -3,7 +3,7 @@ import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, create
 import { Graph } from "./Graph";
 import { Search } from "./Search";
 import { useStatistics } from "../Hooks/SearchStatistics";
-import { Dice } from "./Dice/Dice";
+import { StatisticsResponse } from "./StatisticsResponse";
 import { ResultListContainer } from "./ResultList";
 import { DieSymbol } from "../Models";
 import { FormattedMessage } from "react-intl";
@@ -25,8 +25,6 @@ export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
 	const classes = useStyles();
 
-	const hasData = statistics?.poolCombination?.dice?.length;
-
 	const fetchResults = () => getResultsAsync(statistics.poolCombination.dice);
 
 	useEffect(() => {
@@ -46,8 +44,7 @@ export const Statistics = (): ReactElement => {
 								<FormattedMessage id="ProbabilityHeader" />
 							</Typography>
 							<Typography gutterBottom variant="h5" component="h2">
-								{hasData && <Dice dice={statistics.poolCombination.dice} />}
-								{!hasData && <p>No data was returned for the query</p>}
+								<StatisticsResponse statistics={statistics} />
 							</Typography>
 							<List>
 								{list.map((graph) => (
