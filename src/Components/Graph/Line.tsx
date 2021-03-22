@@ -1,9 +1,18 @@
 import React, { ReactElement, useContext } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, Label, ResponsiveContainer } from "recharts";
-import { GetProbability, IsBlank, ValueFormatter } from "./Functions";
+import { Format, GetProbability, IsBlank } from "./Functions";
 import { ModeContext } from "./ModeContext";
 import { DataContext } from "./DataContext";
 import { useIntl } from "react-intl";
+
+/**
+ * A formatter for the popover label in the Graph
+ * @param value
+ * @param name
+ * @param props
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+const ValueFormatter = (value: any, name: any, props: any): string[] => [Format(value, true), name];
 
 /**
  * Renders a standardized chart.js graph given a dataset.

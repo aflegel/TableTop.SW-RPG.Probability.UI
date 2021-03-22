@@ -38,14 +38,6 @@ export const GetStandardDeviation = (set: import("../../Models/Statistics").Pool
 	);
 
 /**
- * Returns a shortened list of
- * @param dice
- * @param dicer
- */
-export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import("../../Models").DieType[]): import("../../Models").PoolDice[] =>
-	pool.filter((f) => !!dice.find((die) => die === f.dieType));
-
-/**
  * Formats the number as a comma separated thousands and limited to 4 digits if required
  * @param predicate
  * @param digits
@@ -54,12 +46,3 @@ export const FilterPool = (pool: import("../../Models").PoolDice[], dice: import
 export const Format = (predicate: number, digits: boolean): string => new Intl.NumberFormat("en-Us", { minimumFractionDigits: digits ? 4 : 0 }).format(predicate);
 
 export const IsBlank = (mode: import("../../Models").DieSymbol): boolean => mode === "Blank";
-
-/**
- * A formatter for the popover label in the Graph
- * @param value
- * @param name
- * @param props
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-export const ValueFormatter = (value: any, name: any, props: any): string[] => [Format(value, true), name];
