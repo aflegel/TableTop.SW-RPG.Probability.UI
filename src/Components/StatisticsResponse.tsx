@@ -1,6 +1,6 @@
 import React from "react";
 import { Dice } from "./Dice/Dice";
-import { StatisticsState } from "../Hooks/SearchStatistics/StatisticState";
+import { StatisticsState } from "../Hooks/StatisticsApi";
 import { FormattedMessage } from "react-intl";
 
 export const StatisticsResponse = (props: { statistics: StatisticsState }) => {

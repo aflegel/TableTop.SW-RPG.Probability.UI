@@ -2,7 +2,7 @@ import React, { useEffect, ReactElement } from "react";
 import { Grid, Card, CardContent, Typography, List, ListItem, makeStyles, createStyles } from "@material-ui/core";
 import { Graph } from "./Graph";
 import { Search } from "./Search";
-import { useStatistics } from "../Hooks/SearchStatistics";
+import { useStatistics } from "../Hooks/StatisticsApi";
 import { StatisticsResponse } from "./StatisticsResponse";
 import { ResultListContainer } from "./ResultList";
 import { DieSymbol } from "../Models";
