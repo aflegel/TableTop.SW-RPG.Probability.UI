@@ -30,4 +30,5 @@ export const jp: Record<string, string> = {
 	"DataTable.Net": "ネット {a}",
 	"DataTable.Frequency": "周波数",
 	"DataTable.Total": "合計{a}",
+	BadRequest: "クエリに対してデータが返されませんでした",
 };

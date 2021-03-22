@@ -1,5 +1,5 @@
 ﻿import React, { ReactElement } from "react";
-import { Grid, Card, CardContent } from "@material-ui/core";
+import { Grid, Card, CardContent, ListItem } from "@material-ui/core";
 
 import { GraphBreakdown } from "./Breakdown";
 import { GraphDetails } from "./Details";
@@ -23,31 +23,39 @@ const getDataSet = (poolCombination: PoolCombination, mode: DieSymbol): DataSetP
 /**
  * Configures the data for a given symbol and renders a graph and a statistics breakdown panel
  */
-export const Graph = (props: StatisticsResults & ModeProps): ReactElement => (
-	<Grid container>
-		<DataContext.Provider value={getDataSet(props.poolCombination, props.mode)}>
-			<ModeContext.Provider value={GetExtendedModes(props.mode)}>
-				<Grid item xs={12}>
-					<Card>
-						<CardContent>
-							<GraphTitle />
-							<GraphLine />
-						</CardContent>
-					</Card>
-				</Grid>
-				<Grid item xs={12} lg={6}>
-					<GraphDetails />
-				</Grid>
-				<Grid item xs={12} lg={6}>
-					<GraphBreakdown />
-				</Grid>
-				<Grid item xs={12} lg={6}>
-					<GraphAdvanced />
-				</Grid>
-				<Grid item xs={12} lg={6}>
-					<GraphStatisticsList />
-				</Grid>
-			</ModeContext.Provider>
-		</DataContext.Provider>
-	</Grid>
-);
+export const Graph = (props: StatisticsResults & ModeProps): ReactElement => {
+	const dataSet = getDataSet(props.poolCombination, props.mode);
+
+	if (dataSet.filteredSet.length > 1)
+		return (
+			<ListItem divider>
+				<DataContext.Provider value={dataSet}>
+					<ModeContext.Provider value={GetExtendedModes(props.mode)}>
+						<Grid container>
+							<Grid item xs={12}>
+								<Card>
+									<CardContent>
+										<GraphTitle />
+										<GraphLine />
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item xs={12} lg={6}>
+								<GraphDetails />
+							</Grid>
+							<Grid item xs={12} lg={6}>
+								<GraphBreakdown />
+							</Grid>
+							<Grid item xs={12} lg={6}>
+								<GraphAdvanced />
+							</Grid>
+							<Grid item xs={12} lg={6}>
+								<GraphStatisticsList />
+							</Grid>
+						</Grid>
+					</ModeContext.Provider>
+				</DataContext.Provider>
+			</ListItem>
+		);
+	else return <></>;
+};

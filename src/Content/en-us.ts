@@ -30,4 +30,5 @@ export const enUs: Record<string, string> = {
 	"DataTable.Net": "Net {a}",
 	"DataTable.Frequency": "Frequency",
 	"DataTable.Total": "Total {a}",
+	BadRequest: "No data was returned for the query",
 };
