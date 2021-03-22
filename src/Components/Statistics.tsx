@@ -40,7 +40,7 @@ export const Statistics = (): ReactElement => {
 				<Grid item xs={12} className={classes.bottomSpace}>
 					<Card>
 						<CardContent>
-							<Typography gutterBottom variant="h2" component="h2">
+							<Typography gutterBottom variant="h2" component="h1">
 								<FormattedMessage id="ProbabilityHeader" />
 							</Typography>
 							<Typography gutterBottom variant="h5" component="h2">
@@ -48,9 +48,7 @@ export const Statistics = (): ReactElement => {
 							</Typography>
 							<List>
 								{list.map((graph) => (
-									<ListItem divider key={graph}>
-										<Graph {...statistics} mode={graph} />
-									</ListItem>
+									<Graph {...statistics} mode={graph} key={graph} />
 								))}
 								<ListItem>
 									<ResultListContainer {...statistics} resultCallback={fetchResults} />
