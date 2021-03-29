@@ -28,7 +28,7 @@ export const useResults = (): StatisticsHook => {
 	const getResultsAsync = async (dice: PoolDice[]): Promise<void> => {
 		try {
 			const result = await axios.post<RollContainer>(`http://localhost:62546/Roll`, dice, jsonHeader);
-			setStatistics({ ...statistics, positiveResults: result.data.positiveResults, negativeResults: result.data.negativeResults });
+			setStatistics({ ...result.data });
 		} catch {
 			setStatistics(InitialState);
 		}
