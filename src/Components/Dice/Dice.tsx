@@ -2,10 +2,6 @@ import React, { ReactElement } from "react";
 import { PoolDice } from "../../Models";
 import { DieSeries } from "./DieSeries";
 
-interface DiceProps {
-	dice: PoolDice[];
-}
-
 const dieSorter = (a: PoolDice, b: PoolDice): number => {
 	switch (a.dieType) {
 		case "Proficiency":
@@ -44,7 +40,7 @@ const dieSorter = (a: PoolDice, b: PoolDice): number => {
 /**
  * Returns a sorted array of icons for the given dice set
  */
-export const Dice = (props: DiceProps): ReactElement => (
+export const Dice = (props: { dice: PoolDice[] }): ReactElement => (
 	<>
 		{props?.dice?.sort(dieSorter).map((item) => (
 			<DieSeries dice={item} key={`${item.dieType}${item.quantity}`} />

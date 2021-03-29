@@ -3,16 +3,11 @@ import { Grid, Button } from "@material-ui/core";
 import { RollResultList } from "./ResultList";
 import { PoolDice } from "../../Models";
 import { useResults } from "../../Hooks/ResultsApi";
-import { Dice } from "../Dice/Dice";
-
-interface GraphResultListProps {
-	dice: PoolDice[];
-}
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const ResultListContainer = (props: GraphResultListProps): ReactElement => {
+export const ResultListContainer = (props: { dice: PoolDice[] }): ReactElement => {
 	const { statistics, clearResults, getResultsAsync } = useResults();
 
 	useEffect(() => {

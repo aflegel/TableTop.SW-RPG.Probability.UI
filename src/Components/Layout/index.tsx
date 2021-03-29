@@ -3,11 +3,7 @@ import { NavMenu } from "./NavMenu";
 import { Footer } from "./Footer";
 import { CssBaseline } from "@material-ui/core";
 
-interface ChildrenProps {
-	children?: ReactNode;
-}
-
-export const Layout = (props: ChildrenProps): ReactElement => (
+export const Layout = (props: { children?: ReactNode }): ReactElement => (
 	<div className="light-green darken-2">
 		<CssBaseline />
 		<NavMenu />

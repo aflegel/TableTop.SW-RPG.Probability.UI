@@ -2,17 +2,12 @@ import React, { ReactElement } from "react";
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TableFooter } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ResultListRow } from "./ResultListRow";
-
 import { RollResult } from "../../Models/Roll";
-
-interface GraphResultListProps {
-	poolRoll: RollResult[];
-}
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const RollResultList = (props: GraphResultListProps): ReactElement => {
+export const RollResultList = (props: { poolRoll: RollResult[] }): ReactElement => {
 	return (
 		<>
 			{!!props.poolRoll?.length && (

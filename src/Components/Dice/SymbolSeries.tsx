@@ -2,14 +2,10 @@ import React, { ReactElement } from "react";
 import { Symbol } from "./Symbol";
 import { RollSymbol } from "../../Models/Roll";
 
-interface SymbolSeriesProps {
-	symbol: RollSymbol;
-}
-
 /**
  * Returns a set icons for the die and quantity
  */
-export const SymbolSeries = (props: SymbolSeriesProps): ReactElement => {
+export const SymbolSeries = (props: { symbol: RollSymbol }): ReactElement => {
 	const output: ReactElement[] = [];
 
 	for (let i = 0; i < props.symbol.quantity; i++) {
