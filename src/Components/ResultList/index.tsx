@@ -30,7 +30,6 @@ export const ResultListContainer = (props: GraphResultListProps): ReactElement =
 				>
 					Results
 				</Button>
-				<Dice dice={props.dice} />
 			</Grid>
 			<Grid item xs={12} md={6}>
 				<RollResultList poolRoll={statistics.positiveResults}></RollResultList>

@@ -29,36 +29,38 @@ const getDataSet = (poolCombination: PoolCombination, mode: DieSymbol): DataSetP
 export const Graph = (props: StatisticsResults & ModeProps): ReactElement => {
 	const dataSet = getDataSet(props.poolCombination, props.mode);
 
-	if (dataSet.filteredSet.length > 1)
-		return (
-			<ListItem divider>
-				<DataContext.Provider value={dataSet}>
-					<ModeContext.Provider value={GetExtendedModes(props.mode)}>
-						<Grid container>
-							<Grid item xs={12}>
-								<Card>
-									<CardContent>
-										<GraphTitle />
-										<GraphLine />
-									</CardContent>
-								</Card>
+	return (
+		<>
+			{dataSet.filteredSet.length > 1 && (
+				<ListItem divider>
+					<DataContext.Provider value={dataSet}>
+						<ModeContext.Provider value={GetExtendedModes(props.mode)}>
+							<Grid container>
+								<Grid item xs={12}>
+									<Card>
+										<CardContent>
+											<GraphTitle />
+											<GraphLine />
+										</CardContent>
+									</Card>
+								</Grid>
+								<Grid item xs={12} lg={6}>
+									<GraphDetails />
+								</Grid>
+								<Grid item xs={12} lg={6}>
+									<GraphBreakdown />
+								</Grid>
+								<Grid item xs={12} lg={6}>
+									<GraphAdvanced />
+								</Grid>
+								<Grid item xs={12} lg={6}>
+									<GraphStatisticsList />
+								</Grid>
 							</Grid>
-							<Grid item xs={12} lg={6}>
-								<GraphDetails />
-							</Grid>
-							<Grid item xs={12} lg={6}>
-								<GraphBreakdown />
-							</Grid>
-							<Grid item xs={12} lg={6}>
-								<GraphAdvanced />
-							</Grid>
-							<Grid item xs={12} lg={6}>
-								<GraphStatisticsList />
-							</Grid>
-						</Grid>
-					</ModeContext.Provider>
-				</DataContext.Provider>
-			</ListItem>
-		);
-	else return <></>;
+						</ModeContext.Provider>
+					</DataContext.Provider>
+				</ListItem>
+			)}
+		</>
+	);
 };

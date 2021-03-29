@@ -24,7 +24,7 @@ export const InitialState: PoolDice[] = [
 	{ dieType: "Difficulty", quantity: 1 },
 ];
 
-const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"];
+const modes: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"];
 
 export const Statistics = (): ReactElement => {
 	const { statistics, getStatisticsAsync } = useStatistics();
@@ -50,12 +50,14 @@ export const Statistics = (): ReactElement => {
 								<StatisticsResponse dice={statistics.dice} />
 							</Typography>
 							<List>
-								{list.map((graph) => (
+								{modes.map((graph) => (
 									<Graph poolCombination={statistics} mode={graph} key={graph} />
 								))}
-								<ListItem>
-									<ResultListContainer dice={statistics.dice} />
-								</ListItem>
+								{!!statistics.dice.length && (
+									<ListItem>
+										<ResultListContainer dice={statistics.dice} />
+									</ListItem>
+								)}
 							</List>
 						</CardContent>
 					</Card>
