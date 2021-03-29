@@ -22,8 +22,6 @@ export const GraphLine = (): ReactElement => {
 	const { filteredSet, totalFrequency } = useContext(DataContext);
 	const { mode, alternateMode } = useContext(ModeContext);
 
-	const hasData = filteredSet?.length;
-
 	const mappedDataSet = filteredSet.map((map) => ({
 		quantity: map.quantity,
 		probability: GetProbability(map.frequency, totalFrequency),
@@ -43,13 +41,13 @@ export const GraphLine = (): ReactElement => {
 				</YAxis>
 				<Tooltip formatter={ValueFormatter} labelFormatter={labelFormatter} />
 				<Legend verticalAlign="top" />
-				{hasData && <Line yAxisId="probability" name={`${intl.formatMessage({ id: "Advanced.Probability" })} (%)`} type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />}
-				{hasData && !IsBlank(alternateMode) && (
+				<Line yAxisId="probability" name={`${intl.formatMessage({ id: "Advanced.Probability" })} (%)`} type="monotone" dataKey="probability" stroke="#58125A" strokeWidth={5} />
+				{!IsBlank(alternateMode) && (
 					<YAxis yAxisId="average" type="number" orientation="right">
 						<Label value={intl.formatMessage({ id: "Breakdowns.Average" }, { a: intl.messages[`Dice.${alternateMode}`] }) as string} angle={-90} position="insideRight" />
 					</YAxis>
 				)}
-				{hasData && !IsBlank(alternateMode) && (
+				{!IsBlank(alternateMode) && (
 					<Line
 						yAxisId="average"
 						name={intl.formatMessage({ id: "Breakdowns.Average" }, { a: intl.messages[`Dice.${alternateMode}`] }) as string}
