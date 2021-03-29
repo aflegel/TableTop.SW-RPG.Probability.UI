@@ -10,9 +10,12 @@ import { GraphTitle } from "./Title";
 import { ModeProps, ModeContext, GetExtendedModes } from "./ModeContext";
 import { DataSetProps, DataContext } from "./DataContext";
 import { GetFrequencyTotal } from "./Functions";
-import { StatisticsResults } from "../../Hooks/StatisticsApi";
 import { PoolCombination } from "../../Models/Statistics";
 import { DieSymbol } from "../../Models";
+
+interface StatisticsResults {
+	poolCombination: PoolCombination;
+}
 
 const getDataSet = (poolCombination: PoolCombination, mode: DieSymbol): DataSetProps => {
 	const filteredSet = poolCombination?.statistics?.filter((f) => f.symbol === mode).sort((n1, n2) => n1.quantity - n2.quantity) ?? [];

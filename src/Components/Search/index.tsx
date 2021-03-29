@@ -2,13 +2,13 @@ import React, { ReactElement, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";
-import { StatisticsDice } from "../../Hooks/StatisticsApi";
 import { DieType, PoolDice } from "../../Models";
 import { AddDice, RemoveDice } from "./Functions";
 import { DiceContext } from "../Dice/DiceContext";
 import { FormattedMessage } from "react-intl";
 
 interface SearchCallbackProps {
+	dice: PoolDice[];
 	searchCallback: (param: PoolDice[]) => void;
 }
 
@@ -25,8 +25,8 @@ const list: DieType[] = ["Proficiency", "Challenge", "Ability", "Difficulty", "B
 /**
  * Renders the current search icons as well as a search builder
  */
-export const Search = (props: StatisticsDice & SearchCallbackProps): ReactElement => {
-	const [state, setState] = useState(props.searchDice);
+export const Search = (props: SearchCallbackProps): ReactElement => {
+	const [state, setState] = useState(props.dice);
 	const classes = useStyles();
 
 	/**

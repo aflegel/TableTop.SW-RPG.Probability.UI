@@ -1,39 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 import { PoolDice } from "../Models";
-import { RollContainer } from "../Models/Roll";
 import { PoolCombination } from "../Models/Statistics";
 
-export type StatisticsState = StatisticsResults & StatisticsDice;
-
-export interface StatisticsResults {
-	poolCombination: PoolCombination;
-	poolRoll: RollContainer;
-}
-
-export interface StatisticsDice {
-	searchDice: PoolDice[];
-}
-
-export const InitialState: StatisticsState = {
-	poolRoll: {
-		positiveResults: [],
-		negativeResults: [],
-	},
-	poolCombination: {
-		statistics: [],
-		dice: [],
-	},
-	searchDice: [
-		{ dieType: "Ability", quantity: 1 },
-		{ dieType: "Difficulty", quantity: 1 },
-	],
+const InitialState: PoolCombination = {
+	statistics: [],
+	dice: [],
 };
 
 interface StatisticsHook {
-	statistics: StatisticsState;
+	statistics: PoolCombination;
 	getStatisticsAsync: (dice: PoolDice[]) => Promise<void>;
-	getResultsAsync: (dice: PoolDice[]) => Promise<void>;
 }
 
 /**
@@ -49,24 +26,12 @@ export const useStatistics = (): StatisticsHook => {
 	 */
 	const getStatisticsAsync = async (dice: PoolDice[]): Promise<void> => {
 		try {
-			const result = await axios.post(`http://localhost:62546/Search`, dice, jsonHeader);
-			setStatistics({ ...statistics, poolCombination: result.data });
+			const result = await axios.post<PoolCombination>(`http://localhost:62546/Search`, dice, jsonHeader);
+			setStatistics({ ...statistics, statistics: result.data.statistics, dice: result.data.dice });
 		} catch {
 			setStatistics(InitialState);
 		}
 	};
 
-	/**
-	 * Gets dice roll results from the API.
-	 */
-	const getResultsAsync = async (dice: PoolDice[]): Promise<void> => {
-		try {
-			const result = await axios.post(`http://localhost:62546/Roll`, dice, jsonHeader);
-			setStatistics({ ...statistics, poolRoll: result.data });
-		} catch {
-			setStatistics(InitialState);
-		}
-	};
-
-	return { statistics, getStatisticsAsync, getResultsAsync };
+	return { statistics, getStatisticsAsync };
 };
