@@ -1,4 +1,4 @@
-import React, { createContext, ReactElement } from "react";
+import React, { createContext, ReactNode } from "react";
 import { DieSymbol } from "../../Models";
 import { PoolCombination, PoolStatistic } from "../../Models/Statistics";
 import { GetFrequencyTotal } from "./Functions";
@@ -25,7 +25,7 @@ export const DataContext = createContext(emptyData);
 interface ProviderProps {
 	poolCombination: PoolCombination;
 	mode: DieSymbol;
-	children: ReactElement;
+	children: ReactNode;
 }
 
 export const DataContextProvider = (props: ProviderProps) => {
@@ -33,7 +33,7 @@ export const DataContextProvider = (props: ProviderProps) => {
 
 	return (
 		<DataContext.Provider value={dataSet}>
-			<ModeContext.Provider value={GetExtendedModes(props.mode)}>{dataSet.filteredSet.length > 1 && { ...props.children }}</ModeContext.Provider>
+			<ModeContext.Provider value={GetExtendedModes(props.mode)}>{dataSet.filteredSet.length > 1 && props.children}</ModeContext.Provider>
 		</DataContext.Provider>
 	);
 };
