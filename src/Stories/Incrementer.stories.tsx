@@ -8,7 +8,7 @@ interface ButtonProps {
 	dieType: DieType;
 }
 export default {
-	title: "Example/Header",
+	title: "Example/Incrementer",
 	component: DieIncrementer,
 } as Meta;
 

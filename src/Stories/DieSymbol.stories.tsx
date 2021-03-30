@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 export default {
-	title: "Example/Button",
+	title: "Example/Die Symbols",
 	component: Die,
 } as Meta;
 
