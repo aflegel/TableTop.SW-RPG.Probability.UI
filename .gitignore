@@ -195,6 +195,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
+storybook-static/
 orleans.codegen.cs
 
 # Since there are multiple workflows, uncomment next line to ignore bower_components
