@@ -5,7 +5,7 @@ import { Search } from "./Search";
 import { useStatistics } from "../Hooks/StatisticsApi";
 import { StatisticsResponse } from "./StatisticsResponse";
 import { ResultListContainer } from "./ResultList";
-import { DieSymbol } from "../Models";
+import { DieSymbol, PoolDice } from "../Models";
 import { FormattedMessage } from "react-intl";
 
 const useStyles = makeStyles(() =>
@@ -19,23 +19,26 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-const list: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"];
+export const InitialState: PoolDice[] = [
+	{ dieType: "Ability", quantity: 1 },
+	{ dieType: "Difficulty", quantity: 1 },
+];
+
+const modes: DieSymbol[] = ["Success", "Advantage", "Triumph", "Despair"];
 
 export const Statistics = (): ReactElement => {
-	const { statistics, getStatisticsAsync, getResultsAsync } = useStatistics();
+	const { statistics, getStatisticsAsync } = useStatistics();
 	const classes = useStyles();
 
-	const fetchResults = () => getResultsAsync(statistics.poolCombination.dice);
-
 	useEffect(() => {
-		getStatisticsAsync(statistics.searchDice);
-	}, [statistics.searchDice]);
+		getStatisticsAsync(InitialState);
+	}, []);
 
 	return (
 		<div className={classes.root}>
 			<Grid container>
 				<Grid item xs={12}>
-					<Search searchDice={statistics.searchDice} searchCallback={getStatisticsAsync} />
+					<Search dice={InitialState} searchCallback={getStatisticsAsync} />
 				</Grid>
 				<Grid item xs={12} className={classes.bottomSpace}>
 					<Card>
@@ -44,15 +47,17 @@ export const Statistics = (): ReactElement => {
 								<FormattedMessage id="ProbabilityHeader" />
 							</Typography>
 							<Typography gutterBottom variant="h5" component="h2">
-								<StatisticsResponse statistics={statistics} />
+								<StatisticsResponse dice={statistics.dice} />
 							</Typography>
 							<List>
-								{list.map((graph) => (
-									<Graph {...statistics} mode={graph} key={graph} />
+								{modes.map((graph) => (
+									<Graph poolCombination={statistics} mode={graph} key={graph} />
 								))}
-								<ListItem>
-									<ResultListContainer {...statistics} resultCallback={fetchResults} />
-								</ListItem>
+								{!!statistics.dice.length && (
+									<ListItem>
+										<ResultListContainer dice={statistics.dice} />
+									</ListItem>
+								)}
 							</List>
 						</CardContent>
 					</Card>

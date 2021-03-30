@@ -2,14 +2,10 @@ import React, { ReactElement } from "react";
 import { Die } from "./Die";
 import { PoolDice } from "../../Models";
 
-interface DieSeriesProps {
-	dice: PoolDice;
-}
-
 /**
  * Returns a set icons for the die and quantity
  */
-export const DieSeries = (props: DieSeriesProps): ReactElement => {
+export const DieSeries = (props: { dice: PoolDice }): ReactElement => {
 	const output: ReactElement[] = [];
 
 	for (let i = 0; i < props.dice.quantity; i++) {

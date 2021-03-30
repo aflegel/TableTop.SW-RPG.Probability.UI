@@ -1,34 +1,36 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { RollResultList } from "./ResultList";
-import { RollContainer } from "../../Models/Roll";
-
-interface GraphResultListProps {
-	poolRoll: RollContainer;
-	resultCallback: () => void;
-}
+import { PoolDice } from "../../Models";
+import { useResults } from "../../Hooks/ResultsApi";
 
 /**
  * Renders a table with the raw data used for populating the tables and statistics data
  */
-export const ResultListContainer = (props: GraphResultListProps): ReactElement => {
+export const ResultListContainer = (props: { dice: PoolDice[] }): ReactElement => {
+	const { statistics, clearResults, getResultsAsync } = useResults();
+
+	useEffect(() => {
+		clearResults();
+	}, [props.dice]);
+
 	return (
 		<Grid container>
 			<Grid item xs={12}>
 				<Button
 					color="primary"
 					onClick={(): void => {
-						props.resultCallback();
+						getResultsAsync(props.dice);
 					}}
 				>
 					Results
 				</Button>
 			</Grid>
 			<Grid item xs={12} md={6}>
-				<RollResultList poolRoll={props.poolRoll.positiveResults}></RollResultList>
+				<RollResultList poolRoll={statistics.positiveResults}></RollResultList>
 			</Grid>
 			<Grid item xs={12} md={6}>
-				<RollResultList poolRoll={props.poolRoll.negativeResults}></RollResultList>
+				<RollResultList poolRoll={statistics.negativeResults}></RollResultList>
 			</Grid>
 		</Grid>
 	);

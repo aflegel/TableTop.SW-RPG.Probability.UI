@@ -3,10 +3,6 @@ import { TableRow, TableCell } from "@material-ui/core";
 import { RollResult, RollSymbol } from "../../Models/Roll";
 import { Symbols } from "../Dice/Symbols";
 
-interface GraphResultListRowProps {
-	poolResults: RollResult[];
-}
-
 const sumSymbols = (symbolArray: RollSymbol[]): number => symbolArray?.map((s) => s.quantity)?.reduce((a, b) => a + b, 0);
 
 const maxSymbolCount = (symbolArray: RollSymbol[]): number => Math.max(...symbolArray?.map((s) => s.quantity));
@@ -31,7 +27,7 @@ const rowKey = (roll: RollResult): string => `${symbol(roll)}${roll.frequency}`;
 /**
  * Calculates the statictical model and builds a definition list for that data
  */
-export const ResultListRow = (props: GraphResultListRowProps): ReactElement => (
+export const ResultListRow = (props: { poolResults: RollResult[] }): ReactElement => (
 	<>
 		{props?.poolResults?.sort(resultSorter).map((roll) => (
 			<TableRow key={rowKey(roll)}>
