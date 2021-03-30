@@ -1,20 +1,22 @@
 import React from "react";
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import { Story, Meta } from "@storybook/react/types-6-0";
+import { Story, Meta } from "@storybook/react";
+import { DieIncrementer } from "../Components/Search/Incrementer";
+import { DieType } from "../Models";
 
-import { Header, HeaderProps } from "./Header";
-
+const nullCallback = () => null;
+interface ButtonProps {
+	dieType: DieType;
+}
 export default {
 	title: "Example/Header",
-	component: Header,
+	component: DieIncrementer,
 } as Meta;
 
-const Template: Story<HeaderProps> = (args) => <Header {...args} />;
+const Template: Story<ButtonProps> = (args) => {
+	return <DieIncrementer addDieCallback={nullCallback} removeDieCallback={nullCallback} {...args} />;
+};
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-	user: {},
+	dieType: "Proficiency",
 };
-
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};

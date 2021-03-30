@@ -37,5 +37,5 @@ const dieSize = (dieType: DieType): number => {
 export const Die = (props: DieProps): ReactElement => {
 	const classes = useStyles();
 
-	return <i aria-label={props.ariaLabel} className={`${classes.dieStroke} ffi ffi-d${dieSize(props.dieType)} ffi-swrpg-${props.dieType.toLowerCase()}-color`} />;
+	return <i aria-label={props.ariaLabel} className={`${classes.dieStroke} ffi ffi-d${dieSize(props.dieType)} ffi-swrpg-${props.dieType?.toLowerCase()}-color`} />;
 };
