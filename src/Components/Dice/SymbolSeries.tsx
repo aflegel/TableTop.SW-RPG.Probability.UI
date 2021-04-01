@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Symbol } from "./Symbol";
 import { RollSymbol } from "../../Models/Roll";
 

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 import { RollResult, RollSymbol } from "../../Models/Roll";
 import { Symbols } from "../Dice/Symbols";

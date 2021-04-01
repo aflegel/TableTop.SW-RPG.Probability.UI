@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Button, makeStyles, createStyles } from "@material-ui/core";
 
 import { DieIncrementer } from "./Incrementer";

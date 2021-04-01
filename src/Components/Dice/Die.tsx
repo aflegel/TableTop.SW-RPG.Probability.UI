@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { DieType } from "../../Models";
 import { createStyles, makeStyles } from "@material-ui/core";
 

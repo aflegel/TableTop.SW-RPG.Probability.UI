@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { RollResultList } from "./ResultList";
 import { PoolDice } from "../../Models";

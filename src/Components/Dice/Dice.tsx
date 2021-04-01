@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { PoolDice } from "../../Models";
 import { DieSeries } from "./DieSeries";
 

@@ -1,4 +1,4 @@
-﻿import React, { ReactElement } from "react";
+﻿import { ReactElement } from "react";
 import { Grid, Card, CardContent, ListItem } from "@material-ui/core";
 
 import { GraphBreakdown } from "./Breakdown";

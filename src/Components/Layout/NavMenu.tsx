@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
+import { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
 import { AppBar, Toolbar, Typography, FormControl, MenuItem, Select, Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
 import { FormattedMessage, useIntl } from "react-intl";
 import { IntlWrapperContext, Locales } from "../../Hooks/IntlWrapper";

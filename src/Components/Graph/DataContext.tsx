@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from "react";
 import { DieSymbol } from "../../Models";
 import { PoolCombination, PoolStatistic } from "../../Models/Statistics";
 import { GetFrequencyTotal } from "./Functions";

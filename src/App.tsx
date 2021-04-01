@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Layout } from "./Components/Layout";
 import { Statistics } from "./Components/Statistics";
 import { IntlContainer } from "./Hooks/IntlWrapper";

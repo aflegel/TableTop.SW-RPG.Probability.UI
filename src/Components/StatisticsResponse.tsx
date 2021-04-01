@@ -1,4 +1,3 @@
-import React from "react";
 import { Dice } from "./Dice/Dice";
 import { FormattedMessage } from "react-intl";
 import { PoolDice } from "../Models";

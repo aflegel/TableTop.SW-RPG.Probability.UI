@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 export const Footer = (): ReactElement => (
